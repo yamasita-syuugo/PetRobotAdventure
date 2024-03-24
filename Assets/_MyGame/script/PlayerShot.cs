@@ -10,10 +10,10 @@ public class PlayerShot : MonoBehaviour
     public float moveDirectionX, moveDirectionY;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    //void Start()
+    //{
         
-    }
+    //}
 
     // Update is called once per frame
     void Update()
@@ -22,6 +22,8 @@ public class PlayerShot : MonoBehaviour
     }
     void Shot()
     {
+        if (GetComponent<ObjectFall>().GetSituation() == ObjectFall.eSituation.fall) return;
+
         int shotButton = (int)Input.GetAxisRaw("Shot");
         moveDirectionX = Input.GetAxis("AimX");
         moveDirectionY = -Input.GetAxis("AimY");

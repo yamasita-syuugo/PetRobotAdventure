@@ -43,6 +43,8 @@ public class PlayerCreateBlock : MonoBehaviour
 
     void CreatBlock()
     {
+        if (GetComponent<ObjectFall>().GetSituation() == ObjectFall.eSituation.fall) return;
+
         if (1 <= blockNum)
         {
             float playerPosX, playerPosY, playerDirectionX,playerDirectionY;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DestroyTimer : MonoBehaviour
 {
-    public float timer = 2.0f;
+    public float timer = 0.5f;
 
     public GameObject Object;
 

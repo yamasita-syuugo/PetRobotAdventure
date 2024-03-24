@@ -15,6 +15,7 @@ public class ObjectFall : MonoBehaviour
     public AudioSource fallSound;
 
     [SerializeField] bool fallCheck = false;
+    [SerializeField] bool fallSoundCheck = false;
 
     bool oneFrame = true;
     // Start is called before the first frame update
@@ -38,9 +39,10 @@ public class ObjectFall : MonoBehaviour
             {
                Destroy(gameObject);
             }
-            if (!fallSound.isPlaying)
+            if (!fallSoundCheck)
             {
                 fallSound.Play();
+                fallSoundCheck = true;
             }
         }
     }
