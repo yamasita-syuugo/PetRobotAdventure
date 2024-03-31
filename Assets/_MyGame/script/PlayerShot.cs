@@ -32,7 +32,6 @@ public class PlayerShot : MonoBehaviour
         {
             shotTrigger = true;
 
-            Debug.Log("Shot");
             bulletMove tmp1 = Instantiate<bulletMove>(bulletBase);
             shotSound.Play(0);
             tmp1.transform.position = this.transform.position;

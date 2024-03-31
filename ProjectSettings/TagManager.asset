@@ -8,6 +8,8 @@ TagManager:
   - Bullet
   - Flag
   - Enemy
+  - Field
+  - Manager
   layers:
   - Default
   - TransparentFX

@@ -9,7 +9,15 @@ public class EnemyCreate : MonoBehaviour
     float enemySpaunTime;
     public float enemySpaunTimeReset = 3.0f;
 
-    public GameObject enemyObject;
+    float waveTimer;
+    enum eWaveType
+    {
+        None,
+        bom,
+    }
+    eWaveType waveType;
+
+    public GameObject enemyObjectBom;
     [SerializeField]
     Vector3 nextPosition = new Vector3(12,12,0);
 
@@ -25,6 +33,9 @@ public class EnemyCreate : MonoBehaviour
     void Start()
     {
         enemySpaunTime = 0;
+
+        waveTimer = 30;
+        waveType = eWaveType.bom;
     }
 
     // Update is called once per frame
@@ -37,9 +48,14 @@ public class EnemyCreate : MonoBehaviour
     {
         enemySpaunTime -= Time.deltaTime;
 
+        GameObject spawnEnemy = enemyObjectBom;
+        switch (waveType)
+        {
+            case eWaveType.bom:spawnEnemy = enemyObjectBom;break;
+        }
         if(enemySpaunTime < 0)
         {
-            GameObject tmp = Instantiate<GameObject>(enemyObject);
+            GameObject tmp = Instantiate<GameObject>(spawnEnemy);
             tmp.transform.parent = transform;
             tmp.transform.position = nextPosition;
             tmp.GetComponent<BombHit>().ExplosionSource = setSound;
