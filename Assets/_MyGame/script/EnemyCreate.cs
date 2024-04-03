@@ -1,5 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
+using UnityEditor;
+using UnityEditor.Experimental.GraphView;
+
+
 //using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -13,7 +18,10 @@ public class EnemyCreate : MonoBehaviour
     enum eWaveType
     {
         None,
+
         bom,
+
+        waveTimerMax
     }
     eWaveType waveType;
 
@@ -47,13 +55,22 @@ public class EnemyCreate : MonoBehaviour
     void EnemySpaun()
     {
         enemySpaunTime -= Time.deltaTime;
+        if (waveTimer > 0)
+        {
+            waveTimer -= Time.deltaTime;
+        }
+        else
+        {
+            waveTimer = 30;
+            waveType = (eWaveType)Random.Range(((int)eWaveType.None) + 1, ((int)eWaveType.waveTimerMax) - 1);
+        }
 
-        GameObject spawnEnemy = enemyObjectBom;
+        GameObject spawnEnemy = null;
         switch (waveType)
         {
-            case eWaveType.bom:spawnEnemy = enemyObjectBom;break;
+            case eWaveType.bom:spawnEnemy = enemyObjectBom; break;
         }
-        if(enemySpaunTime < 0)
+        if(enemySpaunTime < 0 && spawnEnemy != null)
         {
             GameObject tmp = Instantiate<GameObject>(spawnEnemy);
             tmp.transform.parent = transform;
@@ -80,5 +97,18 @@ public class EnemyCreate : MonoBehaviour
 
             enemySpaunTime = enemySpaunTimeReset;
         }
+    }
+
+    public float GetWaveTime()
+    {
+        return waveTimer;
+    }
+    public string GetWaveName()
+    {
+        switch (waveType)
+        {
+            case eWaveType.bom:return "BOM";
+        }
+        return "FREE";
     }
 }

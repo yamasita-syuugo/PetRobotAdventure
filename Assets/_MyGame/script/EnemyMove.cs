@@ -9,6 +9,7 @@ public class BombMove : MonoBehaviour
 {
     [SerializeField]
     GameObject player;
+    ObjectFall playerFall;
 
     public float moveSpeed = 1.0f;
 
@@ -27,6 +28,7 @@ public class BombMove : MonoBehaviour
     {
         //todo:playerのオートサーチ(複数の場合の対応)
         player = GameObject.FindWithTag("Player");
+        playerFall = player.GetComponent<ObjectFall>();
     }
 
     // Update is called once per frame
@@ -44,6 +46,7 @@ public class BombMove : MonoBehaviour
 
     void MoveGoStraight()
     {
+        if (playerFall.GetSituation() != ObjectFall.eSituation.normal) return;
         Vector3 move = new Vector3(0.0f,0.0f,0.0f);
         move.x = player.transform.position.x - transform.position.x;
         move.y = player.transform.position.y - transform.position.y;

@@ -7,6 +7,8 @@ public class PlayerShot : MonoBehaviour
     bool shotTrigger = false;
     public bulletMove bulletBase;
     public AudioSource shotSound ;
+    [SerializeField]
+    int magazine = 10;
     public float moveDirectionX, moveDirectionY;
 
     // Start is called before the first frame update
@@ -28,19 +30,24 @@ public class PlayerShot : MonoBehaviour
         moveDirectionX = Input.GetAxis("AimX");
         moveDirectionY = -Input.GetAxis("AimY");
 
-        if (shotButton == 1 && shotTrigger == false)
+        if (magazine > 0)
         {
-            shotTrigger = true;
+            if (shotButton == 1 && shotTrigger == false)
+            {
+                shotTrigger = true;
 
-            bulletMove tmp1 = Instantiate<bulletMove>(bulletBase);
-            shotSound.Play(0);
-            tmp1.transform.position = this.transform.position;
-            Vector2 tmp2 = new Vector2(moveDirectionX, moveDirectionY);
-            tmp1.SetMoveEnelgy(tmp2);
-        }
-        else if (shotButton != 1 && shotTrigger == true)
-        {
-            shotTrigger = false;
+                bulletMove tmp1 = Instantiate<bulletMove>(bulletBase);
+                shotSound.Play(0);
+                tmp1.transform.position = this.transform.position;
+                Vector2 tmp2 = new Vector2(moveDirectionX, moveDirectionY);
+                tmp1.SetMoveEnelgy(tmp2);
+
+                magazine--;
+            }
+            else if (shotButton != 1 && shotTrigger == true)
+            {
+                shotTrigger = false;
+            }
         }
     }
 
