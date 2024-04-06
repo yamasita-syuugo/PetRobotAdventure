@@ -43,6 +43,8 @@ public class PlayerShot : MonoBehaviour
                 tmp1.SetMoveEnelgy(tmp2);
 
                 magazine--;
+
+                ScoreManager.ShotNumAdd();
             }
             else if (shotButton != 1 && shotTrigger == true)
             {

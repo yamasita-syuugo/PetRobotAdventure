@@ -26,6 +26,7 @@ public class playerMove : MonoBehaviour
     {
         if (GetComponent<ObjectFall>().GetSituation() == ObjectFall.eSituation.fall) return;
 
+        transform.position += move * moveSpeed * Time.deltaTime;
 
         move = new Vector3(0.0f, 0.0f, 0.0f);
 
@@ -44,8 +45,11 @@ public class playerMove : MonoBehaviour
             else playerAnimation.SetInteger("direction", 1);
         }
 
-        transform.position += move * moveSpeed * Time.deltaTime;
 
     }
 
+    public void AddMove(Vector3 addMove)
+    {
+        move += addMove;
+    }
 }

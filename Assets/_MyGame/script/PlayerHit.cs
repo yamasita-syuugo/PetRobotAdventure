@@ -22,7 +22,7 @@ public class PlayerHit : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Flag") {
-            PointManager.FlagPointAdd();
+            ScoreManager.FlagGetPointAdd();
             Destroy(collision.GameObject());
 
             if(flagToBlock <= 0)

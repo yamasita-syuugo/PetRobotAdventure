@@ -20,20 +20,22 @@ public class EnemyCreate : MonoBehaviour
         None,
 
         bom,
+        crow,
 
         waveTimerMax
     }
     eWaveType waveType;
 
     public GameObject enemyObjectBom;
+    public GameObject enemyObjectCrow;
     [SerializeField]
-    Vector3 nextPosition = new Vector3(12,12,0);
+    Vector3 nextPosition = new Vector3(12, 12, 0);
 
     enum eDirecttion
     {
-        north, 
+        north,
         south,
-        east, 
+        east,
         west,
     }
 
@@ -49,11 +51,6 @@ public class EnemyCreate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        EnemySpaun();
-    }
-
-    void EnemySpaun()
-    {
         enemySpaunTime -= Time.deltaTime;
         if (waveTimer > 0)
         {
@@ -65,39 +62,50 @@ public class EnemyCreate : MonoBehaviour
             waveType = (eWaveType)Random.Range(((int)eWaveType.None) + 1, ((int)eWaveType.waveTimerMax) - 1);
         }
 
+        if (enemySpaunTime < 0)
+        {
+            EnemySpaun();
+        }
+    }
+
+    void EnemySpaun()
+    {
         GameObject spawnEnemy = null;
         switch (waveType)
         {
-            case eWaveType.bom:spawnEnemy = enemyObjectBom; break;
+            case eWaveType.bom: spawnEnemy = enemyObjectBom; break;
+            case eWaveType.crow: spawnEnemy = enemyObjectCrow; break;
         }
-        if(enemySpaunTime < 0 && spawnEnemy != null)
+        GameObject tmp = Instantiate<GameObject>(spawnEnemy);
+        tmp.transform.parent = transform;
+        tmp.transform.position = nextPosition;
+        if (waveType == eWaveType.bom)
         {
-            GameObject tmp = Instantiate<GameObject>(spawnEnemy);
-            tmp.transform.parent = transform;
-            tmp.transform.position = nextPosition;
             tmp.GetComponent<BombHit>().ExplosionSource = setSound;
-
-            int directtion = Random.Range(0, 4);
-            float width = Random.Range(-11, 11);
-            switch (directtion)
-            {
-                case 0:
-                    nextPosition = new Vector3(width, 12, 0);
-                    break;
-                case 1:
-                    nextPosition = new Vector3(width, -12, 0);
-                    break;
-                case 2:
-                    nextPosition = new Vector3(12, width, 0);
-                    break;
-                case 3:
-                    nextPosition = new Vector3(-12, width, 0);
-                    break;
-            }
-
-            enemySpaunTime = enemySpaunTimeReset;
         }
+
+        int directtion = Random.Range(0, 4);
+        float width = Random.Range(-11, 11);
+        switch (directtion)
+        {
+            case 0:
+                nextPosition = new Vector3(width, 12, 0);
+                break;
+            case 1:
+                nextPosition = new Vector3(width, -12, 0);
+                break;
+            case 2:
+                nextPosition = new Vector3(12, width, 0);
+                break;
+            case 3:
+                nextPosition = new Vector3(-12, width, 0);
+                break;
+        }
+
+        enemySpaunTime = enemySpaunTimeReset;
     }
+
+
 
     public float GetWaveTime()
     {
@@ -107,7 +115,8 @@ public class EnemyCreate : MonoBehaviour
     {
         switch (waveType)
         {
-            case eWaveType.bom:return "BOM";
+            case eWaveType.bom: return "BOM";
+            case eWaveType.crow: return "CROW";
         }
         return "FREE";
     }
