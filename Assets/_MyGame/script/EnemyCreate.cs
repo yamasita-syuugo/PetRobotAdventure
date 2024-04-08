@@ -45,7 +45,7 @@ public class EnemyCreate : MonoBehaviour
         enemySpaunTime = 0;
 
         waveTimer = 30;
-        waveType = eWaveType.bom;
+        waveType = eWaveType.crow;
     }
 
     // Update is called once per frame
