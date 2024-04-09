@@ -19,7 +19,8 @@ public class CrowHit : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision .tag == "Player") {
-            collision.GetComponent<playerMove>().AddMove(GetComponent<EnemyMove>().GetMove());
+            EnemyMove enemyMove = GetComponent<EnemyMove>();
+            collision.GetComponent<playerMove>().AddPosition(enemyMove.GetMove() * enemyMove.moveSpeed * Time.deltaTime);
         }
     }
 }

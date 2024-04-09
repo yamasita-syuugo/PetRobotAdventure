@@ -48,8 +48,8 @@ public class playerMove : MonoBehaviour
 
     }
 
-    public void AddMove(Vector3 addMove)
+    public void AddPosition(Vector3 addMove)
     {
-        move += addMove;
+        transform.position += addMove;
     }
 }
