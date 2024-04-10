@@ -7,8 +7,9 @@ public class PlayerShot : MonoBehaviour
     bool shotTrigger = false;
     public bulletMove bulletBase;
     public AudioSource shotSound ;
+    const int magazineSize = 10;
     [SerializeField]
-    int magazine = 10;
+    int magazine = magazineSize;
     public float moveDirectionX, moveDirectionY;
 
     // Start is called before the first frame update

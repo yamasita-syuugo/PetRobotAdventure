@@ -16,6 +16,7 @@ public class CameraMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (target == null) return;
         Vector3 move = new Vector3(0.0f, 0.0f, 0.0f);
 
         move.x = (target.transform.position.x - transform.position.x) / speedDelay * Time.deltaTime;

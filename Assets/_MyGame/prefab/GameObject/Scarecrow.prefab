@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 17ded8ea5ed16c440a9d662aa46ac073, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9cde90ea0dc3e5f41a3e3873c942fb2c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -165,6 +165,7 @@ MonoBehaviour:
   situation: 1
   fallSound: {fileID: 0}
   fallCheck: 0
+  fallSoundCheck: 0
 --- !u!114 &7191480105231842355
 MonoBehaviour:
   m_ObjectHideFlags: 0
