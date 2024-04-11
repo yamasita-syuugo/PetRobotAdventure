@@ -16,7 +16,7 @@ public class TimeManager : MonoBehaviour
     void Update()
     {
         GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
-
+        if (player == null) return;
         ObjectFall.eSituation situation = player[0].GetComponent<ObjectFall>().GetSituation();
 
         if (situation == ObjectFall.eSituation.normal) playTimer += Time.deltaTime;

@@ -2945,6 +2945,10 @@ PrefabInstance:
       propertyPath: enemyObjectCrow
       value: 
       objectReference: {fileID: 1846042793416335476, guid: 5aec0b44d81ee454fb01a2547fd18a57, type: 3}
+    - target: {fileID: 2094567756836657004, guid: a4e384d6cbc5e274280a3a3c0cab7a12, type: 3}
+      propertyPath: enemyObjectFallBom
+      value: 
+      objectReference: {fileID: 1846042793416335476, guid: 0aa37b1f7a8bc094fb95ea2bc2b857a0, type: 3}
     - target: {fileID: 3956128938480590584, guid: a4e384d6cbc5e274280a3a3c0cab7a12, type: 3}
       propertyPath: m_Name
       value: CreateEnemy

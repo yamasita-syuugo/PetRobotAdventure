@@ -21,13 +21,16 @@ public class EnemyCreate : MonoBehaviour
 
         bom,
         crow,
+        fallBom,
 
         waveTimerMax
     }
+    [SerializeField]
     eWaveType waveType;
 
     public GameObject enemyObjectBom;
     public GameObject enemyObjectCrow;
+    public GameObject enemyObjectFallBom;
     [SerializeField]
     Vector3 nextPosition = new Vector3(12, 12, 0);
 
@@ -45,7 +48,7 @@ public class EnemyCreate : MonoBehaviour
         enemySpaunTime = 0;
 
         waveTimer = 30;
-        waveType = eWaveType.crow;
+        waveType = eWaveType.fallBom;
     }
 
     // Update is called once per frame
@@ -75,6 +78,7 @@ public class EnemyCreate : MonoBehaviour
         {
             case eWaveType.bom: spawnEnemy = enemyObjectBom; break;
             case eWaveType.crow: spawnEnemy = enemyObjectCrow; break;
+            case eWaveType.fallBom: spawnEnemy = enemyObjectFallBom; break;
         }
         GameObject tmp = Instantiate<GameObject>(spawnEnemy);
         tmp.transform.parent = transform;
@@ -117,6 +121,7 @@ public class EnemyCreate : MonoBehaviour
         {
             case eWaveType.bom: return "BOM";
             case eWaveType.crow: return "CROW";
+            case eWaveType.fallBom: return "FALLBOM";
         }
         return "FREE";
     }

@@ -11,6 +11,7 @@ public class EnemyMove : MonoBehaviour
     [SerializeField]
     GameObject player;
     ObjectFall playerFall;
+    Vector2 tmpPosishon;
 
     public float moveSpeed = 1.0f; 
     [SerializeField]
@@ -22,6 +23,8 @@ public class EnemyMove : MonoBehaviour
         goStraight,
         tracking,
         topToFall,
+
+        moveTyptMax,
     }
     [SerializeField]
     eMoveType moveType = eMoveType.tracking;
@@ -94,7 +97,20 @@ public class EnemyMove : MonoBehaviour
     void MoveTopToFall()
     {
         if (playerFall == null) return;
+        if (move == new Vector3(0.0f, 0.0f, 0.0f))
+        {
+            move.x = player.transform.position.x - transform.position.x;
+            move.y = player.transform.position.y - transform.position.y;
+            tmpPosishon = player.transform.position;
+        }
 
+        float distance = Mathf.Sqrt(move.x * move.x + move.y * move.y);
+
+        move /= distance;
+        if ((move.x < 0 && tmpPosishon.x <= transform.position.x) || (move.x > 0 && tmpPosishon.x >= transform.position.x))
+        {
+            transform.position += move * moveSpeed * Time.deltaTime;
+        }
     }
 
     public Vector3 GetMove()
