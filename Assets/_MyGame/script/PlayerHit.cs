@@ -25,6 +25,8 @@ public class PlayerHit : MonoBehaviour
             ScoreManager.FlagGetPointAdd();
             Destroy(collision.GameObject());
 
+            GetComponent<PlayerShot>().AddMagazine();
+
             if(flagToBlock <= 0)
             {
                 GetComponent<PlayerCreateBlock>().AddBlockNum();

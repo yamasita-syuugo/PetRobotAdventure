@@ -5,6 +5,7 @@ using UnityEngine;
 public class Landing : MonoBehaviour
 {
     Vector2 beforePosision = Vector2.zero;
+    public GameObject blast;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,9 +15,16 @@ public class Landing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(beforePosision == (Vector2)transform.position) { 
-            
+        if(beforePosision == (Vector2)transform.position) {
+            Bomb();
         }
         beforePosision = (Vector2)transform.position;
+    }
+    void Bomb()
+    {
+        GameObject tmp = Instantiate<GameObject>(blast);
+        tmp.transform.position = transform.position;
+
+        Destroy(gameObject);
     }
 }

@@ -10,7 +10,7 @@ using UnityEngine;
 
 public class EnemyCreate : MonoBehaviour
 {
-    public AudioSource setSound;
+    //public AudioSource setSound;
     float enemySpaunTime;
     public float enemySpaunTimeReset = 3.0f;
 
@@ -83,10 +83,10 @@ public class EnemyCreate : MonoBehaviour
         GameObject tmp = Instantiate<GameObject>(spawnEnemy);
         tmp.transform.parent = transform;
         tmp.transform.position = nextPosition;
-        if (waveType == eWaveType.bom)
-        {
-            tmp.GetComponent<BombHit>().ExplosionSource = setSound;
-        }
+        //if (waveType == eWaveType.bom)
+        //{
+        //    tmp.GetComponent<BombHit>().ExplosionSource = setSound;
+        //}
 
         int directtion = Random.Range(0, 4);
         float width = Random.Range(-11, 11);
