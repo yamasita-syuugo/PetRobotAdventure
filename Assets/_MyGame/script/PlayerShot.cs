@@ -45,6 +45,7 @@ public class PlayerShot : MonoBehaviour
 
                 magazine--;
                 GetComponent<PlayerUIDisplay>().BulletNumCheck();
+                GetComponentInChildren<BlockUI>().UIUpDate();
 
                 ScoreManager.ShotNumAdd();
             }

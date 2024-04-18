@@ -68,4 +68,8 @@ public class PlayerCreateBlock : MonoBehaviour
     {
         addBlock = true;
     }
+
+    public int GetBlockNum() {
+        return blockNum;
+    }
 }

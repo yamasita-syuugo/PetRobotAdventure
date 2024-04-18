@@ -6,6 +6,10 @@ public class ReinforcementBoard : MonoBehaviour
 {
     enum eReinforcementType
     {
+        none,
+        moveSpeed,
+        shotSpeed,
+        bulletMaxNum,
 
     }
     [SerializeField]
@@ -19,6 +23,8 @@ public class ReinforcementBoard : MonoBehaviour
     void Start()
     {
         panel = new eReinforcementType[boardSizeX * boardSizeY];
+
+
     }
 
     // Update is called once per frame

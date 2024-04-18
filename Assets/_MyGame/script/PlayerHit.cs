@@ -36,6 +36,17 @@ public class PlayerHit : MonoBehaviour
             {
                 flagToBlock--;
             }
+
+            GetComponentInChildren<BlockUI>().UIUpDate();
         }
+    }
+
+    public int GetBlockGetNum()
+    {
+        return blockGetNum;
+    }
+    public int GetFlagToBlock()
+    {
+        return flagToBlock;
     }
 }
