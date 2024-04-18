@@ -45,5 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySpaunTimeReset: 3
-  enemyObject: {fileID: 7882004832147076534, guid: af61f766f8047ab4aa57ecc86036e3f9, type: 3}
+  waveType: 0
+  enemyObjectBom: {fileID: 7882004832147076534, guid: af61f766f8047ab4aa57ecc86036e3f9, type: 3}
+  enemyObjectCrow: {fileID: 1846042793416335476, guid: 5aec0b44d81ee454fb01a2547fd18a57, type: 3}
+  enemyObjectFallBom: {fileID: 1846042793416335476, guid: 0aa37b1f7a8bc094fb95ea2bc2b857a0, type: 3}
   nextPosition: {x: 12, y: 12, z: 0}

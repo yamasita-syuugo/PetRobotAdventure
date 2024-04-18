@@ -37,7 +37,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -140,8 +140,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d6448c7c394dd9449b85f875dde5d4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletMax: 10
-  bulletUI: {fileID: 0}
+  bulletUI: {fileID: 9174371447192631023, guid: 004499973bbd0b94782c2dec86a96512, type: 3}
+  displayDistance: 0.5
+  bulletColor: {r: 1, g: 1, b: 1, a: 255}
+  unBulletColor: {r: 1, g: 1, b: 1, a: 0.19607843}
 --- !u!114 &4306313645317709558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,6 +158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletBase: {fileID: 3284376109990628062, guid: 8d465513b25fcd14c974449136fe5a82, type: 3}
   shotSound: {fileID: 0}
+  magazine: 10
   moveDirectionX: 0.1
   moveDirectionY: 0.1
 --- !u!114 &7174793852350078459
@@ -184,7 +187,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   situation: 0
+  fallSound: {fileID: 0}
   fallCheck: 0
+  fallSoundCheck: 0
 --- !u!114 &6679133269672677200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,6 +264,6 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 0

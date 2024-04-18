@@ -44,7 +44,7 @@ public class PlayerShot : MonoBehaviour
                 tmp1.SetMoveEnelgy(tmp2);
 
                 magazine--;
-                GetComponent<PlayerBulletDisplay>().BulletNumCheck();
+                GetComponent<PlayerUIDisplay>().BulletNumCheck();
 
                 ScoreManager.ShotNumAdd();
             }
@@ -58,7 +58,7 @@ public class PlayerShot : MonoBehaviour
     public void AddMagazine(int add = 1)
     {
         magazine += add;
-        GetComponent<PlayerBulletDisplay>().BulletNumCheck();
+        GetComponent<PlayerUIDisplay>().BulletNumCheck();
     }
     public int GetMagazineSize()
     {
