@@ -37,8 +37,9 @@ public class ObjectFall : MonoBehaviour
             }
             else
             {
-               Destroy(gameObject);
+                UnityEngine.SceneManagement.SceneManager.LoadScene("Result");
             }
+
             if (!fallSoundCheck)
             {
                 fallSound.Play();

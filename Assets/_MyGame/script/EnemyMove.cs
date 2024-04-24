@@ -12,6 +12,8 @@ public class EnemyMove : MonoBehaviour
     GameObject player;
     ObjectFall playerFall;
     Vector2 tmpPosishon;
+    [SerializeField]
+    GameObject shadow;
 
     public float moveSpeed = 1.0f; 
     [SerializeField]
@@ -102,6 +104,9 @@ public class EnemyMove : MonoBehaviour
             move.x = player.transform.position.x - transform.position.x;
             move.y = player.transform.position.y - transform.position.y;
             tmpPosishon = player.transform.position;
+            GameObject tmpShadow = Instantiate<GameObject>(shadow);
+            tmpShadow.transform.position = tmpPosishon;
+            tmpShadow.GetComponent<ObjectLanding>().SetParentObject(this.GetComponent<GameObject>());
         }
 
         float distance = Mathf.Sqrt(move.x * move.x + move.y * move.y);

@@ -11,10 +11,8 @@ using UnityEngine;
 public class EnemyCreate : MonoBehaviour
 {
     //public AudioSource setSound;
-    float enemySpaunTime;
     public float enemySpaunTimeReset = 3.0f;
 
-    float waveTimer;
     enum eWaveType
     {
         None,
@@ -26,13 +24,11 @@ public class EnemyCreate : MonoBehaviour
         waveTimerMax
     }
     [SerializeField]
-    eWaveType waveType;
+    eWaveType waveType = eWaveType.bom;
 
     public GameObject enemyObjectBom;
     public GameObject enemyObjectCrow;
     public GameObject enemyObjectFallBom;
-    [SerializeField]
-    Vector3 nextPosition = new Vector3(12, 12, 0);
 
     enum eDirecttion
     {
@@ -45,16 +41,18 @@ public class EnemyCreate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemySpaunTime = 0;
-
-        waveTimer = 30;
-        waveType = eWaveType.fallBom;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        enemySpaunTime -= Time.deltaTime;
+        EnemySpaunSchedule();
+    }
+
+    float waveTimer = 30;
+    void EnemySpaunSchedule()
+    {
         if (waveTimer > 0)
         {
             waveTimer -= Time.deltaTime;
@@ -65,28 +63,30 @@ public class EnemyCreate : MonoBehaviour
             waveType = (eWaveType)Random.Range(((int)eWaveType.None) + 1, ((int)eWaveType.waveTimerMax) - 1);
         }
 
-        if (enemySpaunTime < 0)
+            switch (waveType)
+            {
+                case eWaveType.bom: EnemySpaun(enemyObjectBom,eWaveType.bom); break;
+                case eWaveType.crow: EnemySpaun(enemyObjectCrow, eWaveType.crow); break;
+                case eWaveType.fallBom: EnemySpaun(enemyObjectFallBom, eWaveType.fallBom); break;
+            }
+    }
+    float []enemySpaunTime = new float[(int)eWaveType.waveTimerMax];
+    void EnemySpaun(GameObject spawnEnemy,eWaveType enemyType)
+    {
+        enemySpaunTime[(int)enemyType] -= Time.deltaTime;
+        if (enemySpaunTime[(int)enemyType] < 0)
         {
-            EnemySpaun();
+            GameObject tmp = Instantiate<GameObject>(spawnEnemy);
+            EnemySpaunPositionSet(tmp);
+            enemySpaunTime[(int)enemyType] = enemySpaunTimeReset;
         }
     }
-
-    void EnemySpaun()
+    [SerializeField]
+    Vector3 nextPosition = new Vector3(12, 12, 0);
+    void EnemySpaunPositionSet(GameObject spawnEnemy)
     {
-        GameObject spawnEnemy = null;
-        switch (waveType)
-        {
-            case eWaveType.bom: spawnEnemy = enemyObjectBom; break;
-            case eWaveType.crow: spawnEnemy = enemyObjectCrow; break;
-            case eWaveType.fallBom: spawnEnemy = enemyObjectFallBom; break;
-        }
-        GameObject tmp = Instantiate<GameObject>(spawnEnemy);
-        tmp.transform.parent = transform;
-        tmp.transform.position = nextPosition;
-        //if (waveType == eWaveType.bom)
-        //{
-        //    tmp.GetComponent<BombHit>().ExplosionSource = setSound;
-        //}
+        spawnEnemy.transform.parent = transform;
+        spawnEnemy.transform.position = nextPosition;
 
         int directtion = Random.Range(0, 4);
         float width = Random.Range(-11, 11);
@@ -105,10 +105,7 @@ public class EnemyCreate : MonoBehaviour
                 nextPosition = new Vector3(-12, width, 0);
                 break;
         }
-
-        enemySpaunTime = enemySpaunTimeReset;
     }
-
 
 
     public float GetWaveTime()
