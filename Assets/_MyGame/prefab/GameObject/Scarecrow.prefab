@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   situation: 1
-  fallSound: {fileID: 0}
+  fallSound: {fileID: 3753076071498596226, guid: 0a649a52105cf6e4684d76b678759ed3, type: 3}
   fallCheck: 0
   fallSoundCheck: 0
 --- !u!114 &7191480105231842355

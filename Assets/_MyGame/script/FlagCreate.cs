@@ -18,22 +18,26 @@ public class FlagCreate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        FlagSpaun();
+        FlagSpaunCount();
     }
 
-    void FlagSpaun()
+    void FlagSpaunCount()
     {
         flagSpaunTime -= Time.deltaTime;
-        if(flagSpaunTime < 0)
+        if (flagSpaunTime < 0)
         {
-            GameObject tmp;
-            tmp = Instantiate<GameObject>(flag);
-            GameObject []tmp1 = GameObject.FindGameObjectsWithTag("Block");
-            int tmp2 = Random.Range(0, tmp1.Length);
-            tmp.transform.position = tmp1[tmp2].transform.position;
-            tmp.transform.parent = this.transform;
+            FlagSpaun();
 
             flagSpaunTime = flagSpaunTimeReset;
         }
+    }
+    public void FlagSpaun()
+    {
+        GameObject tmp;
+        tmp = Instantiate<GameObject>(flag);
+        GameObject[] tmp1 = GameObject.FindGameObjectsWithTag("Block");
+        int tmp2 = Random.Range(0, tmp1.Length);
+        tmp.transform.position = tmp1[tmp2].transform.position;
+        tmp.transform.parent = this.transform;
     }
 }

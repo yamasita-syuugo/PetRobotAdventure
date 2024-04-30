@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class PlayerHit : MonoBehaviour
 {
-    const int blockGetNum = 3;
-    [SerializeField] private int flagToBlock = blockGetNum;
 
     // Start is called before the first frame update
     //void Start()
@@ -23,30 +21,11 @@ public class PlayerHit : MonoBehaviour
     {
         if (collision.tag == "Flag") {
             ScoreManager.FlagGetPointAdd();
-            Destroy(collision.GameObject());
 
             GetComponent<PlayerShot>().AddMagazine();
+            GetComponent<PlayerCreateBlock>().FlagToBlock();
 
-            if(flagToBlock <= 0)
-            {
-                GetComponent<PlayerCreateBlock>().AddBlockNum();
-                flagToBlock = blockGetNum;
-            }
-            else
-            {
-                flagToBlock--;
-            }
-
-            GetComponentInChildren<BlockUI>().UIUpDate();
+            Destroy(collision.GameObject());
         }
-    }
-
-    public int GetBlockGetNum()
-    {
-        return blockGetNum;
-    }
-    public int GetFlagToBlock()
-    {
-        return flagToBlock;
     }
 }

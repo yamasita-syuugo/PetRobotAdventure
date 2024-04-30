@@ -39,10 +39,10 @@ public class EnemyCreate : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
-    {
+    //void Start()
+    //{
         
-    }
+    //}
 
     // Update is called once per frame
     void Update()
@@ -53,6 +53,17 @@ public class EnemyCreate : MonoBehaviour
     float waveTimer = 30;
     void EnemySpaunSchedule()
     {
+        //if (waveTimer > 0)
+        //{
+        //    waveTimer -= Time.deltaTime;
+        //}
+        //else
+        //{
+        //    waveTimer = 30;
+        //    waveType = (eWaveType)Random.Range(((int)eWaveType.None) + 1, ((int)eWaveType.waveTimerMax) - 1);
+        //}
+        //EnemySpawn(waveType); 
+
         if (waveTimer > 0)
         {
             waveTimer -= Time.deltaTime;
@@ -60,19 +71,26 @@ public class EnemyCreate : MonoBehaviour
         else
         {
             waveTimer = 30;
-            waveType = (eWaveType)Random.Range(((int)eWaveType.None) + 1, ((int)eWaveType.waveTimerMax) - 1);
+            waveType += 1;
         }
-
-            switch (waveType)
-            {
-                case eWaveType.bom: EnemySpaun(enemyObjectBom,eWaveType.bom); break;
-                case eWaveType.crow: EnemySpaun(enemyObjectCrow, eWaveType.crow); break;
-                case eWaveType.fallBom: EnemySpaun(enemyObjectFallBom, eWaveType.fallBom); break;
-            }
+        switch (waveType)
+        {
+            case eWaveType.bom: EnemySpawn(eWaveType.bom); break;
+            case eWaveType.crow: EnemySpawn(eWaveType.bom); EnemySpawn(eWaveType.crow); break;
+            case eWaveType.fallBom: EnemySpawn(eWaveType.bom); EnemySpawn(eWaveType.crow); EnemySpawn(eWaveType.fallBom); break;
+            default:for (int i = 1; i < (int)eWaveType.waveTimerMax - 1; i++) EnemySpawn((eWaveType)i);break;
+        }
     }
     float []enemySpaunTime = new float[(int)eWaveType.waveTimerMax];
-    void EnemySpaun(GameObject spawnEnemy,eWaveType enemyType)
+    void EnemySpawn(eWaveType enemyType)
     {
+        GameObject spawnEnemy = null;
+        switch (enemyType)
+        {
+            case eWaveType.bom: spawnEnemy = enemyObjectBom; break;
+            case eWaveType.crow: spawnEnemy = enemyObjectCrow; break;
+            case eWaveType.fallBom: spawnEnemy = enemyObjectFallBom; break;
+        }
         enemySpaunTime[(int)enemyType] -= Time.deltaTime;
         if (enemySpaunTime[(int)enemyType] < 0)
         {
@@ -93,7 +111,7 @@ public class EnemyCreate : MonoBehaviour
         switch (directtion)
         {
             case 0:
-                nextPosition = new Vector3(width, 12, 0);
+                nextPosition = new Vector2(width, 12);
                 break;
             case 1:
                 nextPosition = new Vector3(width, -12, 0);

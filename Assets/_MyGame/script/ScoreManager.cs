@@ -10,6 +10,8 @@ public class ScoreManager : MonoBehaviour
     static int flagGetPoint;
     static int destroyPoint;
 
+    static int enemyBomPoint;
+
     static int shotNum;
     // Start is called before the first frame update
     void Start()
@@ -18,6 +20,8 @@ public class ScoreManager : MonoBehaviour
 
         flagGetPoint = 0;
         destroyPoint = 0;
+
+        enemyBomPoint = 0;
 
         shotNum = 0;
     }
@@ -29,7 +33,7 @@ public class ScoreManager : MonoBehaviour
 
     private static void TotalPointReset()
     {
-        totalPoint = flagGetPoint + destroyPoint;
+        totalPoint = flagGetPoint + destroyPoint - enemyBomPoint;
     }
 
     public static void FlagGetPointAdd()
@@ -45,8 +49,32 @@ public class ScoreManager : MonoBehaviour
         TotalPointReset();
     }
 
+    public static void EnemyBomPointAdd()
+    {
+        enemyBomPoint++;
+
+        TotalPointReset();
+    }
+
     public static void ShotNumAdd()
     {
         shotNum++;
+    }
+
+    public int GetTotalPoint()
+    {
+        return totalPoint;
+    }
+    public int GetFlagGetPoint()
+    {
+        return flagGetPoint;
+    }
+    public int GetDestroyPoint()
+    {
+        return destroyPoint;
+    }
+    public int GetEnemyBomPoint()
+    {
+        return enemyBomPoint;
     }
 }

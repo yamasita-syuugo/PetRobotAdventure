@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.VisualScripting;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -53,13 +55,8 @@ public class blockCreate : MonoBehaviour
     //çÌèú
     public void DeleteObject()
     {
-        for (int i = 0; i < blocks.Length ; i++)
-        {
-            if (blocks[i] != null)
-            {
-                Destroy(blocks[i]);
-            }
-        }
+        GameObject[] blocks = GetComponentsInChildren<GameObject>();
+        for(int i = 0;i < blocks.Length; i++) Destroy(blocks[i]);
 
         //BlockRegister();
     }

@@ -22,7 +22,7 @@ public class PlayerUIDisplay : MonoBehaviour
         bulletMax = playerShot.GetMagazineSize();
         bulletNum = playerShot.GetMagazine();
 
-        playerUIMark = new GameObject[bulletMax];
+        playerUIMark = new GameObject[bulletMax + 1];
         PosisionSet();
     }
 
@@ -44,8 +44,9 @@ public class PlayerUIDisplay : MonoBehaviour
             {
                 playerUIMark[i] = Instantiate<GameObject>(bulletUI);
             }
+
             playerUIMark[i].transform.SetParent(playerShot.transform, false);
-            Vector2 tmpPos = new Vector2(math.sin((float)i / bulletMax * 3.1415f * 2) * displayDistance, math.cos((float)i / bulletMax * 3.1415f * 2) * displayDistance);
+            Vector2 tmpPos = new Vector2(math.sin((float)i / (bulletMax + 1) * 3.1415f * 2) * displayDistance, math.cos((float)i / (bulletMax + 1) * 3.1415f * 2) * displayDistance);
             playerUIMark[i].transform.position = tmpPos;
         }
     }
@@ -57,11 +58,11 @@ public class PlayerUIDisplay : MonoBehaviour
     public void BulletNumCheck()
     {
         bulletNum = playerShot.GetMagazine();
-        SpriteRenderer spriteRenderer;
-        for (int i = 0; i < bulletMax; i++)
+        //SpriteRenderer spriteRenderer;
+        for (int i = 1; i < bulletMax + 1; i++)
         {
-            spriteRenderer = playerUIMark[i].GetComponent<SpriteRenderer>();
-            if (i < bulletNum)
+            SpriteRenderer spriteRenderer = playerUIMark[i].GetComponent<SpriteRenderer>();
+            if (i < bulletNum + 1)
             {
                 spriteRenderer.color = new Color(bulletColor.r, bulletColor.g, bulletColor.b, bulletColor.a);
             }

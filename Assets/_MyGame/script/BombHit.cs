@@ -25,6 +25,8 @@ public class BombHit : MonoBehaviour
             GameObject tmp = Instantiate<GameObject>(Explosion);
             tmp.transform.position = this.transform.position;
 
+            ScoreManager.EnemyBomPointAdd();
+
             ExplosionSource.Play();
             Destroy(this.GameObject());
         }
@@ -34,6 +36,9 @@ public class BombHit : MonoBehaviour
             tmp.transform.position = this.transform.position;
 
             ExplosionSource.Play();
+            ScoreManager.DestroyPointAdd();
+            GameObject.FindAnyObjectByType<FlagCreate>().FlagSpaun();
+
             Destroy(collision.GameObject());
             Destroy(this.GameObject());
         }
@@ -43,6 +48,8 @@ public class BombHit : MonoBehaviour
             tmp.transform.position = this.transform.position;
 
             ExplosionSource.Play();
+            ScoreManager.EnemyBomPointAdd();
+
             Destroy(this.GameObject());
         }
     }

@@ -78,6 +78,7 @@ public class PlayerShot : MonoBehaviour
 
     public void AddMagazine(int add = 1)
     {
+        if (magazine >= magazineSize ) return;
         magazine += add;
         GetComponent<PlayerUIDisplay>().BulletNumCheck();
     }

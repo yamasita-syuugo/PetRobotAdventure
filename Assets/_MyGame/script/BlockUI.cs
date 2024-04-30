@@ -7,18 +7,18 @@ public class BlockUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UIUpDate();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        UIUpDate();
     }
 
     public void UIUpDate()
     {
-        float color = ((float)GetComponentInParent<PlayerHit>().GetBlockGetNum()) / GetComponentInParent<PlayerHit>().GetFlagToBlock();
+        float color = ((float)GetComponentInParent<PlayerCreateBlock>().GetBlockGetNum()) / GetComponentInParent<PlayerCreateBlock>().GetFlagToBlock();
         if (color >= 1) color = 0;
 
         Color UIColor = new Color(color, color, color, color);

@@ -6,10 +6,14 @@ public class Landing : MonoBehaviour
 {
     Vector2 beforePosision = Vector2.zero;
     public GameObject blast;
+    [SerializeField]
+    GameObject shadowModel;
+    [SerializeField]
+    GameObject shadow = null;
     // Start is called before the first frame update
     void Start()
     {
-
+        shadow = Instantiate<GameObject>(shadowModel);
     }
 
     // Update is called once per frame
@@ -24,7 +28,14 @@ public class Landing : MonoBehaviour
     {
         GameObject tmp = Instantiate<GameObject>(blast);
         tmp.transform.position = transform.position;
+        tmp.transform.parent = transform.parent;
 
+        Destroy(shadow.gameObject);
         Destroy(gameObject);
+    }
+
+    public void SetShadowPosision(Vector2 pos)
+    {
+        shadow.transform.position = pos;
     }
 }

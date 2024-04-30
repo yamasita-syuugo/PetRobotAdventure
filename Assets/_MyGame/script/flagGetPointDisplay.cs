@@ -1,23 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class ObjectLanding : MonoBehaviour
+public class flagGetPointDisplay : MonoBehaviour
 {
-    GameObject parentObject;
+    [SerializeField]
+    ScoreManager scoreManager;
     // Start is called before the first frame update
     //void Start()
     //{
-        
+
     //}
 
     // Update is called once per frame
     void Update()
     {
-        if(parentObject == null)Destroy(gameObject);
-    }
-
-    public void SetParentObject(GameObject tmpObject) { 
-        parentObject = tmpObject;
+        float time = scoreManager.GetFlagGetPoint();
+        GetComponent<TextMeshProUGUI>().text = time.ToString("00");
     }
 }

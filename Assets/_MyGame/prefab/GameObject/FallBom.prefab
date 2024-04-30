@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3176880703463828607}
   - component: {fileID: 8940320677291632386}
   - component: {fileID: 4674094713963566452}
-  - component: {fileID: 5731248891153046568}
   - component: {fileID: 5140491747928800965}
+  - component: {fileID: 5731248891153046568}
   - component: {fileID: 6791331800800802746}
   m_Layer: 0
   m_Name: FallBom
@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -109,23 +109,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5731248891153046568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1846042793416335476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b98f266acff714c4c80829c4500e4536, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  shadow: {fileID: 7607999811221778830, guid: c7211ddc31d83fe4f93ebb629bbd97f2, type: 3}
-  moveSpeed: 7.28
-  move: {x: 0, y: 0, z: 0}
-  moveType: 3
 --- !u!114 &5140491747928800965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,6 +122,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blast: {fileID: 7882004832147076534, guid: af61f766f8047ab4aa57ecc86036e3f9, type: 3}
+  shadowModel: {fileID: 7933361428651780963, guid: c7211ddc31d83fe4f93ebb629bbd97f2, type: 3}
+  shadow: {fileID: 0}
+--- !u!114 &5731248891153046568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846042793416335476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b98f266acff714c4c80829c4500e4536, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  moveSpeed: 7.28
+  move: {x: 0, y: 0, z: 0}
+  moveType: 3
 --- !u!50 &6791331800800802746
 Rigidbody2D:
   serializedVersion: 4
