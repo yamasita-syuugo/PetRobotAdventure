@@ -14,20 +14,18 @@ public class ObjectFall : MonoBehaviour
     eSituation situation = eSituation.normal;
     public AudioSource fallSound;
 
-    [SerializeField] bool fallCheck = false;
-    [SerializeField] bool fallSoundCheck = false;
+    bool fallSoundCheck = false;
 
-    bool oneFrame = true;
     // Start is called before the first frame update
     void Start()
     {
         situation = eSituation.normal;
+        fallSound = GameObject.Find("fallSound").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if(situation == eSituation.fall)
         {
             if(transform.localScale.x > 0.1)
@@ -37,24 +35,27 @@ public class ObjectFall : MonoBehaviour
             }
             else
             {
-                UnityEngine.SceneManagement.SceneManager.LoadScene("Result");
+                if(tag == "Player")UnityEngine.SceneManagement.SceneManager.LoadScene("Result");
+                else Destroy(gameObject);
             }
 
             if (!fallSoundCheck)
             {
-                fallSound.Play();
+                if(gameObject.tag == "Player")fallSound.Play();
                 fallSoundCheck = true;
             }
         }
     }
 
+    bool fallCheck = false;
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.tag == "Block")
+        if(collision.tag == "Scaffold")
         {
             fallCheck = false;
         }
     }
+    bool oneFrame = true;
     private void FixedUpdate()
     {
         if (oneFrame)   //1ÉtÉåÅ[ÉÄñ⁄Ç…fallCheckÇí âﬂÇµÇƒÇµÇ‹Ç§ÇΩÇﬂ

@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_MyGame/Scenes/MainGame.unity
     guid: d0d1628b8c803e046a5d03437fadc5a9
+  - enabled: 1
+    path: Assets/_MyGame/Scenes/Result.unity
+    guid: ffe5fdbc3c7c481458174afaf549e3ab
+  - enabled: 1
+    path: Assets/_MyGame/Scenes/Gacha.unity
+    guid: f25ba0576dbe9f24ea57f9c9cfac6c75
   m_configObjects: {}

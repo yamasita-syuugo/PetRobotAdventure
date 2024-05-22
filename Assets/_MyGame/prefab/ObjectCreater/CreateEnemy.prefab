@@ -44,9 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd0a6c419ded4494a903c9a0164c4ed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpaunTimeReset: 3
-  waveType: 0
+  waveType: 1
   enemyObjectBom: {fileID: 7882004832147076534, guid: af61f766f8047ab4aa57ecc86036e3f9, type: 3}
   enemyObjectCrow: {fileID: 1846042793416335476, guid: 5aec0b44d81ee454fb01a2547fd18a57, type: 3}
   enemyObjectFallBom: {fileID: 1846042793416335476, guid: 0aa37b1f7a8bc094fb95ea2bc2b857a0, type: 3}
+  enemyObjectLivingArmor: {fileID: 1846042793416335476, guid: b9a5fa8a3215ff242898661a5f4fe773, type: 3}
+  enemySpaunTimeReset:
+  - 0
+  - 3
+  - 5
+  - 10
+  - 15
   nextPosition: {x: 12, y: 12, z: 0}

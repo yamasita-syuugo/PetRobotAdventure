@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
+using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
+
 
 
 //using UnityEditor.Experimental.GraphView;
@@ -11,7 +13,6 @@ using UnityEngine;
 public class EnemyCreate : MonoBehaviour
 {
     //public AudioSource setSound;
-    public float enemySpaunTimeReset = 3.0f;
 
     enum eWaveType
     {
@@ -19,16 +20,18 @@ public class EnemyCreate : MonoBehaviour
 
         bom,
         crow,
-        fallBom,
+        golem,
+        livingArmor,
 
-        waveTimerMax
+        waveTypeMax
     }
     [SerializeField]
     eWaveType waveType = eWaveType.bom;
 
     public GameObject enemyObjectBom;
     public GameObject enemyObjectCrow;
-    public GameObject enemyObjectFallBom;
+    public GameObject enemyObjectgolem;
+    public GameObject enemyObjectLivingArmor;
 
     enum eDirecttion
     {
@@ -38,11 +41,17 @@ public class EnemyCreate : MonoBehaviour
         west,
     }
 
+    GameObject player = null;
     // Start is called before the first frame update
-    //void Start()
-    //{
-        
-    //}
+    void Start()
+    {
+        player = GameObject.FindWithTag("Player");
+
+        for (int i = 0; i < enemySpaunTime.Length; i++)
+        {
+            enemySpaunTime[i] = enemySpaunTimeReset[i];
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -53,16 +62,7 @@ public class EnemyCreate : MonoBehaviour
     float waveTimer = 30;
     void EnemySpaunSchedule()
     {
-        //if (waveTimer > 0)
-        //{
-        //    waveTimer -= Time.deltaTime;
-        //}
-        //else
-        //{
-        //    waveTimer = 30;
-        //    waveType = (eWaveType)Random.Range(((int)eWaveType.None) + 1, ((int)eWaveType.waveTimerMax) - 1);
-        //}
-        //EnemySpawn(waveType); 
+        if (player.GetComponent<ObjectFall>().GetSituation() != ObjectFall.eSituation.normal) return;
 
         if (waveTimer > 0)
         {
@@ -70,34 +70,57 @@ public class EnemyCreate : MonoBehaviour
         }
         else
         {
-            waveTimer = 30;
-            waveType += 1;
+            if (waveType < eWaveType.waveTypeMax)
+            {
+                waveTimer = 30;
+                waveType += 1;
+            }
         }
         switch (waveType)
         {
-            case eWaveType.bom: EnemySpawn(eWaveType.bom); break;
-            case eWaveType.crow: EnemySpawn(eWaveType.bom); EnemySpawn(eWaveType.crow); break;
-            case eWaveType.fallBom: EnemySpawn(eWaveType.bom); EnemySpawn(eWaveType.crow); EnemySpawn(eWaveType.fallBom); break;
-            default:for (int i = 1; i < (int)eWaveType.waveTimerMax - 1; i++) EnemySpawn((eWaveType)i);break;
+            case eWaveType.bom: EnemySpawnTimer(eWaveType.bom); break;
+            case eWaveType.crow: EnemySpawnTimer(eWaveType.bom); 
+                if(GameObject.FindGameObjectWithTag("Player").GetComponent<playerMove>().GetMove() == new Vector2(0,0)) EnemySpawnTimer(eWaveType.crow); break;
+            case eWaveType.golem: EnemySpawnTimer(eWaveType.bom);
+                if (GameObject.FindGameObjectWithTag("Player").GetComponent<playerMove>().GetMove() == new Vector2(0, 0)) EnemySpawnTimer(eWaveType.crow); 
+                EnemySpawnTimer(eWaveType.golem); break;
+            case eWaveType.livingArmor: EnemySpawnTimer(eWaveType.bom);
+                if (GameObject.FindGameObjectWithTag("Player").GetComponent<playerMove>().GetMove() == new Vector2(0, 0)) EnemySpawnTimer(eWaveType.crow); 
+                EnemySpawnTimer(eWaveType.golem);
+                EnemySpawnTimer(eWaveType.livingArmor); break;
+
+            case eWaveType.waveTypeMax:EndGame();break;
+            default:for (int i = 1; i < (int)eWaveType.waveTypeMax - 1; i++) EnemySpawnTimer((eWaveType)i);break;
         }
     }
-    float []enemySpaunTime = new float[(int)eWaveType.waveTimerMax];
-    void EnemySpawn(eWaveType enemyType)
+    [SerializeField]
+    float []enemySpaunTime = new float[(int)eWaveType.waveTypeMax];
+    [SerializeField]
+    float[] enemySpaunTimeReset = new float[(int)eWaveType.waveTypeMax];
+    void EnemySpawnTimer(eWaveType enemyType)
     {
         GameObject spawnEnemy = null;
         switch (enemyType)
         {
             case eWaveType.bom: spawnEnemy = enemyObjectBom; break;
             case eWaveType.crow: spawnEnemy = enemyObjectCrow; break;
-            case eWaveType.fallBom: spawnEnemy = enemyObjectFallBom; break;
+            case eWaveType.golem: spawnEnemy = enemyObjectgolem; break;
+            case eWaveType.livingArmor: spawnEnemy = enemyObjectLivingArmor; break;
         }
         enemySpaunTime[(int)enemyType] -= Time.deltaTime;
         if (enemySpaunTime[(int)enemyType] < 0)
         {
             GameObject tmp = Instantiate<GameObject>(spawnEnemy);
             EnemySpaunPositionSet(tmp);
-            enemySpaunTime[(int)enemyType] = enemySpaunTimeReset;
+            enemySpaunTime[(int)enemyType] = enemySpaunTimeReset[(int)enemyType];
         }
+    }
+    void EndGame()
+    {
+        GameObject tmp = Instantiate<GameObject>(enemyObjectBom);
+        EnemySpaunPositionSet(tmp);
+        enemySpaunTime[(int)eWaveType.bom] = enemySpaunTimeReset[(int)eWaveType.bom];
+
     }
     [SerializeField]
     Vector3 nextPosition = new Vector3(12, 12, 0);
@@ -114,17 +137,16 @@ public class EnemyCreate : MonoBehaviour
                 nextPosition = new Vector2(width, 12);
                 break;
             case 1:
-                nextPosition = new Vector3(width, -12, 0);
+                nextPosition = new Vector2(width, -12);
                 break;
             case 2:
-                nextPosition = new Vector3(12, width, 0);
+                nextPosition = new Vector2(12, width);
                 break;
             case 3:
-                nextPosition = new Vector3(-12, width, 0);
+                nextPosition = new Vector2(-12, width);
                 break;
         }
     }
-
 
     public float GetWaveTime()
     {
@@ -136,7 +158,8 @@ public class EnemyCreate : MonoBehaviour
         {
             case eWaveType.bom: return "BOM";
             case eWaveType.crow: return "CROW";
-            case eWaveType.fallBom: return "FALLBOM";
+            case eWaveType.golem: return "GOLEM";
+            case eWaveType.livingArmor: return "LIVING_ARMOR";
         }
         return "FREE";
     }

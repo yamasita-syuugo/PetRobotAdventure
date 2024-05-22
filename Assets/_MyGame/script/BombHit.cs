@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class BombHit : MonoBehaviour
 {
-    public GameObject Explosion;
-    public AudioSource ExplosionSource;
+    public GameObject explosion;
+    public AudioSource explosionSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,37 +20,36 @@ public class BombHit : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Player")
+        if (collision.tag == "Player")
         {
-            GameObject tmp = Instantiate<GameObject>(Explosion);
-            tmp.transform.position = this.transform.position;
-
             ScoreManager.EnemyBomPointAdd();
 
-            ExplosionSource.Play();
-            Destroy(this.GameObject());
+            Explosion();
         }
-        else if(collision.tag == "Bullet")
+        else if (collision.tag == "Attack")
         {
-            GameObject tmp = Instantiate<GameObject>(Explosion);
-            tmp.transform.position = this.transform.position;
-
-            ExplosionSource.Play();
             ScoreManager.DestroyPointAdd();
-            GameObject.FindAnyObjectByType<FlagCreate>().FlagSpaun();
 
             Destroy(collision.GameObject());
-            Destroy(this.GameObject());
-        }
-        else if(collision.tag == "Enemy")
-        {
-            GameObject tmp = Instantiate<GameObject>(Explosion);
-            tmp.transform.position = this.transform.position;
 
-            ExplosionSource.Play();
+            GameObject.FindAnyObjectByType<FlagCreate>().FlagSpaun();
+
+            Explosion();
+        }
+        else if (collision.tag == "Enemy")
+        {
             ScoreManager.EnemyBomPointAdd();
 
-            Destroy(this.GameObject());
+            Explosion();
         }
+    }
+
+    public void Explosion()
+    {
+        GameObject tmp = Instantiate<GameObject>(explosion);
+        tmp.transform.position = this.transform.position;
+        explosionSource.Play();
+
+        Destroy(this.GameObject());
     }
 }

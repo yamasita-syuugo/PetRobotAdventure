@@ -5,11 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Block
-  - Bullet
   - Flag
   - Enemy
-  - Field
   - Manager
+  - Attack
+  - Scaffold
   layers:
   - Default
   - TransparentFX

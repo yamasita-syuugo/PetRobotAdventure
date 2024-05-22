@@ -18,7 +18,7 @@ public class BlockDeleto : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Block")
+        if (collision.tag == "Scaffold")
         {
             Destroy(collision.GameObject());
         }

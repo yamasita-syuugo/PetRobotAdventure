@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    static int totalPoint;
+    static int totalPoint = 0;
 
-    static int flagGetPoint;
-    static int destroyPoint;
+    static int flagGetPoint = 0;
+    static int destroyPoint = 0;
 
-    static int enemyBomPoint;
+    static int enemyBomPoint = 0;
 
-    static int shotNum;
+    static int shotNum = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -61,19 +61,19 @@ public class ScoreManager : MonoBehaviour
         shotNum++;
     }
 
-    public int GetTotalPoint()
+    public static int GetTotalPoint()
     {
         return totalPoint;
     }
-    public int GetFlagGetPoint()
+    public static int GetFlagGetPoint()
     {
         return flagGetPoint;
     }
-    public int GetDestroyPoint()
+    public static int GetDestroyPoint()
     {
         return destroyPoint;
     }
-    public int GetEnemyBomPoint()
+    public static int GetEnemyBomPoint()
     {
         return enemyBomPoint;
     }

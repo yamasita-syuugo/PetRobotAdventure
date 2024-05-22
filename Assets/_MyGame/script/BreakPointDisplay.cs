@@ -16,7 +16,7 @@ public class BreakPointDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float destroyPoint = scoreManager.GetDestroyPoint();
+        float destroyPoint = ScoreManager.GetDestroyPoint();
         GetComponent<TextMeshProUGUI>().text = destroyPoint.ToString("00");
     }
 }

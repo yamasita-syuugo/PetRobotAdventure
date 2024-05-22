@@ -162,8 +162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b1a75a242ecbf748823b70b745ee336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Explosion: {fileID: 422756626205993004, guid: 539f0e49c86f54440bcfe188ba8f6bb7, type: 3}
-  ExplosionSource: {fileID: 4569633534884528094, guid: 332fd1b98f43e4d41bcbb69c2088b828, type: 3}
+  explosion: {fileID: 422756626205993004, guid: 539f0e49c86f54440bcfe188ba8f6bb7, type: 3}
+  explosionSource: {fileID: 3840878471973260572, guid: fe05c5c7542e55f44bb147255e26e176, type: 3}
 --- !u!114 &2815728051082803435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,7 +177,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  shadow: {fileID: 7607999811221778830, guid: c7211ddc31d83fe4f93ebb629bbd97f2, type: 3}
   moveSpeed: 1
   move: {x: 0, y: 0, z: 0}
   moveType: 2

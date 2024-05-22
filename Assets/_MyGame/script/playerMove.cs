@@ -52,4 +52,8 @@ public class playerMove : MonoBehaviour
     {
         transform.position += addMove;
     }
+    public Vector2 GetMove()
+    {
+        return move;
+    }
 }

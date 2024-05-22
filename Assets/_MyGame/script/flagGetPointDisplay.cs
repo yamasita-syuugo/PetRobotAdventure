@@ -16,7 +16,7 @@ public class flagGetPointDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float time = scoreManager.GetFlagGetPoint();
+        float time = ScoreManager.GetFlagGetPoint();
         GetComponent<TextMeshProUGUI>().text = time.ToString("00");
     }
 }

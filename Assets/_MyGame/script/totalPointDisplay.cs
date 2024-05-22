@@ -16,7 +16,7 @@ public class totalPointDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float time = scoreManager.GetTotalPoint();
+        float time = ScoreManager.GetTotalPoint();
         GetComponent<TextMeshProUGUI>().text = time.ToString("00");
     }
 }

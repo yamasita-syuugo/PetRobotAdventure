@@ -35,7 +35,7 @@ public class FlagCreate : MonoBehaviour
     {
         GameObject tmp;
         tmp = Instantiate<GameObject>(flag);
-        GameObject[] tmp1 = GameObject.FindGameObjectsWithTag("Block");
+        GameObject[] tmp1 = GameObject.FindGameObjectsWithTag("Scaffold");
         int tmp2 = Random.Range(0, tmp1.Length);
         tmp.transform.position = tmp1[tmp2].transform.position;
         tmp.transform.parent = this.transform;

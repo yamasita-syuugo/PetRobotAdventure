@@ -8,7 +8,6 @@ public class Landing : MonoBehaviour
     public GameObject blast;
     [SerializeField]
     GameObject shadowModel;
-    [SerializeField]
     GameObject shadow = null;
     // Start is called before the first frame update
     void Start()

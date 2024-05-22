@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 5731248891153046568}
   - component: {fileID: 6791331800800802746}
   m_Layer: 0
-  m_Name: FallBom
-  m_TagString: Untagged
+  m_Name: FallObject
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77,12 +77,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 43
-  m_Sprite: {fileID: 21300000, guid: 29960a9b572004948b50a7062a75de98, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 7de99e6400f01d149b379b57175c91ac, type: 3}
+  m_Color: {r: 0.4811321, g: 0.31565896, b: 0.21106265, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.16, y: 0.16}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88a29402a16f987419f2a9c0e11cc119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blast: {fileID: 7882004832147076534, guid: af61f766f8047ab4aa57ecc86036e3f9, type: 3}
+  blast: {fileID: 7882004832147076534, guid: 6c6cd5368bdeba445990662bd0ea1ade, type: 3}
   shadowModel: {fileID: 7933361428651780963, guid: c7211ddc31d83fe4f93ebb629bbd97f2, type: 3}
   shadow: {fileID: 0}
 --- !u!114 &5731248891153046568

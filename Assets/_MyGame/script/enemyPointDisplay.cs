@@ -16,7 +16,7 @@ public class enemyPointDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float time = scoreManager.GetEnemyBomPoint();
+        float time = ScoreManager.GetEnemyBomPoint();
         GetComponent<TextMeshProUGUI>().text = time.ToString("00");
     }
 }

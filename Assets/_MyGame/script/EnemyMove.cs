@@ -22,6 +22,7 @@ public class EnemyMove : MonoBehaviour
         goStraight,
         tracking,
         topToFall,
+        walk,
 
         moveTyptMax,
     }
@@ -59,6 +60,9 @@ public class EnemyMove : MonoBehaviour
                 break;
             case eMoveType.topToFall:
                 MoveTopToFall();
+                break;
+            case eMoveType.walk:
+                MoveWalk();
                 break;
         }
     }
@@ -112,6 +116,22 @@ public class EnemyMove : MonoBehaviour
         {
             transform.position += move * moveSpeed * Time.deltaTime;
         }
+    }
+    void MoveWalk()
+    {
+        if (GetComponent<ObjectFall>().GetSituation() != ObjectFall.eSituation.normal) return;
+
+        if (playerFall == null) return;
+        if (playerFall.GetSituation() != ObjectFall.eSituation.normal) return;
+        Vector3 move = new Vector3(0.0f, 0.0f, 0.0f);
+        move.x = player.transform.position.x - transform.position.x;
+        move.y = player.transform.position.y - transform.position.y;
+
+        float distance = Mathf.Sqrt(move.x * move.x + move.y * move.y);
+
+        move /= distance;
+
+        transform.position += move * moveSpeed * Time.deltaTime;
     }
 
     public Vector3 GetMove()

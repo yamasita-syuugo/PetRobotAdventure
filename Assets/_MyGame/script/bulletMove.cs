@@ -9,9 +9,9 @@ public class bulletMove : MonoBehaviour
     public float moveSpeed = 2.0f;
 
     // Start is called before the first frame update
-    void Start()
-    {
-    }
+    //void Start()
+    //{
+    //}
 
     // Update is called once per frame
     void Update()
@@ -23,5 +23,13 @@ public class bulletMove : MonoBehaviour
     public void SetMoveEnelgy(Vector2 newMoveEnelgy)
     {
         moveEnelgy = newMoveEnelgy;
+    }
+    public Vector2 GetMoveEnelgy()
+    {
+        return moveEnelgy;
+    }
+    public float GetMoveSpeed()
+    {
+        return moveSpeed;
     }
 }

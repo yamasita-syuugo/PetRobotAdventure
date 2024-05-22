@@ -13,10 +13,10 @@ public class PlayerShot : MonoBehaviour
     public float moveDirectionX, moveDirectionY;
 
     // Start is called before the first frame update
-    //void Start()
-    //{
-        
-    //}
+    void Start()
+    {
+        shotSound = GameObject.Find("shotSound").GetComponent<AudioSource>();
+    }
 
     // Update is called once per frame
     void Update()

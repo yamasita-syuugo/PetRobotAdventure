@@ -13,10 +13,10 @@ public class PlayerCreateBlock : MonoBehaviour
     [SerializeField]
     bool addBlock = false;
     // Start is called before the first frame update
-    //void Start()
-    //{
-        
-    //}
+    void Start()
+    {
+        blockCreateSound = GameObject.Find("installation").GetComponent<AudioSource>();
+    }
 
     // Update is called once per frame
     void Update()
