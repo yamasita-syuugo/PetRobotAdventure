@@ -44,6 +44,7 @@ public class ObjectFall : MonoBehaviour
                 if(gameObject.tag == "Player")fallSound.Play();
                 fallSoundCheck = true;
             }
+            transform.position = new Vector3(transform.position.x, transform.position.y, -1);
         }
     }
 

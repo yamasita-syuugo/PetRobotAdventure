@@ -76,6 +76,8 @@ public class PlayerCreateBlock : MonoBehaviour
 
             blockCreateSound.Play();
 
+            GameObject.Find("CreateEnemy").GetComponent<EnemyCreate>().GolemCountAdd();
+
             blockNum--;
         }
     }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerMeleeAttack : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class PlayerMeleeAttack : MonoBehaviour
         if (Input.GetMouseButtonDown(2))
         {
             MeleeAttack();
+
+            GameObject.Find("CreateEnemy").GetComponent<EnemyCreate>().SetEndCount();
         }
     }
 
@@ -46,6 +49,8 @@ public class PlayerMeleeAttack : MonoBehaviour
         //}
     }
 
+    [SerializeField]
+    float attackDistanceSize = 0.5f;
     void MeleeAttack()
     {
         GameObject meleeAttack = Instantiate(meleeAttackBase);
@@ -56,6 +61,8 @@ public class PlayerMeleeAttack : MonoBehaviour
         float ang = -math.atan2(mouseDistansX, mouseDistansY) * Mathf.Rad2Deg;
         meleeAttack.transform.rotation = Quaternion.Euler(0,0,ang);
 
-        meleeAttack.transform.position = transform.position /*+*/ ;
+        float distance = Mathf.Sqrt(mouseDistansX * mouseDistansX + mouseDistansY * mouseDistansY);
+        meleeAttack.transform.position = transform.position + new Vector3(mouseDistansX / distance * attackDistanceSize, mouseDistansY / distance *attackDistanceSize, 0);
+        meleeAttack.transform.parent = GameObject.FindGameObjectWithTag("Player").transform;
     }
 }

@@ -3361,12 +3361,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 524552161}
     m_Modifications:
     - target: {fileID: 2094567756836657004, guid: a4e384d6cbc5e274280a3a3c0cab7a12, type: 3}
-      propertyPath: waveType
-      value: 2
+      propertyPath: endNum
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2094567756836657004, guid: a4e384d6cbc5e274280a3a3c0cab7a12, type: 3}
-      propertyPath: enemySpaunTimeReset.Array.data[2]
-      value: 0.5
+      propertyPath: waveType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3956128938480590584, guid: a4e384d6cbc5e274280a3a3c0cab7a12, type: 3}
       propertyPath: m_Name
@@ -15022,6 +15022,10 @@ PrefabInstance:
     - target: {fileID: 2637719474650202597, guid: d0a0ddf47f57ef74baba4882b0d50694, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291536584900420585, guid: d0a0ddf47f57ef74baba4882b0d50694, type: 3}
+      propertyPath: attackDistanceSize
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

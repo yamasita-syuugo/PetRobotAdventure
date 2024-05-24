@@ -34,6 +34,8 @@ public class BombHit : MonoBehaviour
 
             GameObject.FindAnyObjectByType<FlagCreate>().FlagSpaun();
 
+            GameObject.Find("CreateEnemy").GetComponent<EnemyCreate>().LivingArmorCountAdd();   //リビングアーマーカウント
+
             Explosion();
         }
         else if (collision.tag == "Enemy")
