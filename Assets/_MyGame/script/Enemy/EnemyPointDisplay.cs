@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class enemyPointDisplay : MonoBehaviour
+public class EnemyPointDisplay : MonoBehaviour
 {
     [SerializeField]
     ScoreManager scoreManager;

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
+using System.Xml.Serialization;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
@@ -22,6 +23,7 @@ public class EnemyCreate : MonoBehaviour
         crow,
         golem,
         livingArmor,
+        enemyMass,
 
         waveTypeMax
     }
@@ -32,6 +34,7 @@ public class EnemyCreate : MonoBehaviour
     public GameObject enemyObjectCrow;
     public GameObject enemyObjectGolem;
     public GameObject enemyObjectLivingArmor;
+    public GameObject enemyObjectEnemyMass;
 
     enum eDirecttion
     {
@@ -49,7 +52,7 @@ public class EnemyCreate : MonoBehaviour
 
         for (int i = 0; i < enemySpaunTime.Length; i++)
         {
-            enemySpaunTime[i] = enemySpaunTimeReset[i];
+            enemySpaunTime[i] = 0;//enemySpaunTimeReset[i];
         }
 
         golemCount = golemCountReset;
@@ -75,29 +78,36 @@ public class EnemyCreate : MonoBehaviour
         }
         else
         {
-            if (waveType < eWaveType.waveTypeMax)
+            if (waveType < eWaveType.waveTypeMax - 1)
             {
                 waveTimer = 30;
                 waveType += 1;
             }
         }
+        EnemySpawnTimer(eWaveType.bom);
         switch (waveType)
         {
-            case eWaveType.bom: EnemySpawnTimer(eWaveType.bom); break;
-            case eWaveType.crow: EnemySpawnTimer(eWaveType.bom); 
-                if(GameObject.FindGameObjectWithTag("Player").GetComponent<playerMove>().GetMove() == new Vector2(0,0)) EnemySpawnTimer(eWaveType.crow); break;
-            case eWaveType.golem: EnemySpawnTimer(eWaveType.bom);
-                if (GameObject.FindGameObjectWithTag("Player").GetComponent<playerMove>().GetMove() == new Vector2(0, 0)) EnemySpawnTimer(eWaveType.crow);
+            case eWaveType.bom:  break;
+            case eWaveType.crow: 
+                EnemySpawnCrow(); break;
+            case eWaveType.golem:
+                EnemySpawnCrow();
                 EnemySpawnGolem(); break;
-            case eWaveType.livingArmor: EnemySpawnTimer(eWaveType.bom);
-                if (GameObject.FindGameObjectWithTag("Player").GetComponent<playerMove>().GetMove() == new Vector2(0, 0)) EnemySpawnTimer(eWaveType.crow);
+            case eWaveType.livingArmor:
+                EnemySpawnCrow();
                 EnemySpawnGolem();
                 EnemySpawnLivingArmor(); break;
+            case eWaveType.enemyMass:
+                EnemySpawnCrow();
+                EnemySpawnGolem();
+                EnemySpawnLivingArmor();
+                EnemySpawnEnemyMass();
+                break;
 
             case eWaveType.waveTypeMax:EndGame();break;
             default:for (int i = 1; i < (int)eWaveType.waveTypeMax - 1; i++) EnemySpawnTimer((eWaveType)i);break;
         }
-
+        BomSpawn();
         EndGame();
     }
     float []enemySpaunTime = new float[(int)eWaveType.waveTypeMax];
@@ -112,14 +122,21 @@ public class EnemyCreate : MonoBehaviour
             case eWaveType.crow: spawnEnemy = enemyObjectCrow; break;
             case eWaveType.golem: spawnEnemy = enemyObjectGolem; break;
             case eWaveType.livingArmor: spawnEnemy = enemyObjectLivingArmor; break;
+            case eWaveType.enemyMass: spawnEnemy = enemyObjectEnemyMass; break;
         }
         enemySpaunTime[(int)enemyType] -= Time.deltaTime;
         if (enemySpaunTime[(int)enemyType] < 0)
         {
             GameObject tmp = Instantiate<GameObject>(spawnEnemy);
             EnemySpaunPositionSet(tmp);
+
             enemySpaunTime[(int)enemyType] = enemySpaunTimeReset[(int)enemyType];
         }
+    }
+    void EnemySpawnCrow()
+    {
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<playerMove>().GetMove() == new Vector2(0, 0)) EnemySpawnTimer(eWaveType.crow);
+        else enemySpaunTime[(int)eWaveType.crow] = enemySpaunTimeReset[(int)eWaveType.crow];
     }
     [SerializeField]
     int golemCountReset = 3;
@@ -134,7 +151,7 @@ public class EnemyCreate : MonoBehaviour
         }
     }
     [SerializeField]
-    int livingArmorCountReset = 10;
+    int livingArmorCountReset = 15;
     int livingArmorCount = 0;
     void EnemySpawnLivingArmor()
     {
@@ -145,9 +162,14 @@ public class EnemyCreate : MonoBehaviour
             livingArmorCount = livingArmorCountReset;
         }
     }
+    void EnemySpawnEnemyMass()
+    {
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerShot>().GetMagazine() >= 7) EnemySpawnTimer(eWaveType.enemyMass);
+        else enemySpaunTime[(int)eWaveType.enemyMass] = enemySpaunTimeReset[(int)eWaveType.enemyMass];
+    }
     bool end = false;
     [SerializeField]
-    int endNum = 3;
+    int endNum = 4;
     float[] endCount ;
     public void SetEndCount()
     {
@@ -162,6 +184,20 @@ public class EnemyCreate : MonoBehaviour
             }
         }
         endCount[num] = 1;
+    }
+    int bomSpawnNum = 0;
+    public void SetBomSpawnNum(int num)
+    {
+        bomSpawnNum += num;
+    }
+    void BomSpawn()
+    {
+        if (bomSpawnNum <= 0) return;
+
+        GameObject tmp = Instantiate<GameObject>(enemyObjectBom);
+        EnemySpaunPositionSet(tmp);
+
+        bomSpawnNum--;
     }
     void EndGame()
     {

@@ -11,11 +11,15 @@ public class CameraMove : MonoBehaviour
     void Start()
     {
         target = GameObject.FindWithTag("Player");
+
+        camera = GetComponent<Camera>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        SizeZoom();
+
         if (target == null) return;
         Vector3 move = new Vector3(0.0f, 0.0f, 0.0f);
 
@@ -23,5 +27,20 @@ public class CameraMove : MonoBehaviour
         move.y = (target.transform.position.y - transform.position.y) / speedDelay * Time.deltaTime;
 
         transform.position += move;
+    }
+
+    Camera camera;
+    [SerializeField]
+    float zoomSpeed = 1.0f;
+    [SerializeField]
+    float maxSize = 6;
+    [SerializeField]
+    float minSize = 2;
+    void SizeZoom()
+    {
+        camera.orthographicSize += -Input.mouseScrollDelta.y * zoomSpeed;
+
+        if(camera.orthographicSize >maxSize)camera.orthographicSize = maxSize;
+        else if(camera.orthographicSize < minSize)camera.orthographicSize = minSize;
     }
 }

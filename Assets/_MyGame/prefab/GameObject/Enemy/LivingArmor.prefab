@@ -208,6 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frictionBase: 3
+  energyMagnification: 2
 --- !u!1001 &4621700929230306267
 PrefabInstance:
   m_ObjectHideFlags: 0

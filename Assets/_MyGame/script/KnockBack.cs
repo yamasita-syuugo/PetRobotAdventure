@@ -8,10 +8,11 @@ public class KnockBack : MonoBehaviour
     float moveSpeed = 1;
 
     [SerializeField] float frictionBase = 3;
+    [SerializeField] float energyMagnification = 2;
     // Start is called before the first frame update
     //void Start()
     //{
-        
+
     //}
 
     // Update is called once per frame
@@ -29,6 +30,6 @@ public class KnockBack : MonoBehaviour
     }
     public void AddMoveSpeed(float speed)
     {
-        moveSpeed += speed;
+        moveSpeed += speed * energyMagnification;
     }
 }

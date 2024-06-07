@@ -21,6 +21,7 @@ public class MeleeAttackHit : MonoBehaviour
         if(collision.tag == "Enemy")
         {
             Destroy(collision.gameObject);
+            Destroy(gameObject);
         }
     }
 }

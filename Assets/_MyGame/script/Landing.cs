@@ -5,7 +5,8 @@ using UnityEngine;
 public class Landing : MonoBehaviour
 {
     Vector2 beforePosision = Vector2.zero;
-    public GameObject blast;
+    [SerializeField]
+    GameObject blast;
     [SerializeField]
     GameObject shadowModel;
     GameObject shadow = null;

@@ -10,11 +10,13 @@ TagManager:
   - Manager
   - Attack
   - Scaffold
+  - Field
+  - ' Scaffold'
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Bullet
   - Water
   - UI
   - 

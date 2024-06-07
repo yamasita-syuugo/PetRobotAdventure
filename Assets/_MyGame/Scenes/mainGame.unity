@@ -3362,11 +3362,35 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2094567756836657004, guid: a4e384d6cbc5e274280a3a3c0cab7a12, type: 3}
       propertyPath: endNum
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2094567756836657004, guid: a4e384d6cbc5e274280a3a3c0cab7a12, type: 3}
       propertyPath: waveType
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2094567756836657004, guid: a4e384d6cbc5e274280a3a3c0cab7a12, type: 3}
+      propertyPath: enemyObjectEnemyMass
+      value: 
+      objectReference: {fileID: 3570103102265485630, guid: a25d743fd780b9c45a0f0829e62478dd, type: 3}
+    - target: {fileID: 2094567756836657004, guid: a4e384d6cbc5e274280a3a3c0cab7a12, type: 3}
+      propertyPath: livingArmorCountReset
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2094567756836657004, guid: a4e384d6cbc5e274280a3a3c0cab7a12, type: 3}
+      propertyPath: enemySpaunTimeReset.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2094567756836657004, guid: a4e384d6cbc5e274280a3a3c0cab7a12, type: 3}
+      propertyPath: enemySpaunTimeReset.Array.data[3]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2094567756836657004, guid: a4e384d6cbc5e274280a3a3c0cab7a12, type: 3}
+      propertyPath: enemySpaunTimeReset.Array.data[4]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2094567756836657004, guid: a4e384d6cbc5e274280a3a3c0cab7a12, type: 3}
+      propertyPath: enemySpaunTimeReset.Array.data[5]
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3956128938480590584, guid: a4e384d6cbc5e274280a3a3c0cab7a12, type: 3}
       propertyPath: m_Name
@@ -5524,7 +5548,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.02
+  orthographic size: 4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -5569,6 +5593,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedDelay: 1.26
+  zoomSpeed: 0.5
+  maxSize: 6
+  minSize: 2
 --- !u!1 &521432481
 GameObject:
   m_ObjectHideFlags: 0

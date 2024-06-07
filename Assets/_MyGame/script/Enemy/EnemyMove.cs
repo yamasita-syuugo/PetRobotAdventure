@@ -8,7 +8,6 @@ using Unity.Mathematics;
 
 public class EnemyMove : MonoBehaviour
 {
-    [SerializeField]
     GameObject player;
     ObjectFall playerFall;
 

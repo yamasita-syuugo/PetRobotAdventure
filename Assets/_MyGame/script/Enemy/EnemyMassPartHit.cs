@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LivingArmorHit : MonoBehaviour
+public class EnemyMassPartHit : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -20,17 +20,14 @@ public class LivingArmorHit : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-
-        }
-        else if (collision.tag == "Attack")
-        {
-            GetComponent<KnockBack>().SetKnockBackEnergy(collision.GetComponent<bulletMove>().GetMoveEnelgy());
-
-            if(collision.name == "Bullet")Destroy(collision.gameObject);
-        }
-        else if (collision.tag == "Enemy")
+            Vector3 enelgy = transform.position - transform.parent.position;
+            collision.GetComponent<KnockBack>().SetKnockBackEnergy(enelgy * 3);
+        }else if(collision.tag == "Attack")
         {
 
+
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
         }
     }
 }

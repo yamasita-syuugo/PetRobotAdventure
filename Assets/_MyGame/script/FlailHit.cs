@@ -13,7 +13,7 @@ public class FlailHit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -22,7 +22,8 @@ public class FlailHit : MonoBehaviour
         {
             GetComponent<FlailMove>().ReturnSpeed();
 
-            collision.GetComponent<KnockBack>().SetKnockBackEnergy(new Vector3(1,1,0));
+            Vector3 enelgy = transform.position - transform.parent.position;
+            collision.GetComponent<KnockBack>().SetKnockBackEnergy(enelgy * 3);
         }
         else if (collision.tag == "Attack")
         {

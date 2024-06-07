@@ -24,12 +24,18 @@ public class PlayerMeleeAttack : MonoBehaviour
         MouseMeleeAttack();
     }
 
+    [SerializeField]
+    int establishment = 25;
+    [SerializeField]
+    int spawnBomNum = 10;
     private void MouseMeleeAttack()
     {
         if (Input.GetMouseButtonDown(2))
         {
             MeleeAttack();
 
+            int randam = UnityEngine.Random.Range(0, 100);
+            if (randam < establishment) GameObject.Find("CreateEnemy").GetComponent<EnemyCreate>().SetBomSpawnNum(spawnBomNum);
             GameObject.Find("CreateEnemy").GetComponent<EnemyCreate>().SetEndCount();
         }
     }
