@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using UnityEngine;
 
-public class PlayerCreateBlock : MonoBehaviour
+public class PlayerCreateScaffold : MonoBehaviour
 {
     public GameObject blockPrefab;
     public AudioSource blockCreateSound;
@@ -73,6 +73,7 @@ public class PlayerCreateBlock : MonoBehaviour
         
             GameObject tmp = Instantiate(blockPrefab);
             tmp.transform.position = new Vector3(posX,posY,0);
+            if(tmp.GetComponent<EarthQuake>() != null) tmp.GetComponent<EarthQuake>().Impact();
 
             blockCreateSound.Play();
 

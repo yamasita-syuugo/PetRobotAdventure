@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EarthQuake : MonoBehaviour
-{
-    [SerializeField]
-    GameObject impact;
+public class BestScoarButtonControl : MonoBehaviour
+{    
     // Start is called before the first frame update
     //void Start()
     //{
@@ -18,9 +16,8 @@ public class EarthQuake : MonoBehaviour
 
     //}
 
-    public void Impact()
+    public void BestScoarButton()
     {
-        GameObject imp = Instantiate<GameObject>(impact);
-        imp.transform.position = transform.position;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("BestScoar");
     }
 }

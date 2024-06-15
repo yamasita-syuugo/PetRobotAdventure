@@ -18,7 +18,7 @@ public class BlockUI : MonoBehaviour
 
     public void UIUpDate()
     {
-        float color = ((float)GetComponentInParent<PlayerCreateBlock>().GetBlockGetNum()) / GetComponentInParent<PlayerCreateBlock>().GetFlagToBlock();
+        float color = ((float)GetComponentInParent<PlayerCreateScaffold>().GetBlockGetNum()) / GetComponentInParent<PlayerCreateScaffold>().GetFlagToBlock();
         if (color >= 1) color = 0;
 
         Color UIColor = new Color(color, color, color, color);

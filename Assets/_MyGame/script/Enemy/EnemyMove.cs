@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using System.Collections;
-using Unity.VisualScripting;
-using Unity.Mathematics;
+//using System.Collections;
+//using Unity.VisualScripting;
+//using Unity.Mathematics;
 
 public class EnemyMove : MonoBehaviour
 {
@@ -118,6 +118,7 @@ public class EnemyMove : MonoBehaviour
     }
     void MoveWalk()
     {
+#if true
         if (GetComponent<ObjectFall>().GetSituation() != ObjectFall.eSituation.normal) return;
 
         if (playerFall == null) return;
@@ -131,6 +132,11 @@ public class EnemyMove : MonoBehaviour
         move /= distance;
 
         transform.position += move * moveSpeed * Time.deltaTime;
+#else
+//todo:足場に沿って移動させる.プレイヤーを追う必要はない
+
+
+#endif
     }
 
     public Vector3 GetMove()
