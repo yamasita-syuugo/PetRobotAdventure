@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Tilemaps;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 //using System.Collections;
 //using Unity.VisualScripting;
@@ -42,6 +44,8 @@ public class EnemyMove : MonoBehaviour
         }
         playerFall = player.GetComponent<ObjectFall>();
         move = new Vector3(0.0f,0.0f,0.0f);
+
+        SetScaffold(GameObject.Find("CreateBlock"));
     }
 
     // Update is called once per frame
@@ -116,27 +120,59 @@ public class EnemyMove : MonoBehaviour
             transform.position += move * moveSpeed * Time.deltaTime;
         }
     }
+    static _Scaffold_Base[] position = new _Scaffold_Base[200];
+    GameObject []previousPos = new GameObject[20];
+    GameObject nextPos;
     void MoveWalk()
     {
-#if true
-        if (GetComponent<ObjectFall>().GetSituation() != ObjectFall.eSituation.normal) return;
+        //todo:足場に沿って移動させる.プレイヤーを追う必要はない
+        if (nextPos == null || (nextPos.transform.position.x <= transform.position.x + 0.1f && nextPos.transform.position.x >= transform.position.x - 0.1f &&
+            nextPos.transform.position.y <= transform.position.y + 0.1f && nextPos.transform.position.y >= transform.position.y - 0.1f))
+        {
+            GameObject[] rmd = new GameObject[20];
+            int rmdNum = 0;
+            for (int i = 0; i < position.Length; i++)
+            {
+                if (position[i] == null) continue;
+                if ((position[i].transform.position.x > transform.position.x - 1.3f && position[i].transform.position.x < transform.position.x + 1.3f &&
+                    position[i].transform.position.y > transform.position.y - 1.3f && position[i].transform.position.y < transform.position.y + 1.3f) == false) continue;
 
-        if (playerFall == null) return;
-        if (playerFall.GetSituation() != ObjectFall.eSituation.normal) return;
+                bool continueOn;
+                continueOn = false;
+                for (int j = previousPos.Length - 1; j >= 0; j--)
+                {
+                    if (previousPos[j] == null) continue;
+                    else if (previousPos[j].transform.position.x == position[i].transform.position.x && previousPos[j].transform.position.y == position[i].transform.position.y)
+                    {
+                        continueOn = true;
+                        continue;
+                    }
+                }
+                if (continueOn == true) continue;
+                rmd[rmdNum++] = position[i].gameObject;
+            }
+            nextPos = rmd[Random.Range(0, rmdNum)];
+            for (int i = previousPos.Length - 1; i >= 0; i--)
+            {
+                if (i <= 0) previousPos[i] = nextPos;
+                else previousPos[i] = previousPos[i - 1];
+            }
+        }
+
+
         Vector3 move = new Vector3(0.0f, 0.0f, 0.0f);
-        move.x = player.transform.position.x - transform.position.x;
-        move.y = player.transform.position.y - transform.position.y;
+        move.x = nextPos.transform.position.x - transform.position.x;
+        move.y = nextPos.transform.position.y - transform.position.y;
 
         float distance = Mathf.Sqrt(move.x * move.x + move.y * move.y);
 
         move /= distance;
 
         transform.position += move * moveSpeed * Time.deltaTime;
-#else
-//todo:足場に沿って移動させる.プレイヤーを追う必要はない
-
-
-#endif
+    }
+    public void SetScaffold(GameObject createScaffold)
+    {
+        position = createScaffold.GetComponentsInChildren<_Scaffold_Base>();
     }
 
     public Vector3 GetMove()

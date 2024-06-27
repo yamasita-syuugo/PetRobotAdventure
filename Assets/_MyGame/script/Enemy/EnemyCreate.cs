@@ -15,7 +15,7 @@ public class EnemyCreate : MonoBehaviour
 {
     //public AudioSource setSound;
 
-    enum eWaveType
+    public enum eWaveType
     {
         None,
 
@@ -139,7 +139,7 @@ public class EnemyCreate : MonoBehaviour
         else enemySpaunTime[(int)eWaveType.crow] = enemySpaunTimeReset[(int)eWaveType.crow];
     }
     [SerializeField]
-    int golemCountReset = 3;
+    int golemCountReset = 1;
     int golemCount = 0;
     void EnemySpawnGolem()
     {
@@ -264,6 +264,10 @@ public class EnemyCreate : MonoBehaviour
     {
         return waveTimer;
     }
+    public eWaveType GetWaveType()
+    {
+        return waveType;
+    }
     public string GetWaveName()
     {
         switch (waveType)
@@ -272,6 +276,7 @@ public class EnemyCreate : MonoBehaviour
             case eWaveType.crow: return "CROW";
             case eWaveType.golem: return "GOLEM";
             case eWaveType.livingArmor: return "LIVING_ARMOR";
+            case eWaveType.enemyMass: return "EnemyMass";
         }
         return "FREE";
     }

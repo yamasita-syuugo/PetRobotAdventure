@@ -73,6 +73,7 @@ public class PlayerCreateScaffold : MonoBehaviour
         
             GameObject tmp = Instantiate(blockPrefab);
             tmp.transform.position = new Vector3(posX,posY,0);
+            tmp.transform.parent = GameObject.Find("CreateBlock").transform;
             if(tmp.GetComponent<EarthQuake>() != null) tmp.GetComponent<EarthQuake>().Impact();
 
             blockCreateSound.Play();

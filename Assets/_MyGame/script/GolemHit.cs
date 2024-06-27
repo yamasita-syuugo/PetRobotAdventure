@@ -21,7 +21,7 @@ public class GolemHit : MonoBehaviour
         if (objectFall.GetSituation() != ObjectFall.eSituation.normal) return;
         if (collision.transform.tag == "Player")
         {
-            Vector3 enelgy = transform.position - transform.parent.position;
+            Vector3 enelgy = collision.transform.position - transform.position;
             collision.GetComponent<KnockBack>().SetKnockBackEnergy(enelgy * 3);
         }
         else if (collision.transform.tag == "Attack")
