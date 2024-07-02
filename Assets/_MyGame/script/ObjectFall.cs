@@ -16,35 +16,112 @@ public class ObjectFall : MonoBehaviour
 
     bool fallSoundCheck = false;
 
+    public enum eFallType
+    {
+        none,
+        carBody,
+        ocean,
+        sky,
+
+        fallTypeMax,
+    }
+    [SerializeField]
+    eFallType fallType = eFallType.sky;
+
     // Start is called before the first frame update
     void Start()
     {
         situation = eSituation.normal;
         fallSound = GameObject.Find("fallSound").GetComponent<AudioSource>();
+        waterSound = GameObject.Find("waterSound").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(situation == eSituation.fall)
+        if (situation == eSituation.fall)
         {
-            if(transform.localScale.x > 0.1)
+            switch (fallType)
             {
-                transform.localScale = transform.localScale * 0.999f;
-                //GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;   //移動にRigidbodyを使用していないため
-            }
-            else
-            {
-                if(tag == "Player")UnityEngine.SceneManagement.SceneManager.LoadScene("Result");
-                else Destroy(gameObject);
+                case eFallType.none:
+                    break;
+                case eFallType.carBody:
+                    CarBodyToFall();
+                    break;
+                case eFallType.ocean:
+                    OceanToFall();
+                    break;
+                case eFallType.sky:
+                    SkyToFall();
+                    break;
             }
 
             if (!fallSoundCheck)
             {
-                if(gameObject.tag == "Player")fallSound.Play();
+                if (gameObject.tag == "Player") fallSound.Play();
                 fallSoundCheck = true;
             }
-            transform.position = new Vector3(transform.position.x, transform.position.y, -1);
+        }
+    }
+    void CarBodyToFall()
+    {
+
+    }
+    [SerializeField]
+    GameObject splashOfWater = null;
+    GameObject splashOfWaterTmp = null;
+    [SerializeField]
+    AudioSource waterSound;
+    void OceanToFall()
+    {
+        if (transform.localScale.x > 2.0f)
+        {
+            transform.localScale = transform.localScale * 0.999f;
+            //GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;   //移動にRigidbodyを使用していないため
+            transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+        }
+        else if (transform.localScale.x > 1.2f/*サイズが3の場合*/)
+        {
+            if(splashOfWaterTmp == null)
+            {
+                splashOfWaterTmp = GameObject.Instantiate(splashOfWater);
+                splashOfWaterTmp.transform.position = transform.position;
+
+                fallSound.Stop();
+                if(!waterSound.isPlaying)
+                {
+                    waterSound.Play();
+                }
+            }
+            transform.localScale = transform.localScale * 0.999f;
+            transform.position = new Vector3(transform.position.x, transform.position.y, -20);
+        }
+        else
+        {
+            if (tag == "Player")
+            {
+                ScoreManager.ResultSend();
+                UnityEngine.SceneManagement.SceneManager.LoadScene("Result");
+            }
+            else Destroy(gameObject);
+        }
+    }
+    void SkyToFall()
+    {
+        if (transform.localScale.x > 1/*サイズが3の場合*/)
+        {
+            transform.localScale = transform.localScale * 0.999f;
+            //GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;   //移動にRigidbodyを使用していないため
+            transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+        }
+        else
+        {
+            if (tag == "Player")
+            {
+                ScoreManager.ResultSend();
+                UnityEngine.SceneManagement.SceneManager.LoadScene("Result");
+            }
+            else Destroy(gameObject);
         }
     }
 

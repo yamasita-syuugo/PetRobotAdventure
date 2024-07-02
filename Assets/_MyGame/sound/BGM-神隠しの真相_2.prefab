@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1741807500527791540}
   - component: {fileID: 5656696006178861868}
   m_Layer: 0
-  m_Name: "\u795E\u96A0\u3057\u306E\u771F\u76F8_2"
+  m_Name: "BGM-\u795E\u96A0\u3057\u306E\u771F\u76F8_2"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 37961ea07f915c44e819f3732ea51bcc, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.031
+  m_Volume: 0.297
   m_Pitch: 1
   Loop: 1
   Mute: 0

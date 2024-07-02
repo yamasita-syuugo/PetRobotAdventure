@@ -129,8 +129,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 747b626f588306c4db7217e862dbf501, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
-  move: {x: 0, y: 0, z: 0}
+  scaffold: 1
+  moveSpeedSetting_block: 2
+  moveMaxSetting_bloce: 2
+  moveSpeedSetting_ice: 0.004
+  moveMaxSetting_ice: 1.5
+  stopEnelgy: 2
+  moveSpeedSetting_grass: 0.7
+  moveMaxSetting_grass: 0.7
 --- !u!114 &4306313645317709558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,6 +154,7 @@ MonoBehaviour:
   magazine: 10
   moveDirectionX: 0.1
   moveDirectionY: 0.1
+  aimMarkPrefab: {fileID: 4282155916562330577, guid: f4746770dd2d82b43ade4bd52c4eda25, type: 3}
 --- !u!114 &5291536584900420585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,7 +168,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meleeAttackBase: {fileID: 4588897879956829703, guid: fa3040f43ba5ec64fa1f286ec06e8135, type: 3}
-  a: 0
+  establishment: 25
+  spawnBomNum: 10
+  attackDistanceSize: 0.5
 --- !u!114 &6679133269672677200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,6 +214,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   situation: 0
   fallSound: {fileID: 0}
+  fallType: 3
+  splashOfWater: {fileID: 0}
+  waterSound: {fileID: 0}
 --- !u!114 &8883265689788904415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frictionBase: 3
+  energyMagnification: 2
 --- !u!50 &273949001904384709
 Rigidbody2D:
   serializedVersion: 4

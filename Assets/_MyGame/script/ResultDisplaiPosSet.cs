@@ -11,17 +11,42 @@ using UnityEditor;
 
 public class ResultDisplaiPosSet : MonoBehaviour
 {
-    // Start is called before the first frame update
-    //void Start()
-    //{
+    public enum ePointType
+    {
+        totalPoint,
 
-    //}
+
+        flagGetPoint,
+        destroyPoint,
+
+
+        enemyBomPoint,
+
+        pointTypeMax,
+    }
+    int []score = new int[(int)ePointType.pointTypeMax];
+
+    //Start is called before the first frame update
+    void Start()
+    {
+        score[(int)ePointType.totalPoint] = PlayerPrefs.GetInt("totalPoint");
+
+        score[(int)ePointType.flagGetPoint] = PlayerPrefs.GetInt("flagGetPoint");
+        score[(int)ePointType.destroyPoint] = PlayerPrefs.GetInt("destroyPoint");
+
+        score[(int)ePointType.enemyBomPoint] = PlayerPrefs.GetInt("enemyBomPoint");
+    }
 
     // Update is called once per frame
     //void Update()
     //{
 
     //}
+
+    public int GetScore(ePointType type)
+    {
+        return score[(int)type];
+    }
 
 #if UNITY_EDITOR
     public void ImagesPosSetting()

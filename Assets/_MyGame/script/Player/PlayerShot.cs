@@ -16,6 +16,7 @@ public class PlayerShot : MonoBehaviour
     void Start()
     {
         shotSound = GameObject.Find("shotSound").GetComponent<AudioSource>();
+        aimMark = Instantiate<GameObject>(aimMarkPrefab);
     }
 
     // Update is called once per frame
@@ -25,6 +26,9 @@ public class PlayerShot : MonoBehaviour
         ControllerShot();
         MouseShot();
     }
+    [SerializeField]
+    GameObject aimMarkPrefab;
+    GameObject aimMark;
     int ControllerShotButton;
     void ControllerShot()
     {
@@ -41,6 +45,17 @@ public class PlayerShot : MonoBehaviour
         else if (ControllerShotButton != 1 && shotTrigger == true)
         {
             shotTrigger = false;
+        }
+
+        float distance = Mathf.Sqrt(moveDirectionX * moveDirectionX + moveDirectionY * moveDirectionY);
+        aimMark.transform.position = new Vector3(moveDirectionX / distance * 3, moveDirectionY / distance * 3, transform.position.z) + transform.position;
+        if (distance > 0.3f)
+        {
+            aimMark.GetComponent<SpriteRenderer>().material.color = Color.white;
+        }
+        else
+        {
+            aimMark.GetComponent<SpriteRenderer>().material.color = Color.clear;
         }
     }
     void MouseShot()

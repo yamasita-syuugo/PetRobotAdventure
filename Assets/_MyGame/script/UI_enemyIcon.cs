@@ -51,9 +51,9 @@ public class UI_enemyIcon : MonoBehaviour
     {
         for (int i = 0; i < enemyIcon.Length; i++)
         {
-            if ((int)oldEnemyType > i)
+            if (i < (int)oldEnemyType)
             {
-                if ((int)enemyType > i)
+                if (i < (int)enemyType)
                 {
                     enemyIcon[i].color = Color.white;
                     continue;

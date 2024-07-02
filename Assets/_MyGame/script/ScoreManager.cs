@@ -77,4 +77,16 @@ public class ScoreManager : MonoBehaviour
     {
         return enemyBomPoint;
     }
+
+    public static void ResultSend()
+    {
+        PlayerPrefs.SetInt("totalPoint", totalPoint);
+
+        PlayerPrefs.SetInt("flagGetPoint", flagGetPoint);
+        PlayerPrefs.SetInt("destroyPoint", destroyPoint);
+
+        PlayerPrefs.SetInt("enemyBomPoint", enemyBomPoint);
+
+        PlayerPrefs.Save();
+    }
 }
