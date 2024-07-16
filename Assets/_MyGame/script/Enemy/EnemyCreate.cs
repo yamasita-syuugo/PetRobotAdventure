@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.Xml.Serialization;
 using UnityEditor;
-using UnityEditor.Experimental.GraphView;
-using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 
 
 
@@ -14,21 +12,6 @@ using UnityEngine;
 public class EnemyCreate : MonoBehaviour
 {
     //public AudioSource setSound;
-
-    public enum eWaveType
-    {
-        None,
-
-        bom,
-        crow,
-        golem,
-        livingArmor,
-        enemyMass,
-
-        waveTypeMax
-    }
-    [SerializeField]
-    eWaveType waveType = eWaveType.bom;
 
     public GameObject enemyObjectBom;
     public GameObject enemyObjectCrow;
@@ -45,18 +28,20 @@ public class EnemyCreate : MonoBehaviour
     }
 
     GameObject player = null;
+    WaveManager waveManager;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindWithTag("Player");
+        waveManager = GameObject.Find("TimeManager").GetComponent<WaveManager>();
 
         for (int i = 0; i < enemySpaunTime.Length; i++)
         {
-            enemySpaunTime[i] = 0;//enemySpaunTimeReset[i];
+            enemySpaunTime[i] = 0;
         }
 
-        golemCount = golemCountReset;
-        livingArmorCount = livingArmorCountReset;
+        golemCount = 0;
+        livingArmorCount = 0;
 
         endCount = new float[endNum];
     }
@@ -66,26 +51,12 @@ public class EnemyCreate : MonoBehaviour
     {
         EnemySpaunSchedule();
     }
-
-    float waveTimer = 30;
     void EnemySpaunSchedule()
     {
         if (player.GetComponent<ObjectFall>().GetSituation() != ObjectFall.eSituation.normal) return;
 
-        if (waveTimer > 0)
-        {
-            waveTimer -= Time.deltaTime;
-        }
-        else
-        {
-            if (waveType < eWaveType.waveTypeMax - 1)
-            {
-                waveTimer = 30;
-                waveType += 1;
-            }
-        }
         EnemySpawnTimer(eWaveType.bom);
-        switch (waveType)
+        switch (waveManager.GetWaveType())
         {
             case eWaveType.bom:  break;
             case eWaveType.crow: 
@@ -125,7 +96,7 @@ public class EnemyCreate : MonoBehaviour
             case eWaveType.enemyMass: spawnEnemy = enemyObjectEnemyMass; break;
         }
         enemySpaunTime[(int)enemyType] -= Time.deltaTime;
-        if (enemySpaunTime[(int)enemyType] < 0)
+        if (enemySpaunTime[(int)enemyType] <= 0)
         {
             GameObject tmp = Instantiate<GameObject>(spawnEnemy);
             EnemySpaunPositionSet(tmp);
@@ -223,7 +194,7 @@ public class EnemyCreate : MonoBehaviour
     }
     [SerializeField]
     Vector3 nextPosition = new Vector3(12, 12, 0);
-    void EnemySpaunPositionSet(GameObject spawnEnemy)
+    void EnemySpaunPositionSet(GameObject spawnEnemy)//‰æ–ÊŠO‚ÉˆÚ“®
     {
         spawnEnemy.transform.parent = transform;
         spawnEnemy.transform.position = nextPosition;
@@ -259,25 +230,4 @@ public class EnemyCreate : MonoBehaviour
     {
         livingArmorCount -= count;
     } 
-
-    public float GetWaveTime()
-    {
-        return waveTimer;
-    }
-    public eWaveType GetWaveType()
-    {
-        return waveType;
-    }
-    public string GetWaveName()
-    {
-        switch (waveType)
-        {
-            case eWaveType.bom: return "BOM";
-            case eWaveType.crow: return "CROW";
-            case eWaveType.golem: return "GOLEM";
-            case eWaveType.livingArmor: return "LIVING_ARMOR";
-            case eWaveType.enemyMass: return "EnemyMass";
-        }
-        return "FREE";
-    }
 }

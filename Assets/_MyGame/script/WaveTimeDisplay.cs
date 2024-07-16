@@ -6,12 +6,12 @@ using UnityEngine;
 public class WaveTimeDisplay : MonoBehaviour
 {
     [SerializeField]
-    EnemyCreate enemyCreate;
+    WaveManager enemyCreate;
     // Start is called before the first frame update
-    //void Start()
-    //{
-
-    //}
+    void Start()
+    {
+        enemyCreate = GameObject.Find("TimeManager").GetComponent<WaveManager>();
+    }
 
     // Update is called once per frame
     void Update()

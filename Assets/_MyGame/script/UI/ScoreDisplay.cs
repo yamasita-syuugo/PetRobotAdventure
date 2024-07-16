@@ -10,14 +10,14 @@ public class ScoreDisplay : MonoBehaviour
     [SerializeField]
     bool old = false;
     // Start is called before the first frame update
-    void Start()
-    {
-        GetComponent<TextMeshProUGUI>().text = transform.parent.parent.GetComponent<ResultDisplaiPosSet>().GetScore(pointType,old).ToString();
-    }
+    //void Start()
+    //{
+    //}
 
     // Update is called once per frame
-    //void Update()
-    //{
-        
-    //}
+    void Update()
+    {
+        if (GetComponent<TextMeshProUGUI>().text != "null") return;
+        GetComponent<TextMeshProUGUI>().text = transform.parent.parent.GetComponent<ResultDisplaiPosSet>().GetScore(pointType,old).ToString();
+    }
 }

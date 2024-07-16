@@ -48,15 +48,13 @@ public class ResultDisplaiPosSet : MonoBehaviour
     void ScoreLoad()
     {
         score[(int)ePointType.totalPoint] = PlayerPrefs.GetInt("totalPoint");
-        PlayerPrefs.SetInt("totalPoint",0);
 
         score[(int)ePointType.flagGetPoint] = PlayerPrefs.GetInt("flagGetPoint");
-        PlayerPrefs.SetInt("flagGetPoint", 0);
         score[(int)ePointType.destroyPoint] = PlayerPrefs.GetInt("destroyPoint");
-        PlayerPrefs.SetInt("destroyPoint", 0);
 
         score[(int)ePointType.enemyBomPoint] = PlayerPrefs.GetInt("enemyBomPoint");
-        PlayerPrefs.SetInt("enemyBomPoint", 0);
+
+        for (int i = 0; i < (int)ePointType.pointTypeMax; i++) if (score[i] == null) score[i] = 0;
     }
     void OldScoreUpdate()
     {
@@ -76,12 +74,29 @@ public class ResultDisplaiPosSet : MonoBehaviour
         oldPoint = PlayerPrefs.GetInt("oldEnemyBomPoint");
         if (oldPoint < score[(int)ePointType.enemyBomPoint]) PlayerPrefs.SetInt("oldEnemyBomPoint", score[(int)ePointType.enemyBomPoint]);
         oldScore[(int)ePointType.enemyBomPoint] = PlayerPrefs.GetInt("oldEnemyBomPoint");
+
+
+        for (int i = 0; i < (int)ePointType.pointTypeMax; i++) if (oldScore[i] == null) oldScore[i] = 0;
     }
 
-    public int GetScore(ePointType type,bool old = false)
+    public int GetScore(ePointType type, bool old = false)
     {
-        if(old == false) return score[(int)type];
-        return oldScore[(int)type];
+        if (old) return oldScore[(int)type];
+        return score[(int)type];
+    }
+
+    public void OldScoreReset()
+    {
+        PlayerPrefs.SetInt("oldTotalPoint",0);
+        PlayerPrefs.SetInt("oldFlagGetPoint", 0);
+        PlayerPrefs.SetInt("oldDestroyPoint", 0);
+        PlayerPrefs.SetInt("oldEnemyBomPoint", 0);
+        PlayerPrefs.SetInt("totalPoint",0);
+        PlayerPrefs.SetInt("flagGetPoint", 0);
+        PlayerPrefs.SetInt("destroyPoint", 0);
+        PlayerPrefs.SetInt("enemyBomPoint", 0);
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene("BestScoar");
     }
 
 #if UNITY_EDITOR

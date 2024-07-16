@@ -7,6 +7,9 @@ public class PlayerCreateScaffold : MonoBehaviour
 {
     public GameObject blockPrefab;
     public AudioSource blockCreateSound;
+
+    [SerializeField]
+    int blockNumMax = 5;
     [SerializeField] 
     private int blockNum = 3;
 
@@ -73,7 +76,7 @@ public class PlayerCreateScaffold : MonoBehaviour
         
             GameObject tmp = Instantiate(blockPrefab);
             tmp.transform.position = new Vector3(posX,posY,0);
-            tmp.transform.parent = GameObject.Find("CreateBlock").transform;
+            tmp.transform.parent = GameObject.Find("CreateScaffold").transform;
             if(tmp.GetComponent<EarthQuake>() != null) tmp.GetComponent<EarthQuake>().Impact();
 
             blockCreateSound.Play();

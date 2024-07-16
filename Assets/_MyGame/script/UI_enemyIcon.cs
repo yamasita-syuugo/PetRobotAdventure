@@ -5,23 +5,13 @@ using UnityEngine.UI;
 
 public class UI_enemyIcon : MonoBehaviour
 {
-    enum eEnemyType
-    {
-        Bom,            //Bom           :基本的な敵床を壊す
-        Crow,           //Crow          :プレイヤーを押し出す
-        Golem,          //Golem         :地面を歩きプレイヤーを弾き出す
-        LivingArmor,    //LivingArmor   :地面を歩き武器を振り回す
-        EnemyMass,      //EnemyMass     :敵の集合体すべて倒すと消える
-
-        enemyTypeMax,
-    }
     eEnemyType enemyType;
     eEnemyType oldEnemyType;
     Image[] enemyIcon = new Image[(int)eEnemyType.enemyTypeMax];
     // Start is called before the first frame update
     void Start()
     {
-        waveCheck = GameObject.Find("CreateEnemy").GetComponent<EnemyCreate>();
+        waveCheck = GameObject.Find("TimeManager").GetComponent<WaveManager>();
         enemyIcon = GetComponentsInChildren<Image>();
         enemyType = (eEnemyType)(int)waveCheck.GetWaveType();
         if (enemyType > oldEnemyType)
@@ -31,19 +21,18 @@ public class UI_enemyIcon : MonoBehaviour
 
         EnemyIconDisplay();
     }
-    EnemyCreate waveCheck;
+    WaveManager waveCheck;
     // Update is called once per frame
     void Update()
     {
         if((int)enemyType != (int)waveCheck.GetWaveType())
         {
-            EnemyIconDisplay();
-
             enemyType = (eEnemyType)(int)waveCheck.GetWaveType();
             if(enemyType > oldEnemyType)
             {
                 oldEnemyType = enemyType;
             }
+            EnemyIconDisplay();
         }
     }
 

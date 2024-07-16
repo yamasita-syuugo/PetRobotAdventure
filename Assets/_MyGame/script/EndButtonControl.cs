@@ -18,6 +18,10 @@ public class EndButtonControl : MonoBehaviour
 
     public void EndButton()
     {
-        UnityEditor.EditorApplication.isPlaying = false;
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
+#else
+    Application.Quit();//ゲームプレイ終了
+#endif
     }
 }

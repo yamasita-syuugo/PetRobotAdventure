@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -45,7 +44,7 @@ public class EnemyMove : MonoBehaviour
         playerFall = player.GetComponent<ObjectFall>();
         move = new Vector3(0.0f,0.0f,0.0f);
 
-        SetScaffold(GameObject.Find("CreateBlock"));
+        SetScaffold(GameObject.Find("CreateScaffold"));
     }
 
     // Update is called once per frame
@@ -125,7 +124,6 @@ public class EnemyMove : MonoBehaviour
     GameObject nextPos;
     void MoveWalk()
     {
-        //todo:足場に沿って移動させる.プレイヤーを追う必要はない
         if (nextPos == null || (nextPos.transform.position.x <= transform.position.x + 0.1f && nextPos.transform.position.x >= transform.position.x - 0.1f &&
             nextPos.transform.position.y <= transform.position.y + 0.1f && nextPos.transform.position.y >= transform.position.y - 0.1f))
         {

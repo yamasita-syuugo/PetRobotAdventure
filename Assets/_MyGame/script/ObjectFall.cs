@@ -110,7 +110,8 @@ public class ObjectFall : MonoBehaviour
     {
         if (transform.localScale.x > 1/*サイズが3の場合*/)
         {
-            transform.localScale = transform.localScale * 0.999f;
+            float down = 1 - 0.6f * Time.deltaTime;
+            transform.localScale = transform.localScale * down;//todo: FPSによって速度が変わる
             //GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;   //移動にRigidbodyを使用していないため
             transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         }
