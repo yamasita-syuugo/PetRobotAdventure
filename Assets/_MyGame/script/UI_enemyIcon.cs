@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,7 @@ public class UI_enemyIcon : MonoBehaviour
     {
         waveCheck = GameObject.Find("TimeManager").GetComponent<WaveManager>();
         enemyIcon = GetComponentsInChildren<Image>();
+        SetPosition();
         enemyType = (eEnemyType)(int)waveCheck.GetWaveType();
         if (enemyType > oldEnemyType)
         {
@@ -25,6 +27,7 @@ public class UI_enemyIcon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameObject.Find("TimeManager").GetComponent<TimeManager>().GetTimeStop()) return;
         if((int)enemyType != (int)waveCheck.GetWaveType())
         {
             enemyType = (eEnemyType)(int)waveCheck.GetWaveType();
@@ -35,11 +38,31 @@ public class UI_enemyIcon : MonoBehaviour
             EnemyIconDisplay();
         }
     }
+    [SerializeField]
+    float width = 75f;
+    [SerializeField] 
+    float height = 50f;
+    void SetPosition()
+    {
+        for(int i = 0; i < enemyIcon.Length; i++)
+        {
+            if (enemyIcon[i].gameObject.name == "nowWaveIcon") continue;
+
+            float PosX = (i % 3) * width - width;
+            float PosY = (i / 3) * height + height;
+            enemyIcon[i].transform.position = new Vector3(PosX, PosY, 0);
+        }
+    }
 
     void EnemyIconDisplay()
     {
         for (int i = 0; i < enemyIcon.Length; i++)
         {
+            if (enemyIcon[i].gameObject.name == "nowWaveIcon")
+            {
+                enemyIcon[i].color = Color.white;
+                continue;
+            }
             if (i < (int)oldEnemyType)
             {
                 if (i < (int)enemyType)

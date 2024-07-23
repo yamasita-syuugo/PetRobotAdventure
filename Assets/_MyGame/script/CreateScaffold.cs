@@ -17,8 +17,7 @@ public class CreateScaffold : MonoBehaviour
     [SerializeField]
     GameObject grassPrefab;
 
-    [SerializeField]
-    GameObject[] blocks = new GameObject[100];
+    GameObject[] blocks;
 
     [SerializeField]
      int fieldSize = 9;
@@ -51,6 +50,7 @@ public class CreateScaffold : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        blocks = new GameObject[fieldSize * fieldSize];
         SetCreatType((eCreatType)PlayerPrefs.GetInt("stage"));
         switch ((eRandomBreak)PlayerPrefs.GetInt("randomBreak"))
         {

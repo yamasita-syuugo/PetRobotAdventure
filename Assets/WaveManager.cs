@@ -6,11 +6,14 @@ public enum eWaveType
 {
     None,
 
-    bom,
-    crow,
-    golem,
-    livingArmor,
-    enemyMass,
+    bom,            //next:bom‚ğˆê’è”shot‚Å“|‚·
+    crow,           //next:crow‚ğˆê’è”ŒÄ‚Ô
+    golem,          //next:golem‚ğˆê’è”’e‚­
+    livingArmor,    //next:livingArmor‚ğ
+    enemyMass,      //next:
+
+    //              //‘«ê‚ğ‰ó‚µ‚Ä‰ñ‚é  ‹ó’†‚ğˆÚ“®‚·‚é     ‚¢‚­‚Â‚©‚ÌUŒ‚‚É‘Ï‚¦‚é
+    //bossEnemy,    //ƒJƒEƒ“ƒg‚ÅendGame‚ğ”­“®   UŒ‚‚ÅƒJƒEƒ“ƒg‚ğ’x‚ç‚¹‚é    ‹ß‚Ã‚­‚Æ˜A‘±‚ÅUŒ‚‚Å‚«‚é‚Ì‚ÅƒJƒƒ‰‚Éû‚Ü‚é”ÍˆÍ‚Å‹——£‚ğæ‚è‰“‹——£UŒ‚‚·‚é  ‰“‹——£UŒ‚‚Í
 
     waveTypeMax
 }
@@ -19,17 +22,19 @@ public class WaveManager : MonoBehaviour
     [SerializeField]
     eWaveType waveType = eWaveType.bom;
     float waveTimer = 30;
+    TimeManager timeManager;
     // Start is called before the first frame update
     void Start()
     {
         waveType = eWaveType.bom;
+        timeManager = GetComponent<TimeManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (GetComponent<TimeManager>().GetTimeStop()) return;
         float time = GetComponent<TimeManager>().GetPlayTime();
-
 
         if (waveTimer > 0)
         {
@@ -40,11 +45,17 @@ public class WaveManager : MonoBehaviour
             if (waveType < eWaveType.waveTypeMax - 1)
             {
                 waveTimer = 30;
-                waveType += 1;
+                AddWave();
+                timeManager.SetTimeStop(true);
             }
         }
     }
 
+    void AddWave(int add = 1)
+    {
+        if (waveType >= eWaveType.waveTypeMax - 1) return;
+        waveType += add;
+    }
     public eWaveType GetWaveType()
     {
         return waveType;

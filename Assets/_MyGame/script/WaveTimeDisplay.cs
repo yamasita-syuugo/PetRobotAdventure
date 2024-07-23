@@ -17,7 +17,7 @@ public class WaveTimeDisplay : MonoBehaviour
     void Update()
     {
         float time = enemyCreate.GetWaveTime();
-        string waveType = enemyCreate.GetWaveName();
-        GetComponent<TextMeshProUGUI>().text = time.ToString("000") + "\n" + waveType;
+        //string waveType = enemyCreate.GetWaveName();
+        GetComponent<TextMeshProUGUI>().text = time.ToString("000");
     }
 }

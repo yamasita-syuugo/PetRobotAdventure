@@ -48,9 +48,9 @@ public class PlayerShot : MonoBehaviour
         }
 
         float distance = Mathf.Sqrt(moveDirectionX * moveDirectionX + moveDirectionY * moveDirectionY);
-        aimMark.transform.position = new Vector3(moveDirectionX / distance * 3, moveDirectionY / distance * 3, transform.position.z) + transform.position;//todo:x,y‚ªNan‚É‚È‚é
         if (distance > 0.3f)
         {
+            aimMark.transform.position = new Vector3(moveDirectionX / distance * 3, moveDirectionY / distance * 3, transform.position.z) + transform.position;//todo:x,y‚ªNan‚É‚È‚é
             aimMark.GetComponent<SpriteRenderer>().material.color = Color.white;
         }
         else

@@ -5,6 +5,7 @@ using UnityEngine;
 public class TimeManager : MonoBehaviour
 {
     float playTimer = 0f;
+    bool timeStop = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,6 +15,12 @@ public class TimeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (timeStop)
+        {
+            if(Input.GetKeyDown(KeyCode.Space)) timeStop = false;
+            return;
+        }
+
         GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
         if (player[0] == null) return;
         ObjectFall.eSituation situation = player[0].GetComponent<ObjectFall>().GetSituation();
@@ -22,4 +29,6 @@ public class TimeManager : MonoBehaviour
     }
 
     public float GetPlayTime() { return playTimer; }
+    public void SetTimeStop(bool timeStop_) {  timeStop = timeStop_; }
+    public bool GetTimeStop() { return timeStop; }
 }

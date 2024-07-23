@@ -28,12 +28,12 @@ public class EnemyCreate : MonoBehaviour
     }
 
     GameObject player = null;
-    WaveManager waveManager;
+    TimeManager timeManager;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindWithTag("Player");
-        waveManager = GameObject.Find("TimeManager").GetComponent<WaveManager>();
+        timeManager = GameObject.Find("TimeManager").GetComponent<TimeManager>();
 
         for (int i = 0; i < enemySpaunTime.Length; i++)
         {
@@ -55,8 +55,9 @@ public class EnemyCreate : MonoBehaviour
     {
         if (player.GetComponent<ObjectFall>().GetSituation() != ObjectFall.eSituation.normal) return;
 
+        if (timeManager.GetTimeStop()) return;
         EnemySpawnTimer(eWaveType.bom);
-        switch (waveManager.GetWaveType())
+        switch (timeManager.GetComponent<WaveManager>().GetWaveType())
         {
             case eWaveType.bom:  break;
             case eWaveType.crow: 
@@ -133,10 +134,20 @@ public class EnemyCreate : MonoBehaviour
             livingArmorCount = livingArmorCountReset;
         }
     }
+    int oldEnemyScore = 0;
+    bool enemyMassSpawn = false;
     void EnemySpawnEnemyMass()
     {
-        if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerShot>().GetMagazine() >= 7) EnemySpawnTimer(eWaveType.enemyMass);
-        else enemySpaunTime[(int)eWaveType.enemyMass] = enemySpaunTimeReset[(int)eWaveType.enemyMass];
+        if(oldEnemyScore != ScoreManager.GetEnemyBomPoint())
+        {
+            oldEnemyScore = ScoreManager.GetEnemyBomPoint();
+            enemyMassSpawn = true;
+        }
+
+        if (!enemyMassSpawn) return;
+        GameObject tmp = Instantiate<GameObject>(enemyObjectEnemyMass);
+        EnemySpaunPositionSet(tmp);
+        enemyMassSpawn = false;
     }
     bool end = false;
     [SerializeField]
@@ -200,20 +211,23 @@ public class EnemyCreate : MonoBehaviour
         spawnEnemy.transform.position = nextPosition;
 
         int directtion = Random.Range(0, 4);
-        float width = Random.Range(-11, 11);
+        float x = Camera.main.ViewportToWorldPoint(new Vector3(1.1f, 1.1f, Camera.main.nearClipPlane)).x;
+        float y = Camera.main.ViewportToWorldPoint(new Vector3(1.1f, 1.1f, Camera.main.nearClipPlane)).y;
+        float width = Random.Range(-x, x);
+        float height = Random.Range(-y, y);
         switch (directtion)
         {
             case 0:
-                nextPosition = new Vector2(width, 12);
+                nextPosition = new Vector2(width, y);
                 break;
             case 1:
-                nextPosition = new Vector2(width, -12);
+                nextPosition = new Vector2(width, -y);
                 break;
             case 2:
-                nextPosition = new Vector2(12, width);
+                nextPosition = new Vector2(x, height);
                 break;
             case 3:
-                nextPosition = new Vector2(-12, width);
+                nextPosition = new Vector2(-x, height);
                 break;
         }
     }
