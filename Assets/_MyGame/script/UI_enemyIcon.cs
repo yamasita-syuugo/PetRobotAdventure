@@ -48,9 +48,9 @@ public class UI_enemyIcon : MonoBehaviour
         {
             if (enemyIcon[i].gameObject.name == "nowWaveIcon") continue;
 
-            float PosX = (i % 3) * width - width;
-            float PosY = (i / 3) * height + height;
-            enemyIcon[i].transform.position = new Vector3(PosX, PosY, 0);
+            float PosX = (i % 3.0f) * width - width;
+            float PosY = (i / 3.0f) * height - height;
+            enemyIcon[i].transform.localPosition = new Vector3(PosX, PosY, 0);
         }
     }
 

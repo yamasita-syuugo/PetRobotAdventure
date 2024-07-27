@@ -10,7 +10,7 @@ public class BombHit : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        explosionSource = GameObject.Find("explosionSound").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

@@ -185,6 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockPrefab: {fileID: 1716873108787873888, guid: 1e457425f77454a40bfbcda0b1240cdb, type: 3}
   blockCreateSound: {fileID: 0}
+  blockNumMax: 5
   blockNum: 3
   addBlock: 0
   flagToBlock: 3
@@ -233,7 +234,7 @@ MonoBehaviour:
   bulletUI: {fileID: 9174371447192631023, guid: 004499973bbd0b94782c2dec86a96512, type: 3}
   displayDistance: 0.5
   bulletColor: {r: 1, g: 1, b: 1, a: 255}
-  unBulletColor: {r: 1, g: 1, b: 1, a: 0.19607843}
+  unBulletColor: {r: 0.4811321, g: 0.4289338, b: 0.4289338, a: 0.19607843}
 --- !u!114 &5497755237350589795
 MonoBehaviour:
   m_ObjectHideFlags: 0

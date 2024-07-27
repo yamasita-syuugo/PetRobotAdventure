@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class PlayerUIDisplay : MonoBehaviour
 {
-    public GameObject blockUI;
-    public GameObject bulletUI;
+    [SerializeField]
+    GameObject blockUI;
+    [SerializeField]
+    GameObject bulletUI;
     GameObject[] playerUIMark;
 
     PlayerShot playerShot;
@@ -54,7 +56,7 @@ public class PlayerUIDisplay : MonoBehaviour
     [SerializeField]
     Color bulletColor = new Color(1, 1, 1, 1);
     [SerializeField]
-    Color unBulletColor = new Color(1, 1, 1, 1);
+    Color unBulletColor = new Color(0.4f, 0.4f, 0.4f, 0.2f);
     public void BulletNumCheck()
     {
         bulletNum = playerShot.GetMagazine();

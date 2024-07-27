@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class PlayerCreateScaffold : MonoBehaviour
 {
-    public GameObject blockPrefab;
-    public AudioSource blockCreateSound;
+    [SerializeField]
+    GameObject blockPrefab;
+    [SerializeField]
+    AudioSource blockCreateSound;
 
     [SerializeField]
     int blockNumMax = 5;

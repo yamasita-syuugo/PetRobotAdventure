@@ -5,23 +5,23 @@ using UnityEngine;
 public class BlockUI : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
-    {
+    //void Start()
+    //{
         
-    }
+    //}
 
     // Update is called once per frame
     void Update()
     {
         UIUpDate();
     }
-
+    bool oldDisplay = false;
     public void UIUpDate()
     {
-        float color = ((float)GetComponentInParent<PlayerCreateScaffold>().GetBlockGetNum()) / GetComponentInParent<PlayerCreateScaffold>().GetFlagToBlock();
-        if (color >= 1) color = 0;
-
-        Color UIColor = new Color(color, color, color, color);
-        GetComponent<SpriteRenderer>().color = UIColor;
+        bool display = GetComponentInParent<PlayerCreateScaffold>().GetBlockGetNum() > 0;
+        if (oldDisplay == display) return;
+        oldDisplay = display;
+        if(display) GetComponent<SpriteRenderer>().color = Color.white;
+        else GetComponent<SpriteRenderer>().color = Color.clear;
     }
 }
