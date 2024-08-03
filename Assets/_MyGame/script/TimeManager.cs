@@ -10,16 +10,24 @@ public class TimeManager : MonoBehaviour
     void Start()
     {
         playTimer = 0f;
+
+        stopTimer = stopTimerSteatTime;
     }
 
     // Update is called once per frame
+    [SerializeField]
+    float stopTimerSteatTime = 10f;
+    float stopTimer;
     void Update()
     {
         if (timeStop)
         {
             if(Input.GetKeyDown(KeyCode.Space)) timeStop = false;
+            if (stopTimer < 0f) timeStop = false;
+            stopTimer -= Time.deltaTime;
             return;
         }
+        else stopTimer = stopTimerSteatTime;
 
         GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
         if (player[0] == null) return;

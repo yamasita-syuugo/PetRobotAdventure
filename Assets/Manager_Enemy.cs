@@ -14,7 +14,7 @@ enum eEnemyType
 
     enemyTypeMax,
 }
-public class EnemyManager : MonoBehaviour
+public class Manager_Enemy : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()

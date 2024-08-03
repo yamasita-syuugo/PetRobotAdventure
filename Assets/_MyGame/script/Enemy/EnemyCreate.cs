@@ -181,20 +181,22 @@ public class EnemyCreate : MonoBehaviour
 
         bomSpawnNum--;
     }
+
+    int endGameCount = 0;
     void EndGame()
     {
         if (!end)
         {
-            int count = 0;
-            for(int i = 0;i < endCount.Length; i++)
+            endGameCount = 0;
+            for (int i = 0;i < endCount.Length; i++)
             {
                 if (endCount[i] > 0)
                 {
                     endCount[i] -= Time.deltaTime;
-                    count++;
+                    endGameCount++;
                 }
             }
-            if (count == endNum) end = true;
+            if (endGameCount >= endNum) end = true;
         }
         else
         {
@@ -243,5 +245,13 @@ public class EnemyCreate : MonoBehaviour
     public void LivingArmorCountAdd(int count)
     {
         livingArmorCount -= count;
-    } 
+    }
+    public int GetEndCountLength()
+    {
+        return endCount.Length;
+    }
+    public int GetEnemyCountNum()
+    {
+        return endGameCount;
+    }
 }

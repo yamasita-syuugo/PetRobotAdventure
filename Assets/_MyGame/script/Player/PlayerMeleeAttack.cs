@@ -11,10 +11,10 @@ public class PlayerMeleeAttack : MonoBehaviour
     GameObject meleeAttackBase;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    //void Start()
+    //{
         
-    }
+    //}
 
     // Update is called once per frame
     void Update()
@@ -34,8 +34,8 @@ public class PlayerMeleeAttack : MonoBehaviour
         {
             MeleeAttack();
 
-            int randam = UnityEngine.Random.Range(0, 100);
-            if (randam < establishment) GameObject.Find("CreateEnemy").GetComponent<EnemyCreate>().SetBomSpawnNum(spawnBomNum);
+            //int randam = UnityEngine.Random.Range(0, 100);
+            //if (randam < establishment) GameObject.Find("CreateEnemy").GetComponent<EnemyCreate>().SetBomSpawnNum(spawnBomNum);
             GameObject.Find("CreateEnemy").GetComponent<EnemyCreate>().SetEndCount();
         }
     }

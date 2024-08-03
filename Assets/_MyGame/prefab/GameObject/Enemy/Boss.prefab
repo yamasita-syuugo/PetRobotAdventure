@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8575244024539958397}
   - component: {fileID: 7058208748199346170}
   - component: {fileID: 2815728051082803435}
+  - component: {fileID: -8166167283030406635}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Enemy
@@ -179,3 +180,17 @@ MonoBehaviour:
   moveSpeed: 1
   move: {x: 0, y: 0, z: 0}
   moveType: 4
+--- !u!114 &-8166167283030406635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7882004832147076534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afb287938c4182c43b3713ea991010ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frictionBase: 3
+  energyMagnification: 2
