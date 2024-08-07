@@ -61,9 +61,9 @@ public class ScoreManager : MonoBehaviour
         TotalPointReset();
     }
 
-    public static void EnemyBomPointAdd()
+    public static void EnemyBomPointAdd(int addPoint = 1)
     {
-        point[(int)eScoreType.enemyBom]++;
+        point[(int)eScoreType.enemyBom] += addPoint;
 
         TotalPointReset();
     }

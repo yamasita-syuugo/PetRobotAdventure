@@ -35,7 +35,7 @@ public class FlailHit : MonoBehaviour
         {
             GetComponent<FlailMove>().ReturnSpeed();
 
-            collision.GetComponent<BombHit>().Explosion();
+            //collision.GetComponent<BombHit>().Explosion();
         }
     }
 }

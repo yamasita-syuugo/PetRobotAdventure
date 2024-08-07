@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class MeleeAttackNumDisplay : MonoBehaviour
 {
-    EnemyCreate enemyCreate;
+    CreateEnemy enemyCreate;
     int MeleeAttackNum;
     int MeleeAttackMaxNum;
     [SerializeField]
@@ -16,7 +16,7 @@ public class MeleeAttackNumDisplay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemyCreate = GameObject.Find("CreateEnemy").GetComponent<EnemyCreate>();
+        enemyCreate = GameObject.Find("CreateEnemy").GetComponent<CreateEnemy>();
         
     }
 

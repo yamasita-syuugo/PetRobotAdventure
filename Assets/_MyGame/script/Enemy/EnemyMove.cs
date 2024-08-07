@@ -255,4 +255,8 @@ public class EnemyMove : MonoBehaviour
     {
         return move;
     }
+    public float GetMoveSpeed()
+    {
+        return moveSpeed;
+    }
 }

@@ -2,7 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour
+public enum eAttackType
+{
+    none,
+
+    Bullet,
+    MeleeAttack,
+    EarthQuake,
+}
+
+public class Manager_Player: MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()

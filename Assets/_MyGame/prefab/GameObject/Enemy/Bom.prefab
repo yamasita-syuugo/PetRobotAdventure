@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 70365072398283684}
   - component: {fileID: 3174550340748689701}
   - component: {fileID: 8575244024539958397}
-  - component: {fileID: 7058208748199346170}
+  - component: {fileID: -721270295378725126}
+  - component: {fileID: -5331052714370709984}
   - component: {fileID: 2815728051082803435}
   - component: {fileID: 4333262851320761444}
   m_Layer: 0
@@ -151,7 +152,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.08
---- !u!114 &7058208748199346170
+--- !u!114 &-721270295378725126
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -160,11 +161,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 7882004832147076534}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b1a75a242ecbf748823b70b745ee336, type: 3}
+  m_Script: {fileID: 11500000, guid: fa9a829ee1cd1c34e97fdd485039601b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosion: {fileID: 422756626205993004, guid: 539f0e49c86f54440bcfe188ba8f6bb7, type: 3}
-  explosionSource: {fileID: 4569633534884528094, guid: 332fd1b98f43e4d41bcbb69c2088b828, type: 3}
+  onTriggerType: 1
+--- !u!114 &-5331052714370709984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7882004832147076534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0bc3a33c86de324ea79d69800c4fa3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyType: 1
 --- !u!114 &2815728051082803435
 MonoBehaviour:
   m_ObjectHideFlags: 0

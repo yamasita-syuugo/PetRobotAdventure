@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 70365072398283684}
   - component: {fileID: 3174550340748689701}
   - component: {fileID: 8575244024539958397}
+  - component: {fileID: -4498846151236872485}
+  - component: {fileID: 5992251645426345027}
   - component: {fileID: 6247056087500350797}
   m_Layer: 0
   m_Name: EnemyMassPart
@@ -149,6 +151,32 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.08
+--- !u!114 &-4498846151236872485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7882004832147076534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa9a829ee1cd1c34e97fdd485039601b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onTriggerType: 1
+--- !u!114 &5992251645426345027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7882004832147076534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0bc3a33c86de324ea79d69800c4fa3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyType: 5
 --- !u!114 &6247056087500350797
 MonoBehaviour:
   m_ObjectHideFlags: 0

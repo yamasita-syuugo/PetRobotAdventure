@@ -36,7 +36,7 @@ public class PlayerMeleeAttack : MonoBehaviour
 
             //int randam = UnityEngine.Random.Range(0, 100);
             //if (randam < establishment) GameObject.Find("CreateEnemy").GetComponent<EnemyCreate>().SetBomSpawnNum(spawnBomNum);
-            GameObject.Find("CreateEnemy").GetComponent<EnemyCreate>().SetEndCount();
+            GameObject.Find("CreateEnemy").GetComponent<CreateEnemy>().SetEndCount();
         }
     }
 

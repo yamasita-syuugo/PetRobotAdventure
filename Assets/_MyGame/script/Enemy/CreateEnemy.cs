@@ -9,7 +9,7 @@ using UnityEditor;
 //using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class EnemyCreate : MonoBehaviour
+public class CreateEnemy : MonoBehaviour
 {
     //public AudioSource setSound;
 
@@ -18,6 +18,11 @@ public class EnemyCreate : MonoBehaviour
     public GameObject enemyObjectGolem;
     public GameObject enemyObjectLivingArmor;
     public GameObject enemyObjectEnemyMass;
+
+    public GameObject enemyObjectBoss;
+    [SerializeField]
+    GameObject[] enemyObjectBase = new GameObject[(int)eEnemyType.enemyTypeMax];
+    public GameObject GetEnemyObjectBase(eEnemyType enemyType) { return enemyObjectBase[(int)enemyType]; }
 
     enum eDirecttion
     {
@@ -204,6 +209,13 @@ public class EnemyCreate : MonoBehaviour
             EnemySpaunPositionSet(tmp);
             enemySpaunTime[(int)eWaveType.bom] = enemySpaunTimeReset[(int)eWaveType.bom];
         }
+    }
+    public void EnemyCreate(GameObject enemy)
+    {
+        if (GetComponent<EnemyType>() == null) return;
+        GameObject tmp = Instantiate<GameObject>(enemy);
+        EnemySpaunPositionSet(tmp);
+
     }
     [SerializeField]
     Vector3 nextPosition = new Vector3(12, 12, 0);

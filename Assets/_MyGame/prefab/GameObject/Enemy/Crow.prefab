@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 3176880703463828607}
   - component: {fileID: 8940320677291632386}
   - component: {fileID: 4674094713963566452}
+  - component: {fileID: -5124276861628736039}
+  - component: {fileID: 718875857613667426}
   - component: {fileID: -241485023189307669}
-  - component: {fileID: -7496698298895255973}
   - component: {fileID: 7352709420760883873}
   - component: {fileID: 8299037585608074092}
   - component: {fileID: -8631162078404593079}
@@ -111,6 +112,32 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-5124276861628736039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846042793416335476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa9a829ee1cd1c34e97fdd485039601b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onTriggerType: 2
+--- !u!114 &718875857613667426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846042793416335476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0bc3a33c86de324ea79d69800c4fa3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyType: 2
 --- !u!114 &-241485023189307669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,18 +153,6 @@ MonoBehaviour:
   moveSpeed: 8
   move: {x: 0, y: 0, z: 0}
   moveType: 1
---- !u!114 &-7496698298895255973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1846042793416335476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7487723b35b17f94f9c901844c81d31a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &7352709420760883873
 BoxCollider2D:
   m_ObjectHideFlags: 0

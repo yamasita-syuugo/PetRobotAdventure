@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 70365072398283684}
   - component: {fileID: 3174550340748689701}
   - component: {fileID: 8575244024539958397}
-  - component: {fileID: 2614478308434531383}
+  - component: {fileID: -3908504947929074433}
+  - component: {fileID: 1589627409698358746}
   - component: {fileID: 2815728051082803435}
   - component: {fileID: 146672500191764178}
   - component: {fileID: 2905040681509545998}
@@ -152,7 +153,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.14
---- !u!114 &2614478308434531383
+--- !u!114 &-3908504947929074433
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,9 +162,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 7882004832147076534}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f4a33cecef9199439ff97355e39eb4f, type: 3}
+  m_Script: {fileID: 11500000, guid: fa9a829ee1cd1c34e97fdd485039601b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onTriggerType: 1
+--- !u!114 &1589627409698358746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7882004832147076534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0bc3a33c86de324ea79d69800c4fa3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyType: 3
 --- !u!114 &2815728051082803435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,7 +191,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b98f266acff714c4c80829c4500e4536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   moveSpeed: 1
   move: {x: 0, y: 0, z: 0}
   moveType: 4
@@ -194,6 +208,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   situation: 1
   fallSound: {fileID: 3753076071498596226, guid: 0a649a52105cf6e4684d76b678759ed3, type: 3}
+  fallType: 3
+  splashOfWater: {fileID: 0}
+  waterSound: {fileID: 0}
 --- !u!114 &2905040681509545998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,4 +223,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afb287938c4182c43b3713ea991010ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  friction: 1.003
+  frictionBase: 3
+  energyMagnification: 2

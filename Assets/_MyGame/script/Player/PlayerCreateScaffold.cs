@@ -83,7 +83,7 @@ public class PlayerCreateScaffold : MonoBehaviour
 
             blockCreateSound.Play();
 
-            GameObject.Find("CreateEnemy").GetComponent<EnemyCreate>().GolemCountAdd();
+            GameObject.Find("CreateEnemy").GetComponent<CreateEnemy>().GolemCountAdd();
 
             blockNum--;
         }
