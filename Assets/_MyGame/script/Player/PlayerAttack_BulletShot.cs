@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerShot : MonoBehaviour
+public class PlayerAttack_BulletShot : MonoBehaviour
 {
     bool shotTrigger = false;
     public bulletMove bulletBase;

@@ -46,8 +46,8 @@ public class PlayerAttack_EarthQuake : MonoBehaviour
                 float playerPosX, playerPosY, playerDirectionX, playerDirectionY;
                 playerPosX = transform.position.x;
                 playerPosY = transform.position.y;
-                playerDirectionX = GetComponent<PlayerShot>().moveDirectionX;
-                playerDirectionY = GetComponent<PlayerShot>().moveDirectionY;
+                playerDirectionX = GetComponent<PlayerAttack_BulletShot>().moveDirectionX;
+                playerDirectionY = GetComponent<PlayerAttack_BulletShot>().moveDirectionY;
                 posX = playerPosX + playerDirectionX;
                 posY = playerPosY + playerDirectionY;
 

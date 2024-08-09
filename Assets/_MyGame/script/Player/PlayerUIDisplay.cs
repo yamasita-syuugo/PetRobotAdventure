@@ -11,7 +11,7 @@ public class PlayerUIDisplay : MonoBehaviour
     GameObject bulletUI;
     GameObject[] playerUIMark;
 
-    PlayerShot playerShot;
+    PlayerAttack_BulletShot playerShot;
     int bulletMax = 10;
     int bulletNum;
 
@@ -20,7 +20,7 @@ public class PlayerUIDisplay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerShot = GetComponent<PlayerShot>();
+        playerShot = GetComponent<PlayerAttack_BulletShot>();
         bulletMax = playerShot.GetMagazineSize();
         bulletNum = playerShot.GetMagazine();
 

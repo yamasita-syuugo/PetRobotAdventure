@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class BulletNumDisplay : MonoBehaviour
 {
-    PlayerShot player;
+    PlayerAttack_BulletShot player;
     int bulletNum;
     int bulletMaxNum;
     [SerializeField]
@@ -17,7 +17,7 @@ public class BulletNumDisplay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindWithTag("Player").GetComponent<PlayerShot>();
+        player = GameObject.FindWithTag("Player").GetComponent<PlayerAttack_BulletShot>();
         bulletMaxNum = player.GetMagazineSize();
         bulletIcon = new GameObject[bulletMaxNum];
         for (int i = 0; i < bulletMaxNum; i++)
