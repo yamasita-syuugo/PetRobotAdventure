@@ -23,7 +23,7 @@ public class PlayerHit : MonoBehaviour
             ScoreManager.FlagGetPointAdd();
 
             GetComponent<PlayerShot>().AddMagazine();
-            GetComponent<PlayerCreateScaffold>().FlagToBlock();
+            GetComponent<PlayerAttack_EarthQuake>().FlagToBlock();
 
             Destroy(collision.GameObject());
         }

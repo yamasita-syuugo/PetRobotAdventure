@@ -123,7 +123,7 @@ public class EnemyMove : MonoBehaviour
             transform.position += move * moveSpeed * Time.deltaTime;
         }
     }
-    static _Scaffold_Base[] position = new _Scaffold_Base[200];
+    static Type_Scaffold[] position = new Type_Scaffold[200];
     GameObject []previousPos = new GameObject[20];
     GameObject nextPos;
     void MoveWalk()
@@ -248,7 +248,7 @@ public class EnemyMove : MonoBehaviour
 
     public void SetScaffold(GameObject createScaffold)
     {
-        position = createScaffold.GetComponentsInChildren<_Scaffold_Base>();
+        position = createScaffold.GetComponentsInChildren<Type_Scaffold>();
     }
 
     public Vector3 GetMove()

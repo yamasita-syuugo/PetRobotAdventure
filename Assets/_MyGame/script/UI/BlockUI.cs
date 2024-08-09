@@ -18,7 +18,7 @@ public class BlockUI : MonoBehaviour
     bool oldDisplay = false;
     public void UIUpDate()
     {
-        bool display = GetComponentInParent<PlayerCreateScaffold>().GetBlockGetNum() > 0;
+        bool display = GetComponentInParent<PlayerAttack_EarthQuake>().GetBlockGetNum() > 0;
         if (oldDisplay == display) return;
         oldDisplay = display;
         if(display) GetComponent<SpriteRenderer>().color = Color.white;

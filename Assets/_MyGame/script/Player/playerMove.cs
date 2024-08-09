@@ -5,31 +5,21 @@ using UnityEngine;
 
 public class playerMove : MonoBehaviour
 {//todo;ノックバックを
-    enum eScaffold
-    {
-        none,
-
-        block,
-        ice,
-        grass,
-
-        scaffoldMax,
-    }
     [SerializeField]
-    eScaffold scaffold = eScaffold.block;
+    eScaffoldType scaffold = eScaffoldType.block;
 
     // Start is called before the first frame update
     void Start()
     {
         playerAnimation = GetComponent<Animator>();
 
-        moveSpeedSetting[(int)eScaffold.block] = moveSpeedSetting_block;
-        moveSpeedSetting[(int)eScaffold.ice] = moveSpeedSetting_ice;
-        moveSpeedSetting[(int)eScaffold.grass] = moveSpeedSetting_grass;
+        moveSpeedSetting[(int)eScaffoldType.block] = moveSpeedSetting_block;
+        moveSpeedSetting[(int)eScaffoldType.ice] = moveSpeedSetting_ice;
+        moveSpeedSetting[(int)eScaffoldType.grass] = moveSpeedSetting_grass;
 
-        moveMaxSetting[(int)eScaffold.block] = moveMaxSetting_bloce;
-        moveMaxSetting[(int)eScaffold.ice] = moveMaxSetting_ice;
-        moveMaxSetting[(int)eScaffold.grass] = moveMaxSetting_grass;
+        moveMaxSetting[(int)eScaffoldType.block] = moveMaxSetting_bloce;
+        moveMaxSetting[(int)eScaffoldType.ice] = moveMaxSetting_ice;
+        moveMaxSetting[(int)eScaffoldType.grass] = moveMaxSetting_grass;
     }
 
     // Update is called once per frame
@@ -42,8 +32,8 @@ public class playerMove : MonoBehaviour
     Vector3 move;
     float moveSpeed;
     float moveMax = 1.5f;
-    float[] moveSpeedSetting = new float[(int)eScaffold.scaffoldMax];
-    float[] moveMaxSetting = new float[(int)eScaffold.scaffoldMax];
+    float[] moveSpeedSetting = new float[(int)eScaffoldType.scaffoldMax];
+    float[] moveMaxSetting = new float[(int)eScaffoldType.scaffoldMax];
     [SerializeField,Header("ブロック")]
     float moveSpeedSetting_block = 2.0f;
     [SerializeField]
@@ -66,13 +56,13 @@ public class playerMove : MonoBehaviour
 
         switch (scaffold)
         {
-            case eScaffold.block:
+            case eScaffoldType.block:
                 move = new Vector3(0.0f, 0.0f, 0.0f);
                 break;
-            case eScaffold.ice:
+            case eScaffoldType.ice:
                 move /= 1 + 1f / 1000;
                 break;
-            case eScaffold.grass:
+            case eScaffoldType.grass:
                 move = new Vector3(0.0f, 0.0f, 0.0f);
                 break;
         }
@@ -127,7 +117,7 @@ public class playerMove : MonoBehaviour
                 onScoffild = collision.gameObject;
                 onScoffildDistancX = tmpX;
                 onScoffildDistancY = tmpY;
-                scaffold = (eScaffold)collision.GetComponent<_Scaffold_Base>().GetScaffold();
+                scaffold = (eScaffoldType)collision.GetComponent<Type_Scaffold>().GetScaffoldType();
                 return;
             }
             else if(onScoffildDistancX > tmpX)
@@ -137,7 +127,7 @@ public class playerMove : MonoBehaviour
                     onScoffild = collision.gameObject;
                     onScoffildDistancX = tmpX;
                     onScoffildDistancY = tmpY;
-                    scaffold = (eScaffold)collision.GetComponent<_Scaffold_Base>().GetScaffold();
+                    scaffold = (eScaffoldType)collision.GetComponent<Type_Scaffold>().GetScaffoldType();
                 }
             }
         }

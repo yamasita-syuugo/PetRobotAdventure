@@ -11,11 +11,11 @@ using UnityEngine;
         total,
 
         //positive
-        flag,
-        destroy,
+        Posi_Flag,
+        Posi_Destroy,
 
         //negative
-        enemyBom,
+        Nega_EnemyBom,
 
         shot,
 
@@ -30,10 +30,10 @@ public class ScoreManager : MonoBehaviour
     {
         point[(int)eScoreType.total] = 0;
 
-        point[(int)eScoreType.flag] = 0;
-        point[(int)eScoreType.destroy] = 0;
+        point[(int)eScoreType.Posi_Flag] = 0;
+        point[(int)eScoreType.Posi_Destroy] = 0;
 
-        point[(int)eScoreType.enemyBom] = 0;
+        point[(int)eScoreType.Nega_EnemyBom] = 0;
 
         point[(int)eScoreType.shot] = 0;
     }
@@ -45,25 +45,25 @@ public class ScoreManager : MonoBehaviour
 
     private static void TotalPointReset()
     {
-        point[(int)eScoreType.total] = point[(int)eScoreType.flag] + point[(int)eScoreType.destroy] - point[(int)eScoreType.enemyBom];
+        point[(int)eScoreType.total] = point[(int)eScoreType.Posi_Flag] + point[(int)eScoreType.Posi_Destroy] - point[(int)eScoreType.Nega_EnemyBom];
     }
 
     public static void FlagGetPointAdd()
     {
-        point[(int)eScoreType.flag]++;
+        point[(int)eScoreType.Posi_Flag]++;
 
         TotalPointReset();
     }
     public static void DestroyPointAdd()
     {
-        point[(int)eScoreType.destroy]++;
+        point[(int)eScoreType.Posi_Destroy]++;
 
         TotalPointReset();
     }
 
     public static void EnemyBomPointAdd(int addPoint = 1)
     {
-        point[(int)eScoreType.enemyBom] += addPoint;
+        point[(int)eScoreType.Nega_EnemyBom] += addPoint;
 
         TotalPointReset();
     }
@@ -79,25 +79,25 @@ public class ScoreManager : MonoBehaviour
     }
     public static int GetFlagGetPoint()
     {
-        return point[(int)eScoreType.flag];
+        return point[(int)eScoreType.Posi_Flag];
     }
     public static int GetDestroyPoint()
     {
-        return point[(int)eScoreType.destroy];
+        return point[(int)eScoreType.Posi_Destroy];
     }
     public static int GetEnemyBomPoint()
     {
-        return point[(int)eScoreType.enemyBom];
+        return point[(int)eScoreType.Nega_EnemyBom];
     }
 
     public static void ResultSend()
     {
         PlayerPrefs.SetInt("totalPoint", point[(int)eScoreType.total]);
 
-        PlayerPrefs.SetInt("flagGetPoint", point[(int)eScoreType.flag]);
-        PlayerPrefs.SetInt("destroyPoint", point[(int)eScoreType.destroy]);
+        PlayerPrefs.SetInt("flagGetPoint", point[(int)eScoreType.Posi_Flag]);
+        PlayerPrefs.SetInt("destroyPoint", point[(int)eScoreType.Posi_Destroy]);
 
-        PlayerPrefs.SetInt("enemyBomPoint", point[(int)eScoreType.enemyBom]);
+        PlayerPrefs.SetInt("enemyBomPoint", point[(int)eScoreType.Nega_EnemyBom]);
 
         PlayerPrefs.Save();
     }

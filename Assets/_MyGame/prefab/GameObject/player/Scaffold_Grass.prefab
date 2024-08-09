@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5892337651545052163}
   - component: {fileID: 2262980405609510523}
   - component: {fileID: 4111167878237020882}
-  - component: {fileID: 5111777825754568225}
+  - component: {fileID: 2709749321069441084}
   m_Layer: 0
   m_Name: Scaffold_Grass
   m_TagString: Scaffold
@@ -159,7 +159,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5111777825754568225
+--- !u!114 &2709749321069441084
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,6 +168,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7285234217500196173}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7eea378f8f32b234692c83704c2faa6c, type: 3}
+  m_Script: {fileID: 11500000, guid: 72b3b37f5d329c1438f9704ef6c85c7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaffoldType: 2

@@ -11,6 +11,8 @@ enum eObjectType
     player,
     enemy,
     attack,
+
+    scaffold,
 }
 public class Manager_Hit : MonoBehaviour
 {
@@ -52,6 +54,11 @@ public class Manager_Hit : MonoBehaviour
             case eObjectType.attack:
                 AttackTo();
                 break;
+            case eObjectType.scaffold:
+                ScaffokdTo();
+                break;
+
+            case eObjectType.none: break;
         }
     }
 
@@ -63,22 +70,24 @@ public class Manager_Hit : MonoBehaviour
         if (gameObject.tag == "Player") gameObjectType = eObjectType.player;
         else if (gameObject.tag == "Enemy") gameObjectType = eObjectType.enemy;
         else if (gameObject.tag == "Attack") gameObjectType = eObjectType.attack;
+        else if (gameObject.tag == "Scaffold") gameObjectType = eObjectType.scaffold;
 
         if (collision.tag == "Player") collisionGameObjectType = eObjectType.player;
         else if (collision.tag == "Enemy") collisionGameObjectType = eObjectType.enemy;
         else if (collision.tag == "Attack") collisionGameObjectType = eObjectType.attack;
+        else if (collision.tag == "Scaffold") collisionGameObjectType = eObjectType.scaffold;
     }
-    //attackÅ®enemyÅ®enemyÅ®player
+    //attackÅ®enemyÅ®enemyÅ®playerÅ®scaffold
     void PlayerTo()
     {
         switch (collisionGameObjectType)
         {
-            //case eObjectType.player:
-            //    break;
-            //case eObjectType.enemy:
-            //    break;
-            //case eObjectType.attack:
-            //    break;
+            //case eObjectType.player: break;
+            //case eObjectType.enemy: break;
+            //case eObjectType.attack: break;
+            case eObjectType.scaffold: 
+                
+                break;
         }
     }
 
@@ -111,13 +120,15 @@ public class Manager_Hit : MonoBehaviour
                         break;
                     case eEnemyType.EnemyMass:
                         break;
+
+                        case eEnemyType.bossEnemy: break;
                 }
                 break;
             case eObjectType.enemy:
                 EnemyToEnemy();
                 break;
-                //case eObjectType.attack:
-                //    break;
+            //case eObjectType.attack: break;
+            //case eObjectType.scaffold: break;
         }
     }
     void EnemyToEnemy()
@@ -133,14 +144,12 @@ public class Manager_Hit : MonoBehaviour
                         Explosion(collision);
                         Explosion(gameObject);
                         break;
-                    case eEnemyType.Crow:
-                        break;
-                    case eEnemyType.Golem:
-                        break;
-                    case eEnemyType.LivingArmor:
-                        break;
-                    case eEnemyType.EnemyMass:
-                        break;
+                    case eEnemyType.Crow: break;
+                    case eEnemyType.Golem: break;
+                    case eEnemyType.LivingArmor: break;
+                    case eEnemyType.EnemyMass: break;
+
+                    case eEnemyType.bossEnemy: break;
                 }
                 break;
             case eEnemyType.Crow:
@@ -152,59 +161,61 @@ public class Manager_Hit : MonoBehaviour
                         Explosion(collision);
                         Explosion(gameObject);
                         break;
-                    case eEnemyType.Crow:
-                        break;
-                    case eEnemyType.Golem:
-                        break;
-                    case eEnemyType.LivingArmor:
-                        break;
-                    case eEnemyType.EnemyMass:
-                        break;
+                    case eEnemyType.Crow: break;
+                    case eEnemyType.Golem: break;
+                    case eEnemyType.LivingArmor: break;
+                    case eEnemyType.EnemyMass: break;
+
+                    case eEnemyType.bossEnemy: break;
                 }
                 break;
             case eEnemyType.Golem:
                 switch (collision.GetComponent<EnemyType>().GetEnemyType())
                 {
-                    case eEnemyType.Bom:
-                        break;
-                    case eEnemyType.Crow:
-                        break;
-                    case eEnemyType.Golem:
-                        break;
-                    case eEnemyType.LivingArmor:
-                        break;
-                    case eEnemyType.EnemyMass:
-                        break;
+                    case eEnemyType.Bom: break;
+                    case eEnemyType.Crow: break;
+                    case eEnemyType.Golem: break;
+                    case eEnemyType.LivingArmor: break;
+                    case eEnemyType.EnemyMass: break;
+
+                    case eEnemyType.bossEnemy: break;
                 }
                 break;
             case eEnemyType.LivingArmor:
                 switch (collision.GetComponent<EnemyType>().GetEnemyType())
                 {
-                    case eEnemyType.Bom:
-                        break;
-                    case eEnemyType.Crow:
-                        break;
-                    case eEnemyType.Golem:
-                        break;
-                    case eEnemyType.LivingArmor:
-                        break;
-                    case eEnemyType.EnemyMass:
-                        break;
+                    case eEnemyType.Bom: break;
+                    case eEnemyType.Crow: break;
+                    case eEnemyType.Golem: break;
+                    case eEnemyType.LivingArmor: break;
+                    case eEnemyType.EnemyMass: break;
+
+                    case eEnemyType.bossEnemy: break;
                 }
                 break;
             case eEnemyType.EnemyMass:
                 switch (collision.GetComponent<EnemyType>().GetEnemyType())
                 {
-                    case eEnemyType.Bom:
-                        break;
-                    case eEnemyType.Crow:
-                        break;
-                    case eEnemyType.Golem:
-                        break;
-                    case eEnemyType.LivingArmor:
-                        break;
-                    case eEnemyType.EnemyMass:
-                        break;
+                    case eEnemyType.Bom: break;
+                    case eEnemyType.Crow: break;
+                    case eEnemyType.Golem: break;
+                    case eEnemyType.LivingArmor: break;
+                    case eEnemyType.EnemyMass: break;
+
+                    case eEnemyType.bossEnemy: break;
+                }
+                break;
+
+            case eEnemyType.bossEnemy:
+                switch (collision.GetComponent<EnemyType>().GetEnemyType())
+                {
+                    case eEnemyType.Bom: break;
+                    case eEnemyType.Crow: break;
+                    case eEnemyType.Golem: break;
+                    case eEnemyType.LivingArmor: break;
+                    case eEnemyType.EnemyMass: break;
+
+                    case eEnemyType.bossEnemy: break;
                 }
                 break;
         }
@@ -241,8 +252,7 @@ public class Manager_Hit : MonoBehaviour
                                 Explosion(collision);
                                 Destroy(gameObject);
                                 break;
-                            case eEnemyType.Crow:
-                                break;
+                            case eEnemyType.Crow: break;
                             case eEnemyType.Golem:
                                 collision.GetComponent<KnockBack>().SetKnockBackEnergy(gameObject.GetComponent<bulletMove>().GetMoveEnelgy());
                                 collision.GetComponent<KnockBack>().AddMoveSpeed(gameObject.GetComponent<bulletMove>().GetMoveSpeed());
@@ -252,20 +262,30 @@ public class Manager_Hit : MonoBehaviour
                                 collision.GetComponent<KnockBack>().SetKnockBackEnergy(gameObject.GetComponent<bulletMove>().GetMoveEnelgy());
                                 Destroy(gameObject.gameObject);
                                 break;
-                            case eEnemyType.EnemyMass:
-                                break;
+                            case eEnemyType.EnemyMass: break;
+
+                            case eEnemyType.bossEnemy: break;
                         }
 
 
                         break;
-                    case eAttackType.MeleeAttack:
-                        break;
-                    case eAttackType.EarthQuake:
-                        break;
+                    case eAttackType.MeleeAttack: break;
+                    case eAttackType.EarthQuake: break;
                 }
                 break;
-                //case eObjectType.attack:
-                //    break;
+            //case eObjectType.attack: break;
+            //case eObjectType.scaffold: break;
+        }
+    }
+
+    private void ScaffokdTo()
+    {
+        switch (collisionGameObjectType)
+        {
+            //case eObjectType.player: break;
+            //case eObjectType.enemy: break;
+            //case eObjectType.attack: break;
+            //case eObjectType.scaffold: break;
         }
     }
 }

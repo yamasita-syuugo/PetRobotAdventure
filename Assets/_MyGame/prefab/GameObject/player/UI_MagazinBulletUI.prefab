@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7302232343224843859}
   - component: {fileID: 5456056094962589387}
   m_Layer: 0
-  m_Name: MagazinBulletUI
-  m_TagString: Untagged
+  m_Name: UI_MagazinBulletUI
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

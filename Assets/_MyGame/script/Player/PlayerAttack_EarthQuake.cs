@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using UnityEngine;
 
-public class PlayerCreateScaffold : MonoBehaviour
+public class PlayerAttack_EarthQuake : MonoBehaviour
 {
     [SerializeField]
     GameObject blockPrefab;

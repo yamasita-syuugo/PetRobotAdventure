@@ -6,7 +6,7 @@ using UnityEngine;
 public class CreateBlockNumDisplay : MonoBehaviour
 {
     [SerializeField]
-    PlayerCreateScaffold player;
+    PlayerAttack_EarthQuake player;
     // Start is called before the first frame update
     //void Start()
     //{

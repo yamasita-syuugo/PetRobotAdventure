@@ -11,6 +11,7 @@ TagManager:
   - Attack
   - Scaffold
   - Field
+  - UI
   layers:
   - Default
   - TransparentFX

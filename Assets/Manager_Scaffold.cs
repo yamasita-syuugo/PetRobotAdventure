@@ -2,17 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Scaffold_Block : _Scaffold_Base
+public enum eScaffoldType
+{
+    none,
+
+    block,
+    grass,
+    ice,
+
+    scaffoldMax,
+}
+public class Manager_Scaffold : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
     {
-        scaffold = eScaffold.block;
+        
     }
 
     // Update is called once per frame
-    //void Update()
-    //{
+    void Update()
+    {
         
-    //}
+    }
 }
