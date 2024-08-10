@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossTechnique : MonoBehaviour
+public class Technique_Boss : MonoBehaviour
 {
     float endPower = 0;
     [SerializeField]
@@ -25,5 +25,12 @@ public class BossTechnique : MonoBehaviour
             CreateEnemy tmp = GameObject.Find("CreateEnemy").GetComponent<CreateEnemy>();
             tmp.EnemyCreate(tmp.GetEnemyObjectBase(eEnemyType.Bom));
         }
+    }
+
+    [SerializeField]
+    float endPowerDown = 3;
+    public void EndPowerDown()
+    {
+        endPower -= endPowerDown;
     }
 }

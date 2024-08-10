@@ -118,10 +118,9 @@ public class Manager_Hit : MonoBehaviour
 
                         if (collision.name == "Bullet") Destroy(collision.gameObject);
                         break;
-                    case eEnemyType.EnemyMass:
-                        break;
+                    case eEnemyType.EnemyMass: break;
 
-                        case eEnemyType.bossEnemy: break;
+                    case eEnemyType.bossEnemy: break;
                 }
                 break;
             case eObjectType.enemy:
@@ -264,7 +263,10 @@ public class Manager_Hit : MonoBehaviour
                                 break;
                             case eEnemyType.EnemyMass: break;
 
-                            case eEnemyType.bossEnemy: break;
+                            case eEnemyType.bossEnemy:
+                                collision.GetComponent<Technique_Boss>().EndPowerDown();
+
+                                break;
                         }
 
 
