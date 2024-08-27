@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Technique_Boss : MonoBehaviour
+public class Technique_Enemy_Boss : MonoBehaviour
 {
     float endPower = 0;
     [SerializeField]

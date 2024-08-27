@@ -22,11 +22,11 @@ public class Explosion : MonoBehaviour
         {
             Destroy(collision.GameObject());
         }
-        else if(collision.tag == "Player")
-        {
-            Vector3 energy = collision.transform.position - transform.position;
-            collision.GetComponent<KnockBack>().SetKnockBackEnergy(energy);
-            collision.GetComponent<KnockBack>().AddMoveSpeed(3);
-        }
+        //else if(collision.tag == "Player")
+        //{
+        //    Vector3 energy = collision.transform.position - transform.position;
+        //    collision.GetComponent<KnockBack>().SetKnockBackEnergy(energy);
+        //    collision.GetComponent<KnockBack>().AddMoveSpeed(2);
+        //}
     }
 }

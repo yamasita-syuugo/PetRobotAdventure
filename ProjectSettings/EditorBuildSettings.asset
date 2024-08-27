@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/_MyGame/Scenes/Title.unity
     guid: cc14980659401214e9075cfc09ae2546
   - enabled: 1
-    path: Assets/_MyGame/Scenes/MainGame.unity
+    path: Assets/_MyGame/Scenes/LastGame.unity
     guid: d0d1628b8c803e046a5d03437fadc5a9
   - enabled: 1
     path: Assets/_MyGame/Scenes/Result.unity

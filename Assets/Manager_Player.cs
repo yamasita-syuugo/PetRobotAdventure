@@ -2,13 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum eAttackType
+public enum ePlayerTechniqueType
 {
     none,
 
     Bullet,
-    MeleeAttack,
     EarthQuake,
+    MeleeAttack,
+
+    Mirage,
+
+
+    playerTechniqueTypeMax,
 }
 
 public class Manager_Player: MonoBehaviour

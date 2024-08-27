@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2025371526325894783
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6419712028691353803}
+  - component: {fileID: 2240942690576679868}
+  - component: {fileID: -255703585508960896}
+  m_Layer: 0
+  m_Name: Technique_EarthQuake
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6419712028691353803
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025371526325894783}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2240942690576679868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025371526325894783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8994c6d51e05594390402dbb12471a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockPrefab: {fileID: 1716873108787873888, guid: 1e457425f77454a40bfbcda0b1240cdb, type: 3}
+  impact: {fileID: 1932533781327131626, guid: dc93cf7aeaf0e3540b72e63540f1084c, type: 3}
+  flagToBlock: 3
+--- !u!114 &-255703585508960896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025371526325894783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b1328f78790fbd41aa0853a1595a6d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materialType: 1
+  materialBase:
+  - {fileID: 0}
+  - {fileID: 1716873108787873888, guid: 1e457425f77454a40bfbcda0b1240cdb, type: 3}
+  - {fileID: 7285234217500196173, guid: d978f503312ba7442804a407d42ade34, type: 3}
+  - {fileID: 7285234217500196173, guid: ba29eb92117e8484c8561e9d49989168, type: 3}
+  earthQuakeMaterialsMax: 5
+  earthQuakeMaterials: 3

@@ -47,8 +47,6 @@ public class CreateEnemy : MonoBehaviour
 
         golemCount = 0;
         livingArmorCount = 0;
-
-        endCount = new float[endNum];
     }
 
     // Update is called once per frame
@@ -154,24 +152,6 @@ public class CreateEnemy : MonoBehaviour
         EnemySpaunPositionSet(tmp);
         enemyMassSpawn = false;
     }
-    bool end = false;
-    [SerializeField]
-    int endNum = 4;
-    float[] endCount ;
-    public void SetEndCount()
-    {
-        float time = 0;
-        int num = 0; 
-        for(int i = 0;i < endCount.Length; i++)
-        {
-            if (endCount[i] <= time)
-            {
-                time = endCount[i];
-                num = i;
-            }
-        }
-        endCount[num] = 1;
-    }
     int bomSpawnNum = 0;
     public void SetBomSpawnNum(int num)
     {
@@ -186,24 +166,10 @@ public class CreateEnemy : MonoBehaviour
 
         bomSpawnNum--;
     }
-
-    int endGameCount = 0;
+    bool endGame = false;
     void EndGame()
     {
-        if (!end)
-        {
-            endGameCount = 0;
-            for (int i = 0;i < endCount.Length; i++)
-            {
-                if (endCount[i] > 0)
-                {
-                    endCount[i] -= Time.deltaTime;
-                    endGameCount++;
-                }
-            }
-            if (endGameCount >= endNum) end = true;
-        }
-        else
+        if(endGame)
         {
             GameObject tmp = Instantiate<GameObject>(enemyObjectBom);
             EnemySpaunPositionSet(tmp);
@@ -257,13 +223,5 @@ public class CreateEnemy : MonoBehaviour
     public void LivingArmorCountAdd(int count)
     {
         livingArmorCount -= count;
-    }
-    public int GetEndCountLength()
-    {
-        return endCount.Length;
-    }
-    public int GetEnemyCountNum()
-    {
-        return endGameCount;
     }
 }

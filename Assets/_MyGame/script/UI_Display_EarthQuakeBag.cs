@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class CreateBlockNumDisplay : MonoBehaviour
+public class UI_Display_EarthQuakeBag : UI_Display__Base
 {
-    [SerializeField]
-    PlayerAttack_EarthQuake player;
     // Start is called before the first frame update
     //void Start()
     //{
@@ -16,7 +14,7 @@ public class CreateBlockNumDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int blockNum = player.GetBlockNum();
-        GetComponent<TextMeshProUGUI>().text = blockNum.ToString("00");
+        int materialsNum = connectTechnique.GetComponent<Technique_Player_MaterialBag>().GetEarthQuakeMaterials();
+        GetComponent<TextMeshProUGUI>().text = materialsNum.ToString();
     }
 }

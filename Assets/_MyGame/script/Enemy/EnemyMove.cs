@@ -160,9 +160,7 @@ public class EnemyMove : MonoBehaviour
                 else previousPos[i] = previousPos[i - 1];
             }
         }
-
-
-        Vector3 move = new Vector3(0.0f, 0.0f, 0.0f);Debug.Log(nextPos.name);Debug.Log(name);
+        Vector3 move = new Vector3(0.0f, 0.0f, 0.0f);
         move.x = nextPos.transform.position.x - transform.position.x;
         move.y = nextPos.transform.position.y - transform.position.y;
 

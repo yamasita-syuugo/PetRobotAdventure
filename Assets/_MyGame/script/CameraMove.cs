@@ -13,6 +13,8 @@ public class CameraMove : MonoBehaviour
         target = GameObject.FindWithTag("Player");
 
         camera = GetComponent<Camera>();
+
+        size = camera.orthographicSize;
     }
 
     // Update is called once per frame
@@ -36,11 +38,14 @@ public class CameraMove : MonoBehaviour
     float maxSize = 6;
     [SerializeField]
     float minSize = 2;
+    float size;
     void SizeZoom()
     {
-        camera.orthographicSize += -Input.mouseScrollDelta.y * zoomSpeed;
+        if(Input.mouseScrollDelta.y != 0) size += Input.mouseScrollDelta.y * zoomSpeed;
 
-        if(camera.orthographicSize >maxSize)camera.orthographicSize = maxSize;
-        else if(camera.orthographicSize < minSize)camera.orthographicSize = minSize;
+        if(size > maxSize) size = maxSize;
+        else if(size < minSize) size = minSize;
+
+        camera.orthographicSize += (size - camera.orthographicSize) / 1.1f * Time.deltaTime;
     }
 }

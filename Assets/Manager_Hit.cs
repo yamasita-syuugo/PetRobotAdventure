@@ -21,7 +21,7 @@ public class Manager_Hit : MonoBehaviour
     void Start()
     {
         explosionSource = GameObject.Find("explosionSound").GetComponent<AudioSource>();
-        objectFall =GameObject.Find("Player").GetComponent<ObjectFall>();
+        objectFall =GameObject.FindGameObjectWithTag("Player").GetComponent<ObjectFall>();
     }
 
     // Update is called once per frame
@@ -240,7 +240,7 @@ public class Manager_Hit : MonoBehaviour
             case eObjectType.enemy:
                 switch (gameObject.GetComponent<AttackType>().GetAttackType())
                 {
-                    case eAttackType.Bullet:
+                    case ePlayerTechniqueType.Bullet:
                         switch (collision.GetComponent<EnemyType>().GetEnemyType())
                         {
                             case eEnemyType.Bom:
@@ -264,15 +264,45 @@ public class Manager_Hit : MonoBehaviour
                             case eEnemyType.EnemyMass: break;
 
                             case eEnemyType.bossEnemy:
-                                collision.GetComponent<Technique_Boss>().EndPowerDown();
+                                collision.GetComponent<Technique_Enemy_Boss>().EndPowerDown();
 
                                 break;
                         }
 
 
                         break;
-                    case eAttackType.MeleeAttack: break;
-                    case eAttackType.EarthQuake: break;
+                    case ePlayerTechniqueType.EarthQuake:
+                        switch (collision.GetComponent<EnemyType>().GetEnemyType())
+                        {
+                            case eEnemyType.Bom:
+                                ScoreManager.DestroyPointAdd();
+
+                                GameObject.FindAnyObjectByType<FlagCreate>().FlagSpaun();
+
+                                GameObject.Find("CreateEnemy").GetComponent<CreateEnemy>().LivingArmorCountAdd();   //リビングアーマーカウント
+
+                                Destroy(collision);
+                                Destroy(gameObject);
+                                break;
+                            case eEnemyType.Crow: break;
+                            case eEnemyType.Golem:
+                                collision.GetComponent<KnockBack>().SetKnockBackEnergy(gameObject.GetComponent<bulletMove>().GetMoveEnelgy());
+                                collision.GetComponent<KnockBack>().AddMoveSpeed(gameObject.GetComponent<bulletMove>().GetMoveSpeed());
+                                Destroy(gameObject);
+                                break;
+                            case eEnemyType.LivingArmor:
+                                collision.GetComponent<KnockBack>().SetKnockBackEnergy(gameObject.GetComponent<bulletMove>().GetMoveEnelgy());
+                                Destroy(gameObject.gameObject);
+                                break;
+                            case eEnemyType.EnemyMass: break;
+
+                            case eEnemyType.bossEnemy:
+                                collision.GetComponent<Technique_Enemy_Boss>().EndPowerDown();
+
+                                break;
+                        }
+                        break;
+                    case ePlayerTechniqueType.MeleeAttack: break;
                 }
                 break;
             //case eObjectType.attack: break;
@@ -284,7 +314,7 @@ public class Manager_Hit : MonoBehaviour
     {
         switch (collisionGameObjectType)
         {
-            //case eObjectType.player: break;
+            case eObjectType.player: break;
             //case eObjectType.enemy: break;
             //case eObjectType.attack: break;
             //case eObjectType.scaffold: break;

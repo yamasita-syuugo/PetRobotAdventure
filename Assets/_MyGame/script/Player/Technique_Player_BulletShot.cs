@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttack_BulletShot : MonoBehaviour
+public class Technique_Player_BulletShot : MonoBehaviour
 {
-    bool shotTrigger = false;
-    public bulletMove bulletBase;
-    public AudioSource shotSound ;
-    const int magazineSize = 10;
+    GameObject magazine;
+
     [SerializeField]
-    int magazine = magazineSize;
+    bulletMove bulletBase;
+    AudioSource shotSound ;
     public float moveDirectionX, moveDirectionY;
 
     // Start is called before the first frame update
@@ -22,29 +21,24 @@ public class PlayerAttack_BulletShot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GetComponent<ObjectFall>().GetSituation() == ObjectFall.eSituation.fall) return;
         ControllerShot();
-        MouseShot();
     }
+
     [SerializeField]
     GameObject aimMarkPrefab;
     GameObject aimMark;
-    int ControllerShotButton;
+    bool controllerShot = false;
+    public void SetControllerShot(bool shot_ = true) { controllerShot = shot_; }
     void ControllerShot()
     {
-        ControllerShotButton = (int)Input.GetAxisRaw("Shot");
         moveDirectionX = Input.GetAxis("AimX");
         moveDirectionY = -Input.GetAxis("AimY");
 
-        if (ControllerShotButton == 1 && shotTrigger == false)
+        if (controllerShot)
         {
-            shotTrigger = true;
+            controllerShot = false;
 
             Shot();
-        }
-        else if (ControllerShotButton != 1 && shotTrigger == true)
-        {
-            shotTrigger = false;
         }
 
         float distance = Mathf.Sqrt(moveDirectionX * moveDirectionX + moveDirectionY * moveDirectionY);
@@ -58,15 +52,12 @@ public class PlayerAttack_BulletShot : MonoBehaviour
             aimMark.GetComponent<SpriteRenderer>().material.color = Color.clear;
         }
     }
-    void MouseShot()
+    public void MouseShot()
     {
-        if (Input.GetMouseButtonDown(0) == false) return;
         Vector2 playerPos = transform.position;
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
         moveDirectionX = mousePos.x - playerPos.x;
         moveDirectionY = mousePos.y - playerPos.y;
-
         float distance = Mathf.Sqrt(moveDirectionX * moveDirectionX + moveDirectionY * moveDirectionY);
         moveDirectionX /= distance;
         moveDirectionY /= distance;
@@ -75,34 +66,17 @@ public class PlayerAttack_BulletShot : MonoBehaviour
     }
     void Shot()
     {
-        if (magazine > 0)
-        {
-                bulletMove tmp1 = Instantiate<bulletMove>(bulletBase);
-                shotSound.Play(0);
-                tmp1.transform.position = this.transform.position;
-                Vector2 tmp2 = new Vector2(moveDirectionX, moveDirectionY);
-                tmp1.SetMoveEnelgy(tmp2);
+        if (!GetComponent<Technique_Player_BulletMagazine>().BulletCheck()) return;
 
-                magazine--;
-                GetComponent<PlayerUIDisplay>().BulletNumCheck();
-                GetComponentInChildren<BlockUI>().UIUpDate();
+        ScoreManager.ShotNumAdd();
 
-                ScoreManager.ShotNumAdd();
-        }
-    }
+        bulletMove tmp1 = Instantiate<bulletMove>(bulletBase);
+        tmp1.transform.position = this.transform.position;
+        Vector2 tmp2 = new Vector2(moveDirectionX, moveDirectionY);
+        tmp1.SetMoveEnelgy(tmp2);
 
-    public void AddMagazine(int add = 1)
-    {
-        if (magazine >= magazineSize ) return;
-        magazine += add;
-        GetComponent<PlayerUIDisplay>().BulletNumCheck();
-    }
-    public int GetMagazineSize()
-    {
-        return magazineSize;
-    }
-    public int GetMagazine()
-    {
-        return magazine;
+        shotSound.Play(0);
+
+        GetComponent<Technique_Player_BulletMagazine>().AddBullet(-1);
     }
 }

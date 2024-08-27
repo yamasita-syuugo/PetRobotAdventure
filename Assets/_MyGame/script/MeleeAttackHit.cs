@@ -25,7 +25,7 @@ public class MeleeAttackHit : MonoBehaviour
     eEffect effect = eEffect.destroy;
 
     [SerializeField]
-    float knockBackPower = 0;
+    //float knockBackPower = 0;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Enemy")

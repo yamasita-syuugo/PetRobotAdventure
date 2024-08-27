@@ -12,17 +12,13 @@ GameObject:
   - component: {fileID: 2566826918916351229}
   - component: {fileID: 6891509713449213750}
   - component: {fileID: 1457245362866958160}
-  - component: {fileID: 4306313645317709558}
-  - component: {fileID: 5291536584900420585}
-  - component: {fileID: 6679133269672677200}
   - component: {fileID: 7174793852350078459}
   - component: {fileID: 3389291411982607370}
-  - component: {fileID: 8883265689788904415}
   - component: {fileID: 5497755237350589795}
   - component: {fileID: 273949001904384709}
   - component: {fileID: 5798991024116548831}
   m_Layer: 0
-  m_Name: player
+  m_Name: Player_PetRobot
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,6 +38,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 49676571916337742}
+  - {fileID: 2251773206328263675}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2566826918916351229
@@ -129,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 747b626f588306c4db7217e862dbf501, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaffold: 1
+  scaffold: 2
   moveSpeedSetting_block: 2
   moveMaxSetting_bloce: 2
   moveSpeedSetting_ice: 0.004
@@ -137,58 +134,6 @@ MonoBehaviour:
   stopEnelgy: 2
   moveSpeedSetting_grass: 0.7
   moveMaxSetting_grass: 0.7
---- !u!114 &4306313645317709558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2637719474650202597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 823d74a8025173e4795fcd40633b289e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletBase: {fileID: 3284376109990628062, guid: 8d465513b25fcd14c974449136fe5a82, type: 3}
-  shotSound: {fileID: 0}
-  magazine: 10
-  moveDirectionX: 0.1
-  moveDirectionY: 0.1
-  aimMarkPrefab: {fileID: 4282155916562330577, guid: f4746770dd2d82b43ade4bd52c4eda25, type: 3}
---- !u!114 &5291536584900420585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2637719474650202597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10710482183f33041a7b836d29818838, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meleeAttackBase: {fileID: 4588897879956829703, guid: fa3040f43ba5ec64fa1f286ec06e8135, type: 3}
-  establishment: 25
-  spawnBomNum: 10
-  attackDistanceSize: 0.5
---- !u!114 &6679133269672677200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2637719474650202597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8994c6d51e05594390402dbb12471a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blockPrefab: {fileID: 1716873108787873888, guid: 1e457425f77454a40bfbcda0b1240cdb, type: 3}
-  blockCreateSound: {fileID: 0}
-  blockNumMax: 5
-  blockNum: 3
-  addBlock: 0
-  flagToBlock: 3
 --- !u!114 &7174793852350078459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,27 +159,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   situation: 0
-  fallSound: {fileID: 0}
+  fallSound: {fileID: 3753076071498596226, guid: 0a649a52105cf6e4684d76b678759ed3, type: 3}
   fallType: 3
-  splashOfWater: {fileID: 0}
+  splashOfWater: {fileID: 1932533781327131626, guid: dc93cf7aeaf0e3540b72e63540f1084c, type: 3}
   waterSound: {fileID: 0}
---- !u!114 &8883265689788904415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2637719474650202597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d6448c7c394dd9449b85f875dde5d4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blockUI: {fileID: 827899541496627631, guid: d5f1b1d51d4bde340be54a8836f36620, type: 3}
-  bulletUI: {fileID: 9174371447192631023, guid: 004499973bbd0b94782c2dec86a96512, type: 3}
-  displayDistance: 0.5
-  bulletColor: {r: 1, g: 1, b: 1, a: 255}
-  unBulletColor: {r: 0.4811321, g: 0.4289338, b: 0.4289338, a: 0.19607843}
 --- !u!114 &5497755237350589795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,3 +286,61 @@ MonoBehaviour:
   boardSizeX: 2
   boardSizeY: 2
   panel: 
+--- !u!1 &8866836488508785559
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2251773206328263675}
+  - component: {fileID: 3964005167112652102}
+  m_Layer: 0
+  m_Name: Player_Technique
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2251773206328263675
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8866836488508785559}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2540863459560322167}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3964005167112652102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8866836488508785559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c426e51d10ceec34b877a306c21b22f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  techniqueNum: 2
+  use: 0100000002000000
+  techniqueBase:
+  - {fileID: 0}
+  - {fileID: 5879217919693297659, guid: 74c639ade4938e248b81e667a3d03d52, type: 3}
+  - {fileID: 2025371526325894783, guid: 4037c50fb2b2ca04aab898fd08248109, type: 3}
+  - {fileID: 1618894492982383026, guid: c9cd949571db92248ad1b8ff6c447473, type: 3}
+  - {fileID: 2859058344158072907, guid: de0069758cf8a0843b0ce31ad6cc8c8d, type: 3}
+  techniqueUIBase:
+  - {fileID: 0}
+  - {fileID: 8102269772775701251, guid: 87eac8096d8b4044b8e798f827073228, type: 3}
+  - {fileID: 5297492152204844733, guid: 2633da88eb9ba904985bea49cf2e9361, type: 3}
+  - {fileID: 5389394737070788234, guid: 59b01d05602784e4c9c15b82d639c9bd, type: 3}
+  - {fileID: 0}

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5616048076372087000}
   - component: {fileID: 3927302132137685234}
   m_Layer: 0
-  m_Name: Mirage
+  m_Name: Attack_Mirage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

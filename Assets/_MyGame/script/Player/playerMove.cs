@@ -80,6 +80,8 @@ public class playerMove : MonoBehaviour
     Animator playerAnimation;
     void Direction()//todo:アニメーションの変更
     {
+        if (playerAnimation == null) return;
+
         float directionX = Input.GetAxis("Horizontal");
         float directionY = Input.GetAxis("Vertical");
         if (directionX * directionX > directionY * directionY)

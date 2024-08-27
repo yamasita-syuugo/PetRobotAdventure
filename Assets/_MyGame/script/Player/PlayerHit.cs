@@ -22,8 +22,7 @@ public class PlayerHit : MonoBehaviour
         if (collision.tag == "Flag") {
             ScoreManager.FlagGetPointAdd();
 
-            GetComponent<PlayerAttack_BulletShot>().AddMagazine();
-            GetComponent<PlayerAttack_EarthQuake>().FlagToBlock();
+            GameObject.Find("Player_Technique").GetComponent<Technique_Player__Control>().GetPoint();
 
             Destroy(collision.GameObject());
         }
