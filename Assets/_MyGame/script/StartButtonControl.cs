@@ -19,6 +19,13 @@ public class StartButtonControl : MonoBehaviour
 
     public void StartButton()
     {
+        DataSave();
+
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainGame");
+    }
+
+    public void DataSave()
+    {
+        GameObject.Find("Chara").GetComponent<Select_Chara>().DataSave();
     }
 }

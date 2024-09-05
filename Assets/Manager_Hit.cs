@@ -105,7 +105,7 @@ public class Manager_Hit : MonoBehaviour
                         break;
                     case eEnemyType.Crow:
 
-                        EnemyMove enemyMove = gameObject.GetComponent<EnemyMove>();
+                        CPUMove enemyMove = gameObject.GetComponent<CPUMove>();
                         collision.GetComponent<playerMove>().AddPosition(enemyMove.GetMove() * enemyMove.GetMoveSpeed() * Time.deltaTime);
                         break;
                     case eEnemyType.Golem:
@@ -222,7 +222,7 @@ public class Manager_Hit : MonoBehaviour
     [SerializeField]
     GameObject explosion;
     AudioSource explosionSource;
-    void Explosion(GameObject gameObject)
+    public void Explosion(GameObject gameObject)
     {
         GameObject tmp = Instantiate<GameObject>(explosion);
         tmp.transform.position = gameObject.transform.position;
@@ -271,7 +271,9 @@ public class Manager_Hit : MonoBehaviour
 
 
                         break;
-                    case ePlayerTechniqueType.EarthQuake:
+                    case ePlayerTechniqueType.EarthQuakeInpact:
+                        Vector2 knockBackEnergy = collision .transform.position - gameObject.transform.position;
+                        float distance = 3 / Mathf.Sqrt(knockBackEnergy.x * knockBackEnergy.x + knockBackEnergy.y * knockBackEnergy.y);
                         switch (collision.GetComponent<EnemyType>().GetEnemyType())
                         {
                             case eEnemyType.Bom:
@@ -279,19 +281,20 @@ public class Manager_Hit : MonoBehaviour
 
                                 GameObject.FindAnyObjectByType<FlagCreate>().FlagSpaun();
 
-                                GameObject.Find("CreateEnemy").GetComponent<CreateEnemy>().LivingArmorCountAdd();   //リビングアーマーカウント
+                                collision.GetComponent<KnockBack>().SetKnockBackEnergy(knockBackEnergy);
+                                collision.GetComponent<KnockBack>().AddMoveSpeed(distance);
+                                GetComponent<Manager_ObjectPhenomenon>().SetObject(collision);
 
-                                Destroy(collision);
-                                Destroy(gameObject);
+                                GameObject.Find("CreateEnemy").GetComponent<CreateEnemy>().LivingArmorCountAdd();   //リビングアーマーカウント
                                 break;
                             case eEnemyType.Crow: break;
                             case eEnemyType.Golem:
-                                collision.GetComponent<KnockBack>().SetKnockBackEnergy(gameObject.GetComponent<bulletMove>().GetMoveEnelgy());
-                                collision.GetComponent<KnockBack>().AddMoveSpeed(gameObject.GetComponent<bulletMove>().GetMoveSpeed());
+                                collision.GetComponent<KnockBack>().SetKnockBackEnergy(knockBackEnergy);
+                                collision.GetComponent<KnockBack>().AddMoveSpeed(1 / distance);
                                 Destroy(gameObject);
                                 break;
                             case eEnemyType.LivingArmor:
-                                collision.GetComponent<KnockBack>().SetKnockBackEnergy(gameObject.GetComponent<bulletMove>().GetMoveEnelgy());
+                                collision.GetComponent<KnockBack>().SetKnockBackEnergy(knockBackEnergy);
                                 Destroy(gameObject.gameObject);
                                 break;
                             case eEnemyType.EnemyMass: break;

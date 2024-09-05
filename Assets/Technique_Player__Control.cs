@@ -81,7 +81,7 @@ public class Technique_Player__Control : MonoBehaviour
         {
             case ePlayerTechniqueType.Bullet: pushType = ePushType.down; break;
             case ePlayerTechniqueType.MeleeAttack: pushType = ePushType.down; break;
-            case ePlayerTechniqueType.EarthQuake: pushType = ePushType.down; break;
+            case ePlayerTechniqueType.EarthQuakeInpact: pushType = ePushType.down; break;
 
             case ePlayerTechniqueType.Mirage: pushType = ePushType.down; break;
         }
@@ -107,7 +107,7 @@ public class Technique_Player__Control : MonoBehaviour
             case ePlayerTechniqueType.MeleeAttack:
                 technique[useNum].GetComponent<Technique_Player_MeleeAttack>().MouseMeleeAttack();
                     break;
-            case ePlayerTechniqueType.EarthQuake:
+            case ePlayerTechniqueType.EarthQuakeInpact:
                 technique[useNum].GetComponent<Technique_Player_EarthQuake>().MouseCreatBlock();
                 break;
 
@@ -145,7 +145,7 @@ public class Technique_Player__Control : MonoBehaviour
             case ePlayerTechniqueType.MeleeAttack:
                 technique[useNum].GetComponent<Technique_Player_MeleeAttack>().ControllerMeleeAttack();
                 break;
-            case ePlayerTechniqueType.EarthQuake:
+            case ePlayerTechniqueType.EarthQuakeInpact:
                 technique[useNum].GetComponent<Technique_Player_EarthQuake>().ControllerCreatBlock();
                 break;
 

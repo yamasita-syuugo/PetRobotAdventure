@@ -26,6 +26,7 @@ public class StopDisplay : MonoBehaviour
         bool newTimeStop = GameObject.Find("TimeManager").GetComponent<TimeManager>().GetTimeStop();
         if (oldTimeStop == newTimeStop) return;
         oldTimeStop = newTimeStop;
+
         if (newTimeStop)
         {
             if (uiType == eUiType.text) GetComponent<TextMeshProUGUI>().color = Color.white;

@@ -11,6 +11,7 @@ using UnityEngine;
 
 public class CreateEnemy : MonoBehaviour
 {
+    eStage stage;
     //public AudioSource setSound;
 
     public GameObject enemyObjectBom;
@@ -37,6 +38,8 @@ public class CreateEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        stage = GameObject.Find("GameManager").GetComponent<Manager_StageSelect>().GetStage();
+
         player = GameObject.FindWithTag("Player");
         timeManager = GameObject.Find("TimeManager").GetComponent<TimeManager>();
 
@@ -60,29 +63,39 @@ public class CreateEnemy : MonoBehaviour
 
         if (timeManager.GetTimeStop()) return;
         EnemySpawnTimer(eWaveType.bom);
-        switch (timeManager.GetComponent<WaveManager>().GetWaveType())
+        switch (stage)
         {
-            case eWaveType.bom:  break;
-            case eWaveType.crow: 
-                EnemySpawnCrow(); break;
-            case eWaveType.golem:
-                EnemySpawnCrow();
-                EnemySpawnGolem(); break;
-            case eWaveType.livingArmor:
-                EnemySpawnCrow();
-                EnemySpawnGolem();
-                EnemySpawnLivingArmor(); break;
-            case eWaveType.enemyMass:
-                EnemySpawnCrow();
-                EnemySpawnGolem();
-                EnemySpawnLivingArmor();
-                EnemySpawnEnemyMass();
+            case eStage.bomOnly:
+                EnemySpawnTimer(eWaveType.bom);
                 break;
+            case eStage.golemOnly: break;
 
-            case eWaveType.waveTypeMax:EndGame();break;
-            default:for (int i = 1; i < (int)eWaveType.waveTypeMax - 1; i++) EnemySpawnTimer((eWaveType)i);break;
+            case eStage.lastGame:
+                switch (timeManager.GetComponent<WaveManager>().GetWaveType())
+                {
+                    case eWaveType.bom: break;
+                    case eWaveType.crow:
+                        EnemySpawnCrow(); break;
+                    case eWaveType.golem:
+                        EnemySpawnCrow();
+                        EnemySpawnGolem(); break;
+                    case eWaveType.livingArmor:
+                        EnemySpawnCrow();
+                        EnemySpawnGolem();
+                        EnemySpawnLivingArmor(); break;
+                    case eWaveType.enemyMass:
+                        EnemySpawnCrow();
+                        EnemySpawnGolem();
+                        EnemySpawnLivingArmor();
+                        EnemySpawnEnemyMass();
+                        break;
+
+                    case eWaveType.waveTypeMax: EndGame(); break;
+                    default: for (int i = 1; i < (int)eWaveType.waveTypeMax - 1; i++) EnemySpawnTimer((eWaveType)i); break;
+                }
+                BomSpawn();
+                break;
         }
-        BomSpawn();
         EndGame();
     }
     float []enemySpaunTime = new float[(int)eWaveType.waveTypeMax];

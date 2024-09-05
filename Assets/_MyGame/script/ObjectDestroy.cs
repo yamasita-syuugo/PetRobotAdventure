@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class ObjectDestroy : MonoBehaviour
 {
-    enum eDestroyType
+    public enum eDestroyType
     {
         none,
         time,
         distance,
     }
-    public int destroyType = (int)eDestroyType.time;
+    public eDestroyType destroyType = eDestroyType.time;
 
     public float deleteTime = 3.0f;
     float survivalTime;
@@ -27,7 +27,7 @@ public class ObjectDestroy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (destroyType == (int)eDestroyType.time)
+        if (destroyType == eDestroyType.time)
         {
             if ((survivalTime -= Time.deltaTime) < 0.0f)
             {
@@ -35,7 +35,7 @@ public class ObjectDestroy : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
-        else if (destroyType == (int) eDestroyType.distance)
+        else if (destroyType ==  eDestroyType.distance)
         {
             if (Vector2.Distance(spaunPosition, transform.position) > deleteDistance)
             {

@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 //using Unity.VisualScripting;
 //using Unity.Mathematics;
 
-public class EnemyMove : MonoBehaviour
+public class CPUMove : MonoBehaviour
 {
     GameObject player;
     ObjectFall playerFall;

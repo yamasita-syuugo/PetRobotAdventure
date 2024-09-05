@@ -10,7 +10,7 @@ public class FlailMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        parent = GetComponentInParent<EnemyMove>().gameObject;
+        parent = transform.parent.gameObject;
     }
 
     [SerializeField]

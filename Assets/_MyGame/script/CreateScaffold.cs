@@ -50,23 +50,23 @@ public class CreateScaffold : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        blocks = new GameObject[fieldSize * fieldSize];
-        SetCreatType((eCreatType)PlayerPrefs.GetInt("stage"));
-        switch ((eRandomBreak)PlayerPrefs.GetInt("randomBreak"))
-        {
-            case eRandomBreak.random0:
-                GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetRandomBreak(0);
-                break;
-            //case eRandomBreak.random30:
-            //    GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetRandomBreak(30);
-            //    break;
-            case eRandomBreak.random50:
-                GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetRandomBreak(50);
-                break;
-            case eRandomBreak.random70:
-                GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetRandomBreak(70);
-                break;
-        }
+        //SetCreatType((eCreatType)PlayerPrefs.GetInt("stage"));
+        //switch ((eRandomBreak)PlayerPrefs.GetInt("randomBreak"))
+        //{
+        //    case eRandomBreak.random0:
+        //        GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetRandomBreak(0);
+        //        break;
+        //    //case eRandomBreak.random30:
+        //    //    GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetRandomBreak(30);
+        //    //    break;
+        //    case eRandomBreak.random50:
+        //        GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetRandomBreak(50);
+        //        break;
+        //    case eRandomBreak.random70:
+        //        GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetRandomBreak(70);
+        //        break;
+        //}
+        Load();
         CreateObject();
     }
 
@@ -95,6 +95,7 @@ public class CreateScaffold : MonoBehaviour
         int blockSizeY = 1;
 
         int blockNum = 0;
+        blocks = new GameObject[fieldSize * fieldSize];
         for(int x = 0;x < fieldSize; x++)
         {
             for(int y = 0;y < fieldSize; y++)
@@ -158,6 +159,18 @@ public class CreateScaffold : MonoBehaviour
         GameObject[] tmp = GetComponentsInChildren<GameObject>();
         blocks = tmp;
     }
+
+    public void Save()
+    {
+        PlayerPrefs.SetInt("ScaffoldType", (int)creatType);
+        PlayerPrefs.SetFloat("ScaffoldRandom", randomBreak);
+    }
+    public void Load()
+    {
+        creatType = (eCreatType)PlayerPrefs.GetFloat("ScaffoldType");
+        randomBreak = PlayerPrefs.GetFloat("ScaffoldRandom");
+    }
+
 }
 
 #if UNITY_EDITOR
@@ -174,6 +187,12 @@ public class a : Editor
         }
         if (GUILayout.Button("Delete", GUILayout.Width(100f))){
             trg.DeleteObject();
+        }
+        if (GUILayout.Button("Save", GUILayout.Width(100f))){
+            trg.Save();
+        }
+        if (GUILayout.Button("Load", GUILayout.Width(100f))){
+            trg.Load();
         }
     }
 }

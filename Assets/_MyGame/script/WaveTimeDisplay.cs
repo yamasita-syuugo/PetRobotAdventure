@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class WaveTimeDisplay : MonoBehaviour
 {
-    [SerializeField]
     WaveManager enemyCreate;
     // Start is called before the first frame update
     void Start()

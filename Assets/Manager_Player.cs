@@ -2,12 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ePlayerType
+{
+    [InspectorName("")] none,
+
+    PetRobot,
+    WizardGhost,
+
+    [InspectorName("")] playerTypeMax,
+}
+
 public enum ePlayerTechniqueType
 {
     none,
 
     Bullet,
-    EarthQuake,
+    EarthQuakeInpact,
     MeleeAttack,
 
     Mirage,
@@ -19,14 +29,14 @@ public enum ePlayerTechniqueType
 public class Manager_Player: MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
-    {
+    //void Start()
+    //{
         
-    }
+    //}
 
     // Update is called once per frame
-    void Update()
-    {
+    //void Update()
+    //{
         
-    }
+    //}
 }

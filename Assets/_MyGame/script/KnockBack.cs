@@ -5,7 +5,10 @@ using UnityEngine;
 public class KnockBack : MonoBehaviour
 {
     Vector2 knockBackEnergy = Vector2.zero;
+    public void SetKnockBackEnergy(Vector3 knockBackEnergy_) { knockBackEnergy = knockBackEnergy_; }
+    public Vector3 GetKnockBackEnergy() {  return knockBackEnergy; }
     float moveSpeed = 1;
+    public void AddMoveSpeed(float speed) { moveSpeed = speed * energyMagnification; }
 
     [SerializeField] float frictionBase = 3;
     [SerializeField] float energyMagnification = 2;
@@ -19,17 +22,12 @@ public class KnockBack : MonoBehaviour
     void Update()
     {
         float friction = (frictionBase / 1000) + 1;
-        transform.position += (Vector3)knockBackEnergy * moveSpeed * Time.deltaTime;
         knockBackEnergy /= new Vector3(friction, friction, friction);
-        if ((knockBackEnergy.x < 0.2 && knockBackEnergy.x > -0.2) && (knockBackEnergy.y < 0.2 && knockBackEnergy.y > -0.2)) knockBackEnergy = Vector2.zero; 
+
+        Vector2 energy = knockBackEnergy * moveSpeed;
+        if ((energy.x < 0.2 && energy.x > -0.2) && (energy.y < 0.2 && energy.y > -0.2)) energy = Vector2.zero; 
+        transform.position += (Vector3)energy * Time.deltaTime;
     }
 
-    public void SetKnockBackEnergy(Vector3 knockBackEnergy_)
-    {
-        knockBackEnergy = knockBackEnergy_;
-    }
-    public void AddMoveSpeed(float speed)
-    {
-        moveSpeed += speed * energyMagnification;
-    }
 }
+
