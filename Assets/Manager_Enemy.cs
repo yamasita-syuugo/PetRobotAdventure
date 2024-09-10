@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum eEnemyType
 {
-    none,
+    [InspectorName("")] none,
 
     Bom,            //Bom           :基本的な敵床を壊す
     Crow,           //Crow          :プレイヤーを押し出す
@@ -15,7 +15,7 @@ public enum eEnemyType
     //              //足場を壊して回る  空中を移動する     いくつかの攻撃に耐える
     bossEnemy,    //カウントでendGameを発動   攻撃でカウントを遅らせる    近づくと連続で攻撃できるのでカメラに収まる範囲で距離を取り遠距離攻撃する  遠距離攻撃は
 
-    enemyTypeMax,
+    [InspectorName("")] enemyTypeMax,
 }
 public class Manager_Enemy : MonoBehaviour
 {

@@ -29,7 +29,6 @@ public class Manager_ObjectPhenomenon : MonoBehaviour
         {
             if (objects[i] != null)
             {
-                Debug.Log(objects[i].name);
                 if (objects[i].GetComponent<KnockBack>().GetKnockBackEnergy().x == 0 && objects[i].GetComponent<KnockBack>().GetKnockBackEnergy().y == 0) { 
                     GameObject.Find("GameManager").GetComponent<Manager_Hit>().Explosion(objects[i]); 
                 }

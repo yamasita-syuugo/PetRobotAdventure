@@ -33,7 +33,7 @@ public class TimeManager : MonoBehaviour
         if (player[0] == null) return;
         ObjectFall.eSituation situation = player[0].GetComponent<ObjectFall>().GetSituation();
 
-        if (situation == ObjectFall.eSituation.normal) playTimer += Time.deltaTime;
+        if (situation != ObjectFall.eSituation.fall) playTimer += Time.deltaTime;
     }
 
     public float GetPlayTime() { return playTimer; }

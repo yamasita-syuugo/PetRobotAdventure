@@ -50,7 +50,8 @@ public class playerMove : MonoBehaviour
     float moveMaxSetting_grass = 0.7f;
     void Move()
     {
-        if (GetComponent<ObjectFall>().GetSituation() == ObjectFall.eSituation.fall) return;
+        if (GetComponent<ObjectFall>().GetSituation() == ObjectFall.eSituation.fall ||
+            GetComponent<ObjectFall>().GetSituation() == ObjectFall.eSituation.chanting) return;
 
         transform.position += move * Time.deltaTime;
 

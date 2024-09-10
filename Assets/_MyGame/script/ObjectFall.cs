@@ -6,12 +6,17 @@ public class ObjectFall : MonoBehaviour
 {
     public enum eSituation
     {
-        none,
+        [InspectorName("")] none,
+
         normal,
-        fall,
+        fall,       //落下中
+        fly,        //浮遊中
+        chanting,   //詠唱中
     }
     [SerializeField]
     eSituation situation = eSituation.normal;
+    public eSituation GetSituation() { return situation; }
+    public void SetSituation(eSituation situation_) { situation = situation_; }
     public AudioSource fallSound;
 
     bool fallSoundCheck = false;
@@ -34,10 +39,17 @@ public class ObjectFall : MonoBehaviour
         situation = eSituation.normal;
         fallSound = GameObject.Find("fallSound").GetComponent<AudioSource>();
         waterSound = GameObject.Find("waterSound").GetComponent<AudioSource>();
+
+        baseSize = transform.localScale.x;
     }
 
     // Update is called once per frame
     void Update()
+    {
+        Fall();
+    }
+    float baseSize;
+    void Fall()
     {
         if (situation == eSituation.fall)
         {
@@ -74,13 +86,13 @@ public class ObjectFall : MonoBehaviour
     AudioSource waterSound;
     void OceanToFall()
     {
-        if (transform.localScale.x > 2.0f)
+        if (transform.localScale.x > baseSize * (2f/3))
         {
             transform.localScale = transform.localScale * 0.999f;
             //GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;   //移動にRigidbodyを使用していないため
             transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         }
-        else if (transform.localScale.x > 1.2f/*サイズが3の場合*/)
+        else if (transform.localScale.x > baseSize * (1.2f / 3))
         {
             if(splashOfWaterTmp == null)
             {
@@ -108,7 +120,7 @@ public class ObjectFall : MonoBehaviour
     }
     void SkyToFall()
     {
-        if (transform.localScale.x > 1/*サイズが3の場合*/)
+        if (transform.localScale.x > baseSize * (1f / 3))
         {
             float down = 1 - 0.6f * Time.deltaTime;
             transform.localScale = transform.localScale * down;//todo: FPSによって速度が変わる
@@ -142,6 +154,9 @@ public class ObjectFall : MonoBehaviour
             oneFrame = false;
             return;
         }
+
+        if(situation == eSituation.fly)fallCheck = false;
+
         if (fallCheck == true)
         {
             situation = eSituation.fall;
@@ -151,6 +166,4 @@ public class ObjectFall : MonoBehaviour
             fallCheck = true;
         }
     }
-
-    public eSituation GetSituation() { return situation; }
 }

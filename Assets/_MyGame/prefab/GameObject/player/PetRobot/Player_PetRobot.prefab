@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   techniqueNum: 2
-  use: 0100000002000000
+  use: 0100000001000000
   techniqueBase:
   - {fileID: 0}
   - {fileID: 5879217919693297659, guid: 74c639ade4938e248b81e667a3d03d52, type: 3}

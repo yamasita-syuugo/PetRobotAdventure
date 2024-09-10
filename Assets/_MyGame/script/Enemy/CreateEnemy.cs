@@ -14,12 +14,6 @@ public class CreateEnemy : MonoBehaviour
     eStage stage;
     //public AudioSource setSound;
 
-    public GameObject enemyObjectBom;
-    public GameObject enemyObjectCrow;
-    public GameObject enemyObjectGolem;
-    public GameObject enemyObjectLivingArmor;
-    public GameObject enemyObjectEnemyMass;
-
     public GameObject enemyObjectBoss;
     [SerializeField]
     GameObject[] enemyObjectBase = new GameObject[(int)eEnemyType.enemyTypeMax];
@@ -106,11 +100,11 @@ public class CreateEnemy : MonoBehaviour
         GameObject spawnEnemy = null;
         switch (enemyType)
         {
-            case eWaveType.bom: spawnEnemy = enemyObjectBom; break;
-            case eWaveType.crow: spawnEnemy = enemyObjectCrow; break;
-            case eWaveType.golem: spawnEnemy = enemyObjectGolem; break;
-            case eWaveType.livingArmor: spawnEnemy = enemyObjectLivingArmor; break;
-            case eWaveType.enemyMass: spawnEnemy = enemyObjectEnemyMass; break;
+            case eWaveType.bom: spawnEnemy = enemyObjectBase[(int)eEnemyType.Bom]; break;
+            case eWaveType.crow: spawnEnemy = enemyObjectBase[(int)eEnemyType.Crow]; break;
+            case eWaveType.golem: spawnEnemy = enemyObjectBase[(int)eEnemyType.Golem]; break;
+            case eWaveType.livingArmor: spawnEnemy = enemyObjectBase[(int)eEnemyType.LivingArmor]; break;
+            case eWaveType.enemyMass: spawnEnemy = enemyObjectBase[(int)eEnemyType.EnemyMass]; break;
         }
         enemySpaunTime[(int)enemyType] -= Time.deltaTime;
         if (enemySpaunTime[(int)enemyType] <= 0)
@@ -133,7 +127,7 @@ public class CreateEnemy : MonoBehaviour
     {
         if(golemCount <= 0)
         {
-            GameObject tmp = Instantiate<GameObject>(enemyObjectGolem);
+            GameObject tmp = Instantiate<GameObject>(enemyObjectBase[(int)eEnemyType.Golem]);
             EnemySpaunPositionSet(tmp);
             golemCount = golemCountReset;
         }
@@ -145,7 +139,7 @@ public class CreateEnemy : MonoBehaviour
     {
         if (livingArmorCount <= 0)
         {
-            GameObject tmp = Instantiate<GameObject>(enemyObjectLivingArmor);
+            GameObject tmp = Instantiate<GameObject>(enemyObjectBase[(int)eEnemyType.LivingArmor]);
             EnemySpaunPositionSet(tmp);
             livingArmorCount = livingArmorCountReset;
         }
@@ -161,7 +155,7 @@ public class CreateEnemy : MonoBehaviour
         }
 
         if (!enemyMassSpawn) return;
-        GameObject tmp = Instantiate<GameObject>(enemyObjectEnemyMass);
+        GameObject tmp = Instantiate<GameObject>(enemyObjectBase[(int)eEnemyType.EnemyMass]);
         EnemySpaunPositionSet(tmp);
         enemyMassSpawn = false;
     }
@@ -174,7 +168,7 @@ public class CreateEnemy : MonoBehaviour
     {
         if (bomSpawnNum <= 0) return;
 
-        GameObject tmp = Instantiate<GameObject>(enemyObjectBom);
+        GameObject tmp = Instantiate<GameObject>(enemyObjectBase[(int)eEnemyType.Bom]);
         EnemySpaunPositionSet(tmp);
 
         bomSpawnNum--;
@@ -184,7 +178,7 @@ public class CreateEnemy : MonoBehaviour
     {
         if(endGame)
         {
-            GameObject tmp = Instantiate<GameObject>(enemyObjectBom);
+            GameObject tmp = Instantiate<GameObject>(enemyObjectBase[(int)eEnemyType.Bom]);
             EnemySpaunPositionSet(tmp);
             enemySpaunTime[(int)eWaveType.bom] = enemySpaunTimeReset[(int)eWaveType.bom];
         }

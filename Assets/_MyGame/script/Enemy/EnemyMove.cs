@@ -92,7 +92,7 @@ public class CPUMove : MonoBehaviour
     void MoveTracking()
     {
         if (playerFall == null) return;
-        if (playerFall.GetSituation() != ObjectFall.eSituation.normal) return;
+        if (playerFall.GetSituation() == ObjectFall.eSituation.fall) return;
         Vector3 move = new Vector3(0.0f,0.0f,0.0f);
         move.x = player.transform.position.x - transform.position.x;
         move.y = player.transform.position.y - transform.position.y;

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StartButtonControl : MonoBehaviour
@@ -26,6 +27,11 @@ public class StartButtonControl : MonoBehaviour
 
     public void DataSave()
     {
-        GameObject.Find("Chara").GetComponent<Select_Chara>().DataSave();
+        if (SceneManager.GetActiveScene().name == "Title")
+        {
+            GameObject.Find("TitleManager").GetComponent<Manager_StageSelect>().DataSave();
+            GameObject.Find("Chara").GetComponent<Select_Chara>().DataSave();
+        }
+
     }
 }

@@ -17,11 +17,15 @@ enum eObjectType
 public class Manager_Hit : MonoBehaviour
 {
     ObjectFall objectFall;
+    private void Awake()
+    {
+        
+    }
     // Start is called before the first frame update
     void Start()
     {
         explosionSource = GameObject.Find("explosionSound").GetComponent<AudioSource>();
-        objectFall =GameObject.FindGameObjectWithTag("Player").GetComponent<ObjectFall>();
+        objectFall = GameObject.FindGameObjectWithTag("Player").GetComponent<ObjectFall>();
     }
 
     // Update is called once per frame

@@ -15,6 +15,8 @@ public class Player_Magic__Control : MonoBehaviour
     int chanting = 0;
     void Update()
     {
+        if (transform.parent.GetComponent<ObjectFall>().GetSituation() == ObjectFall.eSituation.fall) return;
+
         Magic__Base();
     }
 
@@ -22,6 +24,8 @@ public class Player_Magic__Control : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Mouse0))
         {
+            transform.parent.GetComponent<ObjectFall>().SetSituation(ObjectFall.eSituation.chanting);
+
             if (Input.GetKeyDown(KeyCode.W)) chanting = chanting * 10 + 1;
             if (Input.GetKeyDown(KeyCode.A)) chanting = chanting * 10 + 2;
             if (Input.GetKeyDown(KeyCode.S)) chanting = chanting * 10 + 3;
@@ -31,10 +35,8 @@ public class Player_Magic__Control : MonoBehaviour
         {
             switch (chanting)
             {
-                case 0: break;
-                case 1: 
-                    Magic_();
-                    break;
+                case 0: transform.parent.GetComponent<ObjectFall>().SetSituation(ObjectFall.eSituation.normal); break;
+                case 1: Magic_(); break;
                 case 2: break;
                 case 3: break;
                 case 4: break;
@@ -46,6 +48,6 @@ public class Player_Magic__Control : MonoBehaviour
     }
     private void Magic_()
     {
-        
+        Debug.Log("MagicBase");
     }
 }
