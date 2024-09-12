@@ -167,6 +167,12 @@ public class CreateScaffold : MonoBehaviour
     }
     public void Load()
     {
+        GameObject stageSelect = GameObject.Find("TitleManager");
+        if(stageSelect != null)
+        {
+            stageSelect.GetComponent<Manager_StageSelect>().GetScaffoldType();
+        }
+
         creatType = (eCreatType)PlayerPrefs.GetFloat("ScaffoldType");
         randomBreak = PlayerPrefs.GetFloat("ScaffoldRandom");
     }

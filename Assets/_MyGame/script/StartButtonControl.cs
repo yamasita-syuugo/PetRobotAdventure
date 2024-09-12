@@ -30,7 +30,7 @@ public class StartButtonControl : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Title")
         {
             GameObject.Find("TitleManager").GetComponent<Manager_StageSelect>().DataSave();
-            GameObject.Find("Chara").GetComponent<Select_Chara>().DataSave();
+            GameObject.Find("Serect_Chara").GetComponent<Select_Chara>().DataSave();
         }
 
     }

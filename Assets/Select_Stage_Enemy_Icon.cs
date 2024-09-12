@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -9,8 +10,10 @@ using UnityEditor;
 public class Select_Stage_Enemy_Icon : MonoBehaviour
 {
     [SerializeField]
-    GameObject[] enemyIconBase = new GameObject[(int)eEnemyType.enemyTypeMax]; 
-    GameObject[] enemyIcon = new GameObject[(int)eEnemyType.enemyTypeMax]; 
+    GameObject Image_Base;
+    [SerializeField]
+    GameObject[] enemyIconBase = new GameObject[(int)eEnemyType.enemyTypeMax];
+    GameObject[] enemyIcon = new GameObject[(int)eEnemyType.enemyTypeMax];
     // Start is called before the first frame update
     void Start()
     {
@@ -22,19 +25,21 @@ public class Select_Stage_Enemy_Icon : MonoBehaviour
     float height = 50f;
     public void SetPosition()
     {
+        GameObject tmp;
         for (int i = 0; i < enemyIcon.Length; i++)
         {
-            if (enemyIconBase[i].Equals(null)) continue;
-            if (enemyIcon[i].Equals(null) == false) continue;
+            if (enemyIconBase[i] == null) continue;
             if (enemyIconBase[i].gameObject.name == "nowWaveIcon") continue;
 
-            GameObject tmp = Instantiate(enemyIconBase[i]);
+            string enemyName = enemyIconBase[i].gameObject.name;
+            tmp = GameObject.Find(enemyName + "(Clone)");
+            if (tmp == null) tmp = Instantiate(enemyIconBase[i]);
             enemyIcon[i] = tmp;
             tmp.transform.parent = transform;
             float PosX = ((i - 1) % 3.0f) * width - width;
             float PosY = ((i - 1) / 3) * height + height;
             tmp.transform.localPosition = new Vector3(PosX, -PosY, 0);
-            tmp.transform.localScale = new Vector3(1,1,1);
+            tmp.transform.localScale = new Vector3(1, 1, 1);
         }
     }
 
@@ -46,13 +51,15 @@ public class Select_Stage_Enemy_Icon : MonoBehaviour
     eStage oldStage = eStage.none;
     void EnemyDistance()
     {
-        if (oldStage == GetComponent<Select_Stage>().GetStage()) return;oldStage = GetComponent<Select_Stage>().GetStage();
+        if (oldStage == GetComponent<Select_Stage>().GetStage()) return; oldStage = GetComponent<Select_Stage>().GetStage();
 
-        switch (oldStage)
+        bool[,] enemy = GameObject.Find("TitleManager").GetComponent<Manager_StageSelect>().GetStageEnemy();
+        for (int i = 0; i < (int)enemyIcon.Length; i++)
         {
-            case eStage.bomOnly:break;
-            case eStage.golemOnly:break;
-            case eStage.lastGame:break;
+            if (enemyIcon[i] == null) continue;
+
+            if (enemy[(int)oldStage, i]) enemyIcon[i].GetComponent<Image>().color = Color.white;
+            else enemyIcon[i].GetComponent<Image>().color = Color.black;
         }
     }
 }

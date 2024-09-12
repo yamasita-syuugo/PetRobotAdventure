@@ -20,19 +20,28 @@ public class Player_Magic__Control : MonoBehaviour
         Magic__Base();
     }
 
+    bool standby = false;
     private void Magic__Base()
     {
         if (Input.GetKey(KeyCode.Mouse0))
         {
-            transform.parent.GetComponent<ObjectFall>().SetSituation(ObjectFall.eSituation.chanting);
+            if (standby)
+            {
+                transform.parent.GetComponent<ObjectFall>().SetSituation(ObjectFall.eSituation.chanting);
 
-            if (Input.GetKeyDown(KeyCode.W)) chanting = chanting * 10 + 1;
-            if (Input.GetKeyDown(KeyCode.A)) chanting = chanting * 10 + 2;
-            if (Input.GetKeyDown(KeyCode.S)) chanting = chanting * 10 + 3;
-            if (Input.GetKeyDown(KeyCode.D)) chanting = chanting * 10 + 4;
+                if (Input.GetKeyDown(KeyCode.W)) chanting = chanting * 10 + 1;
+                if (Input.GetKeyDown(KeyCode.A)) chanting = chanting * 10 + 2;
+                if (Input.GetKeyDown(KeyCode.S)) chanting = chanting * 10 + 3;
+                if (Input.GetKeyDown(KeyCode.D)) chanting = chanting * 10 + 4;
+
+                if (chanting > 500000) standby = false;
+            }
+            else transform.parent.GetComponent<ObjectFall>().SetSituation(ObjectFall.eSituation.normal);
         }
         else
         {
+            standby = true;
+
             switch (chanting)
             {
                 case 0: transform.parent.GetComponent<ObjectFall>().SetSituation(ObjectFall.eSituation.normal); break;
@@ -41,7 +50,7 @@ public class Player_Magic__Control : MonoBehaviour
                 case 3: break;
                 case 4: break;
                 case 14: break;
-            }
+            }if (chanting != 0) Debug.Log(chanting);
 
             chanting = 0;
         }
