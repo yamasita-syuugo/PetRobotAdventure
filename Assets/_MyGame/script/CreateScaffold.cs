@@ -22,16 +22,6 @@ public class CreateScaffold : MonoBehaviour
     [SerializeField]
      int fieldSize = 9;
 
-    public enum eCreatType
-    {
-        None,
-
-        block, 
-        grass,
-        ice,
-        
-        random,
-    }
     [SerializeField]
     eCreatType creatType = eCreatType.block;
     [SerializeField][Range(0f,100f)]
@@ -50,30 +40,27 @@ public class CreateScaffold : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //SetCreatType((eCreatType)PlayerPrefs.GetInt("stage"));
-        //switch ((eRandomBreak)PlayerPrefs.GetInt("randomBreak"))
-        //{
-        //    case eRandomBreak.random0:
-        //        GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetRandomBreak(0);
-        //        break;
-        //    //case eRandomBreak.random30:
-        //    //    GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetRandomBreak(30);
-        //    //    break;
-        //    case eRandomBreak.random50:
-        //        GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetRandomBreak(50);
-        //        break;
-        //    case eRandomBreak.random70:
-        //        GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetRandomBreak(70);
-        //        break;
-        //}
-        Load();
         CreateObject();
     }
 
     // Update is called once per frame
-    //void Update()
-    //{
-    //}
+    eStage oldStage = eStage.none;
+    void Update()
+    {
+        GameObject tmp = GameObject.Find("TitleManager");
+        if (tmp != null)
+        {
+        Manager_StageSelect manager_StageSelect = tmp.GetComponent<Manager_StageSelect>();
+            eStage stage = manager_StageSelect.GetStage();
+            if (oldStage != stage)
+            {
+                oldStage = stage;
+                SetCreatType(manager_StageSelect.GetScaffoldType()[(int)stage]);
+                SetRandomBreak(manager_StageSelect.GetRandomBreak()[(int)stage]);
+                CreateObject();
+            }
+        }
+    }
 
     public void SetCreatType(eCreatType creatType_)
     {

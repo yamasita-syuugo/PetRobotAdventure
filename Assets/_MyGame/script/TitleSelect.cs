@@ -121,13 +121,13 @@ public class TitleSelect : MonoBehaviour
                 switch (stage)
                 {
                     case eStage.block:
-                        GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetCreatType(CreateScaffold.eCreatType.block);
+                        GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetCreatType(eCreatType.block);
                         break;
                     case eStage.ice:
-                        GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetCreatType(CreateScaffold.eCreatType.ice);
+                        GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetCreatType(eCreatType.ice);
                         break;
                     case eStage.grass:
-                        GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetCreatType(CreateScaffold.eCreatType.grass);
+                        GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetCreatType(eCreatType.grass);
                         break;
                 }
                 GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().CreateObject();

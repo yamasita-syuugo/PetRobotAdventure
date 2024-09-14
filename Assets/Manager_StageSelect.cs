@@ -21,22 +21,28 @@ public class Manager_StageSelect : MonoBehaviour
 
     bool[,] stageEnemy = new bool[(int)eStage.eStageMax,(int)eEnemyType.enemyTypeMax];
     public bool[,] GetStageEnemy() {  return stageEnemy; }
-    eScaffoldType []scaffoldType = new eScaffoldType [(int)eStage.eStageMax];
-    public eScaffoldType[] GetScaffoldType() { return scaffoldType; }
+    eCreatType [] creatType = new eCreatType[(int)eStage.eStageMax];
+    public eCreatType[] GetScaffoldType() { return creatType; }
     float []randomBreak = new float[(int)eStage.eStageMax];
     public float[] GetRandomBreak() {  return randomBreak; }
+
+    eBackGroundType[] backGroundTypes = new eBackGroundType[(int)eStage.eStageMax];
+    public eBackGroundType[] GetBackGroundTypes() { return backGroundTypes; }
 
     private void OnEnable()
     {
         DataLoad(); 
         StageEnemySelect();
         StageScaffoldSelect();
+        GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetCreatType(creatType[(int)stage]);
+        GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetRandomBreak(randomBreak[(int)stage]);
+        StageBackGroundSelect();
     }
     // Start is called before the first frame update
-    void Start()
-    {
+    //void Start()
+    //{
         
-    }
+    //}
     void StageEnemySelect()
     {
         for (int stage = 0; stage < (int)eStage.eStageMax; stage++)
@@ -89,16 +95,34 @@ public class Manager_StageSelect : MonoBehaviour
             switch ((eStage)stage)
             {
                 case eStage.bomOnly:
-                    scaffoldType[stage] = eScaffoldType.block;
+                    creatType[stage] = eCreatType.block;
                     randomBreak[stage] = 0.0f;
                     break;
                 case eStage.golemOnly:
-                    scaffoldType[stage] = eScaffoldType.block;
+                    creatType[stage] = eCreatType.block;
                     randomBreak[stage] = 50.0f;
                     break;
                 case eStage.lastGame:
-                    scaffoldType[stage] = eScaffoldType.block;
+                    creatType[stage] = eCreatType.random;
                     randomBreak[stage] = 0.0f;
+                    break;
+            }
+        }
+    }
+    void StageBackGroundSelect()
+    {
+        for (int stage = 0; stage < (int)eStage.eStageMax; stage++)
+        {
+            switch ((eStage)stage)
+            {
+                case eStage.bomOnly:
+                    backGroundTypes[stage] = eBackGroundType.sea;
+                    break;
+                case eStage.golemOnly:
+                    backGroundTypes[stage] = eBackGroundType.sea;
+                    break;
+                case eStage.lastGame:
+                    backGroundTypes[stage] = eBackGroundType.forest;
                     break;
             }
         }
@@ -106,10 +130,20 @@ public class Manager_StageSelect : MonoBehaviour
 
 
     // Update is called once per frame
-    //void Update()
-    //{
-
-    //}
+    void Update()
+    {
+        {
+            GameObject tmp = GameObject.Find("Serect_Steag");
+            if (tmp == null) return; 
+            eStage stage_ = tmp.GetComponent<Select_Stage>().GetStage();
+            if (stage != stage_)
+            {
+                stage = stage_;
+                GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetCreatType(creatType[(int)stage]);
+                GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetRandomBreak(randomBreak[(int)stage]);
+            }
+        }
+    }
     public void DataSave() { PlayerPrefs.SetInt("stage", (int)stage); }
     public void DataLoad() { stage = (eStage)PlayerPrefs.GetInt("stage"); }
 }
