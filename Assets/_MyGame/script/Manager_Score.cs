@@ -12,7 +12,7 @@ using UnityEngine;
 
         //positive
         Posi_Flag,
-        Posi_Destroy,
+        Posi_Destroy_Bom,
 
         //negative
         Nega_EnemyBom,
@@ -22,7 +22,7 @@ using UnityEngine;
 
         scoreTypeMax,
     }
-public class ScoreManager : MonoBehaviour
+public class Manager_Score : MonoBehaviour
 {
     static int []point = new int [(int)eScoreType.scoreTypeMax];
     // Start is called before the first frame update
@@ -31,7 +31,7 @@ public class ScoreManager : MonoBehaviour
         point[(int)eScoreType.total] = 0;
 
         point[(int)eScoreType.Posi_Flag] = 0;
-        point[(int)eScoreType.Posi_Destroy] = 0;
+        point[(int)eScoreType.Posi_Destroy_Bom] = 0;
 
         point[(int)eScoreType.Nega_EnemyBom] = 0;
 
@@ -45,7 +45,7 @@ public class ScoreManager : MonoBehaviour
 
     private static void TotalPointReset()
     {
-        point[(int)eScoreType.total] = point[(int)eScoreType.Posi_Flag] + point[(int)eScoreType.Posi_Destroy] - point[(int)eScoreType.Nega_EnemyBom];
+        point[(int)eScoreType.total] = point[(int)eScoreType.Posi_Flag] + point[(int)eScoreType.Posi_Destroy_Bom] - point[(int)eScoreType.Nega_EnemyBom];
     }
 
     public static void FlagGetPointAdd()
@@ -56,7 +56,7 @@ public class ScoreManager : MonoBehaviour
     }
     public static void DestroyPointAdd()
     {
-        point[(int)eScoreType.Posi_Destroy]++;
+        point[(int)eScoreType.Posi_Destroy_Bom]++;
 
         TotalPointReset();
     }
@@ -83,7 +83,7 @@ public class ScoreManager : MonoBehaviour
     }
     public static int GetDestroyPoint()
     {
-        return point[(int)eScoreType.Posi_Destroy];
+        return point[(int)eScoreType.Posi_Destroy_Bom];
     }
     public static int GetEnemyBomPoint()
     {
@@ -95,7 +95,7 @@ public class ScoreManager : MonoBehaviour
         PlayerPrefs.SetInt("totalPoint", point[(int)eScoreType.total]);
 
         PlayerPrefs.SetInt("flagGetPoint", point[(int)eScoreType.Posi_Flag]);
-        PlayerPrefs.SetInt("destroyPoint", point[(int)eScoreType.Posi_Destroy]);
+        PlayerPrefs.SetInt("destroyPoint", point[(int)eScoreType.Posi_Destroy_Bom]);
 
         PlayerPrefs.SetInt("enemyBomPoint", point[(int)eScoreType.Nega_EnemyBom]);
 

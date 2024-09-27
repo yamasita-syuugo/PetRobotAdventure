@@ -55,9 +55,9 @@ MonoBehaviour:
   - {fileID: 0}
   enemySpaunTimeReset:
   - 0
-  - 3
+  - 4
   - 1
-  - 0
+  - 10
   - 0
   - 15
   golemCountReset: 1

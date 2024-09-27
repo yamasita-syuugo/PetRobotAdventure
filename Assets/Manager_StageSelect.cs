@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.Collections;
 using UnityEngine;
 
 public enum eStage
@@ -16,32 +18,56 @@ public enum eStage
 }
 public class Manager_StageSelect : MonoBehaviour
 {
+    //ステージの選択
+    [SerializeField,ReadOnly]
     eStage stage;
     public eStage GetStage() { return stage; }
+    public void SetStage(eStage stage_) { 
+        stage = stage_;
+        if (stage <= eStage.none) stage = eStage.eStageMax - 1;
+        else if (stage >= eStage.eStageMax) stage = eStage.none + 1;
+    }
+    public void AddStage() { 
+        stage += 1;
+        if (stage <= eStage.none) stage = eStage.eStageMax - 1;
+        else if (stage >= eStage.eStageMax) stage = eStage.none + 1;
+    }
+    public void DataSave() { PlayerPrefs.SetInt("stage", (int)stage); }
+    public void DataLoad() { stage = (eStage)PlayerPrefs.GetInt("stage"); }
 
+    //敵の出現パターン
     bool[,] stageEnemy = new bool[(int)eStage.eStageMax,(int)eEnemyType.enemyTypeMax];
     public bool[,] GetStageEnemy() {  return stageEnemy; }
+
+    //足場の配置パターン
     eCreatType [] creatType = new eCreatType[(int)eStage.eStageMax];
     public eCreatType[] GetScaffoldType() { return creatType; }
     float []randomBreak = new float[(int)eStage.eStageMax];
     public float[] GetRandomBreak() {  return randomBreak; }
 
+    //背景の選択パターン
     eBackGroundType[] backGroundTypes = new eBackGroundType[(int)eStage.eStageMax];
     public eBackGroundType[] GetBackGroundTypes() { return backGroundTypes; }
+
+    //ステージクリアの条件パターン
+    eGateOpenType []gateOpenType = new eGateOpenType[(int)eStage.eStageMax];
+    public eGateOpenType[] GetGateOpenType() {  return gateOpenType; }
+    int []gateOpenNum = new int[(int)eStage.eStageMax];
+    public int[] GetGateOpenNum() {  return gateOpenNum; }
 
     private void OnEnable()
     {
         DataLoad(); 
         StageEnemySelect();
         StageScaffoldSelect();
-        GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetCreatType(creatType[(int)stage]);
-        GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetRandomBreak(randomBreak[(int)stage]);
         StageBackGroundSelect();
+        StageGatoOpenTypeSelect();
     }
+
     // Start is called before the first frame update
     //void Start()
     //{
-        
+
     //}
     void StageEnemySelect()
     {
@@ -127,23 +153,49 @@ public class Manager_StageSelect : MonoBehaviour
             }
         }
     }
-
-
-    // Update is called once per frame
-    void Update()
+    void StageGatoOpenTypeSelect()
     {
+        for (int stage = 0; stage < (int)eStage.eStageMax; stage++)
         {
-            GameObject tmp = GameObject.Find("Serect_Steag");
-            if (tmp == null) return; 
-            eStage stage_ = tmp.GetComponent<Select_Stage>().GetStage();
-            if (stage != stage_)
+            switch ((eStage)stage)
             {
-                stage = stage_;
-                GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetCreatType(creatType[(int)stage]);
-                GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetRandomBreak(randomBreak[(int)stage]);
+                case eStage.bomOnly:
+                    gateOpenType[stage] = eGateOpenType.scoreCheck_Posi_Destroy_Bom;
+                    gateOpenNum[stage] = 15;
+                    break;
+                case eStage.golemOnly:
+                    gateOpenType[stage] = eGateOpenType.none;
+                    gateOpenNum[stage] = 30;
+                    break;
+                case eStage.lastGame:
+                    gateOpenType[stage] = eGateOpenType.none;
+                    gateOpenNum[stage] = 30;
+                    break;
             }
         }
     }
-    public void DataSave() { PlayerPrefs.SetInt("stage", (int)stage); }
-    public void DataLoad() { stage = (eStage)PlayerPrefs.GetInt("stage"); }
+
+
+    // Update is called once per frame
+    eStage oldStage = eStage.none + 1;
+    void Update()
+    {
+        {
+            if (stage <= eStage.none) stage = eStage.eStageMax - 1;
+            else if (stage >= eStage.eStageMax) stage = eStage.none + 1;
+        }
+        {
+            if (oldStage != stage)
+            {
+                oldStage = stage;
+                GameObject tmp = GameObject.Find("CreateScaffold");
+                if (tmp != null)
+                {
+                    CreateScaffold createScaffold = tmp.GetComponent<CreateScaffold>();
+                    createScaffold.SetCreatType(creatType[(int)stage]);
+                    createScaffold.SetRandomBreak(randomBreak[(int)stage]);
+                }
+            }
+        }
+    }
 }

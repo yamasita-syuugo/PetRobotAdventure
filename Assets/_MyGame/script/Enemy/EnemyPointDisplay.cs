@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyPointDisplay : MonoBehaviour
 {
     [SerializeField]
-    ScoreManager scoreManager;
+    Manager_Score Manager_Score;
     // Start is called before the first frame update
     //void Start()
     //{
@@ -16,7 +16,7 @@ public class EnemyPointDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float time = ScoreManager.GetEnemyBomPoint();
+        float time = Manager_Score.GetEnemyBomPoint();
         GetComponent<TextMeshProUGUI>().text = time.ToString("00");
     }
 }

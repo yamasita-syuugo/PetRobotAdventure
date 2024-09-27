@@ -6,7 +6,7 @@ using UnityEngine;
 public class BreakPointDisplay : MonoBehaviour
 {
     [SerializeField]
-    ScoreManager scoreManager;
+    Manager_Score Manager_Score;
     // Start is called before the first frame update
     //void Start()
     //{
@@ -16,7 +16,7 @@ public class BreakPointDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float destroyPoint = ScoreManager.GetDestroyPoint();
+        float destroyPoint = Manager_Score.GetDestroyPoint();
         GetComponent<TextMeshProUGUI>().text = destroyPoint.ToString("00");
     }
 }

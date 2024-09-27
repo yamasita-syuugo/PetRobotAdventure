@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 2540863459560322167}
   - component: {fileID: 2566826918916351229}
   - component: {fileID: 6891509713449213750}
+  - component: {fileID: 4143571559429726273}
   - component: {fileID: 1457245362866958160}
   - component: {fileID: 7174793852350078459}
   - component: {fileID: 3389291411982607370}
   - component: {fileID: 5497755237350589795}
-  - component: {fileID: 4143571559429726273}
   - component: {fileID: 273949001904384709}
   - component: {fileID: 5798991024116548831}
   m_Layer: 0
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 388234297, guid: b0687eb97c0a0954a880ff91a6e7be93, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -115,6 +115,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4143571559429726273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2637719474650202597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5335f8cfbe8e4574e9931995c18ce567, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerType: 1
 --- !u!114 &1457245362866958160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,19 +191,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   frictionBase: 3
   energyMagnification: 2
---- !u!114 &4143571559429726273
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2637719474650202597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5335f8cfbe8e4574e9931995c18ce567, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerType: 1
 --- !u!50 &273949001904384709
 Rigidbody2D:
   serializedVersion: 4
@@ -351,7 +351,7 @@ MonoBehaviour:
   - {fileID: 5879217919693297659, guid: 74c639ade4938e248b81e667a3d03d52, type: 3}
   - {fileID: 2025371526325894783, guid: 4037c50fb2b2ca04aab898fd08248109, type: 3}
   - {fileID: 1618894492982383026, guid: c9cd949571db92248ad1b8ff6c447473, type: 3}
-  - {fileID: 2859058344158072907, guid: de0069758cf8a0843b0ce31ad6cc8c8d, type: 3}
+  - {fileID: 5879217919693297659, guid: c455f4f84976c4e448be560e249019e3, type: 3}
   techniqueUIBase:
   - {fileID: 0}
   - {fileID: 8102269772775701251, guid: 87eac8096d8b4044b8e798f827073228, type: 3}

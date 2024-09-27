@@ -50,6 +50,9 @@ public class Player_Magic__Control : MonoBehaviour
                 case 3: break;
                 case 4: break;
                 case 14: break;
+                case 242:
+                    Magic_Teleport();
+                    break;
             }if (chanting != 0) Debug.Log(chanting);
 
             chanting = 0;
@@ -58,5 +61,10 @@ public class Player_Magic__Control : MonoBehaviour
     private void Magic_()
     {
         Debug.Log("MagicBase");
+    }
+    private void Magic_Teleport()
+    {
+        GameObject.FindGameObjectWithTag("Player").transform.position = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        GetComponentInParent<ObjectFall>().SetOneFrame(true);
     }
 }

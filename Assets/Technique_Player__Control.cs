@@ -26,6 +26,7 @@ public class Technique_Player__Control : MonoBehaviour
         GameObject playerUIParent = GameObject.Find("PlayerUI");
         for (int i = 0; i < techniqueNum; i++)
         {
+            if (techniqueBase[(int)use[i]] == null) continue;
             technique[i] = Instantiate<GameObject>(techniqueBase[(int)use[i]]);
 
             technique[i].transform.parent = transform;
@@ -51,6 +52,7 @@ public class Technique_Player__Control : MonoBehaviour
     {
         for(int i = 0;i < techniqueNum;i++)
         {
+            if (technique[i] == null) continue;
             technique[i].GetComponent<Technique_Player__ContainerBase>().GetPoint();
         }
     }

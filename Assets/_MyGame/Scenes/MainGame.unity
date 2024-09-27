@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: b2d7fd523ec8dca4f971ef27ca4a7306, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -403,7 +403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd15f3500e427094fa8b4264608b6ae6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreManager: {fileID: 1303459127}
+  Manager_Score: {fileID: 0}
 --- !u!4 &314564611 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 15010895846319603, guid: f072615cd3e37864fa4af1ca170daeb3, type: 3}
@@ -623,6 +623,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 524552161}
     m_Modifications:
+    - target: {fileID: 2094567756836657004, guid: a4e384d6cbc5e274280a3a3c0cab7a12, type: 3}
+      propertyPath: enemySpaunTimeReset.Array.data[3]
+      value: 4.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3956128938480590584, guid: a4e384d6cbc5e274280a3a3c0cab7a12, type: 3}
       propertyPath: m_Name
       value: CreateEnemy
@@ -824,7 +828,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4872d3349bc9fe4d8944701b9194acc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreManager: {fileID: 1303459127}
+  Manager_Score: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1146,8 +1150,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 519420032}
   - {fileID: 1094810287}
+  - {fileID: 519420032}
   - {fileID: 1706017050}
   - {fileID: 524552161}
   - {fileID: 60007418}
@@ -1419,7 +1423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa42ca56aaac05046bab9fa64f160e58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreManager: {fileID: 1303459127}
+  Manager_Score: {fileID: 0}
 --- !u!1 &697636602
 GameObject:
   m_ObjectHideFlags: 0
@@ -1757,6 +1761,7 @@ GameObject:
   - component: {fileID: 734193968}
   - component: {fileID: 734193970}
   - component: {fileID: 734193971}
+  - component: {fileID: 734193972}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Manager
@@ -1820,6 +1825,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 2637719474650202597, guid: d0a0ddf47f57ef74baba4882b0d50694, type: 3}
   - {fileID: 5324167455278739525, guid: 9f8d3bc841644ca429c842f522042d13, type: 3}
+  gate: {fileID: 7979918696854808001, guid: 7cf276572f5ddc34f846bb40481bfe94, type: 3}
+  mousePointer: {fileID: 2044329444728250679, guid: c4f0481156a7c2444b818632c1664be5, type: 3}
 --- !u!114 &734193968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1857,6 +1864,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116a26de12e5eac4ea64abef8332a290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stage: 0
+--- !u!114 &734193972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734193962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff1003822586d7f47bf267be077c0f75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gateOpen: 0
 --- !u!1001 &769319852
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2460,7 +2481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d606b0fccc4a0f4cb87baabb540ae94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreManager: {fileID: 1303459127}
+  Manager_Score: {fileID: 0}
 --- !u!1 &1303459125
 GameObject:
   m_ObjectHideFlags: 0
@@ -3174,6 +3195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waveType: 1
+  waveEnabled: 0
 --- !u!4 &1892269990 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1741807500527791540, guid: c137f375fc593464aa35e1370585ce36, type: 3}

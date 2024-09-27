@@ -1,0 +1,35 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class GateProcess : MonoBehaviour
+{
+    Manager_GateOpen manager_GateOpen;
+    // Start is called before the first frame update
+    void Start()
+    {
+        manager_GateOpen = GameObject.Find("GameManager").GetComponent<Manager_GateOpen>();
+    }
+
+    // Update is called once per frame
+    [SerializeField]
+    Sprite []gateBase = new Sprite[2];
+    bool oldGateOpen;
+    void Update()
+    {
+        if(oldGateOpen != manager_GateOpen.GetGateOpen())
+        {oldGateOpen = manager_GateOpen.GetGateOpen();
+            GetComponent<SpriteRenderer>().sprite = gateBase[oldGateOpen?1:0];
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag != "Player") return;
+        if (!manager_GateOpen.GetGateOpen()) return;
+
+        Manager_Score.ResultSend();
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Result");
+    }
+}

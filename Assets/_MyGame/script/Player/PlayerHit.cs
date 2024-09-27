@@ -21,7 +21,7 @@ public class PlayerHit : MonoBehaviour
     {
         if (collision.tag == "Flag")
         {
-            ScoreManager.FlagGetPointAdd();
+            Manager_Score.FlagGetPointAdd();
             switch (GetComponent<PlayerType>().GetPlayerType())
             {
                 case ePlayerType.PetRobot:

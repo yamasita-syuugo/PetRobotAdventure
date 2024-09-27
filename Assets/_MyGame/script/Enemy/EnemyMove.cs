@@ -104,14 +104,25 @@ public class CPUMove : MonoBehaviour
         transform.position += move * moveSpeed * Time.deltaTime;
     }
     Vector2 tmpPosishon;
+    [SerializeField,Header("TopToFallÇÃóéâ∫êÊÇplayerÇ…Ç∑ÇÈÇ©Ç«Ç§Ç©")]
+    bool topToFall_toPlayer = false;
     void MoveTopToFall()
     {
         if (playerFall == null) return;
         if (move == new Vector3(0.0f, 0.0f, 0.0f))
         {
-            move.x = player.transform.position.x - transform.position.x;
-            move.y = player.transform.position.y - transform.position.y;
-            tmpPosishon = player.transform.position;
+            switch (topToFall_toPlayer)
+            {
+                case true:
+                    tmpPosishon = player.transform.position;
+                    break;
+                case false:
+                    Transform[] transform = GameObject.Find("CreateScaffold").GetComponentsInChildren<Transform>();
+                    tmpPosishon = transform[Random.Range(0, transform.Length)].position;
+                    break;
+            }
+            move.x = tmpPosishon.x - transform.position.x;
+            move.y = tmpPosishon.y - transform.position.y;
             GetComponent<Landing>().SetShadowPosision(tmpPosishon);
         }
 

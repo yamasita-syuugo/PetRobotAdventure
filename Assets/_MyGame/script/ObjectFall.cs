@@ -112,7 +112,7 @@ public class ObjectFall : MonoBehaviour
         {
             if (tag == "Player")
             {
-                ScoreManager.ResultSend();
+                Manager_Score.ResultSend();
                 UnityEngine.SceneManagement.SceneManager.LoadScene("Result");
             }
             else Destroy(gameObject);
@@ -131,7 +131,7 @@ public class ObjectFall : MonoBehaviour
         {
             if (tag == "Player")
             {
-                ScoreManager.ResultSend();
+                Manager_Score.ResultSend();
                 UnityEngine.SceneManagement.SceneManager.LoadScene("Result");
             }
             else Destroy(gameObject);
@@ -147,6 +147,7 @@ public class ObjectFall : MonoBehaviour
         }
     }
     bool oneFrame = true;
+    public void SetOneFrame(bool oneFrame_) { oneFrame = oneFrame_; }
     private void FixedUpdate()
     {
         if (oneFrame)   //1ƒtƒŒ[ƒ€–Ú‚ÉfallCheck‚ğ’Ê‰ß‚µ‚Ä‚µ‚Ü‚¤‚½‚ß

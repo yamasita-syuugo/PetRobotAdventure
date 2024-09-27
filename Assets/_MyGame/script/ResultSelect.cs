@@ -7,7 +7,7 @@ public class ResultSelect : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -19,13 +19,14 @@ public class ResultSelect : MonoBehaviour
     {
         None,
 
+        next,
         retry,
         title,
 
         buttonMax,
     }
     [SerializeField]
-    eButton button = eButton.retry;
+    eButton button = eButton.next;
     bool triggerBut = false;
     eButton oldButton = eButton.None;
     void ButtonSelect()
@@ -48,8 +49,13 @@ public class ResultSelect : MonoBehaviour
             }
         }
         if (Input.GetAxis("Decision") == 0) return;
+        Manager_StageSelect manager_StageSelect = GameObject.Find("Manager_Result").GetComponent<Manager_StageSelect>();
         switch (button)
         {
+            case eButton.next:
+                manager_StageSelect.SetStage(manager_StageSelect.GetStage()  + 1);
+                UnityEngine.SceneManagement.SceneManager.LoadScene("MainGame");
+                break;
             case eButton.retry:
                 UnityEngine.SceneManagement.SceneManager.LoadScene("MainGame");
                 break;

@@ -103,7 +103,7 @@ public class Manager_Hit : MonoBehaviour
                 switch (gameObject.GetComponent<EnemyType>().GetEnemyType())
                 {
                     case eEnemyType.Bom:
-                        ScoreManager.EnemyBomPointAdd();
+                        Manager_Score.EnemyBomPointAdd();
 
                         Explosion(gameObject);
                         break;
@@ -142,7 +142,7 @@ public class Manager_Hit : MonoBehaviour
                 switch (collision.GetComponent<EnemyType>().GetEnemyType())
                 {
                     case eEnemyType.Bom:
-                        ScoreManager.EnemyBomPointAdd(2);
+                        Manager_Score.EnemyBomPointAdd(2);
 
                         Explosion(collision);
                         Explosion(gameObject);
@@ -159,7 +159,7 @@ public class Manager_Hit : MonoBehaviour
                 switch (collision.GetComponent<EnemyType>().GetEnemyType())
                 {
                     case eEnemyType.Bom:
-                        ScoreManager.EnemyBomPointAdd();
+                        Manager_Score.EnemyBomPointAdd();
 
                         Explosion(collision);
                         Explosion(gameObject);
@@ -248,7 +248,7 @@ public class Manager_Hit : MonoBehaviour
                         switch (collision.GetComponent<EnemyType>().GetEnemyType())
                         {
                             case eEnemyType.Bom:
-                                ScoreManager.DestroyPointAdd();
+                                Manager_Score.DestroyPointAdd();
                                 GameObject.Find("CreateEnemy").GetComponent<CreateEnemy>().LivingArmorCountAdd();   //リビングアーマーカウント
                                 GameObject.FindAnyObjectByType<FlagCreate>().FlagSpaun();
 
@@ -281,7 +281,7 @@ public class Manager_Hit : MonoBehaviour
                         switch (collision.GetComponent<EnemyType>().GetEnemyType())
                         {
                             case eEnemyType.Bom:
-                                ScoreManager.DestroyPointAdd();
+                                Manager_Score.DestroyPointAdd();
 
                                 GameObject.FindAnyObjectByType<FlagCreate>().FlagSpaun();
 

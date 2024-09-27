@@ -68,7 +68,7 @@ public class Technique_Player_BulletShot : MonoBehaviour
     {
         if (!GetComponent<Technique_Player_BulletMagazine>().BulletCheck()) return;
 
-        ScoreManager.ShotNumAdd();
+        Manager_Score.ShotNumAdd();
 
         bulletMove tmp1 = Instantiate<bulletMove>(bulletBase);
         tmp1.transform.position = this.transform.position;

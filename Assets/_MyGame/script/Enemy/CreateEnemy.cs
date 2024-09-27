@@ -54,15 +54,16 @@ public class CreateEnemy : MonoBehaviour
     void EnemySpaunSchedule()
     {
         if (player.GetComponent<ObjectFall>().GetSituation() != ObjectFall.eSituation.normal) return;
-
         if (timeManager.GetTimeStop()) return;
-        EnemySpawnTimer(eWaveType.bom);
+
         switch (stage)
         {
             case eStage.bomOnly:
                 EnemySpawnTimer(eWaveType.bom);
                 break;
-            case eStage.golemOnly: break;
+            case eStage.golemOnly:
+                EnemySpawnTimer(eWaveType.golem);
+                break;
 
             case eStage.lastGame:
                 switch (timeManager.GetComponent<WaveManager>().GetWaveType())
@@ -148,9 +149,9 @@ public class CreateEnemy : MonoBehaviour
     bool enemyMassSpawn = false;
     void EnemySpawnEnemyMass()
     {
-        if(oldEnemyScore != ScoreManager.GetEnemyBomPoint())
+        if(oldEnemyScore != Manager_Score.GetEnemyBomPoint())
         {
-            oldEnemyScore = ScoreManager.GetEnemyBomPoint();
+            oldEnemyScore = Manager_Score.GetEnemyBomPoint();
             enemyMassSpawn = true;
         }
 

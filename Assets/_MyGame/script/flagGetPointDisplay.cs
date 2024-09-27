@@ -6,7 +6,7 @@ using UnityEngine;
 public class flagGetPointDisplay : MonoBehaviour
 {
     [SerializeField]
-    ScoreManager scoreManager;
+    Manager_Score Manager_Score;
     // Start is called before the first frame update
     //void Start()
     //{
@@ -16,7 +16,7 @@ public class flagGetPointDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float time = ScoreManager.GetFlagGetPoint();
+        float time = Manager_Score.GetFlagGetPoint();
         GetComponent<TextMeshProUGUI>().text = time.ToString("00");
     }
 }

@@ -30,6 +30,8 @@ public class WaveManager : MonoBehaviour
         timeManager = GetComponent<TimeManager>();
     }
 
+    [SerializeField]
+    bool waveEnabled = false;
     // Update is called once per frame
     void Update()
     {
@@ -38,7 +40,7 @@ public class WaveManager : MonoBehaviour
 
         if (waveTimer > 0)
         {
-            waveTimer -= Time.deltaTime;
+            if(waveEnabled)waveTimer -= Time.deltaTime;
         }
         else
         {

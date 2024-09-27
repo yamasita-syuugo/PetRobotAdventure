@@ -14,7 +14,7 @@ public enum ePlayerType
 
 public enum ePlayerTechniqueType
 {
-    [InspectorName("")] none,
+     none,
 
     Bullet,
     EarthQuakeInpact,
@@ -30,10 +30,17 @@ public class Manager_Player: MonoBehaviour
 {
     [SerializeField]
     GameObject []playerBase = new GameObject[(int)ePlayerType.playerTypeMax];
+
+    [SerializeField]
+    GameObject gate;
+    [SerializeField]
+    GameObject mousePointer;
     // Start is called before the first frame update
     private void OnEnable()
     {
         Instantiate(playerBase[PlayerPrefs.GetInt("playerType")]);
+        Instantiate(gate);
+        Instantiate(mousePointer);
     }
     void Start()
     {

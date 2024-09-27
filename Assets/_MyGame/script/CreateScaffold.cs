@@ -20,26 +20,36 @@ public class CreateScaffold : MonoBehaviour
     GameObject[] blocks;
 
     [SerializeField]
-     int fieldSize = 9;
+    int fieldSize = 9;
 
     [SerializeField]
     eCreatType creatType = eCreatType.block;
-    [SerializeField][Range(0f,100f)]
+    public void SetCreatType(eCreatType creatType_) { creatType = creatType_; }
+    [SerializeField]
+    [Range(0f, 100f)]
     float randomBreak = 0.0f;
-    enum eRandomBreak
+    public void SetRandomBreak(float randomBreak_)
     {
-        None,
-
-        random0,
-        //random30,
-        random50,
-        random70,
-
-        randomBreakMax,
+        randomBreak = randomBreak_;
+        if (randomBreak < 0.0f) randomBreak = 0.0f;
+        if (randomBreak > 100.0f) randomBreak = 100.0f;
     }
+    //enum eRandomBreak
+    //{
+    //    None,
+
+    //    random0,
+    //    //random30,
+    //    random50,
+    //    random70,
+
+    //    randomBreakMax,
+    //}
     // Start is called before the first frame update
     void Start()
     {
+        Load();
+
         CreateObject();
     }
 
@@ -50,7 +60,7 @@ public class CreateScaffold : MonoBehaviour
         GameObject tmp = GameObject.Find("TitleManager");
         if (tmp != null)
         {
-        Manager_StageSelect manager_StageSelect = tmp.GetComponent<Manager_StageSelect>();
+            Manager_StageSelect manager_StageSelect = tmp.GetComponent<Manager_StageSelect>();
             eStage stage = manager_StageSelect.GetStage();
             if (oldStage != stage)
             {
@@ -60,17 +70,6 @@ public class CreateScaffold : MonoBehaviour
                 CreateObject();
             }
         }
-    }
-
-    public void SetCreatType(eCreatType creatType_)
-    {
-        creatType = creatType_;
-    }
-    public void SetRandomBreak(float randomBreak_)
-    {
-        if(randomBreak < 0.0f) randomBreak = 0.0f;
-        if (randomBreak > 100.0f) randomBreak = 100.0f;
-        randomBreak = randomBreak_;
     }
 
     //ê∂ê¨
@@ -83,13 +82,13 @@ public class CreateScaffold : MonoBehaviour
 
         int blockNum = 0;
         blocks = new GameObject[fieldSize * fieldSize];
-        for(int x = 0;x < fieldSize; x++)
+        for (int x = 0; x < fieldSize; x++)
         {
-            for(int y = 0;y < fieldSize; y++)
+            for (int y = 0; y < fieldSize; y++)
             {
 
                 if (randomBreak > Random.RandomRange(0, 100) &&
-                    !(fieldSize / 2 * 2 == fieldSize ? (x == fieldSize / 2 - 1 || x == fieldSize / 2) && (y == fieldSize / 2 - 1 || y == fieldSize / 2):( x == fieldSize / 2) && ( y == fieldSize / 2))) continue;
+                    !(fieldSize / 2 * 2 == fieldSize ? (x == fieldSize / 2 - 1 || x == fieldSize / 2) && (y == fieldSize / 2 - 1 || y == fieldSize / 2) : (x == fieldSize / 2) && (y == fieldSize / 2))) continue;
 
                 GameObject tmpPre;
                 switch (creatType)
@@ -97,8 +96,9 @@ public class CreateScaffold : MonoBehaviour
                     case eCreatType.block: tmpPre = blockPrefab; break;
                     case eCreatType.ice: tmpPre = icePrefab; break;
                     case eCreatType.grass: tmpPre = grassPrefab; break;
-                    case eCreatType.random: 
-                            switch (Random.Range(0, 3)){
+                    case eCreatType.random:
+                        switch (Random.Range(0, 3))
+                        {
                             case (int)eCreatType.block - 1:
                                 tmpPre = blockPrefab;
                                 break;
@@ -108,8 +108,8 @@ public class CreateScaffold : MonoBehaviour
                             case (int)eCreatType.grass - 1:
                                 tmpPre = grassPrefab;
                                 break;
-                                default: tmpPre = blockPrefab; break;
-                        } 
+                            default: tmpPre = blockPrefab; break;
+                        }
                         break;
 
                     default: tmpPre = blockPrefab; break;
@@ -131,7 +131,7 @@ public class CreateScaffold : MonoBehaviour
     {
         Transform[] blocks = GetComponentsInChildren<Transform>();
         if (blocks == null) return;
-        for(int i = 0;i < blocks.Length; i++)if(blocks[i].tag == "Scaffold") DestroyImmediate(blocks[i].gameObject);
+        for (int i = 0; i < blocks.Length; i++) if (blocks[i].tag == "Scaffold") DestroyImmediate(blocks[i].gameObject);
 
         //BlockRegister();
     }
@@ -140,30 +140,23 @@ public class CreateScaffold : MonoBehaviour
     {
         blocks = new GameObject[fieldSize * fieldSize];
 
-        for(int i = 0;i < fieldSize * fieldSize; i++)
+        for (int i = 0; i < fieldSize * fieldSize; i++)
         {
         }
         GameObject[] tmp = GetComponentsInChildren<GameObject>();
         blocks = tmp;
     }
 
-    public void Save()
-    {
-        PlayerPrefs.SetInt("ScaffoldType", (int)creatType);
-        PlayerPrefs.SetFloat("ScaffoldRandom", randomBreak);
-    }
     public void Load()
     {
-        GameObject stageSelect = GameObject.Find("TitleManager");
-        if(stageSelect != null)
-        {
-            stageSelect.GetComponent<Manager_StageSelect>().GetScaffoldType();
-        }
+        GameObject tmp = GameObject.Find("TitleManager");
+        if (tmp == null) tmp = GameObject.Find("GameManager");
+        if (tmp == null) return;
+        Manager_StageSelect manager_StageSelect = tmp.GetComponent<Manager_StageSelect>();
 
-        creatType = (eCreatType)PlayerPrefs.GetFloat("ScaffoldType");
-        randomBreak = PlayerPrefs.GetFloat("ScaffoldRandom");
+        creatType = manager_StageSelect.GetScaffoldType()[(int)manager_StageSelect.GetStage()];
+        randomBreak = manager_StageSelect.GetRandomBreak()[(int)manager_StageSelect.GetStage()];
     }
-
 }
 
 #if UNITY_EDITOR
@@ -180,9 +173,6 @@ public class a : Editor
         }
         if (GUILayout.Button("Delete", GUILayout.Width(100f))){
             trg.DeleteObject();
-        }
-        if (GUILayout.Button("Save", GUILayout.Width(100f))){
-            trg.Save();
         }
         if (GUILayout.Button("Load", GUILayout.Width(100f))){
             trg.Load();
