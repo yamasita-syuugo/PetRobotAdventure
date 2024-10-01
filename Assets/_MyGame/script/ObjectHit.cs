@@ -28,16 +28,16 @@ public class ObjectHit : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (onTriggerType != eOnTriggerType.enter) return;
-        GameObject.Find("GameManager").GetComponent<Manager_Hit>().Hit(gameObject,collision.gameObject);
+        GameObject.FindWithTag("Manager").GetComponent<Manager_Hit>().Hit(gameObject,collision.gameObject);
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (onTriggerType != eOnTriggerType.stay) return;
-        GameObject.Find("GameManager").GetComponent<Manager_Hit>().Hit(gameObject,collision.gameObject);
+        GameObject.FindWithTag("Manager").GetComponent<Manager_Hit>().Hit(gameObject,collision.gameObject);
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (onTriggerType != eOnTriggerType.exit) return;
-        GameObject.Find("GameManager").GetComponent<Manager_Hit>().Hit(gameObject,collision.gameObject);
+        GameObject.FindWithTag("Manager").GetComponent<Manager_Hit>().Hit(gameObject,collision.gameObject);
     }
 }

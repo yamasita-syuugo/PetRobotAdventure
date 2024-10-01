@@ -18,7 +18,7 @@ public class FlagCreate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameObject.Find("TimeManager").GetComponent<TimeManager>().GetTimeStop()) return;
+        if (GameObject.FindWithTag("Manager").GetComponent<TimeManager>().GetTimeStop()) return;
         FlagSpaunCount();
     }
 

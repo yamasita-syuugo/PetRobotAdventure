@@ -25,12 +25,10 @@ public class StartButtonControl : MonoBehaviour
     }
     public void NextButton()
     {
-        GameObject tmp = GameObject.Find("Manager_Result");
+        GameObject tmp = GameObject.FindWithTag("Manager");
         if (tmp == null) return;
         Manager_StageSelect manager_StageSelect = tmp.GetComponent<Manager_StageSelect>();
-        Debug.Log(manager_StageSelect.GetStage());
         manager_StageSelect.SetStage(manager_StageSelect.GetStage() + 1);
-        Debug.Log(manager_StageSelect.GetStage());
         DataSave();
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainGame");
     }
@@ -38,14 +36,10 @@ public class StartButtonControl : MonoBehaviour
     public void DataSave()
     {
         string name = SceneManager.GetActiveScene().name;
+            GameObject.FindWithTag("Manager").GetComponent<Manager_StageSelect>().DataSave();
         if (name == "Title")
         {
-            GameObject.Find("TitleManager").GetComponent<Manager_StageSelect>().DataSave();
             GameObject.Find("Serect_Chara").GetComponent<Select_Chara>().DataSave();
-        }else if(name == "Result")
-        {
-            GameObject.Find("Manager_Result").GetComponent<Manager_StageSelect>().DataSave();
         }
-
     }
 }

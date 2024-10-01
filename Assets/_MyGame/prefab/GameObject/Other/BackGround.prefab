@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 9120021975743158797}
   - component: {fileID: 723810082638440576}
   - component: {fileID: 6912519410074805092}
-  - component: {fileID: 5901619978405539501}
+  - component: {fileID: 754933333800623862}
   m_Layer: 0
   m_Name: BackGround
-  m_TagString: Untagged
+  m_TagString: BackGround
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,7 +107,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5901619978405539501
+--- !u!114 &754933333800623862
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,10 +116,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2266753198798434003}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c485e34f89373904da245f426cfffce0, type: 3}
+  m_Script: {fileID: 11500000, guid: ae12174f1b716ca4d8277f08081c63e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backGroundType: 1
-  backGroundBase:
-  - {fileID: 21300000, guid: 00995bb8248ea054d87a097d10b30223, type: 3}
-  - {fileID: 21300000, guid: 464242f83045cf24fa4e17e00889aac5, type: 3}

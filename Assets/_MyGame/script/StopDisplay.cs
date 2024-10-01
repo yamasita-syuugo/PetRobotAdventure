@@ -23,7 +23,7 @@ public class StopDisplay : MonoBehaviour
     bool oldTimeStop = true;
     void Update()
     {
-        bool newTimeStop = GameObject.Find("TimeManager").GetComponent<TimeManager>().GetTimeStop();
+        bool newTimeStop = GameObject.FindWithTag("Manager").GetComponent<TimeManager>().GetTimeStop();
         if (oldTimeStop == newTimeStop) return;
         oldTimeStop = newTimeStop;
 

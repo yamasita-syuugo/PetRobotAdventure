@@ -9,7 +9,7 @@ public class WaveTimeDisplay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemyCreate = GameObject.Find("TimeManager").GetComponent<WaveManager>();
+        enemyCreate = GameObject.FindWithTag("Manager").GetComponent<WaveManager>();
     }
 
     // Update is called once per frame

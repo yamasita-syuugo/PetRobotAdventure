@@ -26,6 +26,15 @@ public enum ePlayerTechniqueType
     [InspectorName("")] playerTechniqueTypeMax,
 }
 
+public enum ePlayerMagicType
+{
+    none,
+
+    tmp,
+
+    [InspectorName("")] playerMagicMax,
+}
+
 public class Manager_Player: MonoBehaviour
 {
     [SerializeField]

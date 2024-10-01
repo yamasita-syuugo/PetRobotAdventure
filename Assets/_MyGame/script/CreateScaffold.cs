@@ -57,7 +57,7 @@ public class CreateScaffold : MonoBehaviour
     eStage oldStage = eStage.none;
     void Update()
     {
-        GameObject tmp = GameObject.Find("TitleManager");
+        GameObject tmp = GameObject.FindWithTag("Manager");
         if (tmp != null)
         {
             Manager_StageSelect manager_StageSelect = tmp.GetComponent<Manager_StageSelect>();
@@ -149,8 +149,7 @@ public class CreateScaffold : MonoBehaviour
 
     public void Load()
     {
-        GameObject tmp = GameObject.Find("TitleManager");
-        if (tmp == null) tmp = GameObject.Find("GameManager");
+        GameObject tmp = GameObject.FindWithTag("Manager");
         if (tmp == null) return;
         Manager_StageSelect manager_StageSelect = tmp.GetComponent<Manager_StageSelect>();
 

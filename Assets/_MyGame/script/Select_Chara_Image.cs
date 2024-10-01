@@ -9,10 +9,10 @@ public class Select_Chara_Image : MonoBehaviour
     [SerializeField]
     Sprite[] playerImage = new Sprite[(int)ePlayerType.playerTypeMax];
     // Start is called before the first frame update
-    void Start()
-    {
+    //void Start()
+    //{
         
-    }
+    //}
 
     // Update is called once per frame
     ePlayerType oldPlayerType = 0;

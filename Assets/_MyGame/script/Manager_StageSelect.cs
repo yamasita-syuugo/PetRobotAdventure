@@ -45,10 +45,6 @@ public class Manager_StageSelect : MonoBehaviour
     float []randomBreak = new float[(int)eStage.eStageMax];
     public float[] GetRandomBreak() {  return randomBreak; }
 
-    //背景の選択パターン
-    eBackGroundType[] backGroundTypes = new eBackGroundType[(int)eStage.eStageMax];
-    public eBackGroundType[] GetBackGroundTypes() { return backGroundTypes; }
-
     //ステージクリアの条件パターン
     eGateOpenType []gateOpenType = new eGateOpenType[(int)eStage.eStageMax];
     public eGateOpenType[] GetGateOpenType() {  return gateOpenType; }
@@ -60,7 +56,6 @@ public class Manager_StageSelect : MonoBehaviour
         DataLoad(); 
         StageEnemySelect();
         StageScaffoldSelect();
-        StageBackGroundSelect();
         StageGatoOpenTypeSelect();
     }
 
@@ -131,24 +126,6 @@ public class Manager_StageSelect : MonoBehaviour
                 case eStage.lastGame:
                     creatType[stage] = eCreatType.random;
                     randomBreak[stage] = 0.0f;
-                    break;
-            }
-        }
-    }
-    void StageBackGroundSelect()
-    {
-        for (int stage = 0; stage < (int)eStage.eStageMax; stage++)
-        {
-            switch ((eStage)stage)
-            {
-                case eStage.bomOnly:
-                    backGroundTypes[stage] = eBackGroundType.sea;
-                    break;
-                case eStage.golemOnly:
-                    backGroundTypes[stage] = eBackGroundType.sea;
-                    break;
-                case eStage.lastGame:
-                    backGroundTypes[stage] = eBackGroundType.forest;
                     break;
             }
         }

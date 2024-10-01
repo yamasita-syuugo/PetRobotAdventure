@@ -32,10 +32,10 @@ public class CreateEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        stage = GameObject.Find("GameManager").GetComponent<Manager_StageSelect>().GetStage();
+        stage = GameObject.FindWithTag("Manager").GetComponent<Manager_StageSelect>().GetStage();
 
         player = GameObject.FindWithTag("Player");
-        timeManager = GameObject.Find("TimeManager").GetComponent<TimeManager>();
+        timeManager = GameObject.FindWithTag("Manager").GetComponent<TimeManager>();
 
         for (int i = 0; i < enemySpaunTime.Length; i++)
         {

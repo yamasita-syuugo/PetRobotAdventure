@@ -9,10 +9,10 @@ public class TimeDisplay : MonoBehaviour
     [SerializeField]
     TimeManager timeManager;
     // Start is called before the first frame update
-    //void Start()
-    //{
-        
-    //}
+    void Start()
+    {
+       timeManager = GameObject.FindWithTag("Manager").GetComponent<TimeManager>();
+    }
 
     // Update is called once per frame
     void Update()

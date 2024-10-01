@@ -9,7 +9,7 @@ public class GateProcess : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        manager_GateOpen = GameObject.Find("GameManager").GetComponent<Manager_GateOpen>();
+        manager_GateOpen = GameObject.FindWithTag("Manager").GetComponent<Manager_GateOpen>();
     }
 
     // Update is called once per frame

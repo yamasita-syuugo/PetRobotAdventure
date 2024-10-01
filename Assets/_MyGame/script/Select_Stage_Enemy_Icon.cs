@@ -51,7 +51,7 @@ public class Select_Stage_Enemy_Icon : MonoBehaviour
     eStage oldStage = eStage.none;
     void EnemyDistance()
     {
-        Manager_StageSelect manager_StageSelect = GameObject.Find("TitleManager").GetComponent<Manager_StageSelect>();
+        Manager_StageSelect manager_StageSelect = GameObject.FindWithTag("Manager").GetComponent<Manager_StageSelect>();
         if (oldStage == manager_StageSelect.GetStage()) return; oldStage = manager_StageSelect.GetStage();
 
         bool[,] enemy = manager_StageSelect.GetStageEnemy();

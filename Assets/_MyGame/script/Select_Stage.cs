@@ -15,7 +15,7 @@ public class Select_Stage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        manager_StageSelect = GameObject.Find("TitleManager").GetComponent<Manager_StageSelect>();
+        manager_StageSelect = GameObject.FindWithTag("Manager").GetComponent<Manager_StageSelect>();
     }
 
     // Update is called once per frame

@@ -4,18 +4,35 @@ using System.Xml.Linq;
 using UnityEditor.PackageManager;
 using UnityEngine;
 
+enum eTechniqueControl
+{
+    [InspectorName("")] none,
+
+    one,
+    two,
+
+    [InspectorName("")] techniqueControlMax,
+}
+
 public class Technique_Player__Control : MonoBehaviour
 {
     [SerializeField]
     int techniqueNum = 2;
     [SerializeField]
     ePlayerTechniqueType[] use = new ePlayerTechniqueType[3];
+    void UseDeatLoad()
+    {
+        use[0] = (ePlayerTechniqueType)PlayerPrefs.GetInt("playerTechniqueOne");
+        use[1] = (ePlayerTechniqueType)PlayerPrefs.GetInt("playerTechniqueTwo");
+    }
     [SerializeField,Header("0 = none;1 = Bullet;2 = EarthQuake;3 = MeleeAttack;4 = Mirage")]
     GameObject[] techniqueBase = new GameObject[(int)ePlayerTechniqueType.playerTechniqueTypeMax]; 
     GameObject[] technique = new GameObject[3]; 
     // Start is called before the first frame update
     void Start()
     {
+        UseDeatLoad();
+
         CreateTechniqueAndUI();
     }
     [SerializeField]
