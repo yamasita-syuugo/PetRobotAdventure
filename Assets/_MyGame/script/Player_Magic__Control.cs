@@ -6,10 +6,10 @@ using UnityEngine;
 public class Player_Magic__Control : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
-    {
+    //void Start()
+    //{
         
-    }
+    //}
 
     // Update is called once per frame
     int chanting = 0;
@@ -53,7 +53,7 @@ public class Player_Magic__Control : MonoBehaviour
                 case 242:
                     Magic_Teleport();
                     break;
-            }if (chanting != 0) Debug.Log(chanting);
+            }if (chanting != 0) Debug.Log("マジックコード : " + chanting);
 
             chanting = 0;
         }

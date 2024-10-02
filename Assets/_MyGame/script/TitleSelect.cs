@@ -14,7 +14,7 @@ public class TitleSelect : MonoBehaviour
     void Update()
     {
         ButtonSelect();
-        StageSelect();
+        //StageSelect();
     }
 
     enum eButton
@@ -73,101 +73,101 @@ public class TitleSelect : MonoBehaviour
         }
     }
 
-    enum eStage
-    {
-        None,
+    //enum eStage
+    //{
+    //    None,
 
-        block,
-        grass,
-        ice,
+    //    block,
+    //    grass,
+    //    ice,
 
-        stageMax,
-    }
-    [SerializeField]
-    eStage stage = eStage.block;
-    enum eRandomBreak
-    {
-        None,
+    //    stageMax,
+    //}
+    //[SerializeField]
+    //eStage stage = eStage.block;
+    //enum eRandomBreak
+    //{
+    //    None,
 
-        random0,
-        //random30,
-        random50,
-        random70,
+    //    random0,
+    //    //random30,
+    //    random50,
+    //    random70,
 
-        randomBreakMax,
-    }
-    [SerializeField]
-    eRandomBreak randomBreak = eRandomBreak.random0;
+    //    randomBreakMax,
+    //}
+    //[SerializeField]
+    //eRandomBreak randomBreak = eRandomBreak.random0;
 
-    eStage oldStage = eStage.None;
-    bool triggerHor = false;
-    eRandomBreak oldRandom = eRandomBreak.None;
-    bool triggerQE = false;
-    void StageSelect()
-    {
-        if (Input.GetAxis("Horizontal") == 0 && triggerHor) triggerHor = false;
-        if (!triggerHor)
-        {
-            stage = (eStage)((int)stage + Input.GetAxis("Horizontal"));
-            if (stage == eStage.stageMax) stage = eStage.None + 1;
-            if (stage == eStage.None) stage = eStage.stageMax - 1;
+    //eStage oldStage = eStage.None;
+    //bool triggerHor = false;
+    //eRandomBreak oldRandom = eRandomBreak.None;
+    //bool triggerQE = false;
+    //void StageSelect()
+    //{
+    //    if (Input.GetAxis("Horizontal") == 0 && triggerHor) triggerHor = false;
+    //    if (!triggerHor)
+    //    {
+    //        stage = (eStage)((int)stage + Input.GetAxis("Horizontal"));
+    //        if (stage == eStage.stageMax) stage = eStage.None + 1;
+    //        if (stage == eStage.None) stage = eStage.stageMax - 1;
 
-            if (oldStage != stage)
-            {
-                oldStage = stage;
+    //        if (oldStage != stage)
+    //        {
+    //            oldStage = stage;
 
-                PlayerPrefs.SetInt("stage", (int)stage);
+    //            PlayerPrefs.SetInt("stage", (int)stage);
 
-                switch (stage)
-                {
-                    case eStage.block:
-                        GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetCreatType(eCreatType.block);
-                        break;
-                    case eStage.ice:
-                        GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetCreatType(eCreatType.ice);
-                        break;
-                    case eStage.grass:
-                        GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetCreatType(eCreatType.grass);
-                        break;
-                }
-                GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().CreateObject();
+    //            switch (stage)
+    //            {
+    //                case eStage.block:
+    //                    GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetCreatType(eCreatType.block);
+    //                    break;
+    //                case eStage.ice:
+    //                    GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetCreatType(eCreatType.ice);
+    //                    break;
+    //                case eStage.grass:
+    //                    GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetCreatType(eCreatType.grass);
+    //                    break;
+    //            }
+    //            GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().CreateObject();
 
-                triggerHor = true;
-            }
-        }
+    //            triggerHor = true;
+    //        }
+    //    }
 
-        if (Input.GetAxis("QE") == 0 && triggerQE) triggerQE = false;
-        if (!triggerQE)
-        {
-            randomBreak = (eRandomBreak)((int)randomBreak + Input.GetAxis("QE"));
-            if (randomBreak == eRandomBreak.randomBreakMax) randomBreak = eRandomBreak.randomBreakMax - 1;
-            if (randomBreak == eRandomBreak.None) randomBreak = eRandomBreak.None + 1;
+    //    if (Input.GetAxis("QE") == 0 && triggerQE) triggerQE = false;
+    //    if (!triggerQE)
+    //    {
+    //        randomBreak = (eRandomBreak)((int)randomBreak + Input.GetAxis("QE"));
+    //        if (randomBreak == eRandomBreak.randomBreakMax) randomBreak = eRandomBreak.randomBreakMax - 1;
+    //        if (randomBreak == eRandomBreak.None) randomBreak = eRandomBreak.None + 1;
 
-            if (oldRandom != randomBreak)
-            {
-                oldRandom = randomBreak; 
+    //        if (oldRandom != randomBreak)
+    //        {
+    //            oldRandom = randomBreak; 
 
-                PlayerPrefs.SetInt("randomBreak", (int)randomBreak);
+    //            PlayerPrefs.SetInt("randomBreak", (int)randomBreak);
 
-                switch (randomBreak)
-                {
-                    case eRandomBreak.random0:
-                        GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetRandomBreak(0);
-                        break;
-                    //case eRandomBreak.random30:
-                    //    GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetRandomBreak(30);
-                    //    break;
-                    case eRandomBreak.random50:
-                        GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetRandomBreak(50);
-                        break;
-                    case eRandomBreak.random70:
-                        GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetRandomBreak(70);
-                        break;
-                }
-                GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().CreateObject();
+    //            switch (randomBreak)
+    //            {
+    //                case eRandomBreak.random0:
+    //                    GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetRandomBreak(0);
+    //                    break;
+    //                //case eRandomBreak.random30:
+    //                //    GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetRandomBreak(30);
+    //                //    break;
+    //                case eRandomBreak.random50:
+    //                    GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetRandomBreak(50);
+    //                    break;
+    //                case eRandomBreak.random70:
+    //                    GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetRandomBreak(70);
+    //                    break;
+    //            }
+    //            GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().CreateObject();
 
-                triggerQE = true;
-            }
-        }
-    }
+    //            triggerQE = true;
+    //        }
+    //    }
+    //}
 }

@@ -13,6 +13,8 @@ public class playerMove : MonoBehaviour
     {
         playerAnimation = GetComponent<Animator>();
 
+        playerTypeSpeed = GameObject.FindWithTag("Manager").GetComponent<Manager_Player>().GetPlayerTypeSpeed(GetComponent<PlayerType>().GetPlayerType());
+
         moveSpeedSetting[(int)eScaffoldType.block] = moveSpeedSetting_block;
         moveSpeedSetting[(int)eScaffoldType.ice] = moveSpeedSetting_ice;
         moveSpeedSetting[(int)eScaffoldType.grass] = moveSpeedSetting_grass;
@@ -28,7 +30,9 @@ public class playerMove : MonoBehaviour
         Move();
         Direction();
     }
-
+    [SerializeField]
+    float playerTypeSpeed = 1;
+    public void SetPlayerTypeSpeed(float speed) {  playerTypeSpeed = speed; }
     Vector3 move;
     float moveSpeed;
     float moveMax = 1.5f;
@@ -53,7 +57,7 @@ public class playerMove : MonoBehaviour
         if (GetComponent<ObjectFall>().GetSituation() == ObjectFall.eSituation.fall ||
             GetComponent<ObjectFall>().GetSituation() == ObjectFall.eSituation.chanting) return;
 
-        transform.position += move * Time.deltaTime;
+        transform.position += move * playerTypeSpeed * Time.deltaTime;
 
         switch (scaffold)
         {

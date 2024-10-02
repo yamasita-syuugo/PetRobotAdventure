@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.VisualScripting;
+using UnityEditor.SceneManagement;
+using static Unity.Burst.Intrinsics.X86.Avx;
+
+
 
 
 #if UNITY_EDITOR
@@ -149,9 +153,7 @@ public class CreateScaffold : MonoBehaviour
 
     public void Load()
     {
-        GameObject tmp = GameObject.FindWithTag("Manager");
-        if (tmp == null) return;
-        Manager_StageSelect manager_StageSelect = tmp.GetComponent<Manager_StageSelect>();
+        Manager_StageSelect manager_StageSelect = GameObject.FindWithTag("Manager").GetComponent<Manager_StageSelect>();
 
         creatType = manager_StageSelect.GetScaffoldType()[(int)manager_StageSelect.GetStage()];
         randomBreak = manager_StageSelect.GetRandomBreak()[(int)manager_StageSelect.GetStage()];

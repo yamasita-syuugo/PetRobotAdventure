@@ -23,6 +23,8 @@ public class Manager_BackgroundType : MonoBehaviour
         if(backGroundType <= eBackGroundType.none)backGroundType = eBackGroundType.backGroundTypeMax - 1;
         else if(backGroundType >= eBackGroundType.backGroundTypeMax) backGroundType = eBackGroundType.none + 1;
     }
+    public void DataSave() { PlayerPrefs.SetInt("backGroundType", (int)backGroundType); }
+    void DataLoad() { backGroundType = (eBackGroundType)PlayerPrefs.GetInt("backGroundType"); }
     public void LeftButton() { AddBackGroundType(-1); }
     public void RightButton() { AddBackGroundType(1); }
     [SerializeField]
@@ -32,14 +34,13 @@ public class Manager_BackgroundType : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        DataLoad();
     }
 
     // Update is called once per frame
-    eStage oldStage = eStage.none;
-    void Update()
-    {
+    //void Update()
+    //{
 
-    }
+    //}
 
 }

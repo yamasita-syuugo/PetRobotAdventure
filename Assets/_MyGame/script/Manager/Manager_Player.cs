@@ -30,15 +30,26 @@ public enum ePlayerMagicType
 {
     none,
 
-    tmp,
+    //tmp,
 
     [InspectorName("")] playerMagicMax,
 }
 
-public class Manager_Player: MonoBehaviour
+public class Manager_Player : MonoBehaviour
 {
     [SerializeField]
-    GameObject []playerBase = new GameObject[(int)ePlayerType.playerTypeMax];
+    GameObject[] playerBase = new GameObject[(int)ePlayerType.playerTypeMax];
+    [SerializeField] float petRobotTypeSpeed = 1.0f;
+    [SerializeField] float wizardGhostTypeSpeed = 0.8f;
+    public float GetPlayerTypeSpeed(ePlayerType playerType)
+    {
+        switch (playerType)
+        {
+            case ePlayerType.PetRobot: return petRobotTypeSpeed; break;
+            case ePlayerType.WizardGhost: return wizardGhostTypeSpeed; break;
+            default: return 1.0f;
+        }
+    }
 
     [SerializeField]
     GameObject gate;
@@ -47,13 +58,14 @@ public class Manager_Player: MonoBehaviour
     // Start is called before the first frame update
     private void OnEnable()
     {
-        Instantiate(playerBase[PlayerPrefs.GetInt("playerType")]);
+        GameObject Player = Instantiate(playerBase[PlayerPrefs.GetInt("playerType")]);
+
         Instantiate(gate);
         Instantiate(mousePointer);
     }
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame

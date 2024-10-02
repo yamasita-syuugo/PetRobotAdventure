@@ -15,7 +15,9 @@ public class Select_Chara : MonoBehaviour
         else if (playerType >= ePlayerType.playerTypeMax) playerType = ePlayerType.none + 1;
 
         SetOne(1);
+        AddOneType(0);
         SetTwo(1);
+        AddTwoType(0);
     }
     public void CharaLeftButton() { AddPlayerType(-1); }
     public void CharaRightButton() { AddPlayerType(1); }
@@ -63,7 +65,7 @@ public class Select_Chara : MonoBehaviour
                 break;
             case ePlayerType.WizardGhost:
                 if (two <= (int)ePlayerMagicType.none) two = (int)ePlayerMagicType.playerMagicMax - 1;
-                else if (two >= (int)ePlayerMagicType.playerMagicMax) two = (int)ePlayerMagicType.none + 1;
+                else if (two >= (int)ePlayerMagicType.playerMagicMax) two = (int)ePlayerMagicType.none;
                 break;
 
             case ePlayerType.playerTypeMax: break;

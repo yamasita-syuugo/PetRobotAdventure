@@ -2187,6 +2187,8 @@ GameObject:
   - component: {fileID: 1094810290}
   - component: {fileID: 1094810289}
   - component: {fileID: 1094810288}
+  - component: {fileID: 1094810298}
+  - component: {fileID: 1094810299}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Manager
@@ -2340,8 +2342,43 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 2637719474650202597, guid: d0a0ddf47f57ef74baba4882b0d50694, type: 3}
   - {fileID: 5324167455278739525, guid: 9f8d3bc841644ca429c842f522042d13, type: 3}
+  petRobotTypeSpeed: 1
+  wizardGhostTypeSpeed: 0.8
   gate: {fileID: 7979918696854808001, guid: 7cf276572f5ddc34f846bb40481bfe94, type: 3}
   mousePointer: {fileID: 2044329444728250679, guid: c4f0481156a7c2444b818632c1664be5, type: 3}
+--- !u!114 &1094810298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094810286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42704e6fff65e7444bb1c4442ebd4099, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mousePointerImage:
+  - {fileID: 21300000, guid: e54c088b1b556b047ab4fa51b2ea4e36, type: 3}
+  - {fileID: 21300000, guid: b30ff2fb05e389f47a04e217719a4adf, type: 3}
+  mousePointerIndex: 0
+--- !u!114 &1094810299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094810286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c485e34f89373904da245f426cfffce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backGroundType: 1
+  backGroundBase:
+  - {fileID: 0}
+  - {fileID: 21300000, guid: 00995bb8248ea054d87a097d10b30223, type: 3}
+  - {fileID: 21300000, guid: 464242f83045cf24fa4e17e00889aac5, type: 3}
 --- !u!1 &1275896687
 GameObject:
   m_ObjectHideFlags: 0

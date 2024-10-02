@@ -18,7 +18,7 @@ public class EndButtonControl : MonoBehaviour
 
     public void EndButton()
     {
-
+        GameObject.FindWithTag("Manager").GetComponent<Manager_Save>().DataSave();
 
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
