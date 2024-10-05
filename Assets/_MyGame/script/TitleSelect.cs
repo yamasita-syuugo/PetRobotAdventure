@@ -121,16 +121,16 @@ public class TitleSelect : MonoBehaviour
     //            switch (stage)
     //            {
     //                case eStage.block:
-    //                    GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetCreatType(eCreatType.block);
+    //                    GameObject.Find("Create").GetComponent<CreateScaffold>().SetCreatType(eCreatType.block);
     //                    break;
     //                case eStage.ice:
-    //                    GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetCreatType(eCreatType.ice);
+    //                    GameObject.Find("Create").GetComponent<CreateScaffold>().SetCreatType(eCreatType.ice);
     //                    break;
     //                case eStage.grass:
-    //                    GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetCreatType(eCreatType.grass);
+    //                    GameObject.Find("Create").GetComponent<CreateScaffold>().SetCreatType(eCreatType.grass);
     //                    break;
     //            }
-    //            GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().CreateObject();
+    //            GameObject.Find("Create").GetComponent<CreateScaffold>().CreateObject();
 
     //            triggerHor = true;
     //        }
@@ -152,19 +152,19 @@ public class TitleSelect : MonoBehaviour
     //            switch (randomBreak)
     //            {
     //                case eRandomBreak.random0:
-    //                    GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetRandomBreak(0);
+    //                    GameObject.Find("Create").GetComponent<CreateScaffold>().SetRandomBreak(0);
     //                    break;
     //                //case eRandomBreak.random30:
-    //                //    GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetRandomBreak(30);
+    //                //    GameObject.Find("Create").GetComponent<CreateScaffold>().SetRandomBreak(30);
     //                //    break;
     //                case eRandomBreak.random50:
-    //                    GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetRandomBreak(50);
+    //                    GameObject.Find("Create").GetComponent<CreateScaffold>().SetRandomBreak(50);
     //                    break;
     //                case eRandomBreak.random70:
-    //                    GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().SetRandomBreak(70);
+    //                    GameObject.Find("Create").GetComponent<CreateScaffold>().SetRandomBreak(70);
     //                    break;
     //            }
-    //            GameObject.Find("CreateScaffold").GetComponent<CreateScaffold>().CreateObject();
+    //            GameObject.Find("Create").GetComponent<CreateScaffold>().CreateObject();
 
     //            triggerQE = true;
     //        }

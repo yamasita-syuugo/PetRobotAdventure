@@ -7,11 +7,11 @@ public class Select_Technique_Image : MonoBehaviour
 {
     [SerializeField]
     eTechniqueControl techniqueControl = eTechniqueControl.none;
-    Select_Chara select_Chara;
+    Manager_Player manager_Player;
     // Start is called before the first frame update
     void Start()
     {
-        select_Chara = GameObject.Find("Serect_Chara").GetComponent<Select_Chara>();
+        manager_Player = GameObject.Find("Manager").GetComponent<Manager_Player>();
     }
 
     [SerializeField]
@@ -26,12 +26,12 @@ public class Select_Technique_Image : MonoBehaviour
         int technique = 0;
         switch (techniqueControl)
         {
-            case eTechniqueControl.one:technique = select_Chara.GetOne();break; 
-            case eTechniqueControl.two:technique = select_Chara.GetTwo();break; 
+            case eTechniqueControl.one:technique = manager_Player.GetOne();break; 
+            case eTechniqueControl.two:technique = manager_Player.GetTwo();break; 
         }
-        if (technique == oldTechnique && select_Chara.GetPlayerType() == oldPlayerType) return;
+        if (technique == oldTechnique && manager_Player.GetPlayerType() == oldPlayerType) return;
 
-        switch (select_Chara.GetPlayerType())
+        switch (manager_Player.GetPlayerType())
         {
             case ePlayerType.PetRobot:
                 GetComponent<Image>().sprite = techniqueImage[technique];

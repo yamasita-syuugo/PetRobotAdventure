@@ -18,7 +18,7 @@ public class Select_Chara_Image : MonoBehaviour
     ePlayerType oldPlayerType = 0;
     void Update()
     {
-        ePlayerType playerType = GetComponentInParent<Select_Chara>().GetPlayerType();
+        ePlayerType playerType = GameObject.FindWithTag("Manager").GetComponent<Manager_Player>().GetPlayerType();
         if (oldPlayerType == playerType) return; oldPlayerType = playerType;
         if (oldPlayerType == ePlayerType.none) return; if (oldPlayerType == ePlayerType.playerTypeMax) return;
         GetComponent<Image>().sprite = playerImage[(int)playerType];

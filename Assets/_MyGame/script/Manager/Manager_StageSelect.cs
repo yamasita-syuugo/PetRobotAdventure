@@ -165,10 +165,10 @@ public class Manager_StageSelect : MonoBehaviour
             if (oldStage != stage)
             {
                 oldStage = stage;
-                GameObject tmp = GameObject.Find("CreateScaffold");
+                GameObject tmp = GameObject.FindWithTag("Create");
                 if (tmp != null)
                 {
-                    CreateScaffold createScaffold = tmp.GetComponent<CreateScaffold>();
+                    Create_Scaffold createScaffold = tmp.GetComponent<Create_Scaffold>();
                     createScaffold.SetCreatType(creatType[(int)stage]);
                     createScaffold.SetRandomBreak(randomBreak[(int)stage]);
                 }

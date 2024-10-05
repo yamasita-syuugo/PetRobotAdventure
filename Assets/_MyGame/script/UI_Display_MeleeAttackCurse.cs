@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class UI_Display_MeleeAttackCurse : UI_Display__Base
 {
-    CreateEnemy enemyCreate;
+    Create_Enemy enemyCreate;
     int MeleeAttackNum;
     int MeleeAttackMaxNum;
     [SerializeField]
@@ -19,7 +19,7 @@ public class UI_Display_MeleeAttackCurse : UI_Display__Base
     {
         GetComponent<TextMeshProUGUI>().text = "";
 
-        enemyCreate = GameObject.Find("CreateEnemy").GetComponent<CreateEnemy>();
+        enemyCreate = GameObject.FindWithTag("Create").GetComponent<Create_Enemy>();
     }
 
     // Update is called once per frame

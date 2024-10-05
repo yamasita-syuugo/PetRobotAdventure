@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeManager : MonoBehaviour
+public class Manager_Time : MonoBehaviour
 {
     float playTimer = 0f;
     bool timeStop = false;
@@ -29,9 +29,9 @@ public class TimeManager : MonoBehaviour
         }
         else stopTimer = stopTimerSteatTime;
 
-        GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
-        if (player[0] == null) return;
-        ObjectFall.eSituation situation = player[0].GetComponent<ObjectFall>().GetSituation();
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player == null) return;
+        ObjectFall.eSituation situation = player.GetComponent<ObjectFall>().GetSituation();
 
         if (situation != ObjectFall.eSituation.fall) playTimer += Time.deltaTime;
     }

@@ -22,7 +22,7 @@ public class Technique_Enemy_Boss : MonoBehaviour
         }
         else
         {
-            CreateEnemy tmp = GameObject.Find("CreateEnemy").GetComponent<CreateEnemy>();
+            Create_Enemy tmp = GameObject.FindWithTag("Create").GetComponent<Create_Enemy>();
             tmp.EnemyCreate(tmp.GetEnemyObjectBase(eEnemyType.Bom));
         }
     }

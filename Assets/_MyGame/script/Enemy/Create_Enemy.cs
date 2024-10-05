@@ -9,7 +9,7 @@ using UnityEditor;
 //using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class CreateEnemy : MonoBehaviour
+public class Create_Enemy : MonoBehaviour
 {
     eStage stage;
     //public AudioSource setSound;
@@ -28,14 +28,14 @@ public class CreateEnemy : MonoBehaviour
     }
 
     GameObject player = null;
-    TimeManager timeManager;
+    Manager_Time timeManager;
     // Start is called before the first frame update
     void Start()
     {
         stage = GameObject.FindWithTag("Manager").GetComponent<Manager_StageSelect>().GetStage();
 
         player = GameObject.FindWithTag("Player");
-        timeManager = GameObject.FindWithTag("Manager").GetComponent<TimeManager>();
+        timeManager = GameObject.FindWithTag("Manager").GetComponent<Manager_Time>();
 
         for (int i = 0; i < enemySpaunTime.Length; i++)
         {

@@ -22,12 +22,12 @@ public class WaveManager : MonoBehaviour
     [SerializeField]
     eWaveType waveType = eWaveType.bom;
     float waveTimer = 30;
-    TimeManager timeManager;
+    Manager_Time timeManager;
     // Start is called before the first frame update
     void Start()
     {
         waveType = eWaveType.bom;
-        timeManager = GetComponent<TimeManager>();
+        timeManager = GetComponent<Manager_Time>();
     }
 
     [SerializeField]
@@ -35,8 +35,8 @@ public class WaveManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GetComponent<TimeManager>().GetTimeStop()) return;
-        float time = GetComponent<TimeManager>().GetPlayTime();
+        if (GetComponent<Manager_Time>().GetTimeStop()) return;
+        float time = GetComponent<Manager_Time>().GetPlayTime();
 
         if (waveTimer > 0)
         {

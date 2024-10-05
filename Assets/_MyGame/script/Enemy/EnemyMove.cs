@@ -45,7 +45,7 @@ public class CPUMove : MonoBehaviour
         playerFall = player.GetComponent<ObjectFall>();
         move = new Vector3(0.0f,0.0f,0.0f);
 
-        SetScaffold(GameObject.Find("CreateScaffold"));
+        SetScaffold(GameObject.FindWithTag("Create"));
     }
 
     // Update is called once per frame
@@ -117,7 +117,7 @@ public class CPUMove : MonoBehaviour
                     tmpPosishon = player.transform.position;
                     break;
                 case false:
-                    Transform[] transform = GameObject.Find("CreateScaffold").GetComponentsInChildren<Transform>();
+                    Transform[] transform = GameObject.FindWithTag("Create").GetComponentsInChildren<Transform>();
                     tmpPosishon = transform[Random.Range(0, transform.Length)].position;
                     break;
             }
@@ -136,7 +136,7 @@ public class CPUMove : MonoBehaviour
     }
     static Type_Scaffold[] position = new Type_Scaffold[200];
     GameObject []previousPos = new GameObject[20];
-    GameObject nextPos;
+    GameObject nextPos = null;
     void MoveWalk()
     {
         if (nextPos == null || (nextPos.transform.position.x <= transform.position.x + 0.1f && nextPos.transform.position.x >= transform.position.x - 0.1f &&

@@ -9,7 +9,7 @@ public class Manager_Save : MonoBehaviour
         GetComponent<Manager_StageSelect>().DataSave();
         GetComponent<Manager_BackgroundType>().DataSave();
         GetComponent<Manager_MousePointerType>().DataSave();
-        GameObject.Find("Serect_Chara").GetComponent<Select_Chara>().DataSave();
+        GameObject.FindWithTag("Manager").GetComponent<Manager_Player>().DataSave();
     }
 
     // Start is called before the first frame update

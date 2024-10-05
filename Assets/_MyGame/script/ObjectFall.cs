@@ -37,8 +37,8 @@ public class ObjectFall : MonoBehaviour
     void Start()
     {
         situation = eSituation.normal;
-        fallSound = GameObject.Find("fallSound").GetComponent<AudioSource>();
-        waterSound = GameObject.Find("waterSound").GetComponent<AudioSource>();
+        fallSound = GameObject.FindWithTag("Manager").GetComponent<Manager_Sounds>().GetSound("fallSound");
+        waterSound = GameObject.FindWithTag("Manager").GetComponent<Manager_Sounds>().GetSound("waterSound");
 
         baseSize = transform.localScale.x;
     }

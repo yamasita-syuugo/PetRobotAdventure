@@ -7,11 +7,11 @@ using UnityEngine.UI;
 public class TimeDisplay : MonoBehaviour
 {
     [SerializeField]
-    TimeManager timeManager;
+    Manager_Time timeManager;
     // Start is called before the first frame update
     void Start()
     {
-       timeManager = GameObject.FindWithTag("Manager").GetComponent<TimeManager>();
+       timeManager = GameObject.FindWithTag("Manager").GetComponent<Manager_Time>();
     }
 
     // Update is called once per frame

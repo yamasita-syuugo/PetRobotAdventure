@@ -27,7 +27,7 @@ public class UI_enemyIcon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameObject.FindWithTag("Manager").GetComponent<TimeManager>().GetTimeStop()) return;
+        if (GameObject.FindWithTag("Manager").GetComponent<Manager_Time>().GetTimeStop()) return;
         if((int)enemyType != (int)waveCheck.GetWaveType())
         {
             enemyType = (eEnemyType)(int)waveCheck.GetWaveType();

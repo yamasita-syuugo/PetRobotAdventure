@@ -16,16 +16,13 @@ enum eObjectType
 }
 public class Manager_Hit : MonoBehaviour
 {
-    ObjectFall objectFall;
-    private void Awake()
-    {
-        
-    }
+    ObjectFall objectFall = null;
     // Start is called before the first frame update
     void Start()
     {
-        explosionSource = GameObject.Find("explosionSound").GetComponent<AudioSource>();
-        objectFall = GameObject.FindGameObjectWithTag("Player").GetComponent<ObjectFall>();
+        explosionSource = GameObject.FindWithTag("Manager").GetComponent<Manager_Sounds>().GetSound("explosionSound");
+        GameObject tmp = GameObject.FindWithTag("Player");
+        if(tmp != null) objectFall = tmp.GetComponent<ObjectFall>();
     }
 
     // Update is called once per frame
@@ -41,7 +38,7 @@ public class Manager_Hit : MonoBehaviour
 
     public void Hit(GameObject gameObject_, GameObject collision_)
     {
-        if (objectFall.GetSituation() != ObjectFall.eSituation.normal) return;
+        if (objectFall == null || objectFall.GetSituation() != ObjectFall.eSituation.normal) return;
 
         gameObject = gameObject_;
         collision = collision_;
@@ -249,8 +246,8 @@ public class Manager_Hit : MonoBehaviour
                         {
                             case eEnemyType.Bom:
                                 Manager_Score.DestroyPointAdd();
-                                GameObject.Find("CreateEnemy").GetComponent<CreateEnemy>().LivingArmorCountAdd();   //リビングアーマーカウント
-                                GameObject.FindAnyObjectByType<FlagCreate>().FlagSpaun();
+                                GameObject.FindWithTag("Create").GetComponent<Create_Enemy>().LivingArmorCountAdd();   //リビングアーマーカウント
+                                GameObject.FindAnyObjectByType<Create_Flag>().FlagSpaun();
 
                                 Explosion(collision);
                                 Destroy(gameObject);
@@ -283,13 +280,13 @@ public class Manager_Hit : MonoBehaviour
                             case eEnemyType.Bom:
                                 Manager_Score.DestroyPointAdd();
 
-                                GameObject.FindAnyObjectByType<FlagCreate>().FlagSpaun();
+                                GameObject.FindAnyObjectByType<Create_Flag>().FlagSpaun();
 
                                 collision.GetComponent<KnockBack>().SetKnockBackEnergy(knockBackEnergy);
                                 collision.GetComponent<KnockBack>().AddMoveSpeed(distance);
                                 GetComponent<Manager_ObjectPhenomenon>().SetObject(collision);
 
-                                GameObject.Find("CreateEnemy").GetComponent<CreateEnemy>().LivingArmorCountAdd();   //リビングアーマーカウント
+                                GameObject.FindWithTag("Create").GetComponent<Create_Enemy>().LivingArmorCountAdd();   //リビングアーマーカウント
                                 break;
                             case eEnemyType.Crow: break;
                             case eEnemyType.Golem:

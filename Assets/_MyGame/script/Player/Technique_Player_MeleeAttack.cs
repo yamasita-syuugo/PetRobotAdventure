@@ -63,7 +63,7 @@ public class Technique_Player_MeleeAttack : MonoBehaviour
     void MeleeAttack()
     {
         //int randam = UnityEngine.Random.Range(0, 100);
-        //if (randam < establishment) GameObject.Find("CreateEnemy").GetComponent<EnemyCreate>().SetBomSpawnNum(spawnBomNum);
+        //if (randam < establishment) GameObject.Find("Create").GetComponent<EnemyCreate>().SetBomSpawnNum(spawnBomNum);
         GameObject meleeAttack = Instantiate(meleeAttackBase);
 
         meleeAttack.transform.rotation = rotation;

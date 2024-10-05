@@ -39,7 +39,7 @@ public class StartButtonControl : MonoBehaviour
             GameObject.FindWithTag("Manager").GetComponent<Manager_StageSelect>().DataSave();
         if (name == "Title")
         {
-            GameObject.Find("Serect_Chara").GetComponent<Select_Chara>().DataSave();
+            GameObject.FindWithTag("Manager").GetComponent<Manager_Player>().DataSave();
         }
     }
 }

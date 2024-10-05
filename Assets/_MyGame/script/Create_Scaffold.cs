@@ -12,7 +12,7 @@ using static Unity.Burst.Intrinsics.X86.Avx;
 using UnityEditor;
 #endif
 
-public class CreateScaffold : MonoBehaviour
+public class Create_Scaffold : MonoBehaviour
 {
     [SerializeField]
     GameObject blockPrefab;
@@ -161,13 +161,13 @@ public class CreateScaffold : MonoBehaviour
 }
 
 #if UNITY_EDITOR
-[CustomEditor(typeof(CreateScaffold))]
+[CustomEditor(typeof(Create_Scaffold))]
 public class a : Editor
 {
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
-        CreateScaffold trg = target as CreateScaffold;
+        Create_Scaffold trg = target as Create_Scaffold;
 
         if (GUILayout.Button("Create", GUILayout.Width(100f))){
             trg.CreateObject();

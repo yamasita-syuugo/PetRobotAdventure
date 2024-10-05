@@ -27,7 +27,7 @@ public class GateProcess : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag != "Player") return;
-        if (!manager_GateOpen.GetGateOpen()) return;
+        if (manager_GateOpen == null || !manager_GateOpen.GetGateOpen()) return;
 
         Manager_Score.ResultSend();
         UnityEngine.SceneManagement.SceneManager.LoadScene("Result");

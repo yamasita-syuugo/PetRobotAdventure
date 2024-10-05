@@ -52,13 +52,13 @@ public class Technique_Player_EarthQuake : MonoBehaviour
 
         GameObject tmp = Instantiate(blockPrefab);
         tmp.transform.position = new Vector3(posX, posY, 0);
-        tmp.transform.parent = GameObject.Find("CreateScaffold").transform;
+        tmp.transform.parent = GameObject.FindWithTag("Create").transform;
         GameObject imp = Instantiate<GameObject>(impact);
         imp.transform.position = tmp.transform.position;
 
         blockCreateSound.Play();
 
-        GameObject.Find("CreateEnemy").GetComponent<CreateEnemy>().GolemCountAdd();
+        GameObject.FindWithTag("Create").GetComponent<Create_Enemy>().GolemCountAdd();
 
 
     }

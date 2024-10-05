@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlagCreate : MonoBehaviour
+public class Create_Flag : MonoBehaviour
 {
     [SerializeField]
     float flagSpaunTime;
@@ -18,7 +18,7 @@ public class FlagCreate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameObject.FindWithTag("Manager").GetComponent<TimeManager>().GetTimeStop()) return;
+        if (GameObject.FindWithTag("Manager").GetComponent<Manager_Time>().GetTimeStop()) return;
         FlagSpaunCount();
     }
 

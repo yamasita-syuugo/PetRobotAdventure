@@ -14,7 +14,7 @@ public class Technique_Player_BulletShot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        shotSound = GameObject.Find("shotSound").GetComponent<AudioSource>();
+        shotSound = GameObject.FindWithTag("Manager").GetComponent<Manager_Sounds>().GetSound("shotSound");
         aimMark = Instantiate<GameObject>(aimMarkPrefab);
     }
 
