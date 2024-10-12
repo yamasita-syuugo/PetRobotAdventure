@@ -17,7 +17,7 @@ public class EnemyIconChange : MonoBehaviour
     int oldWave = 0;
     void Update()
     {
-        int tmp = (int)GameObject.FindWithTag("Manager").GetComponent<WaveManager>().GetWaveType();
+        int tmp = (int)GameObject.FindWithTag("Manager").GetComponent<Manager_Wave>().GetWaveType();
         if(oldWave != tmp)
         {
             GetComponent<Image>().sprite = enemyIcon[tmp];

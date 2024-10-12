@@ -13,10 +13,10 @@ public class Select_BackGround_Image : MonoBehaviour
     }
 
     // Update is called once per frame
-    eBackGroundType oldBackGround = 0;
+    int oldBackGround = 0;
     void Update()
     {
-        eBackGroundType backGroundType = manager_BackgroundType.GetBackGroundType();
+        int backGroundType = manager_BackgroundType.GetBackGroundType();
         if(manager_BackgroundType == null) { return; }
         if (oldBackGround == backGroundType) return;oldBackGround = backGroundType;
         GetComponent<SpriteRenderer>().sprite = manager_BackgroundType.GetBackGroundBase(backGroundType);

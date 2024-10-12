@@ -17,7 +17,7 @@ public class ObjectFall : MonoBehaviour
     eSituation situation = eSituation.normal;
     public eSituation GetSituation() { return situation; }
     public void SetSituation(eSituation situation_) { situation = situation_; }
-    public AudioSource fallSound;
+    AudioSource fallSound;
 
     bool fallSoundCheck = false;
 
@@ -82,7 +82,6 @@ public class ObjectFall : MonoBehaviour
     [SerializeField]
     GameObject splashOfWater = null;
     GameObject splashOfWaterTmp = null;
-    [SerializeField]
     AudioSource waterSound;
     void OceanToFall()
     {
@@ -112,7 +111,7 @@ public class ObjectFall : MonoBehaviour
         {
             if (tag == "Player")
             {
-                Manager_Score.ResultSend();
+                Manager_Score.DataSave();
                 UnityEngine.SceneManagement.SceneManager.LoadScene("Result");
             }
             else Destroy(gameObject);
@@ -131,40 +130,34 @@ public class ObjectFall : MonoBehaviour
         {
             if (tag == "Player")
             {
-                Manager_Score.ResultSend();
+                Manager_Score.DataSave();
+                GameObject.FindWithTag("Manager").GetComponent<Manager_GameSituation>().SetGameSituation(eGameSituation.failure);
+                GameObject.FindWithTag("Manager").GetComponent<Manager_GameSituation>().DataSave();
                 UnityEngine.SceneManagement.SceneManager.LoadScene("Result");
             }
             else Destroy(gameObject);
         }
     }
 
-    bool fallCheck = false;
+    int fallFrame = 3;
     private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.tag == "Scaffold")
         {
-            fallCheck = false;
+            fallFrame = 3;
         }
     }
-    bool oneFrame = true;
-    public void SetOneFrame(bool oneFrame_) { oneFrame = oneFrame_; }
     private void FixedUpdate()
     {
-        if (oneFrame)   //1ÉtÉåÅ[ÉÄñ⁄Ç…fallCheckÇí âﬂÇµÇƒÇµÇ‹Ç§ÇΩÇﬂ
-        {
-            oneFrame = false;
-            return;
-        }
+        if(situation == eSituation.fly) fallFrame = 3;
 
-        if(situation == eSituation.fly)fallCheck = false;
-
-        if (fallCheck == true)
+        if (fallFrame <= 0)
         {
             situation = eSituation.fall;
         }
         else
         {
-            fallCheck = true;
+            fallFrame--;
         }
     }
 }

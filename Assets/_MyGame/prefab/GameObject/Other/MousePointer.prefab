@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2567010811024714287}
   - component: {fileID: 5641068014645006401}
   - component: {fileID: 3301471008954279725}
+  - component: {fileID: -8584499739671386921}
   m_Layer: 0
   m_Name: MousePointer
   m_TagString: Untagged
@@ -97,3 +98,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7da0863bbbc9d334aae6f4942549aafc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &-8584499739671386921
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044329444728250679}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9f79df77c74dd674c8645b2d3c321d65, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

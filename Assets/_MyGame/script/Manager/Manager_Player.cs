@@ -8,6 +8,10 @@ public enum ePlayerType
 
     PetRobot,
     WizardGhost,
+    //Werewolf  //近距離をメインに移動に優れたキャラ
+    //Tower //中心記固定し移動しないキャラ
+    //レベルアップを題材としたキャラクター
+    //短距離の飛行ができるキャラ
 
     [InspectorName("")] playerTypeMax,
 }
@@ -56,7 +60,7 @@ public class Manager_Player : MonoBehaviour
     public void PlayerRightButton() { AddPlayerType(1); }
 
     [SerializeField] float petRobotTypeSpeed = 1.0f;
-    [SerializeField] float wizardGhostTypeSpeed = 0.8f;
+    [SerializeField] float wizardGhostTypeSpeed = 0.6f;
     public float GetPlayerTypeSpeed(ePlayerType playerType)
     {
         switch (playerType)

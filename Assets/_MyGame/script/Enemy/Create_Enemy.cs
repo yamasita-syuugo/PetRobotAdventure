@@ -66,7 +66,7 @@ public class Create_Enemy : MonoBehaviour
                 break;
 
             case eStage.lastGame:
-                switch (timeManager.GetComponent<WaveManager>().GetWaveType())
+                switch (timeManager.GetComponent<Manager_Wave>().GetWaveType())
                 {
                     case eWaveType.bom: break;
                     case eWaveType.crow:

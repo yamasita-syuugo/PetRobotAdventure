@@ -24,6 +24,6 @@ public class MousePointer : MonoBehaviour
 
         int mousePointerIndex = manager_MousePointerType.GetMousePointerIndex();
         if (oldMousePointerIndex == mousePointerIndex) return; oldMousePointerIndex = mousePointerIndex;
-        GetComponent<SpriteRenderer>().sprite = manager_MousePointerType.GetMousePointerImage(mousePointerIndex);
+        GetComponent<Animator>().runtimeAnimatorController = manager_MousePointerType.GetMousePointerAnimation(mousePointerIndex);
     }
 }

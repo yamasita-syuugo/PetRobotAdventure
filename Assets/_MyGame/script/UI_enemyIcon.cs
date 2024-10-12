@@ -12,7 +12,7 @@ public class UI_enemyIcon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        waveCheck = GameObject.FindWithTag("Manager").GetComponent<WaveManager>();
+        waveCheck = GameObject.FindWithTag("Manager").GetComponent<Manager_Wave>();
         enemyIcon = GetComponentsInChildren<Image>();
         SetPosition();
         enemyType = (eEnemyType)(int)waveCheck.GetWaveType();
@@ -23,7 +23,7 @@ public class UI_enemyIcon : MonoBehaviour
 
         EnemyIconDisplay();
     }
-    WaveManager waveCheck;
+    Manager_Wave waveCheck;
     // Update is called once per frame
     void Update()
     {

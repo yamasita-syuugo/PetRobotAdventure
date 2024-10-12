@@ -90,7 +90,7 @@ public class Manager_Score : MonoBehaviour
         return point[(int)eScoreType.Nega_EnemyBom];
     }
 
-    public static void ResultSend()
+    public static void DataSave()
     {
         PlayerPrefs.SetInt("totalPoint", point[(int)eScoreType.total]);
 

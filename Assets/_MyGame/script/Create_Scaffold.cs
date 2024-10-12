@@ -2,11 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.VisualScripting;
-using UnityEditor.SceneManagement;
 using static Unity.Burst.Intrinsics.X86.Avx;
-
-
-
 
 #if UNITY_EDITOR
 using UnityEditor;
