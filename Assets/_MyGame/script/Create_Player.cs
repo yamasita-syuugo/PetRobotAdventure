@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class Create_Player : MonoBehaviour
 {
-    [SerializeField]
-    GameObject[] playerBase = new GameObject[(int)ePlayerType.playerTypeMax];
     // Start is called before the first frame update
     void Start()
     {
-        GameObject Player = Instantiate(playerBase[PlayerPrefs.GetInt("playerType")]);
+        Manager_Player manager_Player = GameObject.FindWithTag("Manager").GetComponent<Manager_Player>();
+        GameObject Player = Instantiate(manager_Player. GetPlayerTypeBase(PlayerPrefs.GetInt("playerTypeIndex")));
     }
 
     // Update is called once per frame

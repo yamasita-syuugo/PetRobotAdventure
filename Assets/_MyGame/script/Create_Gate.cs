@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class Create_Gate : MonoBehaviour
 {
-    [SerializeField]
-    GameObject gate;
     // Start is called before the first frame update
     void Start()
     {
-        Instantiate(gate);
+        Manager_Gate manager_Gate = GameObject.FindWithTag("Manager").GetComponent<Manager_Gate>();
+        Instantiate(manager_Gate.GetGateBase());
     }
 
     // Update is called once per frame

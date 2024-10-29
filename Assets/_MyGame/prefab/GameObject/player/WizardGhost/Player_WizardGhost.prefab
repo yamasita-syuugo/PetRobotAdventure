@@ -33,8 +33,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8682129453008157874}
   m_Father: {fileID: 0}
@@ -104,6 +104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaffold: 1
+  playerTypeSpeed: 1
   moveSpeedSetting_block: 2
   moveMaxSetting_bloce: 2
   moveSpeedSetting_ice: 0.004
@@ -136,10 +137,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   situation: 1
-  fallSound: {fileID: 0}
   fallType: 3
   splashOfWater: {fileID: 0}
-  waterSound: {fileID: 0}
 --- !u!114 &2686942737440831655
 MonoBehaviour:
   m_ObjectHideFlags: 0

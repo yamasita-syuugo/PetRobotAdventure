@@ -11,10 +11,12 @@ GameObject:
   - component: {fileID: 2567010811024714287}
   - component: {fileID: 5641068014645006401}
   - component: {fileID: 3301471008954279725}
+  - component: {fileID: 538336459760555625}
+  - component: {fileID: 6920024718420194771}
   - component: {fileID: -8584499739671386921}
   m_Layer: 0
   m_Name: MousePointer
-  m_TagString: Untagged
+  m_TagString: MousePointer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.03, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -96,6 +98,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7da0863bbbc9d334aae6f4942549aafc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &538336459760555625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044329444728250679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f743f9715d5f20049a70af4f9d950ac8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6920024718420194771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044329444728250679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e7316475b266a4ea8206355fa5fed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!95 &-8584499739671386921

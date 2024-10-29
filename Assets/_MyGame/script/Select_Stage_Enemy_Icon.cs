@@ -54,7 +54,7 @@ public class Select_Stage_Enemy_Icon : MonoBehaviour
         Manager_StageSelect manager_StageSelect = GameObject.FindWithTag("Manager").GetComponent<Manager_StageSelect>();
         if (oldStage == manager_StageSelect.GetStage()) return; oldStage = manager_StageSelect.GetStage();
 
-        bool[,] enemy = manager_StageSelect.GetStageEnemy();
+        bool[,] enemy = GameObject.FindWithTag("Manager").GetComponent<Manager_Enemy>().GetStageEnemy();
         for (int i = 0; i < (int)enemyIcon.Length; i++)
         {
             if (enemyIcon[i] == null) continue;

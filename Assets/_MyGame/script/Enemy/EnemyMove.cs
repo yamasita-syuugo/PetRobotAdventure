@@ -172,8 +172,10 @@ public class CPUMove : MonoBehaviour
             }
         }
         Vector3 move = new Vector3(0.0f, 0.0f, 0.0f);
-        move.x = nextPos.transform.position.x - transform.position.x;
-        move.y = nextPos.transform.position.y - transform.position.y;
+        if (nextPos == null) return;
+        Vector2 tmp = nextPos.transform.position;
+        move.x = tmp.x - transform.position.x;
+        move.y = tmp.y - transform.position.y;
 
         float distance = Mathf.Sqrt(move.x * move.x + move.y * move.y);
 
@@ -242,12 +244,10 @@ public class CPUMove : MonoBehaviour
             }
         }
 
-
-
-
         Vector3 move = new Vector3(0.0f, 0.0f, 0.0f);
-        move.x = nextPos.transform.position.x - transform.position.x;
-        move.y = nextPos.transform.position.y - transform.position.y;
+        Vector2 tmp = nextPos.transform.position;
+        move.x = tmp.x - transform.position.x;
+        move.y = tmp.y - transform.position.y;
 
         float distance = Mathf.Sqrt(move.x * move.x + move.y * move.y);
         move /= distance;

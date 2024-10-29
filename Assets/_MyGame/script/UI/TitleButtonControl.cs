@@ -18,6 +18,7 @@ public class TitleButtonControl : MonoBehaviour
 
     public void TitleButton()
     {
+        GameObject.FindWithTag("Manager").GetComponent<Manager_Save>().DataSave();
         UnityEngine.SceneManagement.SceneManager.LoadScene("Title");
     }
 }

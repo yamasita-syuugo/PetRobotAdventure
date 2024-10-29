@@ -8,36 +8,38 @@ public class Select_Technique_Image : MonoBehaviour
     [SerializeField]
     eTechniqueControl techniqueControl = eTechniqueControl.none;
     Manager_Player manager_Player;
+    Manager_Player_Technique manager_Player_Technique;
     // Start is called before the first frame update
     void Start()
     {
         manager_Player = GameObject.Find("Manager").GetComponent<Manager_Player>();
+        manager_Player_Technique = GameObject.Find("Manager").GetComponent<Manager_Player_Technique>();
     }
 
-    [SerializeField]
-    Sprite[] techniqueImage = new Sprite[(int)ePlayerTechniqueType.playerTechniqueTypeMax];
-    [SerializeField]
-    Sprite[] magicImage = new Sprite[(int)ePlayerMagicType.playerMagicMax];
     // Update is called once per frame
-    ePlayerType oldPlayerType;
-    int oldTechnique = 0;
+    int oldPlayerTypeIndex;
+    int oldTechniqueIndex = 0;
     void Update()
     {
         int technique = 0;
         switch (techniqueControl)
         {
-            case eTechniqueControl.one:technique = manager_Player.GetOne();break; 
-            case eTechniqueControl.two:technique = manager_Player.GetTwo();break; 
+            case eTechniqueControl.one:technique = manager_Player_Technique.GetOne();break; 
+            case eTechniqueControl.two:technique = manager_Player_Technique.GetTwo();break; 
         }
-        if (technique == oldTechnique && manager_Player.GetPlayerType() == oldPlayerType) return;
+        if (oldTechniqueIndex == technique && oldPlayerTypeIndex == manager_Player.GetPlayerTypeIndex()) return;
+        oldTechniqueIndex = technique; oldPlayerTypeIndex = manager_Player.GetPlayerTypeIndex();
 
-        switch (manager_Player.GetPlayerType())
+        switch ((ePlayerType)manager_Player.GetPlayerTypeIndex())
         {
             case ePlayerType.PetRobot:
-                GetComponent<Image>().sprite = techniqueImage[technique];
+                GetComponent<Image>().sprite = manager_Player_Technique.GetTechniqueImage(technique);
+                break;
+            case ePlayerType.Werewolf:
+                GetComponent<Image>().sprite = manager_Player_Technique.GetAttackImage(technique);
                 break;
             case ePlayerType.WizardGhost:
-                GetComponent<Image>().sprite = magicImage[technique]; 
+                GetComponent<Image>().sprite = manager_Player_Technique.GetMagicImage(technique);
                 break;
         }
 

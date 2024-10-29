@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class GateProcess : MonoBehaviour
 {
-    Manager_GateOpen manager_GateOpen;
+    Manager_Gate manager_GateOpen;
     // Start is called before the first frame update
     void Start()
     {
-        manager_GateOpen = GameObject.FindWithTag("Manager").GetComponent<Manager_GateOpen>();
+        manager_GateOpen = GameObject.FindWithTag("Manager").GetComponent<Manager_Gate>();
     }
 
     // Update is called once per frame

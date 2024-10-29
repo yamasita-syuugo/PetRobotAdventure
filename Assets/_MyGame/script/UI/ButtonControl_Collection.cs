@@ -18,6 +18,8 @@ public class ButtonControl_Collection : MonoBehaviour
 
     public void CollectionButton()
     {
+        GameObject.FindWithTag("Manager").GetComponent<Manager_Save>().DataSave();
+
         UnityEngine.SceneManagement.SceneManager.LoadScene("Collection");
     }
 }

@@ -2455,6 +2455,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 2216643563423679949, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
+      propertyPath: gateBase.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2216643563423679949, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
+      propertyPath: gateBase.Array.data[0]
+      value: 
+      objectReference: {fileID: 7979918696854808001, guid: 7cf276572f5ddc34f846bb40481bfe94, type: 3}
     - target: {fileID: 2838408346344982493, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2494,34 +2502,6 @@ PrefabInstance:
     - target: {fileID: 2838408346344982493, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4456441095281617581, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
-      propertyPath: getSituation.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4456441095281617581, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
-      propertyPath: backGroundBase.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4456441095281617581, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
-      propertyPath: getSituation.Array.data[0]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4456441095281617581, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
-      propertyPath: getSituation.Array.data[1]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4456441095281617581, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
-      propertyPath: backGroundBase.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: 00995bb8248ea054d87a097d10b30223, type: 3}
-    - target: {fileID: 4456441095281617581, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
-      propertyPath: backGroundBase.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: 464242f83045cf24fa4e17e00889aac5, type: 3}
-    - target: {fileID: 4456441095281617581, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
-      propertyPath: backGroundBase.Array.data[2]
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2580,10 +2560,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Creates_MainGame
       objectReference: {fileID: 0}
-    - target: {fileID: 9168487050499361660, guid: 1f7262d471ddcef48b3b0694d9c6f08a, type: 3}
-      propertyPath: BGMBase
+    - target: {fileID: 5427013015651620011, guid: 1f7262d471ddcef48b3b0694d9c6f08a, type: 3}
+      propertyPath: playerBase.Array.data[0]
       value: 
-      objectReference: {fileID: 7914236001151910410, guid: c11631aacc6f2f64ebac47c742a061c3, type: 3}
+      objectReference: {fileID: 2637719474650202597, guid: d0a0ddf47f57ef74baba4882b0d50694, type: 3}
+    - target: {fileID: 5427013015651620011, guid: 1f7262d471ddcef48b3b0694d9c6f08a, type: 3}
+      propertyPath: playerBase.Array.data[1]
+      value: 
+      objectReference: {fileID: 5324167455278739525, guid: 9f8d3bc841644ca429c842f522042d13, type: 3}
+    - target: {fileID: 5427013015651620011, guid: 1f7262d471ddcef48b3b0694d9c6f08a, type: 3}
+      propertyPath: playerBase.Array.data[2]
+      value: 
+      objectReference: {fileID: 3585340084940987012, guid: cfbd5a5058f843941aa9424c127d1520, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

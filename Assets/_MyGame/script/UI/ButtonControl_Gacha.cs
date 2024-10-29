@@ -18,6 +18,10 @@ public class ButtonControl_Gacha : MonoBehaviour
 
     public void GachaButton()
     {
+
+
+        GameObject.FindWithTag("Manager").GetComponent<Manager_Save>().DataSave();
+
         UnityEngine.SceneManagement.SceneManager.LoadScene("Gacha");
     }
 }

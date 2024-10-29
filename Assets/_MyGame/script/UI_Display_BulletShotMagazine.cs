@@ -18,7 +18,7 @@ public class UI_Display_BulletShotMagazine : UI_Display__Base
     {
         GetComponent<TextMeshProUGUI>().text = "";
 
-        magazineSize = connectTechnique.GetComponent<Technique_Player_BulletMagazine>().GetMagazineSize();
+        magazineSize = connectTechnique.GetComponent<Player_Technique_Container_BulletMagazine>().GetMagazineSize();
 
         bulletIcon = new GameObject[magazineSize];
         for (int i = 0; i < magazineSize; i++)
@@ -36,7 +36,7 @@ public class UI_Display_BulletShotMagazine : UI_Display__Base
 
     void BulletIconDisplay()
     {
-        int bulletNum = connectTechnique.GetComponent<Technique_Player_BulletMagazine>().GetBulletNum();
+        int bulletNum = connectTechnique.GetComponent<Player_Technique_Container_BulletMagazine>().GetBulletNum();
         for (int i = 0; i < bulletIcon.Length; i++)
         {
             if (i < bulletNum) bulletIcon[i].GetComponent<Image>().color = Color.yellow;

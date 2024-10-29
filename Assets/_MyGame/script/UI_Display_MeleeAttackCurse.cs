@@ -30,7 +30,7 @@ public class UI_Display_MeleeAttackCurse : UI_Display__Base
         {
             fast = true;
 
-            MeleeAttackMaxNum = connectTechnique.GetComponent<Technique_Player_MeleeAttackCurse>().GetEndCountLength();
+            MeleeAttackMaxNum = connectTechnique.GetComponent<Player_Technique_Container_MeleeAttackCurse>().GetEndCountLength();
             MeleeAttackIcon = new GameObject[MeleeAttackMaxNum];
             for (int i = 0; i < MeleeAttackMaxNum; i++)
             {
@@ -43,8 +43,8 @@ public class UI_Display_MeleeAttackCurse : UI_Display__Base
 
     void BulletIconDisplay()
     {
-        if (MeleeAttackNum == connectTechnique.GetComponent<Technique_Player_MeleeAttackCurse>().GetEnemyCountNum()) return;
-        MeleeAttackNum = connectTechnique.GetComponent<Technique_Player_MeleeAttackCurse>().GetEnemyCountNum();
+        if (MeleeAttackNum == connectTechnique.GetComponent<Player_Technique_Container_MeleeAttackCurse>().GetEnemyCountNum()) return;
+        MeleeAttackNum = connectTechnique.GetComponent<Player_Technique_Container_MeleeAttackCurse>().GetEnemyCountNum();
         for (int i = 0; i < MeleeAttackIcon.Length; i++)
         {
             if (i < MeleeAttackNum) MeleeAttackIcon[i].GetComponent<Image>().color = Color.red;

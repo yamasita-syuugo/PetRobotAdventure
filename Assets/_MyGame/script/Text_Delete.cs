@@ -8,7 +8,8 @@ public class Text_Delete : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<TextMeshPro>().text = "";
+        if (GetComponent<TextMeshProUGUI>() != null) GetComponent<TextMeshProUGUI>().text = "";
+        else if (GetComponent<TextMeshPro>() != null) GetComponent<TextMeshPro>().text = "";
     }
 
     // Update is called once per frame

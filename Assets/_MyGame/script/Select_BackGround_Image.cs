@@ -16,7 +16,7 @@ public class Select_BackGround_Image : MonoBehaviour
     int oldBackGround = 0;
     void Update()
     {
-        int backGroundType = manager_BackgroundType.GetBackGroundType();
+        int backGroundType = manager_BackgroundType.GetBackGroundIndex();
         if(manager_BackgroundType == null) { return; }
         if (oldBackGround == backGroundType) return;oldBackGround = backGroundType;
         GetComponent<SpriteRenderer>().sprite = manager_BackgroundType.GetBackGroundBase(backGroundType);

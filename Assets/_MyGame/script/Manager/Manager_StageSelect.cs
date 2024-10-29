@@ -7,7 +7,7 @@ using UnityEngine;
 
 public enum eStage
 {
-    [InspectorName("")]none,
+    [InspectorName("")]none = -1,
 
     bomOnly,
     golemOnly,
@@ -32,12 +32,19 @@ public class Manager_StageSelect : MonoBehaviour
         if (stage <= eStage.none) stage = eStage.eStageMax - 1;
         else if (stage >= eStage.eStageMax) stage = eStage.none + 1;
     }
-    public void DataSave() { PlayerPrefs.SetInt("stage", (int)stage); }
-    public void DataLoad() { stage = (eStage)PlayerPrefs.GetInt("stage"); }
-
-    //敵の出現パターン
-    bool[,] stageEnemy = new bool[(int)eStage.eStageMax,(int)eEnemyType.enemyTypeMax];
-    public bool[,] GetStageEnemy() {  return stageEnemy; }
+    [SerializeField]
+    bool[] getStage = new bool[(int)eStage.eStageMax];
+    public bool GetGetStage (eStage stage) { return getStage[(int)stage]; }
+    public void DataSave()
+    {
+        PlayerPrefs.SetInt("stage", (int)stage);
+        Manager_Save.BoolSave("StageSituation", (int)eStage.eStageMax, getStage);
+    }
+    public void DataLoad()
+    {
+        stage = (eStage)PlayerPrefs.GetInt("stage");
+        Manager_Save.BoolLoad("StageSituation", (int)eStage.eStageMax,out getStage);
+    }
 
     //足場の配置パターン
     eCreatType [] creatType = new eCreatType[(int)eStage.eStageMax];
@@ -105,7 +112,7 @@ public class Manager_StageSelect : MonoBehaviour
                         }
                         break;
                 }
-                stageEnemy[stage,enemy] = tmp;
+                GetComponent<Manager_Enemy>().SetStageEnemy(stage, enemy, tmp);
             }
         }
     }

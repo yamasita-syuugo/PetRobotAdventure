@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ButtonControl_BestScoar : MonoBehaviour
-{    
+{
     // Start is called before the first frame update
     //void Start()
     //{
@@ -18,6 +18,8 @@ public class ButtonControl_BestScoar : MonoBehaviour
 
     public void BestScoarButton()
     {
+        GameObject.FindWithTag("Manager").GetComponent<Manager_Save>().DataSave();
+
         UnityEngine.SceneManagement.SceneManager.LoadScene("BestScoar");
     }
 }

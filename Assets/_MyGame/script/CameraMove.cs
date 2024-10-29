@@ -22,7 +22,8 @@ public class CameraMove : MonoBehaviour
     {
         SizeZoom();
 
-        if (target == null) return;
+        if(target == null) { target = GameObject.FindWithTag("Player");return; }
+
         Vector3 move = new Vector3(0.0f, 0.0f, 0.0f);
 
         move.x = (target.transform.position.x - transform.position.x) / speedDelay * Time.deltaTime;

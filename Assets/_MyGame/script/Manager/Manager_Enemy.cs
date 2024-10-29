@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using static Unity.Burst.Intrinsics.X86.Avx;
 
 public enum eEnemyType
 {
@@ -19,15 +21,22 @@ public enum eEnemyType
 }
 public class Manager_Enemy : MonoBehaviour
 {
+    Manager_StageSelect manager_StageSelect;
+
+    //敵の出現パターン
+    bool[,] stageEnemy = new bool[(int)eStage.eStageMax, (int)eEnemyType.enemyTypeMax];
+    public bool[,] GetStageEnemy() { return stageEnemy; }
+    public void SetStageEnemy(int stage, int enemy,bool spaun) { stageEnemy[stage, enemy] = spaun; }
     // Start is called before the first frame update
-    //void Start()
-    //{
-        
-    //}
+    void Start()
+    {
+        manager_StageSelect = GetComponent<Manager_StageSelect>();
+    }
 
     // Update is called once per frame
-    //void Update()
-    //{
-        
-    //}
+    eStage oldStage = eStage.none;
+    void Update()
+    {
+        if (oldStage == manager_StageSelect.GetStage()) return;oldStage = manager_StageSelect.GetStage();
+    }
 }

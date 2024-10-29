@@ -35,7 +35,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 49676571916337742}
@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaffold: 2
+  playerTypeSpeed: 1
   moveSpeedSetting_block: 2
   moveMaxSetting_bloce: 2
   moveSpeedSetting_ice: 0.004
@@ -173,10 +174,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   situation: 0
-  fallSound: {fileID: 3753076071498596226, guid: 0a649a52105cf6e4684d76b678759ed3, type: 3}
   fallType: 3
   splashOfWater: {fileID: 1932533781327131626, guid: dc93cf7aeaf0e3540b72e63540f1084c, type: 3}
-  waterSound: {fileID: 0}
 --- !u!114 &5497755237350589795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,17 +343,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c426e51d10ceec34b877a306c21b22f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  techniqueNum: 2
   use: 0100000001000000
-  techniqueBase:
-  - {fileID: 0}
-  - {fileID: 5879217919693297659, guid: 74c639ade4938e248b81e667a3d03d52, type: 3}
-  - {fileID: 2025371526325894783, guid: 4037c50fb2b2ca04aab898fd08248109, type: 3}
-  - {fileID: 1618894492982383026, guid: c9cd949571db92248ad1b8ff6c447473, type: 3}
-  - {fileID: 5879217919693297659, guid: c455f4f84976c4e448be560e249019e3, type: 3}
-  techniqueUIBase:
-  - {fileID: 0}
-  - {fileID: 8102269772775701251, guid: 87eac8096d8b4044b8e798f827073228, type: 3}
-  - {fileID: 5297492152204844733, guid: 2633da88eb9ba904985bea49cf2e9361, type: 3}
-  - {fileID: 5389394737070788234, guid: 59b01d05602784e4c9c15b82d639c9bd, type: 3}
-  - {fileID: 0}

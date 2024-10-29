@@ -14,7 +14,7 @@ public class UI_Display_EarthQuakeBag : UI_Display__Base
     // Update is called once per frame
     void Update()
     {
-        int materialsNum = connectTechnique.GetComponent<Technique_Player_MaterialBag>().GetEarthQuakeMaterials();
+        int materialsNum = connectTechnique.GetComponent<Player_Technique_Container_MaterialBag>().GetEarthQuakeMaterials();
         GetComponent<TextMeshProUGUI>().text = materialsNum.ToString();
     }
 }

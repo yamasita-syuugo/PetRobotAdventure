@@ -5,21 +5,19 @@ using UnityEngine.UI;
 
 public class Select_Chara_Image : MonoBehaviour
 {
-    [SerializeField]
-    Sprite[] playerImage = new Sprite[(int)ePlayerType.playerTypeMax];
-    // Start is called before the first frame update
-    //void Start()
-    //{
-        
-    //}
+    Manager_Player manager_Player;
+    //Start is called before the first frame update
+    void Start()
+    {
+        manager_Player = GameObject.FindWithTag("Manager").GetComponent<Manager_Player>();
+    }
 
     // Update is called once per frame
-    ePlayerType oldPlayerType = 0;
+    int oldPlayerType = -1;
     void Update()
     {
-        ePlayerType playerType = GameObject.FindWithTag("Manager").GetComponent<Manager_Player>().GetPlayerType();
+        int playerType = manager_Player.GetPlayerTypeIndex();
         if (oldPlayerType == playerType) return; oldPlayerType = playerType;
-        if (oldPlayerType == ePlayerType.none) return; if (oldPlayerType == ePlayerType.playerTypeMax) return;
-        GetComponent<Image>().sprite = playerImage[(int)playerType];
+        GetComponent<Image>().sprite = manager_Player.GetPlayerTypeBase(manager_Player.GetPlayerTypeIndex()).GetComponent<SpriteRenderer>().sprite;
     }
 }

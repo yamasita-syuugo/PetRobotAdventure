@@ -306,7 +306,7 @@ public class Manager_Hit : MonoBehaviour
                                 break;
                         }
                         break;
-                    case ePlayerTechniqueType.MeleeAttack: break;
+                    //case ePlayerTechniqueType.MeleeAttack: break;
                 }
                 break;
             //case eObjectType.attack: break;
