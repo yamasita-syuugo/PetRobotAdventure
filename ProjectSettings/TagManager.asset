@@ -16,6 +16,7 @@ TagManager:
   - BackGround
   - Sound
   - Create
+  - MousePointer
   layers:
   - Default
   - TransparentFX
