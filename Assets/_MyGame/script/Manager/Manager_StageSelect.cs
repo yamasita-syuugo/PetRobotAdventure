@@ -14,6 +14,9 @@ public enum eStage
 
     lastGame,
 
+    //dungeon,       //•”‰®‚Æ’Ê˜H‚ğŒğŒİ‚É©“®ì¬A•”‰®‚Å’e•â‹‹@’Ê˜H‚ğ‘Oi
+    //labyrinth,     //©“®¶¬–À˜H
+
     [InspectorName("")]eStageMax,
 }
 public class Manager_StageSelect : MonoBehaviour

@@ -2503,6 +2503,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4625129172083975772, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
+      propertyPath: werewolfTypeSpeed
+      value: 1.6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2560,18 +2564,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Creates_MainGame
       objectReference: {fileID: 0}
-    - target: {fileID: 5427013015651620011, guid: 1f7262d471ddcef48b3b0694d9c6f08a, type: 3}
-      propertyPath: playerBase.Array.data[0]
-      value: 
-      objectReference: {fileID: 2637719474650202597, guid: d0a0ddf47f57ef74baba4882b0d50694, type: 3}
-    - target: {fileID: 5427013015651620011, guid: 1f7262d471ddcef48b3b0694d9c6f08a, type: 3}
-      propertyPath: playerBase.Array.data[1]
-      value: 
-      objectReference: {fileID: 5324167455278739525, guid: 9f8d3bc841644ca429c842f522042d13, type: 3}
-    - target: {fileID: 5427013015651620011, guid: 1f7262d471ddcef48b3b0694d9c6f08a, type: 3}
-      propertyPath: playerBase.Array.data[2]
-      value: 
-      objectReference: {fileID: 3585340084940987012, guid: cfbd5a5058f843941aa9424c127d1520, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

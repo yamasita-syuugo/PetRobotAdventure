@@ -15,7 +15,7 @@ public class Player_Technique_Play_BulletShot : Player_Technique_Play__Base
     void Start()
     {
         shotSound = GameObject.FindWithTag("Manager").GetComponent<Manager_Sounds>().GetSound("shotSound");
-        aimMark = Instantiate<GameObject>(aimMarkPrefab);
+        aimMark = Instantiate<GameObject>(aimMarkBase);
     }
 
     // Update is called once per frame
@@ -25,7 +25,7 @@ public class Player_Technique_Play_BulletShot : Player_Technique_Play__Base
     //}
 
     [SerializeField]
-    GameObject aimMarkPrefab;
+    GameObject aimMarkBase;
     GameObject aimMark;
     bool controllerShot = false;
     public void SetControllerShot(bool shot_ = true) { controllerShot = shot_; }

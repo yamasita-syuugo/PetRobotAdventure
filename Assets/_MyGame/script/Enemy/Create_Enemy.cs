@@ -118,7 +118,7 @@ public class Create_Enemy : MonoBehaviour
     }
     void EnemySpawnCrow()
     {
-        if (GameObject.FindGameObjectWithTag("Player").GetComponent<playerMove>().GetMove() == new Vector2(0, 0)) EnemySpawnTimer(eWaveType.crow);
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<player_Move>().GetMove() == new Vector2(0, 0)) EnemySpawnTimer(eWaveType.crow);
         else enemySpaunTime[(int)eWaveType.crow] = enemySpaunTimeReset[(int)eWaveType.crow];
     }
     [SerializeField]

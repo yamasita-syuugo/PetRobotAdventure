@@ -81,7 +81,7 @@ MonoBehaviour:
   - {fileID: 2637719474650202597, guid: d0a0ddf47f57ef74baba4882b0d50694, type: 3}
   - {fileID: 5324167455278739525, guid: 9f8d3bc841644ca429c842f522042d13, type: 3}
   - {fileID: 3585340084940987012, guid: cfbd5a5058f843941aa9424c127d1520, type: 3}
-  getSituation: 00000000000000000000000000000000
+  getSituation: 000000
   playerTypeIndex: 0
   petRobotTypeSpeed: 1
   wizardGhostTypeSpeed: 0.6
@@ -175,7 +175,7 @@ MonoBehaviour:
   - {fileID: 9100000, guid: 1d4ad5eafa79ae14284521b46679c8b6, type: 2}
   - {fileID: 9100000, guid: 0d8037444fdcf8144908b264c1a4b396, type: 2}
   mousePointerIndex: 0
-  getSituation: 010000
+  getSituation: 01000000
 --- !u!114 &4456441095281617581
 MonoBehaviour:
   m_ObjectHideFlags: 0

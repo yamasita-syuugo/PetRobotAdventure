@@ -8,7 +8,7 @@ public class Create_Gate : MonoBehaviour
     void Start()
     {
         Manager_Gate manager_Gate = GameObject.FindWithTag("Manager").GetComponent<Manager_Gate>();
-        Instantiate(manager_Gate.GetGateBase());
+        GameObject gate = Instantiate(manager_Gate.GetGateBase());
     }
 
     // Update is called once per frame

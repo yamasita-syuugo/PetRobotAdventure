@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 //using Unity.VisualScripting;
 //using Unity.Mathematics;
 
-public class CPUMove : MonoBehaviour
+public class CPU_Move : MonoBehaviour
 {
     GameObject player;
     ObjectFall playerFall;
@@ -19,6 +19,7 @@ public class CPUMove : MonoBehaviour
     enum eMoveType
     {
         none,
+
         goStraight,
         tracking,
         topToFall,

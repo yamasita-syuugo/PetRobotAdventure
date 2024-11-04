@@ -6,7 +6,7 @@ using UnityEngine;
 public class Player_Technique_Play_EarthQuake : Player_Technique_Play__Base
 {
     [SerializeField]
-    GameObject blockPrefab;
+    GameObject blockBase;
     AudioSource blockCreateSound;
     // Start is called before the first frame update
     void Start()
@@ -50,7 +50,7 @@ public class Player_Technique_Play_EarthQuake : Player_Technique_Play__Base
         if (!GetComponent<Player_Technique_Container_MaterialBag>().MaterialsCheck()) return;
         GetComponent<Player_Technique_Container_MaterialBag>().AddEarthQuakeMaterials(-1);
 
-        GameObject tmp = Instantiate(blockPrefab);
+        GameObject tmp = Instantiate(blockBase);
         tmp.transform.position = new Vector3(posX, posY, 0);
         tmp.transform.parent = GameObject.FindWithTag("Create").transform;
         GameObject imp = Instantiate<GameObject>(impact);

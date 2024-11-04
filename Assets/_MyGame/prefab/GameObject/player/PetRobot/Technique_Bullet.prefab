@@ -48,7 +48,7 @@ MonoBehaviour:
   bulletBase: {fileID: 3284376109990628062, guid: 8d465513b25fcd14c974449136fe5a82, type: 3}
   moveDirectionX: 0
   moveDirectionY: 0
-  aimMarkPrefab: {fileID: 4282155916562330577, guid: f4746770dd2d82b43ade4bd52c4eda25, type: 3}
+  aimMarkBase: {fileID: 4282155916562330577, guid: f4746770dd2d82b43ade4bd52c4eda25, type: 3}
 --- !u!114 &6867516411708002268
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 //using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class playerMove : MonoBehaviour
+public class player_Move : MonoBehaviour
 {//todo;ノックバックを
     [SerializeField]
     eScaffoldType scaffold = eScaffoldType.block;

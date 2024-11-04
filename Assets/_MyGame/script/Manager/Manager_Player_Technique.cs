@@ -70,7 +70,7 @@ public class Manager_Player_Technique : MonoBehaviour
     public void OneRightButton() { AddOneType(1); }
 
     [SerializeField]
-    int two = -1;
+    int two = 0;
     public int GetTwo() { return two; }
     public void SetTwo(int two_) { two = two_; }
     public void AddTwoType(int add = 1)
@@ -122,14 +122,18 @@ public class Manager_Player_Technique : MonoBehaviour
     {
         DataLoad();
 
-
+        oldPlayerType = GetComponent<Manager_Player>().GetPlayerTypeIndex();
     }
 
     // Update is called once per frame
-    //void Update()
-    //{
+    int oldPlayerType;
+    void Update()
+    {
+        int playerTypeIndex = GetComponent<Manager_Player>().GetPlayerTypeIndex();
+        if (oldPlayerType == playerTypeIndex) return; oldPlayerType = playerTypeIndex;
+        SetOne(1);SetTwo(1);
 
-    //}
+    }
     public void DataSave()
     {
         PlayerPrefs.SetInt("playerTechniqueOne", GetOne());

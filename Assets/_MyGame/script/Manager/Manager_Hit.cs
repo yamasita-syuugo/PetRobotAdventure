@@ -106,8 +106,8 @@ public class Manager_Hit : MonoBehaviour
                         break;
                     case eEnemyType.Crow:
 
-                        CPUMove enemyMove = gameObject.GetComponent<CPUMove>();
-                        collision.GetComponent<playerMove>().AddPosition(enemyMove.GetMove() * enemyMove.GetMoveSpeed() * Time.deltaTime);
+                        CPU_Move enemyMove = gameObject.GetComponent<CPU_Move>();
+                        collision.GetComponent<player_Move>().AddPosition(enemyMove.GetMove() * enemyMove.GetMoveSpeed() * Time.deltaTime);
                         break;
                     case eEnemyType.Golem:
                         Vector3 enelgy = collision.transform.position - transform.position;

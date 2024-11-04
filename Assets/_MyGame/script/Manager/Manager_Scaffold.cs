@@ -4,24 +4,27 @@ using UnityEngine;
 
 public enum eScaffoldType
 {
-    none,
+    [InspectorName("")] none = -1,
 
     block,
     grass,
     ice,
 
-    scaffoldMax,
-}
-    public enum eCreatType
-    {
-        None,
+    //rail
+    //ÉgÉçÉbÉR
 
-        block, 
-        grass,
-        ice,
-        
-        random,
-    }
+    [InspectorName("")] scaffoldMax,
+}
+public enum eCreatType
+{
+    [InspectorName("")] None = -1,
+
+    block,
+    grass,
+    ice,
+
+    random,
+}
 public class Manager_Scaffold : MonoBehaviour
 {
     // Start is called before the first frame update

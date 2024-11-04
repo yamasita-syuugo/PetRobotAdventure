@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6540805436583780281}
   - component: {fileID: 1854644800787314216}
+  - component: {fileID: 2686942737440831655}
   - component: {fileID: 2403675410569501414}
   - component: {fileID: 2154685998020592153}
   - component: {fileID: 7677966443658356583}
-  - component: {fileID: 2686942737440831655}
   - component: {fileID: 6303793496024875221}
   - component: {fileID: 4994315160622053931}
   m_Layer: 0
@@ -91,6 +91,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2686942737440831655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5324167455278739525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5335f8cfbe8e4574e9931995c18ce567, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerType: 1
 --- !u!114 &2403675410569501414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,19 +152,6 @@ MonoBehaviour:
   situation: 1
   fallType: 3
   splashOfWater: {fileID: 0}
---- !u!114 &2686942737440831655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5324167455278739525}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5335f8cfbe8e4574e9931995c18ce567, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerType: 2
 --- !u!58 &6303793496024875221
 CircleCollider2D:
   m_ObjectHideFlags: 0

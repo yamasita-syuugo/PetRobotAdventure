@@ -10,12 +10,13 @@ using UnityEditor;
 
 public class Create_Scaffold : MonoBehaviour
 {
+    eScaffoldType scoffoldType = eScaffoldType.block;
     [SerializeField]
-    GameObject blockPrefab;
+    GameObject blockBase;
     [SerializeField]
-    GameObject icePrefab;
+    GameObject iceBase;
     [SerializeField]
-    GameObject grassPrefab;
+    GameObject grassBase;
 
     GameObject[] blocks;
 
@@ -82,49 +83,116 @@ public class Create_Scaffold : MonoBehaviour
 
         int blockNum = 0;
         blocks = new GameObject[fieldSize * fieldSize];
-        for (int x = 0; x < fieldSize; x++)
+                        GameObject tmpBase;
+                        GameObject tmpScaffold;
+        switch (0)
         {
-            for (int y = 0; y < fieldSize; y++)
-            {
-
-                if (randomBreak > Random.RandomRange(0, 100) &&
-                    !(fieldSize / 2 * 2 == fieldSize ? (x == fieldSize / 2 - 1 || x == fieldSize / 2) && (y == fieldSize / 2 - 1 || y == fieldSize / 2) : (x == fieldSize / 2) && (y == fieldSize / 2))) continue;
-
-                GameObject tmpPre;
-                switch (creatType)
+            case 0:     //正方形ステージ
+                for (int x = 0; x < fieldSize; x++)
                 {
-                    case eCreatType.block: tmpPre = blockPrefab; break;
-                    case eCreatType.ice: tmpPre = icePrefab; break;
-                    case eCreatType.grass: tmpPre = grassPrefab; break;
-                    case eCreatType.random:
-                        switch (Random.Range(0, 3))
-                        {
-                            case (int)eCreatType.block - 1:
-                                tmpPre = blockPrefab;
-                                break;
-                            case (int)eCreatType.ice - 1:
-                                tmpPre = icePrefab;
-                                break;
-                            case (int)eCreatType.grass - 1:
-                                tmpPre = grassPrefab;
-                                break;
-                            default: tmpPre = blockPrefab; break;
-                        }
-                        break;
+                    for (int y = 0; y < fieldSize; y++)
+                    {
+                        tmpBase = ScaffoldSelect();
 
-                    default: tmpPre = blockPrefab; break;
-                }
-                GameObject tmp = Instantiate<GameObject>(tmpPre, new Vector3(
+                        if (randomBreak > Random.RandomRange(0, 100) &&
+                            !(fieldSize / 2 * 2 == fieldSize ? (x == fieldSize / 2 - 1 || x == fieldSize / 2) &&
+                            (y == fieldSize / 2 - 1 || y == fieldSize / 2) : (x == fieldSize / 2) && (y == fieldSize / 2))) continue;
+
+                        tmpScaffold = Instantiate<GameObject>(tmpBase, new Vector3(
                     (x - (float)fieldSize / 2.0f) * blockSizeX + blockSizeX / 2.0f,
                     (y - (float)fieldSize / 2.0f) * blockSizeY + blockSizeY / 2.0f, 0),
                     Quaternion.identity);
-                tmp.transform.parent = transform;
+                        tmpScaffold.transform.parent = transform;
 
-                blocks[blockNum++] = tmp;
-            }
+                        blocks[blockNum++] = tmpScaffold;
+                    }
+                }
+                break;
+            case 1:
+                int scaffoldNum = fieldSize * fieldSize;
+                int[,] ScaffoldPos = new int[scaffoldNum, 2];//0 = x;1 = y;
+
+                ScaffoldPos[0, 0] = 0; ScaffoldPos[0, 1] = 0;
+
+                int old1Random = Random.RandomRange(0, 100);
+                if (old1Random <= 25) {         ScaffoldPos[1, 0] = ScaffoldPos[0, 0] + 1;  ScaffoldPos[1, 1] = ScaffoldPos[0, 1]; }
+                else if (old1Random <= 50) {    ScaffoldPos[1, 0] = ScaffoldPos[0, 0] - 1;  ScaffoldPos[1, 1] = ScaffoldPos[0, 1]; }
+                else if (old1Random <= 75) {    ScaffoldPos[1, 0] = ScaffoldPos[0, 0];      ScaffoldPos[1, 1] = ScaffoldPos[0, 1] + 1; }
+                else {                          ScaffoldPos[1, 0] = ScaffoldPos[0, 0];      ScaffoldPos[1, 1] = ScaffoldPos[0, 1] - 1; }
+                for(int i  = 0; i < 2; i++)
+                {
+                    tmpScaffold = Instantiate<GameObject>(ScaffoldSelect(), new Vector3(
+                ScaffoldPos[i, 0] * blockSizeX,
+                ScaffoldPos[i, 1] * blockSizeY, 0),
+                Quaternion.identity);
+                    tmpScaffold.transform.parent = transform;
+                }
+
+                for (int i = 2; i < scaffoldNum; i++)
+                {
+                    //ポジション設定
+                    {
+                        int[] old2Pos = { 0, 0 };
+                        int[] old1Pos = { 0, 0 };
+                        old2Pos[0] = ScaffoldPos[i - 2, 0]; old2Pos[1] = ScaffoldPos[i - 2, 1];
+                        old1Pos[0] = ScaffoldPos[i - 1, 0]; old1Pos[1] = ScaffoldPos[i - 1, 1];
+
+                        int random = Random.RandomRange(0, 100);
+                        if (random <= 90)
+                        {
+                            ScaffoldPos[i, 0] = old1Pos[0] + (old1Pos[0] - old2Pos[0]);
+                            ScaffoldPos[i, 1] = old1Pos[1] + (old1Pos[1] - old2Pos[1]);
+                        }
+                        else if (random <= 95)
+                        {
+                            ScaffoldPos[i, 0] = old1Pos[0] + (old1Pos[1] - old2Pos[1]);
+                            ScaffoldPos[i, 1] = old1Pos[1] + (old1Pos[0] - old2Pos[0]);
+                        }
+                        else
+                        {
+                            ScaffoldPos[i, 0] = old1Pos[0] - (old1Pos[1] - old2Pos[1]);
+                            ScaffoldPos[i, 1] = old1Pos[1] - (old1Pos[0] - old2Pos[0]);
+                        }
+
+                    }
+
+                    tmpScaffold = Instantiate<GameObject>(ScaffoldSelect(), new Vector3(
+                ScaffoldPos[i, 0] * blockSizeX,
+                ScaffoldPos[i, 1] * blockSizeY, 0),
+                Quaternion.identity);
+                    tmpScaffold.transform.parent = transform;
+
+                    blocks[blockNum++] = tmpScaffold;
+                }
+                break;
         }
-
         //BlockRegister();
+    }
+    GameObject ScaffoldSelect()
+    {
+        switch (creatType)
+        {
+            case eCreatType.block: return blockBase; break;
+            case eCreatType.ice: return iceBase; break;
+            case eCreatType.grass: return grassBase; break;
+            case eCreatType.random:
+                switch (Random.Range(0, (int)eScaffoldType.scaffoldMax))
+                {
+                    case (int)eCreatType.block:
+                        return blockBase;
+                        break;
+                    case (int)eCreatType.grass:
+                        return grassBase;
+                        break;
+                    case (int)eCreatType.ice:
+                        return iceBase;
+                        break;
+                    default: return blockBase; break;
+                }
+                break;
+
+            default: return blockBase; break;
+        }
     }
     //削除
     public void DeleteObject()

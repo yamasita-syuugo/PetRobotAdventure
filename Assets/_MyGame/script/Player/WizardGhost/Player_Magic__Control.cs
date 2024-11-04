@@ -50,6 +50,7 @@ public class Player_Magic__Control : MonoBehaviour
                 case 3: break;
                 case 4: break;
                 case 14: break;
+                case 341: Magic_Missile(); break;
                 case 242:
                     Magic_Teleport();
                     break;
@@ -62,6 +63,11 @@ public class Player_Magic__Control : MonoBehaviour
     {
         Debug.Log("MagicBase");
     }
+    private void Magic_Missile()
+    {
+        /*shot*/
+    }
+
     private void Magic_Teleport()
     {
         GameObject.FindWithTag("Player").transform.position = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
