@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1998681829758624129}
-  - component: {fileID: 7554564104969119466}
-  - component: {fileID: 102984520112073694}
-  - component: {fileID: 2770810001375524527}
   - component: {fileID: 5427013015651620011}
+  - component: {fileID: 102984520112073694}
   - component: {fileID: 7905152651848383049}
+  - component: {fileID: 7554564104969119466}
+  - component: {fileID: 2770810001375524527}
   m_Layer: 0
   m_Name: Creates_MainGame
   m_TagString: Create
@@ -36,7 +36,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7554564104969119466
+--- !u!114 &5427013015651620011
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,12 +45,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5232481471916696781}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95493381128652446a8ac987ed61c6d7, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fc5a08d3c174444cabe49f5fad5ccb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flagSpaunTime: 0
-  flagSpaunTimeReset: 10
-  flag: {fileID: 3931236629968427979, guid: 104a03322ca087f46842d655a082627e, type: 3}
 --- !u!114 &102984520112073694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,9 +63,36 @@ MonoBehaviour:
   blockBase: {fileID: 1716873108787873888, guid: 1e457425f77454a40bfbcda0b1240cdb, type: 3}
   iceBase: {fileID: 7285234217500196173, guid: ba29eb92117e8484c8561e9d49989168, type: 3}
   grassBase: {fileID: 7285234217500196173, guid: d978f503312ba7442804a407d42ade34, type: 3}
-  fieldSize: 9
+  movePanelBase: {fileID: 7285234217500196173, guid: 79e2b42da27f6bb4281353d1229dba0d, type: 3}
   creatType: 1
   randomBreak: 50.9
+--- !u!114 &7905152651848383049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5232481471916696781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22ba6674f5aeeb74eaa074a8fcb7cadd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7554564104969119466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5232481471916696781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95493381128652446a8ac987ed61c6d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flagSpaunTime: 0
+  flagSpaunTimeReset: 10
+  flag: {fileID: 3931236629968427979, guid: 104a03322ca087f46842d655a082627e, type: 3}
 --- !u!114 &2770810001375524527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,27 +124,3 @@ MonoBehaviour:
   golemCountReset: 1
   livingArmorCountReset: 15
   nextPosition: {x: 12, y: 12, z: 0}
---- !u!114 &5427013015651620011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5232481471916696781}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fc5a08d3c174444cabe49f5fad5ccb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7905152651848383049
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5232481471916696781}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22ba6674f5aeeb74eaa074a8fcb7cadd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

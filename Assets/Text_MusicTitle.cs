@@ -10,9 +10,6 @@ public class Text_MusicTitle : MonoBehaviour
     void Start()
     {
         manager_Music = GameObject.FindWithTag("Manager").GetComponent<Manager_Music>();
-
-        if (manager_Music.GetMusicBase(manager_Music.GetMusicIndex()) == null) { GetComponent<TextMeshProUGUI>().text = "ÅÙ - Ç»Çµ"; return; }
-        GetComponent<TextMeshProUGUI>().text = "ÅÙ - " + manager_Music.GetMusicBase(manager_Music.GetMusicIndex()).name;
     }
 
     // Update is called once per frame
@@ -21,7 +18,7 @@ public class Text_MusicTitle : MonoBehaviour
     {
         if (oldMusicIndex == manager_Music.GetMusicIndex()) return; oldMusicIndex = manager_Music.GetMusicIndex();
 
-        if (manager_Music.GetMusicBase(manager_Music.GetMusicIndex()) == null) { GetComponent<TextMeshProUGUI>().text = "ÅÙ - Ç»Çµ"; return; }
-        GetComponent<TextMeshProUGUI>().text = "ÅÙ - " + manager_Music.GetMusicBase(manager_Music.GetMusicIndex()).name;
+        if (manager_Music.GetMusicBase(oldMusicIndex) == null) { GetComponent<TextMeshProUGUI>().text = "ÅÙ - Ç»Çµ"; return; }
+        GetComponent<TextMeshProUGUI>().text = "ÅÙ - " + manager_Music.GetMusicBase(oldMusicIndex).name;
     }
 }

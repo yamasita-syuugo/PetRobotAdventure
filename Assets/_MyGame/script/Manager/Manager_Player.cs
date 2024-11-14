@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
+
 
 public enum ePlayerType
 {
@@ -46,23 +48,26 @@ public class Manager_Player : MonoBehaviour
     public void PlayerTypeIndexRightButton() { AddPlayerTypeIndex(1); }
 
     [Header("PlayerMoveSpeed")]
+    float[] playerSpeed = new float[(int)ePlayerType.playerTypeMax];
+    void SetPlayerSpeed()
+    {
+        playerSpeed[(int)ePlayerType.PetRobot] = petRobotTypeSpeed;
+        playerSpeed[(int)ePlayerType.WizardGhost] = wizardGhostTypeSpeed;
+        playerSpeed[(int)ePlayerType.Werewolf] = werewolfTypeSpeed;
+    }
     [SerializeField] float petRobotTypeSpeed = 1.0f;
     [SerializeField] float wizardGhostTypeSpeed = 0.6f;
     [SerializeField] float werewolfTypeSpeed = 1.6f;
     public float GetPlayerTypeSpeed(ePlayerType playerType)
     {
-        switch ((ePlayerType)playerTypeIndex)
-        {
-            case ePlayerType.PetRobot: return petRobotTypeSpeed; break;
-            case ePlayerType.WizardGhost: return wizardGhostTypeSpeed; break;
-            //case ePlayerType.Werewolf: return werewolfTypeSpeed; break;
-            default: return 1.0f;
-        }
+        return playerSpeed[(int)playerType];
     }
     // Start is called before the first frame update
     private void OnEnable()
     {
         DataLoad();
+
+        SetPlayerSpeed();
     }
     //void Start()
     //{

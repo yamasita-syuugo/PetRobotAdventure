@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7174793852350078459}
   - component: {fileID: 3389291411982607370}
   - component: {fileID: 5497755237350589795}
+  - component: {fileID: 7908455863333201580}
   - component: {fileID: 273949001904384709}
   - component: {fileID: 5798991024116548831}
   m_Layer: 0
@@ -34,12 +35,11 @@ Transform:
   m_GameObject: {fileID: 2637719474650202597}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 49676571916337742}
-  - {fileID: 2251773206328263675}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2566826918916351229
@@ -149,6 +149,8 @@ MonoBehaviour:
   stopEnelgy: 2
   moveSpeedSetting_grass: 0.7
   moveMaxSetting_grass: 0.7
+  moveSpeedSetting_movePanel: 4
+  moveMaxSetting_movePanel: 4
 --- !u!114 &7174793852350078459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,6 +192,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   frictionBase: 3
   energyMagnification: 2
+--- !u!114 &7908455863333201580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2637719474650202597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c426e51d10ceec34b877a306c21b22f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  use: 0000000000000000
 --- !u!50 &273949001904384709
 Rigidbody2D:
   serializedVersion: 4
@@ -299,48 +314,3 @@ MonoBehaviour:
   boardSizeX: 2
   boardSizeY: 2
   panel: 
---- !u!1 &8866836488508785559
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2251773206328263675}
-  - component: {fileID: 3964005167112652102}
-  m_Layer: 0
-  m_Name: Player_Technique
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2251773206328263675
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8866836488508785559}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2540863459560322167}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3964005167112652102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8866836488508785559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c426e51d10ceec34b877a306c21b22f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  use: 0100000001000000

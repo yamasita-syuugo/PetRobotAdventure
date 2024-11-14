@@ -22,6 +22,10 @@ public class Manager_Gate : MonoBehaviour
     bool gateOpen = false;
     public bool GetGateOpen() {  return gateOpen; }
     public void SetGateOpen(bool gateOn_) { gateOpen = gateOn_; }
+    [SerializeField]
+    Vector2 gatePos = new Vector2(0,0);
+    public Vector2 GetGatePos() { return gatePos; }
+    public void SerGatePos(Vector2 gatePos_) {  gatePos = gatePos_; }
     // Start is called before the first frame update
     void Start()
     {
@@ -38,8 +42,10 @@ public class Manager_Gate : MonoBehaviour
     {
         switch (gateOpenType)
         {
-            case eGateOpenType.none:break;
-                case eGateOpenType.scoreCheck_Posi_Destroy_Bom:
+            case eGateOpenType.none:
+                if (!GetGateOpen()) SetGateOpen(true);
+                break;
+            case eGateOpenType.scoreCheck_Posi_Destroy_Bom:
                 if (gateOpenNum <= Manager_Score.GetDestroyPoint()) SetGateOpen(true);
                 break;
         }

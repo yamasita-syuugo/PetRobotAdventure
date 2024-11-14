@@ -196,6 +196,8 @@ MonoBehaviour:
   stopEnelgy: 2
   moveSpeedSetting_grass: 0.7
   moveMaxSetting_grass: 0.7
+  moveSpeedSetting_movePanel: 3
+  moveMaxSetting_movePanel: 3
 --- !u!114 &4890998864718488723
 MonoBehaviour:
   m_ObjectHideFlags: 0

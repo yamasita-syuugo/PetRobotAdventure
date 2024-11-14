@@ -18,10 +18,12 @@ public class player_Move : MonoBehaviour
         moveSpeedSetting[(int)eScaffoldType.block] = moveSpeedSetting_block;
         moveSpeedSetting[(int)eScaffoldType.ice] = moveSpeedSetting_ice;
         moveSpeedSetting[(int)eScaffoldType.grass] = moveSpeedSetting_grass;
+        moveSpeedSetting[(int)eScaffoldType.movePanel] = moveSpeedSetting_movePanel;
 
         moveMaxSetting[(int)eScaffoldType.block] = moveMaxSetting_bloce;
         moveMaxSetting[(int)eScaffoldType.ice] = moveMaxSetting_ice;
         moveMaxSetting[(int)eScaffoldType.grass] = moveMaxSetting_grass;
+        moveMaxSetting[(int)eScaffoldType.movePanel] = moveMaxSetting_movePanel;
     }
 
     // Update is called once per frame
@@ -52,6 +54,10 @@ public class player_Move : MonoBehaviour
     float moveSpeedSetting_grass = 0.7f;
     [SerializeField]
     float moveMaxSetting_grass = 0.7f;
+    [SerializeField, Header("ˆÚ“®ƒpƒlƒ‹")]
+    float moveSpeedSetting_movePanel = 4.0f;
+    [SerializeField]
+    float moveMaxSetting_movePanel = 4.0f;
     void Move()
     {
         if (GetComponent<ObjectFall>().GetSituation() == ObjectFall.eSituation.fall ||
@@ -68,6 +74,9 @@ public class player_Move : MonoBehaviour
                 move /= 1 + 1f / 1000;
                 break;
             case eScaffoldType.grass:
+                move = new Vector3(0.0f, 0.0f, 0.0f);
+                break;
+            case eScaffoldType.movePanel:
                 move = new Vector3(0.0f, 0.0f, 0.0f);
                 break;
         }

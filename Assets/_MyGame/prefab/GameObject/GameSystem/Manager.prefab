@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 7225526075513606991}
   - component: {fileID: 7811643228076920322}
   - component: {fileID: 7101852417421446616}
+  - component: {fileID: 5505683979268049882}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Manager
@@ -142,6 +143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a183b4e599e5d7346935907608267d5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fieldCreatTypeIndex: 000000000000000000000000
+  fieldSize: 000000000000000000000000
 --- !u!114 &2216643563423679949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,9 +157,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff1003822586d7f47bf267be077c0f75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gateBase: []
+  gateBase:
+  - {fileID: 7979918696854808001, guid: 7cf276572f5ddc34f846bb40481bfe94, type: 3}
   gateIndex: 0
   gateOpen: 0
+  gatePos: {x: 0, y: 0}
 --- !u!114 &2980074079378534292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,6 +348,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prizeNum: 0
   gachaPoint: 0
+--- !u!114 &5505683979268049882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492805992380382826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e85921e781c36c43bbd31a1435b18d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1163399678311762220
 PrefabInstance:
   m_ObjectHideFlags: 0

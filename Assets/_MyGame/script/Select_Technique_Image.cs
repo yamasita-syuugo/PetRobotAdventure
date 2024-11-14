@@ -17,9 +17,13 @@ public class Select_Technique_Image : MonoBehaviour
     }
 
     // Update is called once per frame
-    int oldPlayerTypeIndex;
-    int oldTechniqueIndex = 0;
     void Update()
+    {
+        ImageChange();
+    }
+    int oldPlayerTypeIndex = -1;
+    int oldTechniqueIndex = -1;
+    void ImageChange()
     {
         int technique = 0;
         switch (techniqueControl)

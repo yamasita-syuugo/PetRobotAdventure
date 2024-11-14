@@ -40,7 +40,7 @@ public class Player_Technique__Control : MonoBehaviour
         for (int i = 0; i < techniqueNum; i++)
         {
             GameObject useTechnique = manager_Player_Technique.GetTechniqueBase(use[i]);
-
+            if (useTechnique == null) continue;
             technique[i] = Instantiate<GameObject>(useTechnique);
 
             technique[i].transform.parent = transform;
@@ -107,6 +107,8 @@ public class Player_Technique__Control : MonoBehaviour
     }
     void UseSelect_Mouse(int useNum)
     {
+        if (technique[useNum] == null) return;
+
         bool situation = false;
         PushTypeCheck(useNum);
         switch (pushType)

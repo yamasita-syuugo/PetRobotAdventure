@@ -10,18 +10,29 @@ using UnityEditor;
 
 public class Create_Scaffold : MonoBehaviour
 {
+    Manager_StageSelect manager_StageSelect;
+    Manager_Field manager_Field;
+
     eScaffoldType scoffoldType = eScaffoldType.block;
+
+    [Header("scaffoldBase")]
+    GameObject[] scaffoldBases = new GameObject[(int)eScaffoldType.scaffoldMax];
     [SerializeField]
     GameObject blockBase;
     [SerializeField]
     GameObject iceBase;
     [SerializeField]
     GameObject grassBase;
-
-    GameObject[] blocks;
-
     [SerializeField]
-    int fieldSize = 9;
+    GameObject movePanelBase;
+    void SetScaffoldBases() { 
+        scaffoldBases[(int)eScaffoldType.block] = blockBase;
+        scaffoldBases[(int)eScaffoldType.ice] = iceBase;
+        scaffoldBases[(int)eScaffoldType.grass] = grassBase;
+        scaffoldBases[(int)eScaffoldType.movePanel] = movePanelBase;
+    }
+
+
 
     [SerializeField]
     eCreatType creatType = eCreatType.block;
@@ -35,20 +46,15 @@ public class Create_Scaffold : MonoBehaviour
         if (randomBreak < 0.0f) randomBreak = 0.0f;
         if (randomBreak > 100.0f) randomBreak = 100.0f;
     }
-    //enum eRandomBreak
-    //{
-    //    None,
-
-    //    random0,
-    //    //random30,
-    //    random50,
-    //    random70,
-
-    //    randomBreakMax,
-    //}
     // Start is called before the first frame update
     void Start()
     {
+        SetScaffoldBases();
+
+        GameObject manager = GameObject.FindWithTag("Manager");
+        manager_StageSelect = manager.GetComponent<Manager_StageSelect>();
+        manager_Field = manager.GetComponent<Manager_Field>();
+
         Load();
 
         CreateObject();
@@ -58,19 +64,13 @@ public class Create_Scaffold : MonoBehaviour
     eStage oldStage = eStage.none;
     void Update()
     {
-        GameObject tmp = GameObject.FindWithTag("Manager");
-        if (tmp != null)
-        {
-            Manager_StageSelect manager_StageSelect = tmp.GetComponent<Manager_StageSelect>();
-            eStage stage = manager_StageSelect.GetStage();
-            if (oldStage != stage)
-            {
-                oldStage = stage;
-                SetCreatType(manager_StageSelect.GetScaffoldType()[(int)stage]);
-                SetRandomBreak(manager_StageSelect.GetRandomBreak()[(int)stage]);
-                CreateObject();
-            }
-        }
+        eStage stage = manager_StageSelect.GetStage();
+        if (oldStage == stage) return; oldStage = stage;
+        Debug.Log(stage);
+        SetCreatType(manager_Field.GetScaffoldType()[(int)stage]);
+        SetRandomBreak(manager_Field.GetRandomBreak()[(int)stage]);
+        CreateObject();
+
     }
 
     //生成
@@ -82,12 +82,15 @@ public class Create_Scaffold : MonoBehaviour
         int blockSizeY = 1;
 
         int blockNum = 0;
-        blocks = new GameObject[fieldSize * fieldSize];
+
+        int fieldSize = manager_Field.GetFieldSize(manager_StageSelect.GetStage());
+
+        GameObject[] blocks = new GameObject[fieldSize * fieldSize];
                         GameObject tmpBase;
                         GameObject tmpScaffold;
-        switch (0)
+        switch ((eFieldCreatType)manager_Field.GetFieldCreatTypeIndex(manager_StageSelect.GetStage()))
         {
-            case 0:     //正方形ステージ
+            case eFieldCreatType.stage:     //正方形ステージ
                 for (int x = 0; x < fieldSize; x++)
                 {
                     for (int y = 0; y < fieldSize; y++)
@@ -108,16 +111,16 @@ public class Create_Scaffold : MonoBehaviour
                     }
                 }
                 break;
-            case 1:
+            case eFieldCreatType.labyrinth:
                 int scaffoldNum = fieldSize * fieldSize;
                 int[,] ScaffoldPos = new int[scaffoldNum, 2];//0 = x;1 = y;
 
                 ScaffoldPos[0, 0] = 0; ScaffoldPos[0, 1] = 0;
 
-                int old1Random = Random.RandomRange(0, 100);
-                if (old1Random <= 25) {         ScaffoldPos[1, 0] = ScaffoldPos[0, 0] + 1;  ScaffoldPos[1, 1] = ScaffoldPos[0, 1]; }
-                else if (old1Random <= 50) {    ScaffoldPos[1, 0] = ScaffoldPos[0, 0] - 1;  ScaffoldPos[1, 1] = ScaffoldPos[0, 1]; }
-                else if (old1Random <= 75) {    ScaffoldPos[1, 0] = ScaffoldPos[0, 0];      ScaffoldPos[1, 1] = ScaffoldPos[0, 1] + 1; }
+                int old1Random = Random.RandomRange(0, 4);
+                if (old1Random <= 0) {          ScaffoldPos[1, 0] = ScaffoldPos[0, 0] + 1;  ScaffoldPos[1, 1] = ScaffoldPos[0, 1]; }
+                else if (old1Random <= 1) {     ScaffoldPos[1, 0] = ScaffoldPos[0, 0] - 1;  ScaffoldPos[1, 1] = ScaffoldPos[0, 1]; }
+                else if (old1Random <= 2) {     ScaffoldPos[1, 0] = ScaffoldPos[0, 0];      ScaffoldPos[1, 1] = ScaffoldPos[0, 1] + 1; }
                 else {                          ScaffoldPos[1, 0] = ScaffoldPos[0, 0];      ScaffoldPos[1, 1] = ScaffoldPos[0, 1] - 1; }
                 for(int i  = 0; i < 2; i++)
                 {
@@ -138,12 +141,12 @@ public class Create_Scaffold : MonoBehaviour
                         old1Pos[0] = ScaffoldPos[i - 1, 0]; old1Pos[1] = ScaffoldPos[i - 1, 1];
 
                         int random = Random.RandomRange(0, 100);
-                        if (random <= 90)
+                        if (random <= 80)
                         {
                             ScaffoldPos[i, 0] = old1Pos[0] + (old1Pos[0] - old2Pos[0]);
                             ScaffoldPos[i, 1] = old1Pos[1] + (old1Pos[1] - old2Pos[1]);
                         }
-                        else if (random <= 95)
+                        else if (random <= 90)
                         {
                             ScaffoldPos[i, 0] = old1Pos[0] + (old1Pos[1] - old2Pos[1]);
                             ScaffoldPos[i, 1] = old1Pos[1] + (old1Pos[0] - old2Pos[0]);
@@ -163,36 +166,16 @@ public class Create_Scaffold : MonoBehaviour
                     tmpScaffold.transform.parent = transform;
 
                     blocks[blockNum++] = tmpScaffold;
+
+                    if (i == scaffoldNum - 1) GameObject.FindWithTag("Manager").GetComponent<Manager_Gate>().SerGatePos(tmpScaffold.transform.position); 
                 }
                 break;
         }
-        //BlockRegister();
     }
     GameObject ScaffoldSelect()
     {
-        switch (creatType)
-        {
-            case eCreatType.block: return blockBase; break;
-            case eCreatType.ice: return iceBase; break;
-            case eCreatType.grass: return grassBase; break;
-            case eCreatType.random:
-                switch (Random.Range(0, (int)eScaffoldType.scaffoldMax))
-                {
-                    case (int)eCreatType.block:
-                        return blockBase;
-                        break;
-                    case (int)eCreatType.grass:
-                        return grassBase;
-                        break;
-                    case (int)eCreatType.ice:
-                        return iceBase;
-                        break;
-                    default: return blockBase; break;
-                }
-                break;
-
-            default: return blockBase; break;
-        }
+        if (creatType == eCreatType.random) return scaffoldBases[Random.Range(0, (int)eScaffoldType.scaffoldMax)];
+        return scaffoldBases[(int)creatType];
     }
     //削除
     public void DeleteObject()
@@ -200,27 +183,14 @@ public class Create_Scaffold : MonoBehaviour
         Transform[] blocks = GetComponentsInChildren<Transform>();
         if (blocks == null) return;
         for (int i = 0; i < blocks.Length; i++) if (blocks[i].tag == "Scaffold") DestroyImmediate(blocks[i].gameObject);
-
-        //BlockRegister();
-    }
-    //サーチ
-    void BlockRegister()
-    {
-        blocks = new GameObject[fieldSize * fieldSize];
-
-        for (int i = 0; i < fieldSize * fieldSize; i++)
-        {
-        }
-        GameObject[] tmp = GetComponentsInChildren<GameObject>();
-        blocks = tmp;
     }
 
     public void Load()
     {
         Manager_StageSelect manager_StageSelect = GameObject.FindWithTag("Manager").GetComponent<Manager_StageSelect>();
 
-        creatType = manager_StageSelect.GetScaffoldType()[(int)manager_StageSelect.GetStage()];
-        randomBreak = manager_StageSelect.GetRandomBreak()[(int)manager_StageSelect.GetStage()];
+        creatType = manager_Field.GetScaffoldType()[(int)manager_StageSelect.GetStage()];
+        randomBreak = manager_Field.GetRandomBreak()[(int)manager_StageSelect.GetStage()];
     }
 }
 

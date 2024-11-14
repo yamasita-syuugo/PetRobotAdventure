@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8994c6d51e05594390402dbb12471a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockPrefab: {fileID: 1716873108787873888, guid: 1e457425f77454a40bfbcda0b1240cdb, type: 3}
+  blockBase: {fileID: 1716873108787873888, guid: 1e457425f77454a40bfbcda0b1240cdb, type: 3}
   impact: {fileID: 1932533781327131626, guid: dc93cf7aeaf0e3540b72e63540f1084c, type: 3}
   flagToBlock: 3
 --- !u!114 &-255703585508960896
