@@ -14,16 +14,16 @@ public enum ePlayerTechniqueType
     //Wire,
 
 
-    [InspectorName("")] playerTechniqueTypeMax,
+    [InspectorName("")] max,
 }
 
 public enum ePlayerMagicType
-{
+{   //Å©Å®Å© : Teleport    Å´Å®Å™ : MagicMissile
     none,
 
     rubyRing, //âäñÇñ@
 
-    [InspectorName("")] playerMagicMax,
+    [InspectorName("")] max,
 }
 
 public enum ePlayerAttackType
@@ -32,7 +32,7 @@ public enum ePlayerAttackType
 
     MeleeAttack,
 
-    [InspectorName("")] playerAttackMax,
+    [InspectorName("")] max,
 }
 
 public class Manager_Player_Technique : MonoBehaviour
@@ -51,16 +51,16 @@ public class Manager_Player_Technique : MonoBehaviour
             case ePlayerType.none: break;
 
             case ePlayerType.PetRobot:
-                if (one < (int)ePlayerTechniqueType.none) one = (int)ePlayerTechniqueType.playerTechniqueTypeMax - 1;
-                else if (one >= (int)ePlayerTechniqueType.playerTechniqueTypeMax) one = (int)ePlayerTechniqueType.none;
+                if (one < (int)ePlayerTechniqueType.none) one = (int)ePlayerTechniqueType.max - 1;
+                else if (one >= (int)ePlayerTechniqueType.max) one = (int)ePlayerTechniqueType.none;
                 break;
             case ePlayerType.Werewolf:
-                if (one < (int)ePlayerAttackType.none) one = (int)ePlayerAttackType.playerAttackMax - 1;
-                else if (one >= (int)ePlayerAttackType.playerAttackMax) one = (int)ePlayerAttackType.none;
+                if (one < (int)ePlayerAttackType.none) one = (int)ePlayerAttackType.max - 1;
+                else if (one >= (int)ePlayerAttackType.max) one = (int)ePlayerAttackType.none;
                 break;
             case ePlayerType.WizardGhost:
-                if (one < (int)ePlayerMagicType.none) one = (int)ePlayerMagicType.playerMagicMax - 1;
-                else if (one >= (int)ePlayerMagicType.playerMagicMax) one = (int)ePlayerMagicType.none;
+                if (one < (int)ePlayerMagicType.none) one = (int)ePlayerMagicType.max - 1;
+                else if (one >= (int)ePlayerMagicType.max) one = (int)ePlayerMagicType.none;
                 break;
 
             case ePlayerType.playerTypeMax: break;
@@ -81,16 +81,16 @@ public class Manager_Player_Technique : MonoBehaviour
             case ePlayerType.none: break;
 
             case ePlayerType.PetRobot:
-                if (two < (int)ePlayerTechniqueType.none) two = (int)ePlayerTechniqueType.playerTechniqueTypeMax - 1;
-                else if (two >= (int)ePlayerTechniqueType.playerTechniqueTypeMax) two = (int)ePlayerTechniqueType.none;
+                if (two < (int)ePlayerTechniqueType.none) two = (int)ePlayerTechniqueType.max - 1;
+                else if (two >= (int)ePlayerTechniqueType.max) two = (int)ePlayerTechniqueType.none;
                 break;
             case ePlayerType.Werewolf:
-                if (two < (int)ePlayerAttackType.none) two = (int)ePlayerAttackType.playerAttackMax - 1;
-                else if (two >= (int)ePlayerAttackType.playerAttackMax) two = (int)ePlayerAttackType.none;
+                if (two < (int)ePlayerAttackType.none) two = (int)ePlayerAttackType.max - 1;
+                else if (two >= (int)ePlayerAttackType.max) two = (int)ePlayerAttackType.none;
                 break;
             case ePlayerType.WizardGhost:
-                if (two <= (int)ePlayerMagicType.none) two = (int)ePlayerMagicType.playerMagicMax - 1;
-                else if (two >= (int)ePlayerMagicType.playerMagicMax) two = (int)ePlayerMagicType.none;
+                if (two <= (int)ePlayerMagicType.none) two = (int)ePlayerMagicType.max - 1;
+                else if (two >= (int)ePlayerMagicType.max) two = (int)ePlayerMagicType.none;
                 break;
 
             case ePlayerType.playerTypeMax: break;
@@ -100,9 +100,9 @@ public class Manager_Player_Technique : MonoBehaviour
     public void TwoRightButton() { AddTwoType(1); }
 
     [SerializeField,Header("Technique")]
-    Sprite[] techniqueImage = new Sprite[(int)ePlayerTechniqueType.playerTechniqueTypeMax];
+    Sprite[] techniqueImage = new Sprite[(int)ePlayerTechniqueType.max];
     public Sprite GetTechniqueImage(int index_) { return techniqueImage[index_]; }
-    bool[] getTechnique = new bool[(int)ePlayerTechniqueType.playerTechniqueTypeMax];
+    bool[] getTechnique = new bool[(int)ePlayerTechniqueType.max];
     [SerializeField]
     GameObject []techniqueBase;
     public GameObject GetTechniqueBase(int index_) { return techniqueBase[index_]; }
@@ -110,13 +110,13 @@ public class Manager_Player_Technique : MonoBehaviour
     GameObject []techniqueUIBase;
     public GameObject GetTechniqueUIBase(int index_) { return techniqueUIBase[index_]; }
     [SerializeField,Header("Magic")]
-    Sprite[] magicImage = new Sprite[(int)ePlayerMagicType.playerMagicMax];
+    Sprite[] magicImage = new Sprite[(int)ePlayerMagicType.max];
     public Sprite GetMagicImage(int index_) { return magicImage[index_]; }
-    bool[] getMagic = new bool[(int)ePlayerMagicType.playerMagicMax];
+    bool[] getMagic = new bool[(int)ePlayerMagicType.max];
     [SerializeField,Header("Attack")]
-    Sprite[] attackImage = new Sprite[(int)ePlayerAttackType.playerAttackMax];
+    Sprite[] attackImage = new Sprite[(int)ePlayerAttackType.max];
     public Sprite GetAttackImage(int index_) { return attackImage[index_]; }
-    bool[] getAttack = new bool[(int)ePlayerAttackType.playerAttackMax];
+    bool[] getAttack = new bool[(int)ePlayerAttackType.max];
     // Start is called before the first frame update
     void Start()
     {
@@ -139,17 +139,17 @@ public class Manager_Player_Technique : MonoBehaviour
         PlayerPrefs.SetInt("playerTechniqueOne", GetOne());
         PlayerPrefs.SetInt("playerTechniqueTwo", GetTwo());
 
-        Manager_Save.BoolSave("GetPlayerTechnique", (int)ePlayerTechniqueType.playerTechniqueTypeMax, getTechnique);
-        Manager_Save.BoolSave("GetPlayerMagic", (int)ePlayerMagicType.playerMagicMax, getMagic);
-        Manager_Save.BoolSave("GetPlayerAttack", (int)ePlayerAttackType.playerAttackMax, getAttack);
+        Manager_Save.BoolSave("GetPlayerTechnique", (int)ePlayerTechniqueType.max, getTechnique);
+        Manager_Save.BoolSave("GetPlayerMagic", (int)ePlayerMagicType.max, getMagic);
+        Manager_Save.BoolSave("GetPlayerAttack", (int)ePlayerAttackType.max, getAttack);
     }
     public void DataLoad()
     {
         SetOne(PlayerPrefs.GetInt("playerTechniqueOne"));
         SetTwo(PlayerPrefs.GetInt("playerTechniqueTwo"));
 
-        Manager_Save.BoolLoad("GetPlayerTechnique", (int)ePlayerTechniqueType.playerTechniqueTypeMax, out getTechnique);
-        Manager_Save.BoolLoad("GetPlayerMagic", (int)ePlayerMagicType.playerMagicMax, out getMagic);
-        Manager_Save.BoolLoad("GetPlayerAttack", (int)ePlayerAttackType.playerAttackMax, out getAttack);
+        Manager_Save.BoolLoad("GetPlayerTechnique", (int)ePlayerTechniqueType.max, out getTechnique);
+        Manager_Save.BoolLoad("GetPlayerMagic", (int)ePlayerMagicType.max, out getMagic);
+        Manager_Save.BoolLoad("GetPlayerAttack", (int)ePlayerAttackType.max, out getAttack);
     }
 }

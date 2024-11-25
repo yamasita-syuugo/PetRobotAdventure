@@ -38,7 +38,10 @@ public class Manager_Hit : MonoBehaviour
 
     public void Hit(GameObject gameObject_, GameObject collision_)
     {
-        if (objectFall == null || objectFall.GetSituation() != ObjectFall.eSituation.normal) return;
+        if (objectFall == null ||
+            objectFall.GetSituation() != ObjectFall.eSituation.normal ||
+            objectFall.GetSituation() != ObjectFall.eSituation.fly ||
+            objectFall.GetSituation() != ObjectFall.eSituation.chanting) return;
 
         gameObject = gameObject_;
         collision = collision_;

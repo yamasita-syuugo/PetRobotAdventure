@@ -21,8 +21,8 @@ public class Manager_Camera : MonoBehaviour
 
         switch(oldStage)
         {
-            case eStage.bomOnly:cameraMoveSpeedDeray = 1.26f;break;
-            case eStage.golemOnly:cameraMoveSpeedDeray = 4f;break;
+            case eStage.fastPlay:cameraMoveSpeedDeray = 1.26f;break;
+            case eStage.golemLabyrinth:cameraMoveSpeedDeray = 4f;break;
             case eStage.lastGame:cameraMoveSpeedDeray = 1.26f;break;
         }
     }

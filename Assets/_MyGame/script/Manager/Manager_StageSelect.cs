@@ -9,8 +9,8 @@ public enum eStage
 {
     [InspectorName("")]none = -1,
 
-    bomOnly,
-    golemOnly,
+    fastPlay,
+    golemLabyrinth,
 
     lastGame,
 
@@ -76,7 +76,7 @@ public class Manager_StageSelect : MonoBehaviour
                 bool tmp = false;
                 switch ((eStage)stage)
                 {
-                    case eStage.bomOnly:
+                    case eStage.fastPlay:
                         switch ((eEnemyType)enemy)
                         {
                             case eEnemyType.Bom: tmp = true; break;
@@ -86,7 +86,7 @@ public class Manager_StageSelect : MonoBehaviour
                             case eEnemyType.EnemyMass: break;
                         }
                         break;
-                    case eStage.golemOnly:
+                    case eStage.golemLabyrinth:
                         switch ((eEnemyType)enemy)
                         {
                             case eEnemyType.Bom: break;
@@ -96,8 +96,7 @@ public class Manager_StageSelect : MonoBehaviour
                             case eEnemyType.EnemyMass: break;
                         }
                         break;
-                    case eStage.lastGame: break;
-                    default:
+                    case eStage.lastGame:
                         switch ((eEnemyType)enemy)
                         {
                             case eEnemyType.Bom: tmp = true; break;
@@ -107,6 +106,7 @@ public class Manager_StageSelect : MonoBehaviour
                             case eEnemyType.EnemyMass: break;
                         }
                         break;
+                    default:Debug.Log("StageEnemySelect : stageError"); break;
                 }
                 GetComponent<Manager_Enemy>().SetStageEnemy(stage, enemy, tmp);
             }
@@ -118,11 +118,11 @@ public class Manager_StageSelect : MonoBehaviour
         {
             switch ((eStage)stage)
             {
-                case eStage.bomOnly:
+                case eStage.fastPlay:
                     gateOpenType[stage] = eGateOpenType.scoreCheck_Posi_Destroy_Bom;
                     gateOpenNum[stage] = 15;
                     break;
-                case eStage.golemOnly:
+                case eStage.golemLabyrinth:
                     gateOpenType[stage] = eGateOpenType.none;
                     gateOpenNum[stage] = 30;
                     break;

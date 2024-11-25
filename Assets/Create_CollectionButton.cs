@@ -4,6 +4,8 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.Collections;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -27,6 +29,7 @@ public class Create_CollectionButton : MonoBehaviour
 
     [SerializeField]
     GameObject collection_Base;
+    [SerializeField,ReadOnly]
     GameObject[] collection = null;
 
     [SerializeField]
@@ -36,7 +39,7 @@ public class Create_CollectionButton : MonoBehaviour
     {
         if (collectionType == eCollectionType.None) Debug.Log(transform.name + " : TypeError");
 
-        manager = GameObject.FindWithTag("Manager");
+        if (manager == null) manager = GameObject.FindWithTag("Manager");
 
         CollectionCreate();
     }
@@ -46,6 +49,8 @@ public class Create_CollectionButton : MonoBehaviour
     int wideSize = 70;
     public void CollectionCreate()
     {
+        if(manager == null) manager = GameObject.FindWithTag("Manager");
+
         CollectionDelete();
 
         switch (collectionType)
@@ -173,12 +178,12 @@ public class Create_CollectionButton : MonoBehaviour
                 break;
         }
     }
-    void CollectionDelete()
+    public void CollectionDelete()
     {
         if (collection == null) return;
         for (int i = 0; i < collection.Length; i++)
         {
-            Destroy(collection[i]);
+            GameObject.DestroyImmediate(collection[i].gameObject);
         }
         collection = null;
     }
@@ -202,6 +207,10 @@ public class collection : Editor
         if (GUILayout.Button("Create", GUILayout.Width(100f)))
         {
             trg.CollectionCreate();
+        }
+        if (GUILayout.Button("Delete", GUILayout.Width(100f)))
+        {
+            trg.CollectionDelete();
         }
     }
 }

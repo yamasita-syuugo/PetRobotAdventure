@@ -53,16 +53,16 @@ public class Create_Enemy : MonoBehaviour
     }
     void EnemySpaunSchedule()
     {
-        if(player == null) { Debug.Log("Player == null"); player = GameObject.FindWithTag("Player"); return; }
+        if(player == null) { player = GameObject.FindWithTag("Player"); return; }
         if (player.GetComponent<ObjectFall>().GetSituation() != ObjectFall.eSituation.normal) return;
         if (timeManager.GetTimeStop()) return;
 
         switch (stage)
         {
-            case eStage.bomOnly:
+            case eStage.fastPlay:
                 EnemySpawnTimer(eWaveType.bom);
                 break;
-            case eStage.golemOnly:
+            case eStage.golemLabyrinth:
                 EnemySpawnTimer(eWaveType.golem);
                 break;
 

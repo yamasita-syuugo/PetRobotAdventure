@@ -16,8 +16,16 @@ public class Select_Chara_Image : MonoBehaviour
     int oldPlayerType = -1;
     void Update()
     {
-        int playerType = manager_Player.GetPlayerTypeIndex();
-        if (oldPlayerType == playerType) return; oldPlayerType = playerType;
-        GetComponent<Image>().sprite = manager_Player.GetPlayerTypeBase(manager_Player.GetPlayerTypeIndex()).GetComponent<SpriteRenderer>().sprite;
+        int playerTypeIndex = manager_Player.GetPlayerTypeIndex();
+        if (oldPlayerType == playerTypeIndex) return; oldPlayerType = playerTypeIndex;
+
+        RuntimeAnimatorController animator = manager_Player.GetPlayerIconAnimaterBase(playerTypeIndex);
+
+        if (animator != null) GetComponent<Animator>().runtimeAnimatorController = animator;
+        else
+        {
+            GetComponent<Animator>().runtimeAnimatorController = null;
+            GetComponent<Image>().sprite = manager_Player.GetPlayerTypeBase(playerTypeIndex).GetComponent<SpriteRenderer>().sprite;
+        }
     }
 }

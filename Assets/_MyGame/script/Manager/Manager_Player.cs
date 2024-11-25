@@ -25,6 +25,17 @@ public class Manager_Player : MonoBehaviour
     public GameObject GetPlayerTypeBase(int index_) {  return playerTypeBase[index_]; }
     public GameObject[] GetPlayerTypeBases() {  return playerTypeBase; }
     [SerializeField]
+    RuntimeAnimatorController[] playerIconAnimaterBase;
+    void InitializePlayerIconAnimaterBase() { }
+    public RuntimeAnimatorController GetPlayerIconAnimaterBase(int index)
+    {
+        if (index >= playerIconAnimaterBase.Length)
+        {
+            Debug.Log(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + " : " + GetPlayerTypeBase(playerTypeIndex).name + " none Animator"); return null;
+        }
+        return playerIconAnimaterBase[index];
+    }
+    [SerializeField]
     bool[] getSituation = new bool[16];
     public bool GetGetSituation(int index) { return getSituation[index]; }
     public void SetGetSituation(int index, bool getSituation_) { getSituation[index] = getSituation_; }

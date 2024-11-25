@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2838408346344982493}
+  - component: {fileID: 1596946353752216215}
   - component: {fileID: 9181468011796050528}
   - component: {fileID: 4625129172083975772}
   - component: {fileID: 97824935476773763}
@@ -52,6 +53,18 @@ Transform:
   - {fileID: 5263421637708853832}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1596946353752216215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492805992380382826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f56f00428eddeff409e030bb3c572e75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &9181468011796050528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,6 +95,8 @@ MonoBehaviour:
   - {fileID: 2637719474650202597, guid: d0a0ddf47f57ef74baba4882b0d50694, type: 3}
   - {fileID: 5324167455278739525, guid: 9f8d3bc841644ca429c842f522042d13, type: 3}
   - {fileID: 3585340084940987012, guid: cfbd5a5058f843941aa9424c127d1520, type: 3}
+  playerIconAnimaterBase:
+  - {fileID: 9100000, guid: 506a6060f6a657e46afba3dce3483f5f, type: 2}
   getSituation: 000000
   playerTypeIndex: 0
   petRobotTypeSpeed: 1

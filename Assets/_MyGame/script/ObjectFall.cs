@@ -135,11 +135,17 @@ public class ObjectFall : MonoBehaviour
                 GameObject.FindWithTag("Manager").GetComponent<Manager_GameSituation>().DataSave();
                 UnityEngine.SceneManagement.SceneManager.LoadScene("Result");
             }
+            else if(tag == "Enemy")
+            {
+                GameObject.FindWithTag("Create").GetComponent<Create_Flag>().FlagSpaun();
+
+                Destroy(gameObject);
+            }
             else Destroy(gameObject);
         }
     }
 
-    int fallFrame = 3;
+    int fallFrame = 10;
     private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.tag == "Scaffold")

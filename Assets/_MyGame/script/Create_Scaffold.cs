@@ -66,7 +66,7 @@ public class Create_Scaffold : MonoBehaviour
     {
         eStage stage = manager_StageSelect.GetStage();
         if (oldStage == stage) return; oldStage = stage;
-        Debug.Log(stage);
+        Debug.Log("stageName = " + stage);
         SetCreatType(manager_Field.GetScaffoldType()[(int)stage]);
         SetRandomBreak(manager_Field.GetRandomBreak()[(int)stage]);
         CreateObject();

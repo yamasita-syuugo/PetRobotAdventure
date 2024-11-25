@@ -25,7 +25,7 @@ public class PlayerHit : MonoBehaviour
             switch (GetComponent<PlayerType>().GetPlayerType())
             {
                 case ePlayerType.PetRobot:
-                    GameObject.Find("Player_Technique").GetComponent<Player_Technique__Control>().GetPoint();
+                    GameObject.FindWithTag("Player").GetComponent<Player_Technique__Control>().GetPoint();
                     break;
                 case ePlayerType.WizardGhost: break;
             }

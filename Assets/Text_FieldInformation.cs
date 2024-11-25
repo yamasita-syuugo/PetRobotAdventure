@@ -10,8 +10,9 @@ public class Text_FieldInformation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        manager_StageSelect = GameObject.FindWithTag("Manager").GetComponent<Manager_StageSelect>();
-        manager_Field = GameObject.FindWithTag("Manager").GetComponent<Manager_Field>();
+        GameObject manager = GameObject.FindWithTag("Manager");
+        manager_StageSelect = manager.GetComponent<Manager_StageSelect>();
+        manager_Field = manager.GetComponent<Manager_Field>();
     }
 
     // Update is called once per frame
@@ -22,8 +23,9 @@ public class Text_FieldInformation : MonoBehaviour
     }
     void TextChange()
     {
-        if (oldFieldIndex == manager_Field.GetFieldCreatTypeIndex(manager_StageSelect.GetStage())) return; oldFieldIndex = manager_Field.GetFieldCreatTypeIndex(manager_StageSelect.GetStage());
-        Debug.Log("Text_FieldInformation.TextChange");
+        int fieldIndex = manager_Field.GetFieldCreatTypeIndex(manager_StageSelect.GetStage());
+        if (oldFieldIndex == fieldIndex) return; oldFieldIndex = fieldIndex;
+
         string fieldCreatTypeName = "error";
         switch ((eFieldCreatType)oldFieldIndex)
         {

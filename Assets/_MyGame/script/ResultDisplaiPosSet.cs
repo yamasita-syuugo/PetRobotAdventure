@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
+
 
 
 #if UNITY_EDITOR
@@ -102,13 +103,22 @@ public class ResultDisplaiPosSet : MonoBehaviour
 #if UNITY_EDITOR
     public void ImagesPosSetting()
     {
+        CanvasScaler.ScaleMode scaleMode = GetComponentInParent<CanvasScaler>().uiScaleMode;
+
         int imagesNum = GetComponentsInChildren<Image>().Length;
         transform.position = GetComponentInParent<Canvas>().transform.position;
         Image[] images = new Image[imagesNum];
         images = GetComponentsInChildren<Image>();
         for (int i = 0; i < imagesNum; i++)
         {
-            images[i].transform.position = new Vector3(((imagesNum / 2) * -100) + i * 100,100,0);
+            if (scaleMode == CanvasScaler.ScaleMode.ScaleWithScreenSize)
+            {
+                images[i].transform.position = new Vector3(((imagesNum / 2) * -3 + 1.5f) + i * 3, 2, 0);
+            }
+            else if (scaleMode == CanvasScaler.ScaleMode.ConstantPixelSize)
+            {
+                images[i].transform.position = new Vector3(((imagesNum / 2) * -100) + i * 100, 100, 0);
+            }
         }
     }
 # endif

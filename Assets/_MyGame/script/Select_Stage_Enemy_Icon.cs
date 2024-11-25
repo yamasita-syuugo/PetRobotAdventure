@@ -48,11 +48,11 @@ public class Select_Stage_Enemy_Icon : MonoBehaviour
     {
         EnemyDistance();
     }
-    eStage oldStage = eStage.none;
+    int oldStage = -1;
     void EnemyDistance()
     {
-        Manager_StageSelect manager_StageSelect = GameObject.FindWithTag("Manager").GetComponent<Manager_StageSelect>();
-        if (oldStage == manager_StageSelect.GetStage()) return; oldStage = manager_StageSelect.GetStage();
+        int stageIndex = (int)GameObject.FindWithTag("Manager").GetComponent<Manager_StageSelect>().GetStage();
+        if (oldStage == stageIndex) return; oldStage = stageIndex;
 
         bool[,] enemy = GameObject.FindWithTag("Manager").GetComponent<Manager_Enemy>().GetStageEnemy();
         for (int i = 0; i < (int)enemyIcon.Length; i++)

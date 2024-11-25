@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6540805436583780281}
   - component: {fileID: 1854644800787314216}
+  - component: {fileID: -5926833369254169092}
   - component: {fileID: 2686942737440831655}
   - component: {fileID: 2403675410569501414}
   - component: {fileID: 2154685998020592153}
@@ -32,8 +33,8 @@ Transform:
   m_GameObject: {fileID: 5324167455278739525}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8682129453008157874}
@@ -79,8 +80,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -1454678328, guid: 2af43fa50e6483e4892fdb2454c10798, type: 3}
+  m_SortingOrder: 10
+  m_Sprite: {fileID: -1873026843, guid: 8e423a27e6d7b3548b42427f2f26cebb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -91,6 +92,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &-5926833369254169092
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5324167455278739525}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: aa488d4a0ca244a4eb2927d95e6314b7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &2686942737440831655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,6 +147,8 @@ MonoBehaviour:
   stopEnelgy: 2
   moveSpeedSetting_grass: 0.7
   moveMaxSetting_grass: 0.7
+  moveSpeedSetting_movePanel: 6
+  moveMaxSetting_movePanel: 6
 --- !u!114 &2154685998020592153
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -71,13 +71,13 @@ public class Manager_Field : MonoBehaviour
         {
             switch ((eStage)stage)
             {
-                case eStage.bomOnly:
+                case eStage.fastPlay:
                     fieldCreatTypeIndex[stage] = (int)eFieldCreatType.stage;
                     fieldSize[stage] = 7;
                     creatType[stage] = eCreatType.block;
                     randomBreak[stage] = 0.0f;
                     break;
-                case eStage.golemOnly:
+                case eStage.golemLabyrinth:
                     fieldCreatTypeIndex[stage] = (int)eFieldCreatType.labyrinth;
                     fieldSize[stage] = 9;
                     creatType[stage] = eCreatType.movePanel;

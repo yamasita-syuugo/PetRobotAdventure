@@ -31,9 +31,11 @@ public class Select_Technique_Image : MonoBehaviour
             case eTechniqueControl.one:technique = manager_Player_Technique.GetOne();break; 
             case eTechniqueControl.two:technique = manager_Player_Technique.GetTwo();break; 
         }
-        if (oldTechniqueIndex == technique && oldPlayerTypeIndex == manager_Player.GetPlayerTypeIndex()) return;
-        oldTechniqueIndex = technique; oldPlayerTypeIndex = manager_Player.GetPlayerTypeIndex();
+        int playerTypeIndex = manager_Player.GetPlayerTypeIndex();
+        if (oldTechniqueIndex == technique && oldPlayerTypeIndex == playerTypeIndex) return;
+        oldTechniqueIndex = technique; oldPlayerTypeIndex = playerTypeIndex;
 
+        GetComponent<Image>().color = Color.white;
         switch ((ePlayerType)manager_Player.GetPlayerTypeIndex())
         {
             case ePlayerType.PetRobot:
