@@ -82,6 +82,7 @@ public class Create_CollectionButton : MonoBehaviour
                     if (manager.GetComponent<Manager_Player>().GetGetSituation(i))
                     {
                         tmp.GetComponentInChildren<SpriteRenderer>().sprite = manager.GetComponent<Manager_Player>().GetPlayerTypeBase(i).GetComponent<SpriteRenderer>().sprite;
+                        tmp.GetComponentInChildren<Animator>().runtimeAnimatorController = manager.GetComponent<Manager_Player>().GetPlayerTypeBase(i).GetComponent<Animator>().runtimeAnimatorController;
                         int tmpInt = i; //iÇíºê⁄ì¸ÇÍÇÈÇ∆forï∂ÇÃiÇÃç≈èIílÇÃílÇ…Ç»ÇÈ
                         tmp.GetComponent<Button>().onClick.AddListener(() => manager.GetComponent<Manager_Player>().SetPlayerTypeIndex(tmpInt));
                         tmp.GetComponentInChildren<TextMeshProUGUI>().text = "";
@@ -125,7 +126,7 @@ public class Create_CollectionButton : MonoBehaviour
                     tmp.transform.parent = transform;
                     tmp.transform.localPosition = new Vector2(i * wideSize, 0);
                     tmp.transform.localScale = new Vector2(1, 1);
-                    tmp.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector2(5.5f, 5.5f);
+                    tmp.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector2(2f, 2f);
 
                     if (manager.GetComponent<Manager_MousePointerType>().GetGetSituation(i))
                     {
