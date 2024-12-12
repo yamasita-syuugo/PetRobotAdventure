@@ -23,7 +23,7 @@ public class Manager_Enemy : MonoBehaviour
     Manager_StageSelect manager_StageSelect;
 
     //敵の出現パターン
-    bool[,] stageEnemy = new bool[(int)eStage.eStageMax, (int)eEnemyType.enemyTypeMax];
+    bool[,] stageEnemy = new bool[(int)eStage.max, (int)eEnemyType.enemyTypeMax];
     public bool[,] GetStageEnemy() { return stageEnemy; }
     public void SetStageEnemy(int stage, int enemy,bool spaun) { stageEnemy[stage, enemy] = spaun; }
     // Start is called before the first frame update

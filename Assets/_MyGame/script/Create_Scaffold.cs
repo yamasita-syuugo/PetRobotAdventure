@@ -46,6 +46,7 @@ public class Create_Scaffold : MonoBehaviour
         if (randomBreak < 0.0f) randomBreak = 0.0f;
         if (randomBreak > 100.0f) randomBreak = 100.0f;
     }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,7 +67,7 @@ public class Create_Scaffold : MonoBehaviour
     {
         eStage stage = manager_StageSelect.GetStage();
         if (oldStage == stage) return; oldStage = stage;
-        Debug.Log("stageName = " + stage);
+        Debug.Log("stageName : " + stage);
         SetCreatType(manager_Field.GetScaffoldType()[(int)stage]);
         SetRandomBreak(manager_Field.GetRandomBreak()[(int)stage]);
         CreateObject();

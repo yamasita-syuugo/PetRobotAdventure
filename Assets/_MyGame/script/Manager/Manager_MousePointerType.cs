@@ -18,19 +18,16 @@ public class Manager_MousePointerType : MonoBehaviour
         if (mousePointerIndex >= mousePointerAnimations.Length) mousePointerIndex = 0;
         if (mousePointerIndex < 0) mousePointerIndex = mousePointerAnimations.Length - 1;
     }
-    [SerializeField]
-    bool[] getSituation = new bool [16];
-    public bool GetGetSituation(int index) {  return getSituation[index]; }
-    public void SetGetSituation(int index, bool getSituation_) { getSituation[index] = getSituation_; }
+    //GetSituation
+    public bool GetGetSituation(int index) {  return GetComponent<Manager_Collection>().GetGetSituation(eCollectionType.MousePointer,index) ; }
+    public void SetGetSituation(int index, bool getSituation_) { GetComponent<Manager_Collection>().SetGetSituation(eCollectionType.MousePointer, index, getSituation_); }
     public void DataSave()
     {
         PlayerPrefs.SetInt("mousePointerIndex", mousePointerIndex);
-        Manager_Save.BoolSave("MousePointerGetSituation", mousePointerAnimations.Length, getSituation);
     }
     public void DataLoad()
     {
         mousePointerIndex = PlayerPrefs.GetInt("mousePointerIndex");
-        Manager_Save.BoolLoad("MousePointerGetSituation", mousePointerAnimations.Length, out getSituation);
     }
     // Start is called before the first frame update
     void Start()

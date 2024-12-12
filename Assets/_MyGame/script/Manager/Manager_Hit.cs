@@ -21,8 +21,6 @@ public class Manager_Hit : MonoBehaviour
     void Start()
     {
         explosionSource = GameObject.FindWithTag("Manager").GetComponent<Manager_Sounds>().GetSound("explosionSound");
-        GameObject tmp = GameObject.FindWithTag("Player");
-        if(tmp != null) objectFall = tmp.GetComponent<ObjectFall>();
     }
 
     // Update is called once per frame
@@ -38,10 +36,17 @@ public class Manager_Hit : MonoBehaviour
 
     public void Hit(GameObject gameObject_, GameObject collision_)
     {
-        if (objectFall == null ||
-            objectFall.GetSituation() != ObjectFall.eSituation.normal ||
-            objectFall.GetSituation() != ObjectFall.eSituation.fly ||
-            objectFall.GetSituation() != ObjectFall.eSituation.chanting) return;
+        if (objectFall == null)
+        {
+            GameObject tmp = GameObject.FindWithTag("Player");
+            if (tmp != null) objectFall = tmp.GetComponent<ObjectFall>();
+            else return;
+        }
+
+        if (objectFall.GetSituation() == ObjectFall.eSituation.normal ||
+            objectFall.GetSituation() == ObjectFall.eSituation.fly ||
+            objectFall.GetSituation() == ObjectFall.eSituation.chanting) ;
+        else return;
 
         gameObject = gameObject_;
         collision = collision_;

@@ -35,10 +35,9 @@ public class Manager_Player : MonoBehaviour
         }
         return playerIconAnimaterBase[index];
     }
-    [SerializeField]
-    bool[] getSituation = new bool[16];
-    public bool GetGetSituation(int index) { return getSituation[index]; }
-    public void SetGetSituation(int index, bool getSituation_) { getSituation[index] = getSituation_; }
+    //getSituation
+    public bool GetGetSituation(int index) { return  GetComponent<Manager_Collection>().GetGetSituation(eCollectionType.Player,index); }
+    public void SetGetSituation(int index, bool getSituation_) { GetComponent<Manager_Collection>().SetGetSituation(eCollectionType.Player, index, getSituation_); }
     [SerializeField]
     int playerTypeIndex = 0;
     public int GetPlayerTypeIndex() { return playerTypeIndex; }
@@ -94,11 +93,9 @@ public class Manager_Player : MonoBehaviour
     public void DataSave()
     {
         PlayerPrefs.SetInt("playerTypeIndex", playerTypeIndex);
-        Manager_Save.BoolSave("PlayerGetSituation", playerTypeBase.Length, getSituation);
     }
     public void DataLoad()
     {
         SetPlayerTypeIndex(PlayerPrefs.GetInt("playerTypeIndex"));
-        Manager_Save.BoolLoad("PlayerGetSituation", playerTypeBase.Length, out getSituation);
     }
 }

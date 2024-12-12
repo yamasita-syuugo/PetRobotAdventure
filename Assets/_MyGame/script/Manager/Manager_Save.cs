@@ -16,6 +16,8 @@ public class Manager_Save : MonoBehaviour
         GetComponent<Manager_MousePointerType>().DataSave();
         GetComponent<Manager_Music>().DataSave();
 
+        GetComponent<Manager_Collection>().DataSave();
+
         GetComponent<Manager_Gacha>().DataSave();
 
         GetComponent<Manager_GameSituation>().DataSave();   //ƒNƒŠƒA‚©Ž¸”s‚©‚Ì•Û‘¶
@@ -31,6 +33,8 @@ public class Manager_Save : MonoBehaviour
         GetComponent<Manager_BackgroundType>().DataLoad();
         GetComponent<Manager_MousePointerType>().DataLoad();
         GetComponent<Manager_Music>().DataLoad();
+
+        GetComponent<Manager_Collection>().DataLoad();
 
         GetComponent<Manager_Gacha>().DataLoad();
 

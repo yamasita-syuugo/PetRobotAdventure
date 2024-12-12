@@ -20,19 +20,16 @@ public class Manager_Music : MonoBehaviour
     }
     public void MusicIndexLeftButton() { AddMusicIndex(-1); }
     public void MusicIndexRightButton() { AddMusicIndex(1); }
-    [SerializeField]
-    bool[] getSituation = new bool[16];
-    public bool GetGetSituation(int index) { return getSituation[index]; }
-    public  void SetGetSituation(int index ,bool getSituation_) { getSituation[index] = getSituation_; }
+    //GetSituation
+    public bool GetGetSituation(int index) { return GetComponent<Manager_Collection>().GetGetSituation(eCollectionType.Music,index); }
+    public  void SetGetSituation(int index ,bool getSituation_) { GetComponent<Manager_Collection>().SetGetSituation(eCollectionType.Music, index,getSituation_); }
     public void DataSave()
     {
         PlayerPrefs.SetInt("musicIndex", musicIndex);
-        Manager_Save.BoolSave("MusicGetSituation", musicBase.Length, getSituation);
     }
     public void DataLoad()
     {
         musicIndex = PlayerPrefs.GetInt("musicIndex");
-        Manager_Save.BoolLoad("MusicGetSituation", musicBase.Length, out getSituation);
     }
     // Start is called before the first frame update
     void Start()

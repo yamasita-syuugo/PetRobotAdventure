@@ -7,6 +7,7 @@ public enum eGateOpenType
     [InspectorName("")] none,
 
     scoreCheck_Posi_Destroy_Bom,
+    time_Countdown,
 
     [InspectorName("")] gateOpenTypeMax,
 }
@@ -21,7 +22,7 @@ public class Manager_Gate : MonoBehaviour
     [SerializeField]
     bool gateOpen = false;
     public bool GetGateOpen() {  return gateOpen; }
-    public void SetGateOpen(bool gateOn_) { gateOpen = gateOn_; }
+    public void SetGateOpen(bool gateOn_ = true) { gateOpen = gateOn_; }
     [SerializeField]
     Vector2 gatePos = new Vector2(0,0);
     public Vector2 GetGatePos() { return gatePos; }
@@ -43,10 +44,13 @@ public class Manager_Gate : MonoBehaviour
         switch (gateOpenType)
         {
             case eGateOpenType.none:
-                if (!GetGateOpen()) SetGateOpen(true);
+                if (!GetGateOpen()) SetGateOpen();
+                break;
+            case eGateOpenType.time_Countdown:
+                if (GetComponent<Manager_Time>().GetPlayTime() >= gateOpenNum) SetGateOpen();
                 break;
             case eGateOpenType.scoreCheck_Posi_Destroy_Bom:
-                if (gateOpenNum <= Manager_Score.GetDestroyPoint()) SetGateOpen(true);
+                if (Manager_Score.GetDestroyPoint() >= gateOpenNum) SetGateOpen();
                 break;
         }
         if (false) SetGateOpen(true);

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Select_Stage_Image : MonoBehaviour
 {
     [SerializeField]
-    Sprite[] StageImage = new Sprite[(int)eStage.eStageMax];
+    Sprite[] StageImage = new Sprite[(int)eStage.max];
     // Start is called before the first frame update
     //void Start()
     //{
@@ -19,7 +19,7 @@ public class Select_Stage_Image : MonoBehaviour
     {
         eStage stage = GameObject.FindWithTag("Manager").GetComponentInParent<Manager_StageSelect>().GetStage();
         if (oldStage == stage) return; oldStage = stage;
-        if (oldStage == eStage.none) return; if (oldStage == eStage.eStageMax) return;
+        if (oldStage == eStage.none) return; if (oldStage == eStage.max) return;
         GetComponent<Image>().sprite = StageImage[(int)stage];
     }
 }

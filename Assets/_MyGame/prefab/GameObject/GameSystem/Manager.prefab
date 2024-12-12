@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9181468011796050528}
   - component: {fileID: 4625129172083975772}
   - component: {fileID: 97824935476773763}
+  - component: {fileID: 5272878437757293859}
   - component: {fileID: 7140798705473952029}
   - component: {fileID: 5653854550284804236}
   - component: {fileID: 2216643563423679949}
@@ -65,6 +66,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f56f00428eddeff409e030bb3c572e75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  getSituation_Stage: 000000
+  getSituation_Player: 00000000
+  getSituation_MousePointer: 0000000000
+  getSituation_Background: 0000000000
+  getSituation_Music: 0000000000
 --- !u!114 &9181468011796050528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,7 +84,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stage: 0
-  getStage: 010000
 --- !u!114 &4625129172083975772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,7 +102,7 @@ MonoBehaviour:
   - {fileID: 3585340084940987012, guid: cfbd5a5058f843941aa9424c127d1520, type: 3}
   playerIconAnimaterBase:
   - {fileID: 9100000, guid: 506a6060f6a657e46afba3dce3483f5f, type: 2}
-  getSituation: 000000
+  - {fileID: 9100000, guid: da49c1fbb734baa4783d6ff7b34ecfa9, type: 2}
   playerTypeIndex: 0
   petRobotTypeSpeed: 1
   wizardGhostTypeSpeed: 0.6
@@ -134,6 +139,22 @@ MonoBehaviour:
   attackImage:
   - {fileID: 0}
   - {fileID: 21300000, guid: c9602b25a5f348948ae57e664a2baa30, type: 3}
+--- !u!114 &5272878437757293859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492805992380382826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe8cd2c3e5587b43b2d379e25fd329a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  medalImageBase:
+  - {fileID: 0}
+  - {fileID: 21300000, guid: 818f3b1d10b1fe54997728c3e4c99eaa, type: 3}
+  medalType: 000000000000000000000000
 --- !u!114 &7140798705473952029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,8 +179,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a183b4e599e5d7346935907608267d5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fieldCreatTypeIndex: 000000000000000000000000
-  fieldSize: 000000000000000000000000
 --- !u!114 &2216643563423679949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,7 +214,6 @@ MonoBehaviour:
   - {fileID: 9100000, guid: 1d4ad5eafa79ae14284521b46679c8b6, type: 2}
   - {fileID: 9100000, guid: 0d8037444fdcf8144908b264c1a4b396, type: 2}
   mousePointerIndex: 0
-  getSituation: 01000000
 --- !u!114 &4456441095281617581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,7 +230,6 @@ MonoBehaviour:
   backGroundBase:
   - {fileID: 21300000, guid: 00995bb8248ea054d87a097d10b30223, type: 3}
   - {fileID: 21300000, guid: 464242f83045cf24fa4e17e00889aac5, type: 3}
-  getSituation: 0100
 --- !u!114 &3831981519145628050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,7 +247,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 37961ea07f915c44e819f3732ea51bcc, type: 3}
   - {fileID: 8300000, guid: cff094d52b2df26409c57a2d4498e902, type: 3}
   musicIndex: 0
-  getSituation: 010100
 --- !u!114 &8236429974492470528
 MonoBehaviour:
   m_ObjectHideFlags: 0

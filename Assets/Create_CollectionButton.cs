@@ -11,18 +11,6 @@ using Unity.Collections;
 using UnityEditor;
 #endif
 
-enum eCollectionType
-{
-    None = -1,
-
-    Stage,
-    Player,
-    MousePointer,
-    Background,
-    Music,
-
-}
-
 public class Create_CollectionButton : MonoBehaviour
 {
     GameObject manager;
@@ -57,8 +45,8 @@ public class Create_CollectionButton : MonoBehaviour
         {
             case eCollectionType.None: break;
             case eCollectionType.Stage:
-                collection = new GameObject[(int)eStage.eStageMax];
-                for (int i = 0; i < (int)eStage.eStageMax; i++)
+                collection = new GameObject[(int)eStage.max];
+                for (int i = 0; i < (int)eStage.max; i++)
                 {
                     GameObject tmp = Instantiate(collection_Base);
                     collection[i] = tmp;
@@ -67,7 +55,7 @@ public class Create_CollectionButton : MonoBehaviour
                     tmp.transform.localScale = new Vector2(1, 1);
                     tmp.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector2(50, 50);
 
-                    if (manager.GetComponent<Manager_StageSelect>().GetGetStage((eStage)i))
+                    if (manager.GetComponent<Manager_StageSelect>().GetGetSituation((eStage)i))
                     {
                         //tmp.GetComponentInChildren<SpriteRenderer>().sprite = manager.GetComponent<Manager_StageSelect>().GetBackGroundBase(i);
                         int tmpInt = i; //iÇíºê⁄ì¸ÇÍÇÈÇ∆forï∂ÇÃiÇÃç≈èIílÇÃílÇ…Ç»ÇÈ

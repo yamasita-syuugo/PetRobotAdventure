@@ -41,39 +41,53 @@ public class Manager_Field : MonoBehaviour
 {
     Manager_StageSelect manager_StageSelect;
 
-    [SerializeField,Range(0,(int)eFieldCreatType.max - 1)]int []fieldCreatTypeIndex = new int[(int)eStage.eStageMax];
-    public int GetFieldCreatTypeIndex(eStage stage) {  return fieldCreatTypeIndex[(int)stage]; }
 
-    [SerializeField]
-    int []fieldSize = new int[(int)eStage.eStageMax];
-    public int GetFieldSize(eStage stage) { return fieldSize[(int)stage]; }
 
     //足場の配置パターン
-    eCreatType[] creatType = new eCreatType[(int)eStage.eStageMax];
+    eCreatType[] creatType = new eCreatType[(int)eStage.max];
     public eCreatType[] GetScaffoldType() { return creatType; }
-    float[] randomBreak = new float[(int)eStage.eStageMax];
+    float[] randomBreak = new float[(int)eStage.max];
     public float[] GetRandomBreak() { return randomBreak; }
-    // Start is called before the first frame update
-    void Start()
-    {
+
+    private void OnEnable()
+    { 
         manager_StageSelect = GetComponent<Manager_StageSelect>();
         StageScaffoldSelect();
     }
-
-    // Update is called once per frame
-    void Update()
+        // Start is called before the first frame update
+        void Start()
     {
 
     }
+
+    // Update is called once per frame
+    //void Update()
+    //{
+
+    //}
+
+    /*[SerializeField, Range(0, (int)eFieldCreatType.max - 1)]*/ 
+    int[] fieldCreatTypeIndex;
+    public int GetFieldCreatTypeIndex(eStage stage) { return fieldCreatTypeIndex[(int)stage]; }
+    int []fieldSize;
+    public int GetFieldSize(eStage stage) { return fieldSize[(int)stage]; }
     void StageScaffoldSelect()
     {
-        for (int stage = 0; stage < (int)eStage.eStageMax; stage++)
+        fieldCreatTypeIndex = new int[(int)eStage.max];
+        fieldSize = new int[(int)eStage.max];
+        for (int stage = 0; stage < (int)eStage.max; stage++)
         {
             switch ((eStage)stage)
             {
                 case eStage.fastPlay:
                     fieldCreatTypeIndex[stage] = (int)eFieldCreatType.stage;
                     fieldSize[stage] = 7;
+                    creatType[stage] = eCreatType.block;
+                    randomBreak[stage] = 0.0f;
+                    break;
+                case eStage.crowStage:
+                    fieldCreatTypeIndex[stage] = (int)eFieldCreatType.stage;
+                    fieldSize[stage] = 3;
                     creatType[stage] = eCreatType.block;
                     randomBreak[stage] = 0.0f;
                     break;
@@ -89,6 +103,7 @@ public class Manager_Field : MonoBehaviour
                     creatType[stage] = eCreatType.random;
                     randomBreak[stage] = 50.0f;
                     break;
+                default:Debug.Log("error : switch(eStage)"); break;
             }
         }
     }

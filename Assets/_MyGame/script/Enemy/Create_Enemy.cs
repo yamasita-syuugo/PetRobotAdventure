@@ -62,11 +62,15 @@ public class Create_Enemy : MonoBehaviour
             case eStage.fastPlay:
                 EnemySpawnTimer(eWaveType.bom);
                 break;
+            case eStage.crowStage:
+                EnemySpawnTimer(eWaveType.crow);
+                break;
             case eStage.golemLabyrinth:
                 EnemySpawnTimer(eWaveType.golem);
                 break;
 
             case eStage.lastGame:
+                BomSpawn();
                 switch (timeManager.GetComponent<Manager_Wave>().GetWaveType())
                 {
                     case eWaveType.bom: break;
@@ -89,8 +93,8 @@ public class Create_Enemy : MonoBehaviour
                     case eWaveType.waveTypeMax: EndGame(); break;
                     default: for (int i = 1; i < (int)eWaveType.waveTypeMax - 1; i++) EnemySpawnTimer((eWaveType)i); break;
                 }
-                BomSpawn();
                 break;
+            default: Debug.Log("error : switch(eStage)"); break;
         }
         EndGame();
     }
