@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum eWaveType
 {
-    None,
+    None = -1,
 
     bom,            //next:bom‚ğˆê’è”shot‚Å“|‚·
     crow,           //next:crow‚ğˆê’è”ŒÄ‚Ô
@@ -15,7 +15,7 @@ public enum eWaveType
     //              //‘«ê‚ğ‰ó‚µ‚Ä‰ñ‚é  ‹ó’†‚ğˆÚ“®‚·‚é     ‚¢‚­‚Â‚©‚ÌUŒ‚‚É‘Ï‚¦‚é
     //bossEnemy,    //ƒJƒEƒ“ƒg‚ÅendGame‚ğ”­“®   UŒ‚‚ÅƒJƒEƒ“ƒg‚ğ’x‚ç‚¹‚é    ‹ß‚Ã‚­‚Æ˜A‘±‚ÅUŒ‚‚Å‚«‚é‚Ì‚ÅƒJƒƒ‰‚Éû‚Ü‚é”ÍˆÍ‚Å‹——£‚ğæ‚è‰“‹——£UŒ‚‚·‚é  ‰“‹——£UŒ‚‚Í
 
-    waveTypeMax
+    max
 }
 public class Manager_Wave : MonoBehaviour
 {
@@ -44,7 +44,7 @@ public class Manager_Wave : MonoBehaviour
         }
         else
         {
-            if (waveType < eWaveType.waveTypeMax - 1)
+            if (waveType < eWaveType.max - 1)
             {
                 waveTimer = 30;
                 AddWave();
@@ -55,7 +55,7 @@ public class Manager_Wave : MonoBehaviour
 
     void AddWave(int add = 1)
     {
-        if (waveType >= eWaveType.waveTypeMax - 1) return;
+        if (waveType >= eWaveType.max - 1) return;
         waveType += add;
     }
     public eWaveType GetWaveType()

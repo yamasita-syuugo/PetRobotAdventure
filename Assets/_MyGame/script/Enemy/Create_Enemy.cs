@@ -16,7 +16,7 @@ public class Create_Enemy : MonoBehaviour
 
     public GameObject enemyObjectBoss;
     [SerializeField]
-    GameObject[] enemyObjectBase = new GameObject[(int)eEnemyType.enemyTypeMax];
+    GameObject[] enemyObjectBase = new GameObject[(int)eEnemyType.max];
     public GameObject GetEnemyObjectBase(eEnemyType enemyType) { return enemyObjectBase[(int)enemyType]; }
 
     enum eDirecttion
@@ -90,17 +90,17 @@ public class Create_Enemy : MonoBehaviour
                         EnemySpawnEnemyMass();
                         break;
 
-                    case eWaveType.waveTypeMax: EndGame(); break;
-                    default: for (int i = 1; i < (int)eWaveType.waveTypeMax - 1; i++) EnemySpawnTimer((eWaveType)i); break;
+                    case eWaveType.max: EndGame(); break;
+                    default: for (int i = 1; i < (int)eWaveType.max - 1; i++) EnemySpawnTimer((eWaveType)i); break;
                 }
                 break;
             default: Debug.Log("error : switch(eStage)"); break;
         }
         EndGame();
     }
-    float []enemySpaunTime = new float[(int)eWaveType.waveTypeMax];
+    float []enemySpaunTime = new float[(int)eWaveType.max];
     [SerializeField]
-    float[] enemySpaunTimeReset = new float[(int)eWaveType.waveTypeMax];
+    float[] enemySpaunTimeReset = new float[(int)eWaveType.max];
     void EnemySpawnTimer(eWaveType enemyType)
     {
         GameObject spawnEnemy = null;

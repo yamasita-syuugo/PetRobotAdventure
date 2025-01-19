@@ -38,8 +38,8 @@ public class player_Move : MonoBehaviour
     Vector3 move;
     float moveSpeed;
     float moveMax = 1.5f;
-    float[] moveSpeedSetting = new float[(int)eScaffoldType.scaffoldMax];
-    float[] moveMaxSetting = new float[(int)eScaffoldType.scaffoldMax];
+    float[] moveSpeedSetting = new float[(int)eScaffoldType.max];
+    float[] moveMaxSetting = new float[(int)eScaffoldType.max];
     [SerializeField,Header("ÉuÉçÉbÉN")]
     float moveSpeedSetting_block = 2.0f;
     [SerializeField]

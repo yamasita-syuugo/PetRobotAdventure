@@ -8,7 +8,7 @@ public class UI_enemyIcon : MonoBehaviour
 {
     eEnemyType enemyType;
     eEnemyType oldEnemyType;
-    Image[] enemyIcon = new Image[(int)eEnemyType.enemyTypeMax];
+    Image[] enemyIcon = new Image[(int)eEnemyType.max];
     // Start is called before the first frame update
     void Start()
     {

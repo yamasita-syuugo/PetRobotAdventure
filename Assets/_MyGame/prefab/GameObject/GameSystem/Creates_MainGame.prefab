@@ -107,7 +107,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyObjectBoss: {fileID: 7882004832147076534, guid: 3fe46f713c601424d834e39a9af91498, type: 3}
   enemyObjectBase:
-  - {fileID: 0}
   - {fileID: 7882004832147076534, guid: af61f766f8047ab4aa57ecc86036e3f9, type: 3}
   - {fileID: 1846042793416335476, guid: 5aec0b44d81ee454fb01a2547fd18a57, type: 3}
   - {fileID: 1846042793416335476, guid: d060a5b55893a8f49a19733d980fd5fd, type: 3}

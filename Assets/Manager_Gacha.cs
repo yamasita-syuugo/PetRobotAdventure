@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Manager_Gacha : MonoBehaviour
 {
+    Manager_Player manager_Player;
     Manager_MousePointerType manager_MousePointerType;
     Manager_BackgroundType manager_BackgroundType;
     Manager_Music manager_Music;
-    Manager_Player manager_Player;
     [SerializeField]
     int prizeNum;
 
@@ -23,6 +23,12 @@ public class Manager_Gacha : MonoBehaviour
 
         int getPrize = Random.Range(0, prizeNum);
         Debug.Log("random "+getPrize);
+        if (getPrize >= 0 && getPrize < manager_Player.GetPlayerTypeBases().Length - 1)
+        {
+            manager_Player.SetGetSituation(getPrize + 1, true);
+            Debug.Log("getPlayer "  + (getPrize + 1));
+        }
+        getPrize -= manager_Player.GetPlayerTypeBases().Length - 1;
         if (getPrize >= 0 && getPrize < manager_MousePointerType.GetMousePointerAnimations().Length - 1)
         {
             manager_MousePointerType.SetGetSituation(getPrize + 1, true);
@@ -55,11 +61,12 @@ public class Manager_Gacha : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        manager_Player = GetComponent<Manager_Player>();
         manager_MousePointerType = GetComponent<Manager_MousePointerType>();
         manager_BackgroundType = GetComponent<Manager_BackgroundType>();
         manager_Music = GetComponent<Manager_Music>();
 
-        prizeNum = manager_MousePointerType.GetMousePointerAnimations().Length - 1 + manager_BackgroundType.GetBackGroundBase().Length - 1 + manager_Music.GetMusicBase().Length - 1;
+        prizeNum = manager_Player.GetPlayerTypeBases().Length - 1 + manager_MousePointerType.GetMousePointerAnimations().Length - 1 + manager_BackgroundType.GetBackGroundBase().Length - 1 + manager_Music.GetMusicBase().Length - 1;
 
         DataLoad();
     }

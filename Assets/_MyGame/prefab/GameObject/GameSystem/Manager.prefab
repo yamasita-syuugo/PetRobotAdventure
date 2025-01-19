@@ -136,6 +136,7 @@ MonoBehaviour:
   magicImage:
   - {fileID: 0}
   - {fileID: 21300000, guid: 6771953b91d68c9448302a27df1f5b95, type: 3}
+  - {fileID: 21300000, guid: 151e8272678378e449bc222e05371228, type: 3}
   attackImage:
   - {fileID: 0}
   - {fileID: 21300000, guid: c9602b25a5f348948ae57e664a2baa30, type: 3}
@@ -153,7 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   medalImageBase:
   - {fileID: 0}
-  - {fileID: 21300000, guid: 818f3b1d10b1fe54997728c3e4c99eaa, type: 3}
+  - {fileID: 21300000, guid: c4dfbd77c3f740c448b5f0eee7a2bde8, type: 3}
   medalType: 000000000000000000000000
 --- !u!114 &7140798705473952029
 MonoBehaviour:

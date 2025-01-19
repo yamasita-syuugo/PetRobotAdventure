@@ -2820,10 +2820,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Manager
       objectReference: {fileID: 0}
-    - target: {fileID: 2216643563423679949, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
-      propertyPath: gateOpen
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2838408346344982493, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2863,10 +2859,6 @@ PrefabInstance:
     - target: {fileID: 2838408346344982493, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5653854550284804236, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
-      propertyPath: fieldCreatTypeIndex
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2919,6 +2911,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1998681829758624129, guid: 1f7262d471ddcef48b3b0694d9c6f08a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2770810001375524527, guid: 1f7262d471ddcef48b3b0694d9c6f08a, type: 3}
+      propertyPath: enemySpaunTimeReset.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2770810001375524527, guid: 1f7262d471ddcef48b3b0694d9c6f08a, type: 3}
+      propertyPath: enemySpaunTimeReset.Array.data[0]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2770810001375524527, guid: 1f7262d471ddcef48b3b0694d9c6f08a, type: 3}
+      propertyPath: enemySpaunTimeReset.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2770810001375524527, guid: 1f7262d471ddcef48b3b0694d9c6f08a, type: 3}
+      propertyPath: enemySpaunTimeReset.Array.data[2]
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2770810001375524527, guid: 1f7262d471ddcef48b3b0694d9c6f08a, type: 3}
+      propertyPath: enemySpaunTimeReset.Array.data[3]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2770810001375524527, guid: 1f7262d471ddcef48b3b0694d9c6f08a, type: 3}
+      propertyPath: enemySpaunTimeReset.Array.data[4]
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2770810001375524527, guid: 1f7262d471ddcef48b3b0694d9c6f08a, type: 3}
+      propertyPath: enemySpaunTimeReset.Array.data[5]
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5232481471916696781, guid: 1f7262d471ddcef48b3b0694d9c6f08a, type: 3}

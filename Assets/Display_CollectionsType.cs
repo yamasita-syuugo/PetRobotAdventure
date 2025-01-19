@@ -6,6 +6,7 @@ enum eCollectionsTabType
 {
     [InspectorName("")]none = -1,
 
+    stage,
     player,
     medal,
     mousePointer,
@@ -17,7 +18,7 @@ enum eCollectionsTabType
 
 public class Display_CollectionsType : MonoBehaviour
 {
-    eCollectionsTabType collectionsType = eCollectionsTabType.player;
+    eCollectionsTabType collectionsType = eCollectionsTabType.stage;
     public void SetCollectionsType(int collectionsType_) { collectionsType = (eCollectionsTabType)collectionsType_ ; }
     [SerializeField]
     GameObject[] collection; 

@@ -16,18 +16,18 @@ public class Text_FieldInformation : MonoBehaviour
     }
 
     // Update is called once per frame
-    int oldFieldIndex = -1;
+    eFieldCreatType oldFieldIndex = eFieldCreatType.none;
     void Update()
     {
         TextChange();
     }
     void TextChange()
     {
-        int fieldIndex = manager_Field.GetFieldCreatTypeIndex(manager_StageSelect.GetStage());
+        eFieldCreatType fieldIndex = manager_Field.GetFieldCreatTypeIndex(manager_StageSelect.GetStage());
         if (oldFieldIndex == fieldIndex) return; oldFieldIndex = fieldIndex;
 
         string fieldCreatTypeName = "error";
-        switch ((eFieldCreatType)oldFieldIndex)
+        switch (oldFieldIndex)
         {
             case eFieldCreatType.stage: fieldCreatTypeName = "stage";break;
             case eFieldCreatType.labyrinth: fieldCreatTypeName = "labyrinth"; break;

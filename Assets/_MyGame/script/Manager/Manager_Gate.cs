@@ -31,8 +31,8 @@ public class Manager_Gate : MonoBehaviour
     void Start()
     {
         Manager_StageSelect tmp = GetComponent<Manager_StageSelect>();
-        gateOpenType = tmp.GetGateOpenType()[(int)tmp.GetStage()];
-        gateOpenNum = tmp.GetGateOpenNum()[(int)tmp.GetStage()];
+        gateOpenType = tmp.GetGateOpenType(tmp.GetStage());
+        gateOpenNum = tmp.GetGateOpenNum(tmp.GetStage());
     }
 
 

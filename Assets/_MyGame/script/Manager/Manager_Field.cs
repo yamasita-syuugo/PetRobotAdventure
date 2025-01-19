@@ -24,9 +24,9 @@ public enum eScaffoldType
     //rail
     //トロッコ
 
-    [InspectorName("")] scaffoldMax,
+    [InspectorName("")] max,
 }
-public enum eCreatType
+public enum eCreatScaffoldType
 {
     [InspectorName("")] None = -1,
 
@@ -44,15 +44,14 @@ public class Manager_Field : MonoBehaviour
 
 
     //足場の配置パターン
-    eCreatType[] creatType = new eCreatType[(int)eStage.max];
-    public eCreatType[] GetScaffoldType() { return creatType; }
-    float[] randomBreak = new float[(int)eStage.max];
-    public float[] GetRandomBreak() { return randomBreak; }
+    //eCreatScaffoldType[] creatType = new eCreatScaffoldType[(int)eStage.max];
+    public eCreatScaffoldType GetScaffoldType(eStage stage) { return manager_StageSelect.GetStageData(stage).GetCreatScaffoldType(); }
+    //float[] randomBreak = new float[(int)eStage.max];
+    public float GetRandomBreak(eStage stage) { return manager_StageSelect.GetStageData(stage).GetRandomScaffoldBreak(); }
 
     private void OnEnable()
     { 
         manager_StageSelect = GetComponent<Manager_StageSelect>();
-        StageScaffoldSelect();
     }
         // Start is called before the first frame update
         void Start()
@@ -67,44 +66,8 @@ public class Manager_Field : MonoBehaviour
     //}
 
     /*[SerializeField, Range(0, (int)eFieldCreatType.max - 1)]*/ 
-    int[] fieldCreatTypeIndex;
-    public int GetFieldCreatTypeIndex(eStage stage) { return fieldCreatTypeIndex[(int)stage]; }
-    int []fieldSize;
-    public int GetFieldSize(eStage stage) { return fieldSize[(int)stage]; }
-    void StageScaffoldSelect()
-    {
-        fieldCreatTypeIndex = new int[(int)eStage.max];
-        fieldSize = new int[(int)eStage.max];
-        for (int stage = 0; stage < (int)eStage.max; stage++)
-        {
-            switch ((eStage)stage)
-            {
-                case eStage.fastPlay:
-                    fieldCreatTypeIndex[stage] = (int)eFieldCreatType.stage;
-                    fieldSize[stage] = 7;
-                    creatType[stage] = eCreatType.block;
-                    randomBreak[stage] = 0.0f;
-                    break;
-                case eStage.crowStage:
-                    fieldCreatTypeIndex[stage] = (int)eFieldCreatType.stage;
-                    fieldSize[stage] = 3;
-                    creatType[stage] = eCreatType.block;
-                    randomBreak[stage] = 0.0f;
-                    break;
-                case eStage.golemLabyrinth:
-                    fieldCreatTypeIndex[stage] = (int)eFieldCreatType.labyrinth;
-                    fieldSize[stage] = 9;
-                    creatType[stage] = eCreatType.movePanel;
-                    randomBreak[stage] = 50.0f;
-                    break;
-                case eStage.lastGame:
-                    fieldCreatTypeIndex[stage] = (int)eFieldCreatType.stage;
-                    fieldSize[stage] = 9;
-                    creatType[stage] = eCreatType.random;
-                    randomBreak[stage] = 50.0f;
-                    break;
-                default:Debug.Log("error : switch(eStage)"); break;
-            }
-        }
-    }
+    //int[] fieldCreatTypeIndex;
+    public eFieldCreatType GetFieldCreatTypeIndex(eStage stage) { return manager_StageSelect.GetStageData(stage).GetFieldCreatTypeIndex(); }
+    //int []fieldSize;
+    public int GetFieldSize(eStage stage) { return manager_StageSelect.GetStageData(stage).GetFieldSize(); }
 }

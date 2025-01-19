@@ -5,7 +5,7 @@ using static Unity.Burst.Intrinsics.X86.Avx;
 
 public enum eEnemyType
 {
-    [InspectorName("")] none,
+    [InspectorName("")] none = -1,
 
     Bom,            //Bom           :基本的な敵床を壊す
     Crow,           //Crow          :プレイヤーを押し出す
@@ -16,16 +16,14 @@ public enum eEnemyType
     //              //足場を壊して回る  空中を移動する     いくつかの攻撃に耐える
     bossEnemy,    //カウントでendGameを発動   攻撃でカウントを遅らせる    近づくと連続で攻撃できるのでカメラに収まる範囲で距離を取り遠距離攻撃する  遠距離攻撃は
 
-    [InspectorName("")] enemyTypeMax,
+    [InspectorName("")] max,
 }
 public class Manager_Enemy : MonoBehaviour
 {
     Manager_StageSelect manager_StageSelect;
 
     //敵の出現パターン
-    bool[,] stageEnemy = new bool[(int)eStage.max, (int)eEnemyType.enemyTypeMax];
-    public bool[,] GetStageEnemy() { return stageEnemy; }
-    public void SetStageEnemy(int stage, int enemy,bool spaun) { stageEnemy[stage, enemy] = spaun; }
+    public bool[] GetStageEnemy(eStage stage) { return manager_StageSelect.GetStageData(stage).GetEnemySerect(); }
     // Start is called before the first frame update
     void Start()
     {

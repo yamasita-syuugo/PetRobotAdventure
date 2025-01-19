@@ -22,6 +22,7 @@ public enum ePlayerMagicType
     none,
 
     rubyRing, //âäñÇñ@
+    SapphireEarrings,   //êÖñÇñ@
 
     [InspectorName("")] max,
 }
@@ -42,7 +43,7 @@ public class Manager_Player_Technique : MonoBehaviour
     [SerializeField]
     int one = 0;
     public int GetOne() { return one; }
-    public void SetOne(int one_) { one = one_; }
+    public void SetOne(int one_) { one = one_; AddOneType(0); }
     public void AddOneType(int add = 1)
     {
         one = one + add;
@@ -72,7 +73,7 @@ public class Manager_Player_Technique : MonoBehaviour
     [SerializeField]
     int two = 0;
     public int GetTwo() { return two; }
-    public void SetTwo(int two_) { two = two_; }
+    public void SetTwo(int two_) { two = two_; AddTwoType(0); }
     public void AddTwoType(int add = 1)
     {
         two = two + add;
@@ -131,7 +132,7 @@ public class Manager_Player_Technique : MonoBehaviour
     {
         int playerTypeIndex = GetComponent<Manager_Player>().GetPlayerTypeIndex();
         if (oldPlayerType == playerTypeIndex) return; oldPlayerType = playerTypeIndex;
-        SetOne(1);SetTwo(1);
+        SetOne(1);SetTwo(2); 
 
     }
     public void DataSave()

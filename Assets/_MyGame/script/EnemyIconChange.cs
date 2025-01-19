@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class EnemyIconChange : MonoBehaviour
 {
     [SerializeField]
-    Sprite[] enemyIcon = new Sprite[(int)eEnemyType.enemyTypeMax];
+    Sprite[] enemyIcon = new Sprite[(int)eEnemyType.max];
     // Start is called before the first frame update
     void Start()
     {

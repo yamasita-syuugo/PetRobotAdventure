@@ -33,12 +33,12 @@ public class Manager_Collection : MonoBehaviour
     {
         switch (collectionType)
         {
-            case eCollectionType.Stage: return getSituation_Stage[index];break;
+            case eCollectionType.Stage: return getSituation_Stage[index]; break;
             case eCollectionType.Player: return getSituation_Player[index]; break;
-            case eCollectionType.MousePointer: return getSituation_MousePointer[index];break;
+            case eCollectionType.MousePointer: return getSituation_MousePointer[index]; break;
             case eCollectionType.Background: return getSituation_Background[index]; break;
-            case eCollectionType.Music:return getSituation_Music[index]; break;
-            default:Debug.Log("NoSwitch");break;
+            case eCollectionType.Music: return getSituation_Music[index]; break;
+            default: Debug.Log("NoSwitch"); break;
         }
         return false;
     }
@@ -48,17 +48,21 @@ public class Manager_Collection : MonoBehaviour
         {
             case eCollectionType.Stage: getSituation_Stage[index] = getSituation_; break;
             case eCollectionType.Player: getSituation_Player[index] = getSituation_; break;
-            case eCollectionType.MousePointer: getSituation_MousePointer[index] = getSituation_;break;
+            case eCollectionType.MousePointer: getSituation_MousePointer[index] = getSituation_; break;
             case eCollectionType.Background: getSituation_Background[index] = getSituation_; break;
             case eCollectionType.Music: getSituation_Music[index] = getSituation_; break;
             default: Debug.Log("NoSwitch"); break;
         }
     }
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
         DataLoad();
     }
+    // Start is called before the first frame update
+    //void Start()
+    //{
+
+    //}
 
     // Update is called once per frame
     //void Update()
@@ -68,7 +72,7 @@ public class Manager_Collection : MonoBehaviour
     public void DataSave()
     {
         Manager_Save.BoolSave("StageSituation", (int)eStage.max, getSituation_Stage);
-        Manager_Save.BoolSave("PlayerGetSituation",GetComponent<Manager_Player>().GetPlayerTypeBases().Length, getSituation_Player);
+        Manager_Save.BoolSave("PlayerGetSituation", GetComponent<Manager_Player>().GetPlayerTypeBases().Length, getSituation_Player);
         Manager_Save.BoolSave("MousePointerGetSituation", GetComponent<Manager_MousePointerType>().GetMousePointerAnimations().Length, getSituation_MousePointer);
         Manager_Save.BoolSave("BackGroundGetSituation", GetComponent<Manager_BackgroundType>().GetBackGroundBase().Length, getSituation_Background);
         Manager_Save.BoolSave("MusicGetSituation", GetComponent<Manager_Music>().GetMusicBase().Length, getSituation_Music);
@@ -79,6 +83,6 @@ public class Manager_Collection : MonoBehaviour
         Manager_Save.BoolLoad("PlayerGetSituation", GetComponent<Manager_Player>().GetPlayerTypeBases().Length, out getSituation_Player);
         Manager_Save.BoolLoad("MousePointerGetSituation", GetComponent<Manager_MousePointerType>().GetMousePointerAnimations().Length, out getSituation_MousePointer);
         Manager_Save.BoolLoad("BackGroundGetSituation", GetComponent<Manager_BackgroundType>().GetBackGroundBase().Length, out getSituation_Background);
-        Manager_Save.BoolLoad("MusicGetSituation", GetComponent<Manager_Music>().GetMusicBase().Length,out getSituation_Music);
+        Manager_Save.BoolLoad("MusicGetSituation", GetComponent<Manager_Music>().GetMusicBase().Length, out getSituation_Music);
     }
 }

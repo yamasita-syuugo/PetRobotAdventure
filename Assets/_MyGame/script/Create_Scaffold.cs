@@ -16,7 +16,7 @@ public class Create_Scaffold : MonoBehaviour
     eScaffoldType scoffoldType = eScaffoldType.block;
 
     [Header("scaffoldBase")]
-    GameObject[] scaffoldBases = new GameObject[(int)eScaffoldType.scaffoldMax];
+    GameObject[] scaffoldBases = new GameObject[(int)eScaffoldType.max];
     [SerializeField]
     GameObject blockBase;
     [SerializeField]
@@ -35,8 +35,8 @@ public class Create_Scaffold : MonoBehaviour
 
 
     [SerializeField]
-    eCreatType creatType = eCreatType.block;
-    public void SetCreatType(eCreatType creatType_) { creatType = creatType_; }
+    eCreatScaffoldType creatType = eCreatScaffoldType.block;
+    public void SetCreatType(eCreatScaffoldType creatType_) { creatType = creatType_; }
     [SerializeField]
     [Range(0f, 100f)]
     float randomBreak = 0.0f;
@@ -68,8 +68,8 @@ public class Create_Scaffold : MonoBehaviour
         eStage stage = manager_StageSelect.GetStage();
         if (oldStage == stage) return; oldStage = stage;
         Debug.Log("stageName : " + stage);
-        SetCreatType(manager_Field.GetScaffoldType()[(int)stage]);
-        SetRandomBreak(manager_Field.GetRandomBreak()[(int)stage]);
+        SetCreatType(manager_Field.GetScaffoldType(stage));
+        SetRandomBreak(manager_Field.GetRandomBreak(stage));
         CreateObject();
 
     }
@@ -175,7 +175,7 @@ public class Create_Scaffold : MonoBehaviour
     }
     GameObject ScaffoldSelect()
     {
-        if (creatType == eCreatType.random) return scaffoldBases[Random.Range(0, (int)eScaffoldType.scaffoldMax)];
+        if (creatType == eCreatScaffoldType.random) return scaffoldBases[Random.Range(0, (int)eScaffoldType.max)];
         return scaffoldBases[(int)creatType];
     }
     //çÌèú
@@ -190,8 +190,8 @@ public class Create_Scaffold : MonoBehaviour
     {
         Manager_StageSelect manager_StageSelect = GameObject.FindWithTag("Manager").GetComponent<Manager_StageSelect>();
 
-        creatType = manager_Field.GetScaffoldType()[(int)manager_StageSelect.GetStage()];
-        randomBreak = manager_Field.GetRandomBreak()[(int)manager_StageSelect.GetStage()];
+        creatType = manager_Field.GetScaffoldType(manager_StageSelect.GetStage());
+        randomBreak = manager_Field.GetRandomBreak(manager_StageSelect.GetStage());
     }
 }
 
