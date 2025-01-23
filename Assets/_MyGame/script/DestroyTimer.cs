@@ -6,13 +6,11 @@ public class DestroyTimer : MonoBehaviour
 {
     public float timer = 0.5f;
 
-    GameObject Object;
-
     // Start is called before the first frame update
-    void Start()
-    {
-        Object = this.GetComponent<GameObject>();
-    }
+    //void Start()
+    //{
+
+    //}
 
     // Update is called once per frame
     void Update()

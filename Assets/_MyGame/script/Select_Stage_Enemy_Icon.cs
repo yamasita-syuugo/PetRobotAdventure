@@ -72,7 +72,7 @@ public class Select_Stage_Enemy_Icon : MonoBehaviour
     private void EnemyIconDelete()
     {
         for(int i = enemyIcon.Length - 1;i >= 0;i--) {
-            Destroy(enemyIcon[i].gameObject);
+            Destroy(enemyIcon[i]);
         }
     }
 

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum eStage
@@ -57,6 +58,14 @@ public struct stStageData
         int backGroundNum = GameObject.FindWithTag("Manager").GetComponent<Manager_BackgroundType>().GetBackGroundBase().Length;
         if (backGroundIndex < 0) backGroundIndex = 0; else if (backGroundIndex >= backGroundNum) backGroundIndex = backGroundNum - 1;
     }
+
+    int MusicIndex;
+    public int GetMusicIndex() {  return MusicIndex; }
+    public void SetMusicIndex(int MusicIndex_) {
+        MusicIndex = MusicIndex_;
+        int MusicNum = GameObject.FindWithTag("Manager").GetComponent<Manager_Music>().GetMusicBase().Length;
+        if (MusicIndex < 0) MusicIndex = 0; else if (MusicIndex >= MusicNum) MusicIndex = MusicNum - 1;
+    }
 }
 
 public class Manager_StageSelect : MonoBehaviour
@@ -99,10 +108,20 @@ public class Manager_StageSelect : MonoBehaviour
     public void DataSave()
     {
         PlayerPrefs.SetInt("stage", (int)stage);
+
+        bool[] customData = { randomStage, musicSerect, backGroundSerect, };
+        Manager_Save.BoolSave("customData", customData.Length, customData);
     }
     public void DataLoad()
     {
         stage = (eStage)PlayerPrefs.GetInt("stage");
+
+        bool[] customData;
+        Manager_Save.BoolLoad("customData", 3, out customData);
+        randomStage = customData[0];
+        musicSerect = customData[1];
+        backGroundSerect = customData[2];
+
         if (randomStage) stage = (eStage)UnityEngine.Random.RandomRange(0, (int)eStage.max - 1);
     }
 
@@ -120,6 +139,7 @@ public class Manager_StageSelect : MonoBehaviour
         StageScaffoldSelect();
         StageGatoOpenTypeSelect();
         StageBackGroundSelect();
+        StageMusicSelect();
     }
 
     // Start is called before the first frame update
@@ -177,7 +197,7 @@ public class Manager_StageSelect : MonoBehaviour
                             case eEnemyType.EnemyMass: break;
                         }
                         break;
-                    default: Debug.Log("StageEnemySelect : stageError"); break;
+                    default: Debug.Log("StageEnemySelect : " + ((eStage)stage).HumanName()); break;
                 }
                 stageData[stage].SetEnemySerect(enemy, tmp);
             }
@@ -213,7 +233,7 @@ public class Manager_StageSelect : MonoBehaviour
                     stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.random);
                     stageData[stage].SetRandomScaffoldBreak(50.0f);
                     break;
-                default: Debug.Log("error : switch(eStage)"); break;
+                default: Debug.Log("StageScaffoldSelect : " + ((eStage)stage).HumanName()); break;
             }
         }
     }
@@ -239,7 +259,7 @@ public class Manager_StageSelect : MonoBehaviour
                     stageData[stage].SetGateOpenType(eGateOpenType.none);
                     stageData[stage].SetGateOpenNum(30);
                     break;
-                default: Debug.Log("error : switch(eStage)"); break;
+                default: Debug.Log("StageGatoOpenTypeSelect : " + ((eStage)stage).HumanName()); break;
             }
         }
     }
@@ -261,11 +281,32 @@ public class Manager_StageSelect : MonoBehaviour
                 case eStage.lastGame:
                     stageData[stage].SetBackGroundIndex(3);
                     break;
-                default: Debug.Log("error : switch(eStage)"); break;
+                default: Debug.Log("StageBackGroundSelect : " + ((eStage)stage).HumanName()); break;
             }
         }
     }
-
+    void StageMusicSelect()
+    {
+        for (int stage = 0; stage < (int)eStage.max; stage++)
+        {
+            switch ((eStage)stage)
+            {
+                case eStage.fastPlay:
+                    stageData[stage].SetMusicIndex(0);
+                    break;
+                case eStage.crowStage:
+                    stageData[stage].SetMusicIndex(1);
+                    break;
+                case eStage.golemLabyrinth:
+                    stageData[stage].SetMusicIndex(2);
+                    break;
+                case eStage.lastGame:
+                    stageData[stage].SetMusicIndex(3);
+                    break;
+                default: Debug.Log("StageMusicSelect : " + ((eStage)stage).HumanName()); break;
+            }
+        }
+    }
 
     // Update is called once per frame
     //void Update()

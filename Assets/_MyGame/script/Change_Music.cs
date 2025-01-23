@@ -5,10 +5,12 @@ using UnityEngine;
 public class Change_Music : MonoBehaviour
 {
     Manager_Music manager_Music;
+    Manager_StageSelect manager_StageSelect;
     // Start is called before the first frame update
     void Start()
     {
         manager_Music = GameObject.FindWithTag("Manager").GetComponent<Manager_Music>();
+        manager_StageSelect = GameObject.FindWithTag("Manager").GetComponent<Manager_StageSelect>();
 
         GetComponent<AudioSource>().clip = manager_Music.GetMusicBase(manager_Music.GetMusicIndex());
     }
@@ -17,8 +19,12 @@ public class Change_Music : MonoBehaviour
     int oldMusicIndex = -1;
     void Update()
     {
-        if (oldMusicIndex == manager_Music.GetMusicIndex()) return; oldMusicIndex = manager_Music.GetMusicIndex();
-        GetComponent<AudioSource>().clip = manager_Music.GetMusicBase(manager_Music.GetMusicIndex());
+        int newMusicIndex;
+        if (manager_StageSelect.GetMusicSerect()) newMusicIndex = manager_Music.GetMusicIndex();
+        else newMusicIndex = manager_StageSelect.GetStageData(manager_StageSelect.GetStage()).GetMusicIndex();
+        if (oldMusicIndex == newMusicIndex) return; oldMusicIndex = newMusicIndex;
+
+        GetComponent<AudioSource>().clip = manager_Music.GetMusicBase(oldMusicIndex);
         GetComponent<AudioSource>().Play();
     }
 }
