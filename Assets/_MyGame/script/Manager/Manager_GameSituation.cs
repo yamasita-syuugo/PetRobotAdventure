@@ -21,7 +21,7 @@ public class Manager_GameSituation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DataLoad();
+
     }
 
     // Update is called once per frame

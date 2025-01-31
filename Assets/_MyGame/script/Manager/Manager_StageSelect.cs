@@ -122,7 +122,7 @@ public class Manager_StageSelect : MonoBehaviour
         musicSerect = customData[1];
         backGroundSerect = customData[2];
 
-        if (randomStage) stage = (eStage)UnityEngine.Random.RandomRange(0, (int)eStage.max - 1);
+        if (randomStage) stage = (eStage)UnityEngine.Random.Range(0, (int)eStage.max - 1);
     }
 
     stStageData[] stageData = new stStageData[(int)eStage.max];
@@ -134,7 +134,6 @@ public class Manager_StageSelect : MonoBehaviour
 
     private void OnEnable()
     {
-        DataLoad();
         StageEnemySelect();
         StageScaffoldSelect();
         StageGatoOpenTypeSelect();
@@ -252,12 +251,12 @@ public class Manager_StageSelect : MonoBehaviour
                     stageData[stage].SetGateOpenNum(60);
                     break;
                 case eStage.golemLabyrinth:
-                    stageData[stage].SetGateOpenType(eGateOpenType.none);
-                    stageData[stage].SetGateOpenNum(30);
+                    stageData[stage].SetGateOpenType(eGateOpenType.time_Countdown);
+                    stageData[stage].SetGateOpenNum(5);
                     break;
                 case eStage.lastGame:
-                    stageData[stage].SetGateOpenType(eGateOpenType.none);
-                    stageData[stage].SetGateOpenNum(30);
+                    stageData[stage].SetGateOpenType(eGateOpenType.time_Countdown);
+                    stageData[stage].SetGateOpenNum(5);
                     break;
                 default: Debug.Log("StageGatoOpenTypeSelect : " + ((eStage)stage).HumanName()); break;
             }

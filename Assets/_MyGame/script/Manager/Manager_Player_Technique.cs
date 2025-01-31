@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ePlayerTechniqueType
+public enum ePlayerWeaponType
 {
     none,
 
@@ -38,6 +38,7 @@ public enum ePlayerAttackType
 
 public class Manager_Player_Technique : MonoBehaviour
 {
+    Manager_Player manager_Player;
 
     [Header("TechniqueIndex")]
     [SerializeField]
@@ -52,8 +53,8 @@ public class Manager_Player_Technique : MonoBehaviour
             case ePlayerType.none: break;
 
             case ePlayerType.PetRobot:
-                if (one < (int)ePlayerTechniqueType.none) one = (int)ePlayerTechniqueType.max - 1;
-                else if (one >= (int)ePlayerTechniqueType.max) one = (int)ePlayerTechniqueType.none;
+                if (one < (int)ePlayerWeaponType.none) one = (int)ePlayerWeaponType.max - 1;
+                else if (one >= (int)ePlayerWeaponType.max) one = (int)ePlayerWeaponType.none;
                 break;
             case ePlayerType.Werewolf:
                 if (one < (int)ePlayerAttackType.none) one = (int)ePlayerAttackType.max - 1;
@@ -82,8 +83,8 @@ public class Manager_Player_Technique : MonoBehaviour
             case ePlayerType.none: break;
 
             case ePlayerType.PetRobot:
-                if (two < (int)ePlayerTechniqueType.none) two = (int)ePlayerTechniqueType.max - 1;
-                else if (two >= (int)ePlayerTechniqueType.max) two = (int)ePlayerTechniqueType.none;
+                if (two < (int)ePlayerWeaponType.none) two = (int)ePlayerWeaponType.max - 1;
+                else if (two >= (int)ePlayerWeaponType.max) two = (int)ePlayerWeaponType.none;
                 break;
             case ePlayerType.Werewolf:
                 if (two < (int)ePlayerAttackType.none) two = (int)ePlayerAttackType.max - 1;
@@ -101,9 +102,9 @@ public class Manager_Player_Technique : MonoBehaviour
     public void TwoRightButton() { AddTwoType(1); }
 
     [SerializeField,Header("Technique")]
-    Sprite[] techniqueImage = new Sprite[(int)ePlayerTechniqueType.max];
+    Sprite[] techniqueImage = new Sprite[(int)ePlayerWeaponType.max];
     public Sprite GetTechniqueImage(int index_) { return techniqueImage[index_]; }
-    bool[] getTechnique = new bool[(int)ePlayerTechniqueType.max];
+    bool[] getTechnique = new bool[(int)ePlayerWeaponType.max];
     [SerializeField]
     GameObject []techniqueBase;
     public GameObject GetTechniqueBase(int index_) { return techniqueBase[index_]; }
@@ -118,19 +119,21 @@ public class Manager_Player_Technique : MonoBehaviour
     Sprite[] attackImage = new Sprite[(int)ePlayerAttackType.max];
     public Sprite GetAttackImage(int index_) { return attackImage[index_]; }
     bool[] getAttack = new bool[(int)ePlayerAttackType.max];
+
+
     // Start is called before the first frame update
     void Start()
     {
-        DataLoad();
+        manager_Player = GetComponent<Manager_Player>();
 
-        oldPlayerType = GetComponent<Manager_Player>().GetPlayerTypeIndex();
+        oldPlayerType = (int)manager_Player.GetPlayerTypeIndex();
     }
 
     // Update is called once per frame
     int oldPlayerType;
     void Update()
     {
-        int playerTypeIndex = GetComponent<Manager_Player>().GetPlayerTypeIndex();
+        int playerTypeIndex = (int)manager_Player.GetPlayerTypeIndex();
         if (oldPlayerType == playerTypeIndex) return; oldPlayerType = playerTypeIndex;
         SetOne(1);SetTwo(2); 
 
@@ -140,7 +143,7 @@ public class Manager_Player_Technique : MonoBehaviour
         PlayerPrefs.SetInt("playerTechniqueOne", GetOne());
         PlayerPrefs.SetInt("playerTechniqueTwo", GetTwo());
 
-        Manager_Save.BoolSave("GetPlayerTechnique", (int)ePlayerTechniqueType.max, getTechnique);
+        Manager_Save.BoolSave("GetPlayerTechnique", (int)ePlayerWeaponType.max, getTechnique);
         Manager_Save.BoolSave("GetPlayerMagic", (int)ePlayerMagicType.max, getMagic);
         Manager_Save.BoolSave("GetPlayerAttack", (int)ePlayerAttackType.max, getAttack);
     }
@@ -149,7 +152,7 @@ public class Manager_Player_Technique : MonoBehaviour
         SetOne(PlayerPrefs.GetInt("playerTechniqueOne"));
         SetTwo(PlayerPrefs.GetInt("playerTechniqueTwo"));
 
-        Manager_Save.BoolLoad("GetPlayerTechnique", (int)ePlayerTechniqueType.max, out getTechnique);
+        Manager_Save.BoolLoad("GetPlayerTechnique", (int)ePlayerWeaponType.max, out getTechnique);
         Manager_Save.BoolLoad("GetPlayerMagic", (int)ePlayerMagicType.max, out getMagic);
         Manager_Save.BoolLoad("GetPlayerAttack", (int)ePlayerAttackType.max, out getAttack);
     }

@@ -16,7 +16,7 @@ public class Select_Chara_Image : MonoBehaviour
     int oldPlayerType = -1;
     void Update()
     {
-        int playerTypeIndex = manager_Player.GetPlayerTypeIndex();
+        int playerTypeIndex = (int)manager_Player.GetPlayerTypeIndex();
         if (oldPlayerType == playerTypeIndex) return; oldPlayerType = playerTypeIndex;
 
         RuntimeAnimatorController animator = manager_Player.GetPlayerIconAnimaterBase(playerTypeIndex);

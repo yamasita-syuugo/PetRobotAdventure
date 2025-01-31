@@ -31,7 +31,7 @@ public class Manager_Player : MonoBehaviour
     {
         if (index >= playerIconAnimaterBase.Length)
         {
-            Debug.Log(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + " : " + GetPlayerTypeBase(playerTypeIndex).name + " none Animator"); return null;
+            Debug.Log(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + " : " + GetPlayerTypeBase((int)playerTypeIndex).name + " none Animator"); return null;
         }
         return playerIconAnimaterBase[index];
     }
@@ -39,14 +39,14 @@ public class Manager_Player : MonoBehaviour
     public bool GetGetSituation(int index) { return  GetComponent<Manager_Collection>().GetGetSituation(eCollectionType.Player,index); }
     public void SetGetSituation(int index, bool getSituation_) { GetComponent<Manager_Collection>().SetGetSituation(eCollectionType.Player, index, getSituation_); }
     [SerializeField]
-    int playerTypeIndex = 0;
-    public int GetPlayerTypeIndex() { return playerTypeIndex; }
-    public void SetPlayerTypeIndex(int playerTypeIndex_) { playerTypeIndex = playerTypeIndex_; }
+    ePlayerType playerTypeIndex = ePlayerType.none;
+    public ePlayerType GetPlayerTypeIndex() { return playerTypeIndex; }
+    public void SetPlayerTypeIndex(ePlayerType playerTypeIndex_) { playerTypeIndex = playerTypeIndex_; }
     void AddPlayerTypeIndex(int add = 1)
     {
         playerTypeIndex = playerTypeIndex + add;
-        if (playerTypeIndex < 0) playerTypeIndex = (int)ePlayerType.playerTypeMax - 1;
-        else if (playerTypeIndex >= (int)ePlayerType.playerTypeMax) playerTypeIndex = 0;
+        if (playerTypeIndex < 0) playerTypeIndex = ePlayerType.playerTypeMax - 1;
+        else if (playerTypeIndex >= ePlayerType.playerTypeMax) playerTypeIndex = 0;
 
         Manager_Player_Technique manager_Player_Technique = GetComponent<Manager_Player_Technique>();
         manager_Player_Technique.SetOne(1);
@@ -75,8 +75,6 @@ public class Manager_Player : MonoBehaviour
     // Start is called before the first frame update
     private void OnEnable()
     {
-        DataLoad();
-
         SetPlayerSpeed();
     }
     //void Start()
@@ -92,10 +90,10 @@ public class Manager_Player : MonoBehaviour
 
     public void DataSave()
     {
-        PlayerPrefs.SetInt("playerTypeIndex", playerTypeIndex);
+        PlayerPrefs.SetInt("playerTypeIndex", (int)playerTypeIndex);
     }
     public void DataLoad()
     {
-        SetPlayerTypeIndex(PlayerPrefs.GetInt("playerTypeIndex"));
+        SetPlayerTypeIndex((ePlayerType)PlayerPrefs.GetInt("playerTypeIndex"));
     }
 }

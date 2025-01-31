@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Select_Technique_Image : MonoBehaviour
 {
     [SerializeField]
-    eTechniqueControl techniqueControl = eTechniqueControl.none;
+    eWeaponControl techniqueControl = eWeaponControl.none;
     Manager_Player manager_Player;
     Manager_Player_Technique manager_Player_Technique;
     // Start is called before the first frame update
@@ -28,10 +28,10 @@ public class Select_Technique_Image : MonoBehaviour
         int technique = 0;
         switch (techniqueControl)
         {
-            case eTechniqueControl.one:technique = manager_Player_Technique.GetOne();break; 
-            case eTechniqueControl.two:technique = manager_Player_Technique.GetTwo();break; 
+            case eWeaponControl.one:technique = manager_Player_Technique.GetOne();break; 
+            case eWeaponControl.two:technique = manager_Player_Technique.GetTwo();break; 
         }
-        int playerTypeIndex = manager_Player.GetPlayerTypeIndex();
+        int playerTypeIndex = (int)manager_Player.GetPlayerTypeIndex();
         if (oldTechniqueIndex == technique && oldPlayerTypeIndex == playerTypeIndex) return;
         oldTechniqueIndex = technique; oldPlayerTypeIndex = playerTypeIndex;
 

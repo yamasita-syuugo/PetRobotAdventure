@@ -30,10 +30,10 @@ public class Manager_MousePointerType : MonoBehaviour
         mousePointerIndex = PlayerPrefs.GetInt("mousePointerIndex");
     }
     // Start is called before the first frame update
-    void Start()
-    {
-        DataLoad();
-    }
+    //void Start()
+    //{
+
+    //}
 
     // Update is called once per frame
     //void Update()

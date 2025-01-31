@@ -3,33 +3,33 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using UnityEngine;
 
-enum eTechniqueControl
+enum eWeaponControl
 {
     [InspectorName("")] none = -1,
 
     one,    //左クリック
     two,    //右クリック
 
-    [InspectorName("")] techniqueControlMax,
+    [InspectorName("")] max,
 }
 
-public class Player_Technique__Control : MonoBehaviour
+public class Player_Technique_Weapon : Player_Technique_
 {
     Manager_Player_Technique manager_Player_Technique;
 
     [SerializeField]
-    const int techniqueNum = (int)eTechniqueControl.techniqueControlMax;
+    const int weaponNum = (int)eWeaponControl.max;
     [SerializeField]
-    int[] use = new int[(int)eTechniqueControl.techniqueControlMax];
-    [Header("0 = none;1 = Bullet;2 = EarthQuake;3 = MeleeAttack;4 = Mirage")]
-    GameObject[] technique = new GameObject[(int)eTechniqueControl.techniqueControlMax]; 
-    GameObject[] techniqueUI = new GameObject[(int)eTechniqueControl.techniqueControlMax];
+    int[] use = new int[(int)eWeaponControl.max];
+    [Header("0 = none; 1 = Bullet; 2 = EarthQuake; 3 = MeleeAttack; 4 = Mirage")]
+    GameObject[] weapon = new GameObject[(int)eWeaponControl.max]; 
+    GameObject[] weaponUI = new GameObject[(int)eWeaponControl.max];
     // Start is called before the first frame update
     void Start()
     {
         manager_Player_Technique = GameObject.FindWithTag("Manager").GetComponent<Manager_Player_Technique>();
-        use[(int)eTechniqueControl.one] = manager_Player_Technique.GetOne();
-        use[(int)eTechniqueControl.two] = manager_Player_Technique.GetTwo();
+        use[(int)eWeaponControl.one] = manager_Player_Technique.GetOne();
+        use[(int)eWeaponControl.two] = manager_Player_Technique.GetTwo();
 
         CreateTechniqueAndUI();
     }
@@ -37,23 +37,23 @@ public class Player_Technique__Control : MonoBehaviour
     {
 
         GameObject playerUIParent = GameObject.Find("PlayerUI");
-        for (int i = 0; i < techniqueNum; i++)
+        for (int i = 0; i < weaponNum; i++)
         {
             GameObject useTechnique = manager_Player_Technique.GetTechniqueBase(use[i]);
             if (useTechnique == null) continue;
-            technique[i] = Instantiate<GameObject>(useTechnique);
+            weapon[i] = Instantiate<GameObject>(useTechnique);
 
-            technique[i].transform.parent = transform;
-            technique[i].transform.localPosition = Vector3.zero;
+            weapon[i].transform.parent = transform;
+            weapon[i].transform.localPosition = Vector3.zero;
 
             GameObject useTechniqueUI = manager_Player_Technique.GetTechniqueUIBase(use[i]);
 
-            techniqueUI[i] = Instantiate<GameObject>(useTechniqueUI);
+            weaponUI[i] = Instantiate<GameObject>(useTechniqueUI);
 
-            techniqueUI[i].GetComponent<UI_Display__Base>().SetConnectTechnique(technique[i]);
-            techniqueUI[i].transform.parent = playerUIParent.transform;
-            techniqueUI[i].transform.localScale = Vector3.one;
-            techniqueUI[i].transform.localPosition = playerUIParent.transform.position - new Vector3(0, 45, 0) * i;
+            weaponUI[i].GetComponent<UI_Display__Base>().SetConnectTechnique(weapon[i]);
+            weaponUI[i].transform.parent = playerUIParent.transform;
+            weaponUI[i].transform.localScale = Vector3.one;
+            weaponUI[i].transform.localPosition = playerUIParent.transform.position - new Vector3(0, 45, 0) * i;
 
         }
     }
@@ -66,10 +66,10 @@ public class Player_Technique__Control : MonoBehaviour
 
     public void GetPoint()
     {
-        for(int i = 0;i < techniqueNum;i++)
+        for(int i = 0;i < weaponNum; i++)
         {
-            if (technique[i] == null) continue;
-            technique[i].GetComponent<Player_Technique_Container__Base>().GetPoint();
+            if (weapon[i] == null) continue;
+            weapon[i].GetComponent<Player_Technique_Container__Base>().GetPoint();
         }
     }
 
@@ -77,7 +77,7 @@ public class Player_Technique__Control : MonoBehaviour
     {
         if (GameObject.FindGameObjectWithTag("Player").GetComponent<ObjectFall>().GetSituation() == ObjectFall.eSituation.fall) return;
 
-        for (int i = 0; i < techniqueNum; i++)//0 = 左クリック;1 = 右クリック;2 = ホイールクリック;
+        for (int i = 0; i < weaponNum; i++)//0 = 左クリック;1 = 右クリック;2 = ホイールクリック;
         {
             UseSelect_Mouse(i);
             //UseSelect_Controller(i);
@@ -95,10 +95,10 @@ public class Player_Technique__Control : MonoBehaviour
     {
         switch (use[useNum])
         {
-            case (int)ePlayerTechniqueType.none: break;
+            case (int)ePlayerWeaponType.none: break;
 
-            case (int)ePlayerTechniqueType.Bullet: pushType = ePushType.down; break;
-            case (int)ePlayerTechniqueType.EarthQuakeInpact: pushType = ePushType.down; break;
+            case (int)ePlayerWeaponType.Bullet: pushType = ePushType.down; break;
+            case (int)ePlayerWeaponType.EarthQuakeInpact: pushType = ePushType.down; break;
 
             //case ePlayerTechniqueType.Mirage: pushType = ePushType.down; break;
             //case ePlayerTechniqueType.MeleeAttack: pushType = ePushType.down; break;
@@ -107,7 +107,7 @@ public class Player_Technique__Control : MonoBehaviour
     }
     void UseSelect_Mouse(int useNum)
     {
-        if (technique[useNum] == null) return;
+        if (weapon[useNum] == null) return;
 
         bool situation = false;
         PushTypeCheck(useNum);
@@ -120,7 +120,7 @@ public class Player_Technique__Control : MonoBehaviour
 
         if (!situation) return;
 
-        technique[useNum].GetComponent<Player_Technique_Play__Base>().MousePlay();
+        weapon[useNum].GetComponent<Player_Technique_Play__Base>().MousePlay();
     }
     int ControllerShotButton;
     bool []techniqueTrigger = new bool[3];
@@ -143,6 +143,6 @@ public class Player_Technique__Control : MonoBehaviour
         }
 
         if (!situation) return;
-        technique[useNum].GetComponent<Player_Technique_Play__Base>().ControllerPlay();
+        weapon[useNum].GetComponent<Player_Technique_Play__Base>().ControllerPlay();
     }
 }

@@ -97,7 +97,7 @@ public class Create_Scaffold : MonoBehaviour
                     {
                         tmpBase = ScaffoldSelect();
 
-                        if (randomBreak > Random.RandomRange(0, 100) &&
+                        if (randomBreak > Random.Range(0, 100) &&
                             !(fieldSize / 2 * 2 == fieldSize ? (x == fieldSize / 2 - 1 || x == fieldSize / 2) &&
                             (y == fieldSize / 2 - 1 || y == fieldSize / 2) : (x == fieldSize / 2) && (y == fieldSize / 2))) continue;
 
@@ -117,7 +117,7 @@ public class Create_Scaffold : MonoBehaviour
 
                 ScaffoldPos[0, 0] = 0; ScaffoldPos[0, 1] = 0;
 
-                int old1Random = Random.RandomRange(0, 4);
+                int old1Random = Random.Range(0, 4);
                 if (old1Random <= 0) {          ScaffoldPos[1, 0] = ScaffoldPos[0, 0] + 1;  ScaffoldPos[1, 1] = ScaffoldPos[0, 1]; }
                 else if (old1Random <= 1) {     ScaffoldPos[1, 0] = ScaffoldPos[0, 0] - 1;  ScaffoldPos[1, 1] = ScaffoldPos[0, 1]; }
                 else if (old1Random <= 2) {     ScaffoldPos[1, 0] = ScaffoldPos[0, 0];      ScaffoldPos[1, 1] = ScaffoldPos[0, 1] + 1; }
@@ -140,7 +140,7 @@ public class Create_Scaffold : MonoBehaviour
                         old2Pos[0] = ScaffoldPos[i - 2, 0]; old2Pos[1] = ScaffoldPos[i - 2, 1];
                         old1Pos[0] = ScaffoldPos[i - 1, 0]; old1Pos[1] = ScaffoldPos[i - 1, 1];
 
-                        int random = Random.RandomRange(0, 100);
+                        int random = Random.Range(0, 100);
                         if (random <= 80)
                         {
                             ScaffoldPos[i, 0] = old1Pos[0] + (old1Pos[0] - old2Pos[0]);

@@ -42,6 +42,10 @@ public class Manager_Save : MonoBehaviour
 
     }
 
+    private void OnEnable()
+    {
+        DataLoad();
+    }
     // Start is called before the first frame update
     //void Start()
     //{
@@ -56,7 +60,7 @@ public class Manager_Save : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        DataLoad();
+        DataSave();
     }
 
     static public void BoolSave(string name,int size, bool[] data)

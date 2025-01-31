@@ -84,7 +84,7 @@ public class Create_CollectionButton : MonoBehaviour
                         tmp.GetComponentInChildren<SpriteRenderer>().sprite = manager.GetComponent<Manager_Player>().GetPlayerTypeBase(i).GetComponent<SpriteRenderer>().sprite;
                         tmp.GetComponentInChildren<Animator>().runtimeAnimatorController = manager.GetComponent<Manager_Player>().GetPlayerTypeBase(i).GetComponent<Animator>().runtimeAnimatorController;
                         int tmpInt = i; //i‚ğ’¼Ú“ü‚ê‚é‚Æfor•¶‚Ìi‚ÌÅI’l‚Ì’l‚É‚È‚é
-                        tmp.GetComponent<Button>().onClick.AddListener(() => manager.GetComponent<Manager_Player>().SetPlayerTypeIndex(tmpInt));
+                        tmp.GetComponent<Button>().onClick.AddListener(() => manager.GetComponent<Manager_Player>().SetPlayerTypeIndex((ePlayerType)tmpInt));
                         tmp.GetComponentInChildren<TextMeshProUGUI>().text = "";
                     }
                     else

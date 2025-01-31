@@ -45,12 +45,12 @@ public class UI_CountColor : MonoBehaviour
         switch ((ePlayerType)manager_Player.GetPlayerTypeIndex())
         {
             case ePlayerType.PetRobot:
-                switch ((ePlayerTechniqueType)techniqueIndex)
+                switch ((ePlayerWeaponType)techniqueIndex)
                 {
-                    case ePlayerTechniqueType.Bullet:
+                    case ePlayerWeaponType.Bullet:
                         color = Color.yellow;
                         break;
-                    case ePlayerTechniqueType.EarthQuakeInpact:
+                    case ePlayerWeaponType.EarthQuakeInpact:
                         color = new Color(0.7f, 0.2f, 0, 1);
                         break;
                 }

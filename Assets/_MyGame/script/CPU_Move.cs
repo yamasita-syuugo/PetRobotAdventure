@@ -52,6 +52,8 @@ public class CPU_Move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(player == null) player = GameObject.FindWithTag("Player");
+
         switch (moveType)
         {
             case eMoveType.none:

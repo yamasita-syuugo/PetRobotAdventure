@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+
 //using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -79,6 +81,7 @@ public class player_Move : MonoBehaviour
             case eScaffoldType.movePanel:
                 move = new Vector3(0.0f, 0.0f, 0.0f);
                 break;
+            default: Debug.Log("scaffold : " + scaffold.HumanName());break;
         }
         moveSpeed = moveSpeedSetting[(int)scaffold];
         moveMax = moveMaxSetting[(int)scaffold];

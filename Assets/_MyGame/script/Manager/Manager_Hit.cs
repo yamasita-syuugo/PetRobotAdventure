@@ -249,7 +249,7 @@ public class Manager_Hit : MonoBehaviour
             case eObjectType.enemy:
                 switch (gameObject.GetComponent<AttackType>().GetAttackType())
                 {
-                    case ePlayerTechniqueType.Bullet:
+                    case ePlayerWeaponType.Bullet:
                         switch (collision.GetComponent<EnemyType>().GetEnemyType())
                         {
                             case eEnemyType.Bom:
@@ -280,7 +280,7 @@ public class Manager_Hit : MonoBehaviour
 
 
                         break;
-                    case ePlayerTechniqueType.EarthQuakeInpact:
+                    case ePlayerWeaponType.EarthQuakeInpact:
                         Vector2 knockBackEnergy = collision .transform.position - gameObject.transform.position;
                         float distance = 3 / Mathf.Sqrt(knockBackEnergy.x * knockBackEnergy.x + knockBackEnergy.y * knockBackEnergy.y);
                         switch (collision.GetComponent<EnemyType>().GetEnemyType())

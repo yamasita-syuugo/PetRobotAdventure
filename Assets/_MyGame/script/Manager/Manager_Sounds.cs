@@ -34,8 +34,8 @@ public class Manager_Sounds : MonoBehaviour
     //}
 
     // Update is called once per frame
-    void Update()
-    {
+    //void Update()
+    //{
         
-    }
+    //}
 }

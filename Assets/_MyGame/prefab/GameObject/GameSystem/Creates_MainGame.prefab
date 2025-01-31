@@ -114,12 +114,12 @@ MonoBehaviour:
   - {fileID: 3570103102265485630, guid: a25d743fd780b9c45a0f0829e62478dd, type: 3}
   - {fileID: 0}
   enemySpaunTimeReset:
-  - 0
   - 4
   - 1
   - 4.5
   - 0
   - 15
+  - 0
   golemCountReset: 1
   livingArmorCountReset: 15
   nextPosition: {x: 12, y: 12, z: 0}

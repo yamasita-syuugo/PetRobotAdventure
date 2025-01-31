@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_Magic__Control : MonoBehaviour
+public class Player_Technique_Magic : Player_Technique_
 {
     // Start is called before the first frame update
     //void Start()
@@ -52,7 +52,7 @@ public class Player_Magic__Control : MonoBehaviour
                 case 14: break;
                 case 341: Magic_Missile(); break;
                 case 242:
-                    Magic_Teleport();
+                    Teleport();
                     break;
             }if (chanting != 0) Debug.Log("マジックコード : " + chanting);
 
@@ -68,8 +68,4 @@ public class Player_Magic__Control : MonoBehaviour
         /*shot*/
     }
 
-    private void Magic_Teleport()
-    {
-        GameObject.FindWithTag("Player").transform.position = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    }
 }

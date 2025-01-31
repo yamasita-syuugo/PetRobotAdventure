@@ -5,11 +5,12 @@ using UnityEngine;
 public class AttackType : MonoBehaviour
 {
     [SerializeField]
-    ePlayerTechniqueType attackType = ePlayerTechniqueType.none;
+    ePlayerWeaponType attackType = ePlayerWeaponType.none;
+    public ePlayerWeaponType GetAttackType() {  return attackType; }
     // Start is called before the first frame update
     void Start()
     {
-        if (attackType == ePlayerTechniqueType.none) Debug.Log(name + " enemyType = none");
+        if (attackType == ePlayerWeaponType.none) Debug.Log(name + " enemyType = none");
     }
 
     // Update is called once per frame
@@ -18,5 +19,4 @@ public class AttackType : MonoBehaviour
 
     //}
 
-    public ePlayerTechniqueType GetAttackType() {  return attackType; }
 }
