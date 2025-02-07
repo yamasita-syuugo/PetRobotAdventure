@@ -64,7 +64,7 @@ public class Player_Technique_Weapon : Player_Technique_
         UseSummary();
     }
 
-    public void GetPoint()
+    override public void GetPoint()
     {
         for(int i = 0;i < weaponNum; i++)
         {

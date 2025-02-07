@@ -314,6 +314,33 @@ public class Manager_Hit : MonoBehaviour
                                 break;
                         }
                         break;
+                    case ePlayerWeaponType.Sword:
+                        switch (collision.GetComponent<EnemyType>().GetEnemyType())
+                        {
+                            case eEnemyType.Bom:
+                                Manager_Score.DestroyPointAdd();
+
+                                GameObject.FindAnyObjectByType<Create_Flag>().FlagSpaun();
+
+                                Destroy(collision);
+
+                                GameObject.FindWithTag("Create").GetComponent<Create_Enemy>().LivingArmorCountAdd();   //リビングアーマーカウント
+                                break;
+                            case eEnemyType.Crow: break;
+                            case eEnemyType.Golem:
+                                Destroy(gameObject);
+                                break;
+                            case eEnemyType.LivingArmor:
+                                Destroy(gameObject.gameObject);
+                                break;
+                            case eEnemyType.EnemyMass: break;
+
+                            case eEnemyType.bossEnemy:
+                                collision.GetComponent<Technique_Enemy_Boss>().EndPowerDown();
+
+                                break;
+                        }
+                        break;
                     //case ePlayerTechniqueType.MeleeAttack: break;
                 }
                 break;

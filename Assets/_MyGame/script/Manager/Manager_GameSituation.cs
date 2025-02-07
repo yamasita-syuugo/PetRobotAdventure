@@ -9,7 +9,7 @@ public enum eGameSituation
     clear,
     failure,
 
-    GameSituationMax,
+    max,
 }
 public class Manager_GameSituation : MonoBehaviour
 {

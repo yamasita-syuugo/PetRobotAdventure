@@ -8,6 +8,10 @@ using UnityEngine;
 
 public enum eStage
 {
+    //stage,        //正方形、ランダムで穴あけもできる
+    //dungeon,       //部屋と通路を交互に自動作成、部屋で弾補給　通路を前進
+    //labyrinth,     //自動生成迷路
+
     [InspectorName("")]none = -1,
 
     fastPlay,
@@ -15,9 +19,6 @@ public enum eStage
     golemLabyrinth,
 
     lastGame,
-
-    //dungeon,       //部屋と通路を交互に自動作成、部屋で弾補給　通路を前進
-    //labyrinth,     //自動生成迷路
 
     [InspectorName("")]max,
 }

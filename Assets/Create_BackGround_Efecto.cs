@@ -4,23 +4,9 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public enum eEffectType
-{
-    none,
-
-    cloud,
-    rainClouds,
-
-    blackOut,
-
-    [InspectorName("")] max,
-}
-
 public class Create_BackGround_Efecto : MonoBehaviour
 {
-    [SerializeField]
-    eEffectType effectType;
-    public void SetEffectType(eEffectType efectoType_) { effectType = efectoType_; }
+    Manager_Background_Effect manager_Background_Effect;
 
     [SerializeField]
     GameObject cloudBase;
@@ -32,6 +18,8 @@ public class Create_BackGround_Efecto : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        manager_Background_Effect = GameObject.FindWithTag("Manager").GetComponent<Manager_Background_Effect>();
+
         spawnPoint = UnityEngine.Random.Range(0f, 6.28f);
     }
 
@@ -50,6 +38,8 @@ public class Create_BackGround_Efecto : MonoBehaviour
     eEffectType oldEffectType = eEffectType.max;
     void EfectoSpawn()
     {
+        eEffectType effectType = manager_Background_Effect.EffectType;
+
         if (oldEffectType != effectType)
         {
             oldEffectType = effectType;
@@ -102,6 +92,8 @@ public class Create_BackGround_Efecto : MonoBehaviour
     }
     void EffectSpawnStart()
     {
+        eEffectType effectType = manager_Background_Effect.EffectType;
+
         switch (effectType)
         {
             case eEffectType.none: break;

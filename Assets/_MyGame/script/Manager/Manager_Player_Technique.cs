@@ -8,6 +8,7 @@ public enum ePlayerWeaponType
 
     Bullet,
     EarthQuakeInpact,
+    Sword,
 
     //Mirage,
     //Snipe,
@@ -101,10 +102,10 @@ public class Manager_Player_Technique : MonoBehaviour
     public void TwoLeftButton() { AddTwoType(-1); }
     public void TwoRightButton() { AddTwoType(1); }
 
-    [SerializeField,Header("Technique")]
-    Sprite[] techniqueImage = new Sprite[(int)ePlayerWeaponType.max];
-    public Sprite GetTechniqueImage(int index_) { return techniqueImage[index_]; }
-    bool[] getTechnique = new bool[(int)ePlayerWeaponType.max];
+    [SerializeField,Header("Weapon")]
+    Sprite[] WeaponImage = new Sprite[(int)ePlayerWeaponType.max];
+    public Sprite GetWeaponImage(int index_) { return WeaponImage[index_]; }
+    bool[] getWeapon = new bool[(int)ePlayerWeaponType.max];
     [SerializeField]
     GameObject []techniqueBase;
     public GameObject GetTechniqueBase(int index_) { return techniqueBase[index_]; }
@@ -143,7 +144,7 @@ public class Manager_Player_Technique : MonoBehaviour
         PlayerPrefs.SetInt("playerTechniqueOne", GetOne());
         PlayerPrefs.SetInt("playerTechniqueTwo", GetTwo());
 
-        Manager_Save.BoolSave("GetPlayerTechnique", (int)ePlayerWeaponType.max, getTechnique);
+        Manager_Save.BoolSave("GetPlayerWeapon", (int)ePlayerWeaponType.max, getWeapon);
         Manager_Save.BoolSave("GetPlayerMagic", (int)ePlayerMagicType.max, getMagic);
         Manager_Save.BoolSave("GetPlayerAttack", (int)ePlayerAttackType.max, getAttack);
     }
@@ -152,7 +153,7 @@ public class Manager_Player_Technique : MonoBehaviour
         SetOne(PlayerPrefs.GetInt("playerTechniqueOne"));
         SetTwo(PlayerPrefs.GetInt("playerTechniqueTwo"));
 
-        Manager_Save.BoolLoad("GetPlayerTechnique", (int)ePlayerWeaponType.max, out getTechnique);
+        Manager_Save.BoolLoad("GetPlayerWeapon", (int)ePlayerWeaponType.max, out getWeapon);
         Manager_Save.BoolLoad("GetPlayerMagic", (int)ePlayerMagicType.max, out getMagic);
         Manager_Save.BoolLoad("GetPlayerAttack", (int)ePlayerAttackType.max, out getAttack);
     }

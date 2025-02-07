@@ -104,7 +104,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2770589924989194232, guid: 964a1293de7359d4791451504ef6bab4, type: 3}
       propertyPath: m_Name
-      value: Create_BackGround_Efecto
+      value: Create_BackGround_Effect
       objectReference: {fileID: 0}
     - target: {fileID: 4908423575376724262, guid: 964a1293de7359d4791451504ef6bab4, type: 3}
       propertyPath: m_LocalPosition.x

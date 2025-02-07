@@ -282,3 +282,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d840cab67657f4b4bb4cf4dfcc50c9b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletBase: {fileID: 3284376109990628062, guid: 8d465513b25fcd14c974449136fe5a82, type: 3}
+  shotSound: {fileID: 0}
+  moveDirectionX: 0
+  moveDirectionY: 0
+  swordBase: {fileID: 1369618293143239369, guid: 15be66f49a9f73748a7a9f8402177416, type: 3}
+  swordSound: {fileID: 0}
+  magicCircleBase: {fileID: 2717951038558090761, guid: 384675e56de995d4fbc4a49cbd73bb4c, type: 3}

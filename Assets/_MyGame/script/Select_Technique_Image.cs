@@ -39,7 +39,7 @@ public class Select_Technique_Image : MonoBehaviour
         switch ((ePlayerType)manager_Player.GetPlayerTypeIndex())
         {
             case ePlayerType.PetRobot:
-                GetComponent<Image>().sprite = manager_Player_Technique.GetTechniqueImage(technique);
+                GetComponent<Image>().sprite = manager_Player_Technique.GetWeaponImage(technique);
                 break;
             case ePlayerType.Werewolf:
                 GetComponent<Image>().sprite = manager_Player_Technique.GetAttackImage(technique);
