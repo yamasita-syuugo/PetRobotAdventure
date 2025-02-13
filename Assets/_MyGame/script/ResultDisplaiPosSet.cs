@@ -21,12 +21,12 @@ public class ResultDisplaiPosSet : MonoBehaviour
         destroyPoint,
 
 
-        enemyBomPoint,
+        enemy_Bom,
 
-        pointTypeMax,
+        max,
     }
-    int []score = new int[(int)ePointType.pointTypeMax];
-    int []oldScore = new int[(int)ePointType.pointTypeMax];
+    int []score = new int[(int)ePointType.max];
+    int []oldScore = new int[(int)ePointType.max];
 
     private void OnEnable()
     {
@@ -53,9 +53,9 @@ public class ResultDisplaiPosSet : MonoBehaviour
         score[(int)ePointType.flagGetPoint] = PlayerPrefs.GetInt("flagGetPoint");
         score[(int)ePointType.destroyPoint] = PlayerPrefs.GetInt("destroyPoint");
 
-        score[(int)ePointType.enemyBomPoint] = PlayerPrefs.GetInt("enemyBomPoint");
+        score[(int)ePointType.enemy_Bom] = PlayerPrefs.GetInt("enemyBomPoint");
 
-        for (int i = 0; i < (int)ePointType.pointTypeMax; i++) if (score[i] == null) score[i] = 0;
+        for (int i = 0; i < (int)ePointType.max; i++) if (score[i] == null) score[i] = 0;
     }
     void OldScoreUpdate()
     {
@@ -73,11 +73,11 @@ public class ResultDisplaiPosSet : MonoBehaviour
         oldScore[(int)ePointType.destroyPoint] = PlayerPrefs.GetInt("oldDestroyPoint");
 
         oldPoint = PlayerPrefs.GetInt("oldEnemyBomPoint");
-        if (oldPoint < score[(int)ePointType.enemyBomPoint]) PlayerPrefs.SetInt("oldEnemyBomPoint", score[(int)ePointType.enemyBomPoint]);
-        oldScore[(int)ePointType.enemyBomPoint] = PlayerPrefs.GetInt("oldEnemyBomPoint");
+        if (oldPoint < score[(int)ePointType.enemy_Bom]) PlayerPrefs.SetInt("oldEnemyBomPoint", score[(int)ePointType.enemy_Bom]);
+        oldScore[(int)ePointType.enemy_Bom] = PlayerPrefs.GetInt("oldEnemyBomPoint");
 
 
-        for (int i = 0; i < (int)ePointType.pointTypeMax; i++) if (oldScore[i] == null) oldScore[i] = 0;
+        for (int i = 0; i < (int)ePointType.max; i++) if (oldScore[i] == null) oldScore[i] = 0;
     }
 
     public int GetScore(ePointType type, bool old = false)

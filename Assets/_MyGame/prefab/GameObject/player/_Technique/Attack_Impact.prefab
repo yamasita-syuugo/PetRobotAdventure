@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4a7f3dfc82c83c4982ed4fda5e6dd9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackType: 2
+  techniqueObjectType: 1
 --- !u!114 &-1944879420066477485
 MonoBehaviour:
   m_ObjectHideFlags: 0

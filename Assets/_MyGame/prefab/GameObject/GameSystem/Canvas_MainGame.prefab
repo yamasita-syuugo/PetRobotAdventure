@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 8671022419463181735}
   - component: {fileID: 1824063899455253400}
   - component: {fileID: 8135449538063574714}
-  - component: {fileID: 3041072732972281600}
+  - component: {fileID: 1474324425917184191}
   m_Layer: 5
   m_Name: TotalPoint
   m_TagString: Untagged
@@ -273,7 +273,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &3041072732972281600
+--- !u!114 &1474324425917184191
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -282,9 +282,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 866472441489482748}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa42ca56aaac05046bab9fa64f160e58, type: 3}
+  m_Script: {fileID: 11500000, guid: 67a5bce3ebdc2bf46a6e4aa2d75ac029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreType: 0
+  scoreDisplayType: 2
 --- !u!1 &886422821790027467
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,7 +298,7 @@ GameObject:
   - component: {fileID: 4116210559273115999}
   - component: {fileID: 3881661454123484504}
   - component: {fileID: 1358560828266437316}
-  - component: {fileID: 6242436005713512381}
+  - component: {fileID: 4373716460577911442}
   m_Layer: 5
   m_Name: BreakPoint
   m_TagString: Untagged
@@ -420,7 +422,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &6242436005713512381
+--- !u!114 &4373716460577911442
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -429,9 +431,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 886422821790027467}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d606b0fccc4a0f4cb87baabb540ae94, type: 3}
+  m_Script: {fileID: 11500000, guid: 67a5bce3ebdc2bf46a6e4aa2d75ac029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreType: 2
+  scoreDisplayType: 2
 --- !u!1 &1180798648700296155
 GameObject:
   m_ObjectHideFlags: 0
@@ -901,7 +905,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -367.5, y: 222.5}
+  m_AnchoredPosition: {x: -367.50003, y: 222.5}
   m_SizeDelta: {x: -765, y: -475}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &5021679285107578125
@@ -2010,7 +2014,7 @@ GameObject:
   - component: {fileID: 733567274541548524}
   - component: {fileID: 5151683227270900904}
   - component: {fileID: 2059165718607761652}
-  - component: {fileID: 7905950918482501434}
+  - component: {fileID: 155879931869423664}
   m_Layer: 5
   m_Name: FlagGetPoint
   m_TagString: Untagged
@@ -2134,7 +2138,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &7905950918482501434
+--- !u!114 &155879931869423664
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2143,9 +2147,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7619666650257860635}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd15f3500e427094fa8b4264608b6ae6, type: 3}
+  m_Script: {fileID: 11500000, guid: 67a5bce3ebdc2bf46a6e4aa2d75ac029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreType: 1
+  scoreDisplayType: 2
 --- !u!1 &7778019458620630100
 GameObject:
   m_ObjectHideFlags: 0
@@ -2246,7 +2252,7 @@ GameObject:
   - component: {fileID: 4773472970558670392}
   - component: {fileID: 4490688243484084966}
   - component: {fileID: 3093308192788797344}
-  - component: {fileID: 5130187353674487011}
+  - component: {fileID: 7042533334539308846}
   m_Layer: 5
   m_Name: EnemyPoint
   m_TagString: Untagged
@@ -2370,7 +2376,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &5130187353674487011
+--- !u!114 &7042533334539308846
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2379,9 +2385,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8428520817460290546}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4872d3349bc9fe4d8944701b9194acc, type: 3}
+  m_Script: {fileID: 11500000, guid: 67a5bce3ebdc2bf46a6e4aa2d75ac029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreType: 3
+  scoreDisplayType: 2
 --- !u!1 &9199470709626079356
 GameObject:
   m_ObjectHideFlags: 0

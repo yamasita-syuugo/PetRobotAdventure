@@ -111,7 +111,7 @@ public class ObjectFall : MonoBehaviour
         {
             if (tag == "Player")
             {
-                Manager_Score.DataSave();
+                GameObject.FindWithTag("Manager").GetComponent<Manager_Score>().DataSave();
                 UnityEngine.SceneManagement.SceneManager.LoadScene("Result");
             }
             else Destroy(gameObject);
@@ -130,7 +130,7 @@ public class ObjectFall : MonoBehaviour
         {
             if (tag == "Player")
             {
-                Manager_Score.DataSave();
+                GameObject.FindWithTag("Manager").GetComponent<Manager_Score>().DataSave();
                 GameObject.FindWithTag("Manager").GetComponent<Manager_GameSituation>().SetGameSituation(eGameSituation.failure);
                 GameObject.FindWithTag("Manager").GetComponent<Manager_GameSituation>().DataSave();
                 UnityEngine.SceneManagement.SceneManager.LoadScene("Result");

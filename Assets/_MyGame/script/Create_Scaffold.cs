@@ -17,6 +17,12 @@ public class Create_Scaffold : MonoBehaviour
 
     [Header("scaffoldBase")]
     GameObject[] scaffoldBases = new GameObject[(int)eScaffoldType.max];
+    void SetScaffoldBases() { 
+        scaffoldBases[(int)eScaffoldType.block] = blockBase;
+        scaffoldBases[(int)eScaffoldType.ice] = iceBase;
+        scaffoldBases[(int)eScaffoldType.grass] = grassBase;
+        scaffoldBases[(int)eScaffoldType.movePanel] = movePanelBase;
+    }
     [SerializeField]
     GameObject blockBase;
     [SerializeField]
@@ -25,17 +31,11 @@ public class Create_Scaffold : MonoBehaviour
     GameObject grassBase;
     [SerializeField]
     GameObject movePanelBase;
-    void SetScaffoldBases() { 
-        scaffoldBases[(int)eScaffoldType.block] = blockBase;
-        scaffoldBases[(int)eScaffoldType.ice] = iceBase;
-        scaffoldBases[(int)eScaffoldType.grass] = grassBase;
-        scaffoldBases[(int)eScaffoldType.movePanel] = movePanelBase;
-    }
 
 
 
     [SerializeField]
-    eCreatScaffoldType creatType = eCreatScaffoldType.block;
+    eCreatScaffoldType creatType = eCreatScaffoldType.blockOnly;
     public void SetCreatType(eCreatScaffoldType creatType_) { creatType = creatType_; }
     [SerializeField]
     [Range(0f, 100f)]

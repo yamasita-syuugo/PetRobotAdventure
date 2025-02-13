@@ -29,7 +29,7 @@ public class GateProcess : MonoBehaviour
         if (collision.tag != "Player") return;
         if (manager_GateOpen == null || !manager_GateOpen.GetGateOpen()) return;
 
-        Manager_Score.DataSave();
+        GameObject.FindWithTag("Manager").GetComponent<Manager_Score>().DataSave();
         GameObject.FindWithTag("Manager").GetComponent<Manager_GameSituation>().SetGameSituation(eGameSituation.clear);
         GameObject.FindWithTag("Manager").GetComponent<Manager_GameSituation>().DataSave();
         UnityEngine.SceneManagement.SceneManager.LoadScene("Result");

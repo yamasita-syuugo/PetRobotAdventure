@@ -15,7 +15,7 @@ public enum ePlayerType
     //レベルアップを題材としたキャラクター
     //短距離の飛行ができるキャラ
 
-    [InspectorName("")] playerTypeMax,
+    [InspectorName("")] max,
 }
 
 public class Manager_Player : MonoBehaviour
@@ -45,8 +45,8 @@ public class Manager_Player : MonoBehaviour
     void AddPlayerTypeIndex(int add = 1)
     {
         playerTypeIndex = playerTypeIndex + add;
-        if (playerTypeIndex < 0) playerTypeIndex = ePlayerType.playerTypeMax - 1;
-        else if (playerTypeIndex >= ePlayerType.playerTypeMax) playerTypeIndex = 0;
+        if (playerTypeIndex < 0) playerTypeIndex = ePlayerType.max - 1;
+        else if (playerTypeIndex >= ePlayerType.max) playerTypeIndex = 0;
 
         Manager_Player_Technique manager_Player_Technique = GetComponent<Manager_Player_Technique>();
         manager_Player_Technique.SetOne(1);
@@ -58,7 +58,7 @@ public class Manager_Player : MonoBehaviour
     public void PlayerTypeIndexRightButton() { AddPlayerTypeIndex(1); }
 
     [Header("PlayerMoveSpeed")]
-    float[] playerSpeed = new float[(int)ePlayerType.playerTypeMax];
+    float[] playerSpeed = new float[(int)ePlayerType.max];
     void SetPlayerSpeed()
     {
         playerSpeed[(int)ePlayerType.PetRobot] = petRobotTypeSpeed;

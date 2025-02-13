@@ -9,14 +9,15 @@ using UnityEngine;
 public enum eStage
 {
     //stage,        //ê≥ï˚å`ÅAÉâÉìÉ_ÉÄÇ≈åäÇ†ÇØÇ‡Ç≈Ç´ÇÈ
-    //dungeon,       //ïîâÆÇ∆í òHÇåå›Ç…é©ìÆçÏê¨ÅAïîâÆÇ≈íeï‚ããÅ@í òHÇëOêi
     //labyrinth,     //é©ìÆê∂ê¨ñ¿òH
+    //dungeon,       //ïîâÆÇ∆í òHÇåå›Ç…é©ìÆçÏê¨ÅAïîâÆÇ≈íeï‚ããÅ@í òHÇëOêi
 
     [InspectorName("")]none = -1,
 
     fastPlay,
     crowStage,
     golemLabyrinth,
+    iceBom,
 
     lastGame,
 
@@ -28,6 +29,7 @@ public struct stStageData
     bool []enemySerect;
     public void InitializeEnemySerect() { enemySerect = new bool[(int)eEnemyType.max];}
     public bool[] GetEnemySerect() {  return enemySerect; }
+    public bool GetEnemySerect(eEnemyType enemyType) {  return enemySerect[(int)enemyType]; }
     public void SetEnemySerect(eEnemyType enemyType,bool enemySerect_) { enemySerect[(int)enemyType] = enemySerect_; }
 
 
@@ -94,13 +96,13 @@ public class Manager_StageSelect : MonoBehaviour
     public void RandomStageChange() { randomStage = !randomStage; }
 
     bool musicSerect = false;
-    public bool GetMusicSerect() {  return musicSerect; }
+    public bool GetMusicSerect() { return musicSerect; }
     public void SetMusicSerect(bool musicSerect_) { musicSerect = musicSerect_; }
     public void MusicSerectChenge() { musicSerect = !musicSerect; }
 
     bool backGroundSerect = false;
-    public bool GetBackGroundSerect() {  return backGroundSerect; }
-    public void SetBackGroundSerect(bool backGroundSerect_) {  backGroundSerect = backGroundSerect_; }
+    public bool GetBackGroundSerect() { return backGroundSerect; }
+    public void SetBackGroundSerect(bool backGroundSerect_) { backGroundSerect = backGroundSerect_; }
     public void BackGroundSerectChange() { backGroundSerect = !backGroundSerect; }
 
     //GetSituation
@@ -160,41 +162,51 @@ public class Manager_StageSelect : MonoBehaviour
                     case eStage.fastPlay:
                         switch (enemy)
                         {
-                            case eEnemyType.Bom: tmp = true; break;
-                            case eEnemyType.Crow: break;
-                            case eEnemyType.Golem: break;
-                            case eEnemyType.LivingArmor: break;
-                            case eEnemyType.EnemyMass: break;
+                            case eEnemyType.bom: tmp = true; break;
+                            case eEnemyType.crow: break;
+                            case eEnemyType.golem: break;
+                            case eEnemyType.livingArmor: break;
+                            case eEnemyType.enemyMass: break;
                         }
                         break;
                     case eStage.crowStage:
                         switch (enemy)
                         {
-                            case eEnemyType.Bom: break;
-                            case eEnemyType.Crow: tmp = true; break;
-                            case eEnemyType.Golem: break;
-                            case eEnemyType.LivingArmor: break;
-                            case eEnemyType.EnemyMass: break;
+                            case eEnemyType.bom: break;
+                            case eEnemyType.crow: tmp = true; break;
+                            case eEnemyType.golem: break;
+                            case eEnemyType.livingArmor: break;
+                            case eEnemyType.enemyMass: break;
                         }
                         break;
                     case eStage.golemLabyrinth:
                         switch (enemy)
                         {
-                            case eEnemyType.Bom: break;
-                            case eEnemyType.Crow: break;
-                            case eEnemyType.Golem: tmp = true; break;
-                            case eEnemyType.LivingArmor: break;
-                            case eEnemyType.EnemyMass: break;
+                            case eEnemyType.bom: break;
+                            case eEnemyType.crow: break;
+                            case eEnemyType.golem: tmp = true; break;
+                            case eEnemyType.livingArmor: break;
+                            case eEnemyType.enemyMass: break;
+                        }
+                        break;
+                    case eStage.iceBom:
+                        switch (enemy)
+                        {
+                            case eEnemyType.bom: tmp = true; break;
+                            case eEnemyType.crow: break;
+                            case eEnemyType.golem: break;
+                            case eEnemyType.livingArmor: break;
+                            case eEnemyType.enemyMass: break;
                         }
                         break;
                     case eStage.lastGame:
                         switch (enemy)
                         {
-                            case eEnemyType.Bom: tmp = true; break;
-                            case eEnemyType.Crow: tmp = true; break;
-                            case eEnemyType.Golem: tmp = true; break;
-                            case eEnemyType.LivingArmor: tmp = true; break;
-                            case eEnemyType.EnemyMass: break;
+                            case eEnemyType.bom: tmp = true; break;
+                            case eEnemyType.crow: break;
+                            case eEnemyType.golem: break;
+                            case eEnemyType.livingArmor: break;
+                            case eEnemyType.enemyMass: break;
                         }
                         break;
                     default: Debug.Log("StageEnemySelect : " + ((eStage)stage).HumanName()); break;
@@ -212,19 +224,25 @@ public class Manager_StageSelect : MonoBehaviour
                 case eStage.fastPlay:
                     stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.stage);
                     stageData[stage].SetFieldSize(7);
-                    stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.block);
+                    stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.blockOnly);
                     stageData[stage].SetRandomScaffoldBreak(0.0f);
                     break;
                 case eStage.crowStage:
                     stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.stage);
                     stageData[stage].SetFieldSize(3);
-                    stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.block);
+                    stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.blockOnly);
                     stageData[stage].SetRandomScaffoldBreak(0.0f);
                     break;
                 case eStage.golemLabyrinth:
                     stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.labyrinth);
                     stageData[stage].SetFieldSize(9);
-                    stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.movePanel);
+                    stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.movePanelOnly);
+                    stageData[stage].SetRandomScaffoldBreak(0.0f);
+                    break;
+                case eStage.iceBom:
+                    stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.stage);
+                    stageData[stage].SetFieldSize(5);
+                    stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.iceOnly);
                     stageData[stage].SetRandomScaffoldBreak(50.0f);
                     break;
                 case eStage.lastGame:
@@ -255,6 +273,10 @@ public class Manager_StageSelect : MonoBehaviour
                     stageData[stage].SetGateOpenType(eGateOpenType.time_Countdown);
                     stageData[stage].SetGateOpenNum(5);
                     break;
+                case eStage.iceBom:
+                    stageData[stage].SetGateOpenType(eGateOpenType.scoreCheck_Posi_Destroy_Bom);
+                    stageData[stage].SetGateOpenNum(20);
+                    break;
                 case eStage.lastGame:
                     stageData[stage].SetGateOpenType(eGateOpenType.time_Countdown);
                     stageData[stage].SetGateOpenNum(5);
@@ -278,8 +300,11 @@ public class Manager_StageSelect : MonoBehaviour
                 case eStage.golemLabyrinth:
                     stageData[stage].SetBackGroundIndex(2);
                     break;
-                case eStage.lastGame:
+                case eStage.iceBom:
                     stageData[stage].SetBackGroundIndex(3);
+                    break;
+                case eStage.lastGame:
+                    stageData[stage].SetBackGroundIndex(4);
                     break;
                 default: Debug.Log("StageBackGroundSelect : " + ((eStage)stage).HumanName()); break;
             }
@@ -300,8 +325,11 @@ public class Manager_StageSelect : MonoBehaviour
                 case eStage.golemLabyrinth:
                     stageData[stage].SetMusicIndex(2);
                     break;
-                case eStage.lastGame:
+                case eStage.iceBom:
                     stageData[stage].SetMusicIndex(3);
+                    break;
+                case eStage.lastGame:
+                    stageData[stage].SetMusicIndex(4);
                     break;
                 default: Debug.Log("StageMusicSelect : " + ((eStage)stage).HumanName()); break;
             }
@@ -309,8 +337,14 @@ public class Manager_StageSelect : MonoBehaviour
     }
 
     // Update is called once per frame
-    //void Update()
-    //{
+    void Update()
+    {
+        Special();
+    }
 
-    //}
+    int count = (int)eEnemyType.bom;
+    private void Special()
+    {
+        if (stage == eStage.lastGame) if (count < (int)GetComponent<Manager_Time>().GetPlayTime() / 30) { count++; stageData[(int)eStage.lastGame].SetEnemySerect((eEnemyType)count, true); }
+    }
 }

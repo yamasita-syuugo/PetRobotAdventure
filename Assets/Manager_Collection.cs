@@ -54,10 +54,10 @@ public class Manager_Collection : MonoBehaviour
             default: Debug.Log("NoSwitch"); break;
         }
     }
-    private void OnEnable()
-    {
-        DataLoad();
-    }
+    //private void OnEnable()
+    //{
+    //    DataLoad();
+    //}
     // Start is called before the first frame update
     //void Start()
     //{
@@ -72,7 +72,7 @@ public class Manager_Collection : MonoBehaviour
     public void DataSave()
     {
         Manager_Save.BoolSave("StageSituation", (int)eStage.max, getSituation_Stage);
-        Manager_Save.BoolSave("PlayerGetSituation", GetComponent<Manager_Player>().GetPlayerTypeBases().Length, getSituation_Player);
+        Manager_Save.BoolSave("PlayerGetSituation", (int)ePlayerType.max, getSituation_Player);
         Manager_Save.BoolSave("MousePointerGetSituation", GetComponent<Manager_MousePointerType>().GetMousePointerAnimations().Length, getSituation_MousePointer);
         Manager_Save.BoolSave("BackGroundGetSituation", GetComponent<Manager_BackgroundType>().GetBackGroundBase().Length, getSituation_Background);
         Manager_Save.BoolSave("MusicGetSituation", GetComponent<Manager_Music>().GetMusicBase().Length, getSituation_Music);
@@ -80,7 +80,7 @@ public class Manager_Collection : MonoBehaviour
     public void DataLoad()
     {
         Manager_Save.BoolLoad("StageSituation", (int)eStage.max, out getSituation_Stage);
-        Manager_Save.BoolLoad("PlayerGetSituation", GetComponent<Manager_Player>().GetPlayerTypeBases().Length, out getSituation_Player);
+        Manager_Save.BoolLoad("PlayerGetSituation", (int)ePlayerType.max, out getSituation_Player);
         Manager_Save.BoolLoad("MousePointerGetSituation", GetComponent<Manager_MousePointerType>().GetMousePointerAnimations().Length, out getSituation_MousePointer);
         Manager_Save.BoolLoad("BackGroundGetSituation", GetComponent<Manager_BackgroundType>().GetBackGroundBase().Length, out getSituation_Background);
         Manager_Save.BoolLoad("MusicGetSituation", GetComponent<Manager_Music>().GetMusicBase().Length, out getSituation_Music);

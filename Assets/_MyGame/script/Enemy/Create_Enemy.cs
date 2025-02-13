@@ -11,6 +11,8 @@ using UnityEngine;
 
 public class Create_Enemy : MonoBehaviour
 {
+    Manager_StageSelect manager_StageSelect;
+
     eStage stage;
     //public AudioSource setSound;
 
@@ -32,7 +34,9 @@ public class Create_Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        stage = GameObject.FindWithTag("Manager").GetComponent<Manager_StageSelect>().GetStage();
+        manager_StageSelect = GameObject.FindWithTag("Manager").GetComponent<Manager_StageSelect>();
+
+        stage = manager_StageSelect.GetStage();
 
         player = GameObject.FindWithTag("Player");
         timeManager = GameObject.FindWithTag("Manager").GetComponent<Manager_Time>();
@@ -57,61 +61,65 @@ public class Create_Enemy : MonoBehaviour
         if (player.GetComponent<ObjectFall>().GetSituation() != ObjectFall.eSituation.normal) return;
         if (timeManager.GetTimeStop()) return;
 
-        switch (stage)
-        {
-            case eStage.fastPlay:
-                EnemySpawnTimer(eWaveType.bom);
-                break;
-            case eStage.crowStage:
-                EnemySpawnTimer(eWaveType.crow);
-                break;
-            case eStage.golemLabyrinth:
-                EnemySpawnTimer(eWaveType.golem);
-                break;
+        stStageData stageData = manager_StageSelect.GetStageData(stage);
+        for(int i = 0;i < (int)eEnemyType.max; i++) { if (stageData.GetEnemySerect((eEnemyType)i)) EnemySpawnTimer((eEnemyType)i); }
 
-            case eStage.lastGame:
-                BomSpawn();
-                switch (timeManager.GetComponent<Manager_Wave>().GetWaveType())
-                {
-                    case eWaveType.bom: break;
-                    case eWaveType.crow:
-                        EnemySpawnCrow(); break;
-                    case eWaveType.golem:
-                        EnemySpawnCrow();
-                        EnemySpawnGolem(); break;
-                    case eWaveType.livingArmor:
-                        EnemySpawnCrow();
-                        EnemySpawnGolem();
-                        EnemySpawnLivingArmor(); break;
-                    case eWaveType.enemyMass:
-                        EnemySpawnCrow();
-                        EnemySpawnGolem();
-                        EnemySpawnLivingArmor();
-                        EnemySpawnEnemyMass();
-                        break;
+        //switch (stage)
+        //{
+        //    case eStage.fastPlay:
+        //        EnemySpawnTimer(eWaveType.bom);
+        //        break;
+        //    case eStage.crowStage:
+        //        EnemySpawnTimer(eWaveType.crow);
+        //        break;
+        //    case eStage.golemLabyrinth:
+        //        EnemySpawnTimer(eWaveType.golem);
+        //        break;
 
-                    case eWaveType.max: EndGame(); break;
-                    default: for (int i = 1; i < (int)eWaveType.max - 1; i++) EnemySpawnTimer((eWaveType)i); break;
-                }
-                break;
-            default: Debug.Log("error : switch(eStage)"); break;
-        }
+        //    case eStage.lastGame:
+        //        BomSpawn();
+        //        switch (timeManager.GetComponent<Manager_Wave>().GetWaveType())
+        //        {
+        //            case eWaveType.bom: break;
+        //            case eWaveType.crow:
+        //                EnemySpawnCrow(); break;
+        //            case eWaveType.golem:
+        //                EnemySpawnCrow();
+        //                EnemySpawnGolem(); break;
+        //            case eWaveType.livingArmor:
+        //                EnemySpawnCrow();
+        //                EnemySpawnGolem();
+        //                EnemySpawnLivingArmor(); break;
+        //            case eWaveType.enemyMass:
+        //                EnemySpawnCrow();
+        //                EnemySpawnGolem();
+        //                EnemySpawnLivingArmor();
+        //                EnemySpawnEnemyMass();
+        //                break;
+
+        //            case eWaveType.max: EndGame(); break;
+        //            default: for (int i = 1; i < (int)eWaveType.max - 1; i++) EnemySpawnTimer((eWaveType)i); break;
+        //        }
+        //        break;
+        //    default: Debug.Log("error : switch(eStage)"); break;
+        //}
         EndGame();
     }
-    float []enemySpaunTime = new float[(int)eWaveType.max];
+    float []enemySpaunTime = new float[(int)eEnemyType.max];
     [SerializeField]
-    float[] enemySpaunTimeReset = new float[(int)eWaveType.max];
-    void EnemySpawnTimer(eWaveType enemyType)
+    float[] enemySpaunTimeReset = new float[(int)eEnemyType.max];
+    void EnemySpawnTimer(eEnemyType enemyType)
     {
         GameObject spawnEnemy = null;
-        switch (enemyType)
-        {
-            case eWaveType.bom: spawnEnemy = enemyObjectBase[(int)eEnemyType.Bom]; break;
-            case eWaveType.crow: spawnEnemy = enemyObjectBase[(int)eEnemyType.Crow]; break;
-            case eWaveType.golem: spawnEnemy = enemyObjectBase[(int)eEnemyType.Golem]; break;
-            case eWaveType.livingArmor: spawnEnemy = enemyObjectBase[(int)eEnemyType.LivingArmor]; break;
-            case eWaveType.enemyMass: spawnEnemy = enemyObjectBase[(int)eEnemyType.EnemyMass]; break;
-        }
+        spawnEnemy = enemyObjectBase[(int)enemyType];
+        //switch (enemyType)
+        //{
+        //    case eEnemyType.bom:  break;
+        //    case eEnemyType.crow: spawnEnemy = enemyObjectBase[(int)eEnemyType.Crow]; break;
+        //    case eEnemyType.golem: spawnEnemy = enemyObjectBase[(int)eEnemyType.Golem]; break;
+        //    case eEnemyType.livingArmor: spawnEnemy = enemyObjectBase[(int)eEnemyType.LivingArmor]; break;
+        //    case eEnemyType.enemyMass: spawnEnemy = enemyObjectBase[(int)eEnemyType.EnemyMass]; break;
+        //}
         enemySpaunTime[(int)enemyType] -= Time.deltaTime;
         if (enemySpaunTime[(int)enemyType] <= 0)
         {
@@ -123,8 +131,8 @@ public class Create_Enemy : MonoBehaviour
     }
     void EnemySpawnCrow()
     {
-        if (GameObject.FindGameObjectWithTag("Player").GetComponent<player_Move>().GetMove() == new Vector2(0, 0)) EnemySpawnTimer(eWaveType.crow);
-        else enemySpaunTime[(int)eWaveType.crow] = enemySpaunTimeReset[(int)eWaveType.crow];
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<player_Move>().GetMove() == new Vector2(0, 0)) EnemySpawnTimer(eEnemyType.crow);
+        else enemySpaunTime[(int)eEnemyType.crow] = enemySpaunTimeReset[(int)eEnemyType.crow];
     }
     [SerializeField]
     int golemCountReset = 1;
@@ -133,7 +141,7 @@ public class Create_Enemy : MonoBehaviour
     {
         if(golemCount <= 0)
         {
-            GameObject tmp = Instantiate<GameObject>(enemyObjectBase[(int)eEnemyType.Golem]);
+            GameObject tmp = Instantiate<GameObject>(enemyObjectBase[(int)eEnemyType.golem]);
             EnemySpaunPositionSet(tmp);
             golemCount = golemCountReset;
         }
@@ -145,7 +153,7 @@ public class Create_Enemy : MonoBehaviour
     {
         if (livingArmorCount <= 0)
         {
-            GameObject tmp = Instantiate<GameObject>(enemyObjectBase[(int)eEnemyType.LivingArmor]);
+            GameObject tmp = Instantiate<GameObject>(enemyObjectBase[(int)eEnemyType.livingArmor]);
             EnemySpaunPositionSet(tmp);
             livingArmorCount = livingArmorCountReset;
         }
@@ -161,7 +169,7 @@ public class Create_Enemy : MonoBehaviour
         }
 
         if (!enemyMassSpawn) return;
-        GameObject tmp = Instantiate<GameObject>(enemyObjectBase[(int)eEnemyType.EnemyMass]);
+        GameObject tmp = Instantiate<GameObject>(enemyObjectBase[(int)eEnemyType.enemyMass]);
         EnemySpaunPositionSet(tmp);
         enemyMassSpawn = false;
     }
@@ -174,7 +182,7 @@ public class Create_Enemy : MonoBehaviour
     {
         if (bomSpawnNum <= 0) return;
 
-        GameObject tmp = Instantiate<GameObject>(enemyObjectBase[(int)eEnemyType.Bom]);
+        GameObject tmp = Instantiate<GameObject>(enemyObjectBase[(int)eEnemyType.bom]);
         EnemySpaunPositionSet(tmp);
 
         bomSpawnNum--;
@@ -184,9 +192,9 @@ public class Create_Enemy : MonoBehaviour
     {
         if(endGame)
         {
-            GameObject tmp = Instantiate<GameObject>(enemyObjectBase[(int)eEnemyType.Bom]);
+            GameObject tmp = Instantiate<GameObject>(enemyObjectBase[(int)eEnemyType.bom]);
             EnemySpaunPositionSet(tmp);
-            enemySpaunTime[(int)eWaveType.bom] = enemySpaunTimeReset[(int)eWaveType.bom];
+            enemySpaunTime[(int)eEnemyType.bom] = enemySpaunTimeReset[(int)eEnemyType.bom];
         }
     }
     public void EnemyCreate(GameObject enemy)

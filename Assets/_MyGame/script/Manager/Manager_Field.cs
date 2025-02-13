@@ -30,10 +30,10 @@ public enum eCreatScaffoldType
 {
     [InspectorName("")] None = -1,
 
-    block,
-    grass,
-    ice,
-    movePanel,
+    blockOnly,
+    grassOnly,
+    iceOnly,
+    movePanelOnly,
 
     random,
 }

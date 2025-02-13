@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f56f00428eddeff409e030bb3c572e75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  getSituation_Stage: 000000
+  getSituation_Stage: 000001
   getSituation_Player: 00000000
   getSituation_MousePointer: 0000000000
   getSituation_Background: 0000000000
@@ -124,9 +124,8 @@ MonoBehaviour:
   two: 1
   WeaponImage:
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 5bfe0a6d02d500c41aeefc0c23cee935, type: 3}
+  - {fileID: 21300000, guid: fb3e91c8c8710ae43bedb80c7f72450b, type: 3}
   techniqueBase:
   - {fileID: 0}
   - {fileID: 5879217919693297659, guid: 74c639ade4938e248b81e667a3d03d52, type: 3}
@@ -212,9 +211,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mousePointerAnimations:
-  - {fileID: 9100000, guid: 1d4ad5eafa79ae14284521b46679c8b6, type: 2}
+  - {fileID: 9100000, guid: e5b1c400ec05de741b0c02e1a7d0a27b, type: 2}
   - {fileID: 9100000, guid: 9f79df77c74dd674c8645b2d3c321d65, type: 2}
   - {fileID: 9100000, guid: 1d4ad5eafa79ae14284521b46679c8b6, type: 2}
+  - {fileID: 9100000, guid: 0d8037444fdcf8144908b264c1a4b396, type: 2}
   mousePointerIndex: 0
 --- !u!114 &4456441095281617581
 MonoBehaviour:
@@ -343,6 +343,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12e0c9ad008ac5348ac2cf2034d8104a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totalImage: {fileID: 388234297, guid: b0687eb97c0a0954a880ff91a6e7be93, type: 3}
+  Get_FlagImage: {fileID: 21300000, guid: 9cde90ea0dc3e5f41a3e3873c942fb2c, type: 3}
+  Destroy_BomImage: {fileID: 2106291162, guid: 71aff854a94546646ac914a63229c4f5, type: 3}
+  Enemy_BomImage: {fileID: 21300000, guid: 01271042cd8e6be4c9a030171ea91a84, type: 3}
+  Enemy_GolemImage: {fileID: 0}
+  shotImage: {fileID: 21300000, guid: 5bfe0a6d02d500c41aeefc0c23cee935, type: 3}
 --- !u!114 &7225526075513606991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -405,6 +411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a02e047d0970334285f04eb35a273e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectType: 0
 --- !u!1001 &1163399678311762220
 PrefabInstance:
   m_ObjectHideFlags: 0

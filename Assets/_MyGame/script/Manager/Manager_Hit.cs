@@ -107,27 +107,27 @@ public class Manager_Hit : MonoBehaviour
             case eObjectType.player:
                 switch (gameObject.GetComponent<EnemyType>().GetEnemyType())
                 {
-                    case eEnemyType.Bom:
+                    case eEnemyType.bom:
                         Manager_Score.EnemyBomPointAdd();
 
                         Explosion(gameObject);
                         break;
-                    case eEnemyType.Crow:
+                    case eEnemyType.crow:
 
                         CPU_Move enemyMove = gameObject.GetComponent<CPU_Move>();
                         collision.GetComponent<player_Move>().AddPosition(enemyMove.GetMove() * enemyMove.GetMoveSpeed() * Time.deltaTime);
                         break;
-                    case eEnemyType.Golem:
+                    case eEnemyType.golem:
                         Vector3 enelgy = collision.transform.position - transform.position;
                         collision.GetComponent<KnockBack>().SetKnockBackEnergy(enelgy * 3);
                         break;
-                    case eEnemyType.LivingArmor:
+                    case eEnemyType.livingArmor:
 
                         GetComponent<KnockBack>().SetKnockBackEnergy(collision.GetComponent<bulletMove>().GetMoveEnelgy());
 
                         if (collision.name == "Bullet") Destroy(collision.gameObject);
                         break;
-                    case eEnemyType.EnemyMass: break;
+                    case eEnemyType.enemyMass: break;
 
                     case eEnemyType.bossEnemy: break;
                 }
@@ -143,72 +143,72 @@ public class Manager_Hit : MonoBehaviour
     {
         switch (gameObject.GetComponent<EnemyType>().GetEnemyType())
         {
-            case eEnemyType.Bom:
+            case eEnemyType.bom:
                 switch (collision.GetComponent<EnemyType>().GetEnemyType())
                 {
-                    case eEnemyType.Bom:
+                    case eEnemyType.bom:
                         Manager_Score.EnemyBomPointAdd(2);
 
                         Explosion(collision);
                         Explosion(gameObject);
                         break;
-                    case eEnemyType.Crow: break;
-                    case eEnemyType.Golem: break;
-                    case eEnemyType.LivingArmor: break;
-                    case eEnemyType.EnemyMass: break;
+                    case eEnemyType.crow: break;
+                    case eEnemyType.golem: break;
+                    case eEnemyType.livingArmor: break;
+                    case eEnemyType.enemyMass: break;
 
                     case eEnemyType.bossEnemy: break;
                 }
                 break;
-            case eEnemyType.Crow:
+            case eEnemyType.crow:
                 switch (collision.GetComponent<EnemyType>().GetEnemyType())
                 {
-                    case eEnemyType.Bom:
+                    case eEnemyType.bom:
                         Manager_Score.EnemyBomPointAdd();
 
                         Explosion(collision);
                         Explosion(gameObject);
                         break;
-                    case eEnemyType.Crow: break;
-                    case eEnemyType.Golem: break;
-                    case eEnemyType.LivingArmor: break;
-                    case eEnemyType.EnemyMass: break;
+                    case eEnemyType.crow: break;
+                    case eEnemyType.golem: break;
+                    case eEnemyType.livingArmor: break;
+                    case eEnemyType.enemyMass: break;
 
                     case eEnemyType.bossEnemy: break;
                 }
                 break;
-            case eEnemyType.Golem:
+            case eEnemyType.golem:
                 switch (collision.GetComponent<EnemyType>().GetEnemyType())
                 {
-                    case eEnemyType.Bom: break;
-                    case eEnemyType.Crow: break;
-                    case eEnemyType.Golem: break;
-                    case eEnemyType.LivingArmor: break;
-                    case eEnemyType.EnemyMass: break;
+                    case eEnemyType.bom: break;
+                    case eEnemyType.crow: break;
+                    case eEnemyType.golem: break;
+                    case eEnemyType.livingArmor: break;
+                    case eEnemyType.enemyMass: break;
 
                     case eEnemyType.bossEnemy: break;
                 }
                 break;
-            case eEnemyType.LivingArmor:
+            case eEnemyType.livingArmor:
                 switch (collision.GetComponent<EnemyType>().GetEnemyType())
                 {
-                    case eEnemyType.Bom: break;
-                    case eEnemyType.Crow: break;
-                    case eEnemyType.Golem: break;
-                    case eEnemyType.LivingArmor: break;
-                    case eEnemyType.EnemyMass: break;
+                    case eEnemyType.bom: break;
+                    case eEnemyType.crow: break;
+                    case eEnemyType.golem: break;
+                    case eEnemyType.livingArmor: break;
+                    case eEnemyType.enemyMass: break;
 
                     case eEnemyType.bossEnemy: break;
                 }
                 break;
-            case eEnemyType.EnemyMass:
+            case eEnemyType.enemyMass:
                 switch (collision.GetComponent<EnemyType>().GetEnemyType())
                 {
-                    case eEnemyType.Bom: break;
-                    case eEnemyType.Crow: break;
-                    case eEnemyType.Golem: break;
-                    case eEnemyType.LivingArmor: break;
-                    case eEnemyType.EnemyMass: break;
+                    case eEnemyType.bom: break;
+                    case eEnemyType.crow: break;
+                    case eEnemyType.golem: break;
+                    case eEnemyType.livingArmor: break;
+                    case eEnemyType.enemyMass: break;
 
                     case eEnemyType.bossEnemy: break;
                 }
@@ -217,11 +217,11 @@ public class Manager_Hit : MonoBehaviour
             case eEnemyType.bossEnemy:
                 switch (collision.GetComponent<EnemyType>().GetEnemyType())
                 {
-                    case eEnemyType.Bom: break;
-                    case eEnemyType.Crow: break;
-                    case eEnemyType.Golem: break;
-                    case eEnemyType.LivingArmor: break;
-                    case eEnemyType.EnemyMass: break;
+                    case eEnemyType.bom: break;
+                    case eEnemyType.crow: break;
+                    case eEnemyType.golem: break;
+                    case eEnemyType.livingArmor: break;
+                    case eEnemyType.enemyMass: break;
 
                     case eEnemyType.bossEnemy: break;
                 }
@@ -249,10 +249,10 @@ public class Manager_Hit : MonoBehaviour
             case eObjectType.enemy:
                 switch (gameObject.GetComponent<AttackType>().GetAttackType())
                 {
-                    case ePlayerWeaponType.Bullet:
+                    case eTechniqueObjectType.Bullet:
                         switch (collision.GetComponent<EnemyType>().GetEnemyType())
                         {
-                            case eEnemyType.Bom:
+                            case eEnemyType.bom:
                                 Manager_Score.DestroyPointAdd();
                                 GameObject.FindWithTag("Create").GetComponent<Create_Enemy>().LivingArmorCountAdd();   //リビングアーマーカウント
                                 GameObject.FindAnyObjectByType<Create_Flag>().FlagSpaun();
@@ -260,17 +260,17 @@ public class Manager_Hit : MonoBehaviour
                                 Explosion(collision);
                                 Destroy(gameObject);
                                 break;
-                            case eEnemyType.Crow: break;
-                            case eEnemyType.Golem:
+                            case eEnemyType.crow: break;
+                            case eEnemyType.golem:
                                 collision.GetComponent<KnockBack>().SetKnockBackEnergy(gameObject.GetComponent<bulletMove>().GetMoveEnelgy());
                                 collision.GetComponent<KnockBack>().AddMoveSpeed(gameObject.GetComponent<bulletMove>().GetMoveSpeed());
                                 Destroy(gameObject);
                                 break;
-                            case eEnemyType.LivingArmor:
+                            case eEnemyType.livingArmor:
                                 collision.GetComponent<KnockBack>().SetKnockBackEnergy(gameObject.GetComponent<bulletMove>().GetMoveEnelgy());
                                 Destroy(gameObject.gameObject);
                                 break;
-                            case eEnemyType.EnemyMass: break;
+                            case eEnemyType.enemyMass: break;
 
                             case eEnemyType.bossEnemy:
                                 collision.GetComponent<Technique_Enemy_Boss>().EndPowerDown();
@@ -280,12 +280,12 @@ public class Manager_Hit : MonoBehaviour
 
 
                         break;
-                    case ePlayerWeaponType.EarthQuakeInpact:
+                    case eTechniqueObjectType.Inpact:
                         Vector2 knockBackEnergy = collision .transform.position - gameObject.transform.position;
                         float distance = 3 / Mathf.Sqrt(knockBackEnergy.x * knockBackEnergy.x + knockBackEnergy.y * knockBackEnergy.y);
                         switch (collision.GetComponent<EnemyType>().GetEnemyType())
                         {
-                            case eEnemyType.Bom:
+                            case eEnemyType.bom:
                                 Manager_Score.DestroyPointAdd();
 
                                 GameObject.FindAnyObjectByType<Create_Flag>().FlagSpaun();
@@ -296,17 +296,17 @@ public class Manager_Hit : MonoBehaviour
 
                                 GameObject.FindWithTag("Create").GetComponent<Create_Enemy>().LivingArmorCountAdd();   //リビングアーマーカウント
                                 break;
-                            case eEnemyType.Crow: break;
-                            case eEnemyType.Golem:
+                            case eEnemyType.crow: break;
+                            case eEnemyType.golem:
                                 collision.GetComponent<KnockBack>().SetKnockBackEnergy(knockBackEnergy);
                                 collision.GetComponent<KnockBack>().AddMoveSpeed(1 / distance);
                                 Destroy(gameObject);
                                 break;
-                            case eEnemyType.LivingArmor:
+                            case eEnemyType.livingArmor:
                                 collision.GetComponent<KnockBack>().SetKnockBackEnergy(knockBackEnergy);
                                 Destroy(gameObject.gameObject);
                                 break;
-                            case eEnemyType.EnemyMass: break;
+                            case eEnemyType.enemyMass: break;
 
                             case eEnemyType.bossEnemy:
                                 collision.GetComponent<Technique_Enemy_Boss>().EndPowerDown();
@@ -314,10 +314,10 @@ public class Manager_Hit : MonoBehaviour
                                 break;
                         }
                         break;
-                    case ePlayerWeaponType.Sword:
+                    case eTechniqueObjectType.Sword:
                         switch (collision.GetComponent<EnemyType>().GetEnemyType())
                         {
-                            case eEnemyType.Bom:
+                            case eEnemyType.bom:
                                 Manager_Score.DestroyPointAdd();
 
                                 GameObject.FindAnyObjectByType<Create_Flag>().FlagSpaun();
@@ -326,14 +326,14 @@ public class Manager_Hit : MonoBehaviour
 
                                 GameObject.FindWithTag("Create").GetComponent<Create_Enemy>().LivingArmorCountAdd();   //リビングアーマーカウント
                                 break;
-                            case eEnemyType.Crow: break;
-                            case eEnemyType.Golem:
+                            case eEnemyType.crow: break;
+                            case eEnemyType.golem:
                                 Destroy(gameObject);
                                 break;
-                            case eEnemyType.LivingArmor:
+                            case eEnemyType.livingArmor:
                                 Destroy(gameObject.gameObject);
                                 break;
-                            case eEnemyType.EnemyMass: break;
+                            case eEnemyType.enemyMass: break;
 
                             case eEnemyType.bossEnemy:
                                 collision.GetComponent<Technique_Enemy_Boss>().EndPowerDown();

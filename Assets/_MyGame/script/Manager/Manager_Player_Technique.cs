@@ -2,13 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum eTechniqueObjectType
+{
+    [InspectorName("")] none = -1,
+
+    Bullet,
+    Inpact,
+    Sword,
+
+    [InspectorName("")] max,
+}
+
 public enum ePlayerWeaponType
 {
     none,
 
     Bullet,
     EarthQuakeInpact,
-    Sword,
 
     //Mirage,
     //Snipe,
@@ -66,7 +76,7 @@ public class Manager_Player_Technique : MonoBehaviour
                 else if (one >= (int)ePlayerMagicType.max) one = (int)ePlayerMagicType.none;
                 break;
 
-            case ePlayerType.playerTypeMax: break;
+            case ePlayerType.max: break;
         }
     }
     public void OneLeftButton() { AddOneType(-1); }
@@ -96,7 +106,7 @@ public class Manager_Player_Technique : MonoBehaviour
                 else if (two >= (int)ePlayerMagicType.max) two = (int)ePlayerMagicType.none;
                 break;
 
-            case ePlayerType.playerTypeMax: break;
+            case ePlayerType.max: break;
         }
     }
     public void TwoLeftButton() { AddTwoType(-1); }
