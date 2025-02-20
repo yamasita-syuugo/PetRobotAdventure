@@ -63,7 +63,7 @@ public class UI_CountColor : MonoBehaviour
                         break;
                 }
                 break;
-            case ePlayerType.Werewolf:
+            case ePlayerType.WereWolf:
                 switch ((ePlayerAttackType)techniqueIndex)
                 {
                     case ePlayerAttackType.MeleeAttack: 

@@ -24,8 +24,8 @@ public class Manager_BackgroundType : MonoBehaviour
         if (backGroundIndex_ < 0) backGroundIndex_ = 0;else if(backGroundIndex_ >= backGroundBase.Length)backGroundIndex_ = backGroundBase.Length - 1;
         return backGroundBase[backGroundIndex_]; }
     //GetSituation
-    public bool GetGetSituation(int index) { return GetComponent<Manager_Collection>().GetGetSituation(eCollectionType.Background,index); }
-    public void SetGetSituation(int index, bool getSituation_) { GetComponent<Manager_Collection>().SetGetSituation(eCollectionType.Background, index,getSituation_); }
+    public bool GetGetSituation(int index) { return GetComponent<Manager_Collection>().GetGetSituation(eCollectionType.background,index); }
+    public void SetGetSituation(int index, bool getSituation_) { GetComponent<Manager_Collection>().SetGetSituation(eCollectionType.background, index,getSituation_); }
     public void DataSave()
     {
         PlayerPrefs.SetInt("backGroundIndex", (int)backGroundIndex);

@@ -6,15 +6,16 @@ using static ObjectFall;
 
 public enum eCollectionType
 {
-    None = -1,
+    [InspectorName("")] none = -1,
 
-    Stage,
-    Player,
-    MousePointer,
-    Background,
-    Music,
+    stage,
+    player,
+    medal,
+    mousePointer,
+    background,
+    music,
 
-[InspectorName("")]max,
+    [InspectorName("")] max,
 }
 
 public class Manager_Collection : MonoBehaviour
@@ -23,6 +24,8 @@ public class Manager_Collection : MonoBehaviour
     bool[] getSituation_Stage = new bool[(int)eStage.max];
     [SerializeField]
     bool[] getSituation_Player = new bool[16];
+    [SerializeField]
+    bool[] getSituation_Medal = new bool[16];
     [SerializeField]
     bool[] getSituation_MousePointer = new bool[16];
     [SerializeField]
@@ -33,11 +36,12 @@ public class Manager_Collection : MonoBehaviour
     {
         switch (collectionType)
         {
-            case eCollectionType.Stage: return getSituation_Stage[index]; break;
-            case eCollectionType.Player: return getSituation_Player[index]; break;
-            case eCollectionType.MousePointer: return getSituation_MousePointer[index]; break;
-            case eCollectionType.Background: return getSituation_Background[index]; break;
-            case eCollectionType.Music: return getSituation_Music[index]; break;
+            case eCollectionType.stage: return getSituation_Stage[index]; break;
+            case eCollectionType.player: return getSituation_Player[index]; break;
+            case eCollectionType.medal: return getSituation_Medal[index]; break;
+            case eCollectionType.mousePointer: return getSituation_MousePointer[index]; break;
+            case eCollectionType.background: return getSituation_Background[index]; break;
+            case eCollectionType.music: return getSituation_Music[index]; break;
             default: Debug.Log("NoSwitch"); break;
         }
         return false;
@@ -46,11 +50,12 @@ public class Manager_Collection : MonoBehaviour
     {
         switch (collectionType)
         {
-            case eCollectionType.Stage: getSituation_Stage[index] = getSituation_; break;
-            case eCollectionType.Player: getSituation_Player[index] = getSituation_; break;
-            case eCollectionType.MousePointer: getSituation_MousePointer[index] = getSituation_; break;
-            case eCollectionType.Background: getSituation_Background[index] = getSituation_; break;
-            case eCollectionType.Music: getSituation_Music[index] = getSituation_; break;
+            case eCollectionType.stage: getSituation_Stage[index] = getSituation_; break;
+            case eCollectionType.player: getSituation_Player[index] = getSituation_; break;
+            case eCollectionType.medal: getSituation_Medal[index] = getSituation_; break;
+            case eCollectionType.mousePointer: getSituation_MousePointer[index] = getSituation_; break;
+            case eCollectionType.background: getSituation_Background[index] = getSituation_; break;
+            case eCollectionType.music: getSituation_Music[index] = getSituation_; break;
             default: Debug.Log("NoSwitch"); break;
         }
     }
@@ -73,6 +78,7 @@ public class Manager_Collection : MonoBehaviour
     {
         Manager_Save.BoolSave("StageSituation", (int)eStage.max, getSituation_Stage);
         Manager_Save.BoolSave("PlayerGetSituation", (int)ePlayerType.max, getSituation_Player);
+        Manager_Save.BoolSave("MedalGetSituation", (int)eMedalType.max, getSituation_Medal);
         Manager_Save.BoolSave("MousePointerGetSituation", GetComponent<Manager_MousePointerType>().GetMousePointerAnimations().Length, getSituation_MousePointer);
         Manager_Save.BoolSave("BackGroundGetSituation", GetComponent<Manager_BackgroundType>().GetBackGroundBase().Length, getSituation_Background);
         Manager_Save.BoolSave("MusicGetSituation", GetComponent<Manager_Music>().GetMusicBase().Length, getSituation_Music);
@@ -81,6 +87,7 @@ public class Manager_Collection : MonoBehaviour
     {
         Manager_Save.BoolLoad("StageSituation", (int)eStage.max, out getSituation_Stage);
         Manager_Save.BoolLoad("PlayerGetSituation", (int)ePlayerType.max, out getSituation_Player);
+        Manager_Save.BoolLoad("MedalGetSituation", (int)eMedalType.max, out getSituation_Medal);
         Manager_Save.BoolLoad("MousePointerGetSituation", GetComponent<Manager_MousePointerType>().GetMousePointerAnimations().Length, out getSituation_MousePointer);
         Manager_Save.BoolLoad("BackGroundGetSituation", GetComponent<Manager_BackgroundType>().GetBackGroundBase().Length, out getSituation_Background);
         Manager_Save.BoolLoad("MusicGetSituation", GetComponent<Manager_Music>().GetMusicBase().Length, out getSituation_Music);

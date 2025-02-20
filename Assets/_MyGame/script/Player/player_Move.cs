@@ -6,13 +6,18 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class player_Move : MonoBehaviour
-{//todo;ノックバックを
+{
+    Manager_Medal manager_Medal;
+    
+    //todo;ノックバックを
     [SerializeField]
     eScaffoldType scaffold = eScaffoldType.block;
 
     // Start is called before the first frame update
     void Start()
     {
+        manager_Medal = GameObject.FindWithTag("Manager").GetComponent<Manager_Medal>();
+
         playerAnimation = GetComponent<Animator>();
 
         playerTypeSpeed = GameObject.FindWithTag("Manager").GetComponent<Manager_Player>().GetPlayerTypeSpeed(GetComponent<PlayerType>().GetPlayerType());
@@ -65,7 +70,7 @@ public class player_Move : MonoBehaviour
         if (GetComponent<ObjectFall>().GetSituation() == ObjectFall.eSituation.fall ||
             GetComponent<ObjectFall>().GetSituation() == ObjectFall.eSituation.chanting) return;
 
-        transform.position += move * playerTypeSpeed * Time.deltaTime;
+        transform.position += move * playerTypeSpeed * manager_Medal.GetMoveSpeedBuff() * Time.deltaTime;
 
         switch (scaffold)
         {
@@ -74,6 +79,7 @@ public class player_Move : MonoBehaviour
                 break;
             case eScaffoldType.ice:
                 move /= 1 + 1f / 1000;
+                if(manager_Medal.GetBootsSpike()) move = new Vector3(0.0f, 0.0f, 0.0f);
                 break;
             case eScaffoldType.grass:
                 move = new Vector3(0.0f, 0.0f, 0.0f);

@@ -19,8 +19,8 @@ public class Manager_MousePointerType : MonoBehaviour
         if (mousePointerIndex < 0) mousePointerIndex = mousePointerAnimations.Length - 1;
     }
     //GetSituation
-    public bool GetGetSituation(int index) {  return GetComponent<Manager_Collection>().GetGetSituation(eCollectionType.MousePointer,index) ; }
-    public void SetGetSituation(int index, bool getSituation_) { GetComponent<Manager_Collection>().SetGetSituation(eCollectionType.MousePointer, index, getSituation_); }
+    public bool GetGetSituation(int index) {  return GetComponent<Manager_Collection>().GetGetSituation(eCollectionType.mousePointer,index) ; }
+    public void SetGetSituation(int index, bool getSituation_) { GetComponent<Manager_Collection>().SetGetSituation(eCollectionType.mousePointer, index, getSituation_); }
     public void DataSave()
     {
         PlayerPrefs.SetInt("mousePointerIndex", mousePointerIndex);

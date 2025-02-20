@@ -21,8 +21,8 @@ public class Manager_Music : MonoBehaviour
     public void MusicIndexLeftButton() { AddMusicIndex(-1); }
     public void MusicIndexRightButton() { AddMusicIndex(1); }
     //GetSituation
-    public bool GetGetSituation(int index) { return GetComponent<Manager_Collection>().GetGetSituation(eCollectionType.Music,index); }
-    public  void SetGetSituation(int index ,bool getSituation_) { GetComponent<Manager_Collection>().SetGetSituation(eCollectionType.Music, index,getSituation_); }
+    public bool GetGetSituation(int index) { return GetComponent<Manager_Collection>().GetGetSituation(eCollectionType.music,index); }
+    public  void SetGetSituation(int index ,bool getSituation_) { GetComponent<Manager_Collection>().SetGetSituation(eCollectionType.music, index,getSituation_); }
     public void DataSave()
     {
         PlayerPrefs.SetInt("musicIndex", musicIndex);
@@ -32,10 +32,10 @@ public class Manager_Music : MonoBehaviour
         musicIndex = PlayerPrefs.GetInt("musicIndex");
     }
     // Start is called before the first frame update
-    void Start()
-    {
-        DataLoad();
-    }
+    //void Start()
+    //{
+       
+    //}
 
     // Update is called once per frame
     //void Update()

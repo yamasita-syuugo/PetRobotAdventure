@@ -10,7 +10,7 @@ public enum ePlayerType
 
     PetRobot,
     WizardGhost,
-    Werewolf,  //近距離をメインに移動に優れたキャラ
+    WereWolf,  //近距離をメインに移動に優れたキャラ
     //Tower, //中心記固定し移動しないキャラ
     //レベルアップを題材としたキャラクター
     //短距離の飛行ができるキャラ
@@ -36,8 +36,8 @@ public class Manager_Player : MonoBehaviour
         return playerIconAnimaterBase[index];
     }
     //getSituation
-    public bool GetGetSituation(int index) { return  GetComponent<Manager_Collection>().GetGetSituation(eCollectionType.Player,index); }
-    public void SetGetSituation(int index, bool getSituation_) { GetComponent<Manager_Collection>().SetGetSituation(eCollectionType.Player, index, getSituation_); }
+    public bool GetGetSituation(int index) { return  GetComponent<Manager_Collection>().GetGetSituation(eCollectionType.player,index); }
+    public void SetGetSituation(int index, bool getSituation_) { GetComponent<Manager_Collection>().SetGetSituation(eCollectionType.player, index, getSituation_); }
     [SerializeField]
     ePlayerType playerTypeIndex = ePlayerType.none;
     public ePlayerType GetPlayerTypeIndex() { return playerTypeIndex; }
@@ -63,7 +63,7 @@ public class Manager_Player : MonoBehaviour
     {
         playerSpeed[(int)ePlayerType.PetRobot] = petRobotTypeSpeed;
         playerSpeed[(int)ePlayerType.WizardGhost] = wizardGhostTypeSpeed;
-        playerSpeed[(int)ePlayerType.Werewolf] = werewolfTypeSpeed;
+        playerSpeed[(int)ePlayerType.WereWolf] = werewolfTypeSpeed;
     }
     [SerializeField] float petRobotTypeSpeed = 1.0f;
     [SerializeField] float wizardGhostTypeSpeed = 0.6f;

@@ -67,7 +67,7 @@ public class Manager_Player_Technique : MonoBehaviour
                 if (one < (int)ePlayerWeaponType.none) one = (int)ePlayerWeaponType.max - 1;
                 else if (one >= (int)ePlayerWeaponType.max) one = (int)ePlayerWeaponType.none;
                 break;
-            case ePlayerType.Werewolf:
+            case ePlayerType.WereWolf:
                 if (one < (int)ePlayerAttackType.none) one = (int)ePlayerAttackType.max - 1;
                 else if (one >= (int)ePlayerAttackType.max) one = (int)ePlayerAttackType.none;
                 break;
@@ -97,7 +97,7 @@ public class Manager_Player_Technique : MonoBehaviour
                 if (two < (int)ePlayerWeaponType.none) two = (int)ePlayerWeaponType.max - 1;
                 else if (two >= (int)ePlayerWeaponType.max) two = (int)ePlayerWeaponType.none;
                 break;
-            case ePlayerType.Werewolf:
+            case ePlayerType.WereWolf:
                 if (two < (int)ePlayerAttackType.none) two = (int)ePlayerAttackType.max - 1;
                 else if (two >= (int)ePlayerAttackType.max) two = (int)ePlayerAttackType.none;
                 break;

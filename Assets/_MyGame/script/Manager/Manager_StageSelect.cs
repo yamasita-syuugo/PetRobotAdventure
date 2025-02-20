@@ -106,8 +106,8 @@ public class Manager_StageSelect : MonoBehaviour
     public void BackGroundSerectChange() { backGroundSerect = !backGroundSerect; }
 
     //GetSituation
-    public bool GetGetSituation(eStage stage) { return GetComponent<Manager_Collection>().GetGetSituation(eCollectionType.Stage, (int)stage); }
-    public void SetGetSituation(int index, bool getSituation_) { GetComponent<Manager_Collection>().SetGetSituation(eCollectionType.Stage, index, getSituation_); }
+    public bool GetGetSituation(eStage stage) { return GetComponent<Manager_Collection>().GetGetSituation(eCollectionType.stage, (int)stage); }
+    public void SetGetSituation(int index, bool getSituation_) { GetComponent<Manager_Collection>().SetGetSituation(eCollectionType.stage, index, getSituation_); }
     public void DataSave()
     {
         PlayerPrefs.SetInt("stage", (int)stage);

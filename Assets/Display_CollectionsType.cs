@@ -2,34 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-enum eCollectionsTabType
-{
-    [InspectorName("")]none = -1,
-
-    stage,
-    player,
-    medal,
-    mousePointer,
-    background,
-    music,
-
-    [InspectorName("")]max,
-}
-
 public class Display_CollectionsType : MonoBehaviour
 {
-    eCollectionsTabType collectionsType = eCollectionsTabType.stage;
-    public void SetCollectionsType(int collectionsType_) { collectionsType = (eCollectionsTabType)collectionsType_ ; }
+    eCollectionType collectionsType = eCollectionType.stage;
+    public eCollectionType GetCollectionsTabType() { return collectionsType; }
+    public void SetCollectionsType(int collectionsType_) { collectionsType = (eCollectionType)collectionsType_ ; }
     [SerializeField]
-    GameObject[] collection; 
+    GameObject[] collection;
     // Start is called before the first frame update
     //void Start()
     //{
-        
+
     //}
 
     // Update is called once per frame
-    eCollectionsTabType oldCollectionsType = eCollectionsTabType.none;
+    eCollectionType oldCollectionsType = eCollectionType.none;
     void Update()
     {
         if (oldCollectionsType == collectionsType) return; oldCollectionsType = collectionsType;

@@ -67,8 +67,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f56f00428eddeff409e030bb3c572e75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  getSituation_Stage: 000001
+  getSituation_Stage: 000000
   getSituation_Player: 00000000
+  getSituation_Medal: 00000000000000000000000000000000
   getSituation_MousePointer: 0000000000
   getSituation_Background: 0000000000
   getSituation_Music: 0000000000
@@ -153,9 +154,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fe8cd2c3e5587b43b2d379e25fd329a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  medalImageBase:
-  - {fileID: 0}
-  - {fileID: 21300000, guid: c4dfbd77c3f740c448b5f0eee7a2bde8, type: 3}
+  boots_Speed_UPMedalImage: {fileID: 21300000, guid: c4dfbd77c3f740c448b5f0eee7a2bde8, type: 3}
+  boots_Speed_DOWNMedalImage: {fileID: 21300000, guid: c254762abb579284095ed81ad53e6448, type: 3}
+  boots_SpikeImage: {fileID: 21300000, guid: d711250b26fb7904ba9bd2948cdc9fd2, type: 3}
   medalType: 000000000000000000000000
 --- !u!114 &7140798705473952029
 MonoBehaviour:
@@ -347,7 +348,7 @@ MonoBehaviour:
   Get_FlagImage: {fileID: 21300000, guid: 9cde90ea0dc3e5f41a3e3873c942fb2c, type: 3}
   Destroy_BomImage: {fileID: 2106291162, guid: 71aff854a94546646ac914a63229c4f5, type: 3}
   Enemy_BomImage: {fileID: 21300000, guid: 01271042cd8e6be4c9a030171ea91a84, type: 3}
-  Enemy_GolemImage: {fileID: 0}
+  Enemy_GolemImage: {fileID: -2115553726, guid: 31d3c3b7612648241893f5c0793e3286, type: 3}
   shotImage: {fileID: 21300000, guid: 5bfe0a6d02d500c41aeefc0c23cee935, type: 3}
 --- !u!114 &7225526075513606991
 MonoBehaviour:
@@ -478,7 +479,10 @@ PrefabInstance:
       addedObject: {fileID: 3015895508648728215}
     - targetCorrespondingSourceObject: {fileID: 2044329444728250679, guid: c4f0481156a7c2444b818632c1664be5, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6651637405668723910}
+      addedObject: {fileID: 8214931958082051942}
+    - targetCorrespondingSourceObject: {fileID: 2044329444728250679, guid: c4f0481156a7c2444b818632c1664be5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8777936084912285191}
   m_SourcePrefab: {fileID: 100100000, guid: c4f0481156a7c2444b818632c1664be5, type: 3}
 --- !u!1 &899544666082748443 stripped
 GameObject:
@@ -497,18 +501,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f743f9715d5f20049a70af4f9d950ac8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6651637405668723910
-MonoBehaviour:
+--- !u!58 &8214931958082051942
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 899544666082748443}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2053bcf52daf0cc4d854951563921627, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.001
+--- !u!50 &8777936084912285191
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899544666082748443}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!4 &3727541696882582275 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2567010811024714287, guid: c4f0481156a7c2444b818632c1664be5, type: 3}

@@ -22,6 +22,8 @@ public class Manager_Save : MonoBehaviour
 
         GetComponent<Manager_Score>().DataSave();
 
+        GetComponent<Manager_Medal>().DataSave();
+
         GetComponent<Manager_GameSituation>().DataSave();   //クリアか失敗かの保存
 
     }
@@ -41,6 +43,8 @@ public class Manager_Save : MonoBehaviour
         GetComponent<Manager_Gacha>().DataLoad();
 
         GetComponent<Manager_Score>().DataLoad();
+
+        GetComponent<Manager_Medal>().DataLoad();
 
         GetComponent<Manager_GameSituation>().DataLoad();   //クリアか失敗かの保存
 
