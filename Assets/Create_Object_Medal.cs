@@ -18,7 +18,7 @@ public class Create_Object_Medal : MonoBehaviour
         int count = 0;
         for (int i = (int)eMedalType.none + 1; i < (int)eMedalType.max; i++)
         {
-            if (manager_Collection.GetGetSituation(eCollectionType.medal, i)) continue;
+            if (!manager_Collection.GetGetSituation(eCollectionType.medal, i)) continue;
             bool continue_ = false;
             for (int j = 0; j < manager_Medal.GetMedalPocketNum(); j++) if (manager_Medal.GetMedalType(j) == (eMedalType)i) { oldMedalType[j] = (eMedalType)i; continue_ = true; }
             if (continue_) continue;
@@ -50,8 +50,7 @@ public class Create_Object_Medal : MonoBehaviour
             GameObject tmp = Instantiate<GameObject>(medalObject);
             tmp.transform.parent = transform;
             tmp.GetComponent<SpriteRenderer>().sprite = manager_Medal.GetMedalImageBase((int)tmp_OldMedalType);
-            Vector2 randomPos = new Vector2(Random.RandomRange(-0.5f, 0.5f), Random.RandomRange(-0.5f, 0.5f));
-            tmp.transform.position = randomPos;
+            tmp.transform.position = new Vector3((int)tmp_OldMedalType % 14 - 7, -(int)tmp_OldMedalType / 14 + 1, 0);
             tmp.GetComponent<Medal_Type>().SetMedalType(tmp_OldMedalType);
         }
     }

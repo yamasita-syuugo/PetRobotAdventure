@@ -17,14 +17,16 @@ public class Manager_Camera : MonoBehaviour
     eStage oldStage = eStage.none;
     void Update()
     {
-        if (oldStage == manager_StageSelect.GetStage()) return;oldStage = manager_StageSelect.GetStage();
+        if (oldStage == manager_StageSelect.GetStage()) return; oldStage = manager_StageSelect.GetStage();
 
-        switch(oldStage)
+        switch (oldStage)
         {
-            case eStage.fastPlay:cameraMoveSpeedDeray = 1.26f;break;
-            case eStage.crowStage:cameraMoveSpeedDeray = 1.26f;break;
-            case eStage.golemLabyrinth:cameraMoveSpeedDeray = 4f;break;
-            case eStage.lastGame:cameraMoveSpeedDeray = 1.26f;break;
+            case eStage.fastPlay: cameraMoveSpeedDeray = 1.26f; break;
+            case eStage.crowStage: cameraMoveSpeedDeray = 1.26f; break;
+            case eStage.golemLabyrinth: cameraMoveSpeedDeray = 4f; break;
+            case eStage.iceBom: cameraMoveSpeedDeray = 1.26f; break;
+            case eStage.searchGate: cameraMoveSpeedDeray = 4f; break;
+            case eStage.lastGame: cameraMoveSpeedDeray = 1.26f; break;
             default: Debug.Log("error : switch(eStage)"); break;
         }
     }

@@ -70,7 +70,6 @@ public class Create_Scaffold : MonoBehaviour
         SetCreatType(manager_Field.GetScaffoldType(stage));
         SetRandomBreak(manager_Field.GetRandomBreak(stage));
         CreateObject();
-
     }
 
     //生成
@@ -86,8 +85,8 @@ public class Create_Scaffold : MonoBehaviour
         int fieldSize = manager_Field.GetFieldSize(manager_StageSelect.GetStage());
 
         GameObject[] blocks = new GameObject[fieldSize * fieldSize];
-                        GameObject tmpBase;
-                        GameObject tmpScaffold;
+        GameObject tmpBase;
+        GameObject tmpScaffold;
         switch ((eFieldCreatType)manager_Field.GetFieldCreatTypeIndex(manager_StageSelect.GetStage()))
         {
             case eFieldCreatType.stage:     //正方形ステージ
@@ -98,7 +97,7 @@ public class Create_Scaffold : MonoBehaviour
                         tmpBase = ScaffoldSelect();
 
                         if (randomBreak > Random.Range(0, 100) &&
-                            !(fieldSize / 2 * 2 == fieldSize ? (x == fieldSize / 2 - 1 || x == fieldSize / 2) &&
+                            !(fieldSize / 2 * 2 == fieldSize ? (x == fieldSize / 2 - 1 || x == fieldSize / 2) &&//初期地削除の制限
                             (y == fieldSize / 2 - 1 || y == fieldSize / 2) : (x == fieldSize / 2) && (y == fieldSize / 2))) continue;
 
                         tmpScaffold = Instantiate<GameObject>(tmpBase, new Vector3(
@@ -118,11 +117,11 @@ public class Create_Scaffold : MonoBehaviour
                 ScaffoldPos[0, 0] = 0; ScaffoldPos[0, 1] = 0;
 
                 int old1Random = Random.Range(0, 4);
-                if (old1Random <= 0) {          ScaffoldPos[1, 0] = ScaffoldPos[0, 0] + 1;  ScaffoldPos[1, 1] = ScaffoldPos[0, 1]; }
-                else if (old1Random <= 1) {     ScaffoldPos[1, 0] = ScaffoldPos[0, 0] - 1;  ScaffoldPos[1, 1] = ScaffoldPos[0, 1]; }
-                else if (old1Random <= 2) {     ScaffoldPos[1, 0] = ScaffoldPos[0, 0];      ScaffoldPos[1, 1] = ScaffoldPos[0, 1] + 1; }
-                else {                          ScaffoldPos[1, 0] = ScaffoldPos[0, 0];      ScaffoldPos[1, 1] = ScaffoldPos[0, 1] - 1; }
-                for(int i  = 0; i < 2; i++)
+                if (old1Random <= 0) { ScaffoldPos[1, 0] = ScaffoldPos[0, 0] + 1; ScaffoldPos[1, 1] = ScaffoldPos[0, 1]; }
+                else if (old1Random <= 1) { ScaffoldPos[1, 0] = ScaffoldPos[0, 0] - 1; ScaffoldPos[1, 1] = ScaffoldPos[0, 1]; }
+                else if (old1Random <= 2) { ScaffoldPos[1, 0] = ScaffoldPos[0, 0]; ScaffoldPos[1, 1] = ScaffoldPos[0, 1] + 1; }
+                else { ScaffoldPos[1, 0] = ScaffoldPos[0, 0]; ScaffoldPos[1, 1] = ScaffoldPos[0, 1] - 1; }
+                for (int i = 0; i < 2; i++)
                 {
                     tmpScaffold = Instantiate<GameObject>(ScaffoldSelect(), new Vector3(
                 ScaffoldPos[i, 0] * blockSizeX,
@@ -167,8 +166,31 @@ public class Create_Scaffold : MonoBehaviour
 
                     blocks[blockNum++] = tmpScaffold;
 
-                    if (i == scaffoldNum - 1) GameObject.FindWithTag("Manager").GetComponent<Manager_Gate>().SerGatePos(tmpScaffold.transform.position); 
+                    if (i == scaffoldNum - 1) GameObject.FindWithTag("Manager").GetComponent<Manager_Gate>().SerGatePos(tmpScaffold.transform.position);
                 }
+                break;
+            case eFieldCreatType.frameStage:     //正方形ステージ
+                bool holeOn = false;
+                for (int x = 0; x < fieldSize; x++)
+                {
+                    if (x % randomBreak == 0) holeOn = false; else holeOn = true;
+                    for (int y = 0; y < fieldSize; y++)
+                    {
+                        if (holeOn && !(y % randomBreak == 0) &&
+                            ((y < fieldSize / 2 - randomBreak / 2 || y > fieldSize / 2 + randomBreak / 2) ||//初期地の確保
+                            (x < fieldSize / 2 - randomBreak / 2 || x > fieldSize / 2 + randomBreak / 2))) continue;
+                        tmpBase = ScaffoldSelect();
+
+                        tmpScaffold = Instantiate<GameObject>(tmpBase, new Vector3(
+                    (x - (float)fieldSize / 2.0f) * blockSizeX + blockSizeX / 2.0f,
+                    (y - (float)fieldSize / 2.0f) * blockSizeY + blockSizeY / 2.0f, 0),
+                    Quaternion.identity);
+                        tmpScaffold.transform.parent = transform;
+
+                        blocks[blockNum++] = tmpScaffold;
+                    }
+                }
+                GameObject.FindWithTag("Manager").GetComponent<Manager_Gate>().SerGatePos(blocks[Random.Range(0, blocks.Length)].transform.position);
                 break;
         }
     }

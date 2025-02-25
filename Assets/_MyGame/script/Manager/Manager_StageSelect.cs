@@ -18,6 +18,7 @@ public enum eStage
     crowStage,
     golemLabyrinth,
     iceBom,
+    searchGate,
 
     lastGame,
 
@@ -199,6 +200,16 @@ public class Manager_StageSelect : MonoBehaviour
                             case eEnemyType.enemyMass: break;
                         }
                         break;
+                    case eStage.searchGate:
+                        switch (enemy)
+                        {
+                            case eEnemyType.bom: tmp = true; break;
+                            case eEnemyType.crow: break;
+                            case eEnemyType.golem: tmp = true; break;
+                            case eEnemyType.livingArmor: tmp = true; break;
+                            case eEnemyType.enemyMass: break;
+                        }
+                        break;
                     case eStage.lastGame:
                         switch (enemy)
                         {
@@ -245,6 +256,12 @@ public class Manager_StageSelect : MonoBehaviour
                     stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.iceOnly);
                     stageData[stage].SetRandomScaffoldBreak(50.0f);
                     break;
+                case eStage.searchGate:
+                    stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.frameStage);
+                    stageData[stage].SetFieldSize(53);
+                    stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.movePanelOnly);//todo:grassÇ∆BlockÇÃÉâÉìÉ_ÉÄÇçÏê¨Çµè[ÇƒÇÈ
+                    stageData[stage].SetRandomScaffoldBreak(4);
+                    break;
                 case eStage.lastGame:
                     stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.stage);
                     stageData[stage].SetFieldSize(9);
@@ -277,6 +294,10 @@ public class Manager_StageSelect : MonoBehaviour
                     stageData[stage].SetGateOpenType(eGateOpenType.scoreCheck_Posi_Destroy_Bom);
                     stageData[stage].SetGateOpenNum(20);
                     break;
+                case eStage.searchGate:
+                    stageData[stage].SetGateOpenType(eGateOpenType.time_Countdown);
+                    stageData[stage].SetGateOpenNum(5);
+                    break;
                 case eStage.lastGame:
                     stageData[stage].SetGateOpenType(eGateOpenType.time_Countdown);
                     stageData[stage].SetGateOpenNum(5);
@@ -303,6 +324,9 @@ public class Manager_StageSelect : MonoBehaviour
                 case eStage.iceBom:
                     stageData[stage].SetBackGroundIndex(3);
                     break;
+                case eStage.searchGate:
+                    stageData[stage].SetBackGroundIndex(3);
+                    break;
                 case eStage.lastGame:
                     stageData[stage].SetBackGroundIndex(4);
                     break;
@@ -326,6 +350,9 @@ public class Manager_StageSelect : MonoBehaviour
                     stageData[stage].SetMusicIndex(2);
                     break;
                 case eStage.iceBom:
+                    stageData[stage].SetMusicIndex(3);
+                    break;
+                case eStage.searchGate:
                     stageData[stage].SetMusicIndex(3);
                     break;
                 case eStage.lastGame:

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Select_BackGround_Image : MonoBehaviour
@@ -19,7 +20,7 @@ public class Select_BackGround_Image : MonoBehaviour
     void Update()
     {
         int backGroundType;
-        if (manager_StageSelect.GetBackGroundSerect()) { backGroundType = manager_BackgroundType.GetBackGroundIndex();}
+        if (manager_StageSelect.GetBackGroundSerect() || SceneManager.GetActiveScene().name == "Collection") { backGroundType = manager_BackgroundType.GetBackGroundIndex();}
         else { backGroundType = manager_StageSelect.GetStageData(manager_StageSelect.GetStage()).GetBackGroundIndex(); }
         
         if(manager_BackgroundType == null) { return; }

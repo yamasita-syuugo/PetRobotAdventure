@@ -93,99 +93,57 @@ public class Create_CollectionButton : MonoBehaviour
                             case ePlayerType.PetRobot:
                                 for (int tec = 1; tec < (int)ePlayerWeaponType.max; tec++)
                                 {
-                                    //左
                                     GameObject tmp_Tec = Instantiate(collection_Base);
                                     tmp_Tec.transform.parent = tmp.transform;
-                                    tmp_Tec.transform.localPosition = new Vector2(-12.5f, tec * -wideSize);
-                                    tmp_Tec.transform.localScale = new Vector2(0.5f, 1);
-                                    tmp_Tec.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector2(100, 50);
-                                    tmp_Tec.GetComponentInChildren<SpriteRenderer>().transform.localPosition = new Vector2(25, 0);
+                                    tmp_Tec.transform.localPosition = new Vector2(0, tec * -wideSize);
+                                    tmp_Tec.transform.localScale = new Vector2(1, 1);
+                                    tmp_Tec.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector2(50, 50);
 
                                     tmp_Tec.GetComponentInChildren<SpriteRenderer>().sprite = manager.GetComponent<Manager_Player_Technique>().GetWeaponImage(tec);
                                     tmp_Tec.GetComponentInChildren<Animator>().runtimeAnimatorController = null;
                                     int tmpInt_tec = tec; //iを直接入れるとfor文のtecの最終値の値になる
                                     tmp_Tec.GetComponent<Button>().onClick.AddListener(() => manager.GetComponent<Manager_Player>().SetPlayerTypeIndex((ePlayerType)tmpInt));   //左右クリック
                                     tmp_Tec.GetComponent<Button>().onClick.AddListener(() => manager.GetComponent<Manager_Player_Technique>().SetOne(tmpInt_tec));  //左クリック
-                                    tmp_Tec.GetComponentInChildren<TextMeshProUGUI>().text = "";
-
-                                    //右
-                                    tmp_Tec = Instantiate(collection_Base);
-                                    tmp_Tec.transform.parent = tmp.transform;
-                                    tmp_Tec.transform.localPosition = new Vector2(12.5f, tec * -wideSize);
-                                    tmp_Tec.transform.localScale = new Vector2(0.5f, 1);
-                                    //tmp_Tec.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector2(50, 50);
-
-                                    //tmp_Tec.GetComponentInChildren<SpriteRenderer>().sprite = manager.GetComponent<Manager_Player_Technique>().GetAttackImage(tec);
-                                    tmp_Tec.GetComponentInChildren<Animator>().runtimeAnimatorController = null;
-                                    //tmpInt_tec = tec; //iを直接入れるとfor文のtecの最終値の値になる
-                                    tmp_Tec.GetComponent<Button>().onClick.AddListener(() => manager.GetComponent<Manager_Player>().SetPlayerTypeIndex((ePlayerType)tmpInt));   //左右クリック
-                                    tmp_Tec.GetComponent<Button>().onClick.AddListener(() => manager.GetComponent<Manager_Player_Technique>().SetTwo(tmpInt_tec));    //右クリック
+                                    tmp_Tec.GetComponent<Collection_Button_Right_Click>().SetPlayerType((ePlayerType)i);    //右クリック設定
+                                    tmp_Tec.GetComponent<Collection_Button_Right_Click>().SetTechniqueIndex(tec);
                                     tmp_Tec.GetComponentInChildren<TextMeshProUGUI>().text = "";
                                 }
                                 break;
                                 case ePlayerType.WizardGhost:
                                 for (int tec = 1; tec < (int)ePlayerMagicType.max; tec++)
                                 {
-                                    //左
                                     GameObject tmp_Tec = Instantiate(collection_Base);
                                     tmp_Tec.transform.parent = tmp.transform;
-                                    tmp_Tec.transform.localPosition = new Vector2(-12.5f, tec * -wideSize);
-                                    tmp_Tec.transform.localScale = new Vector2(0.5f, 1);
-                                    tmp_Tec.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector2(100, 50);
-                                    tmp_Tec.GetComponentInChildren<SpriteRenderer>().transform.localPosition = new Vector2(25, 0);
+                                    tmp_Tec.transform.localPosition = new Vector2(0, tec * -wideSize);
+                                    tmp_Tec.transform.localScale = new Vector2(1, 1);
+                                    tmp_Tec.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector2(50, 50);
 
                                     tmp_Tec.GetComponentInChildren<SpriteRenderer>().sprite = manager.GetComponent<Manager_Player_Technique>().GetMagicImage(tec);
                                     tmp_Tec.GetComponentInChildren<Animator>().runtimeAnimatorController = null;
                                     int tmpInt_tec = tec; //iを直接入れるとfor文のtecの最終値の値になる
                                     tmp_Tec.GetComponent<Button>().onClick.AddListener(() => manager.GetComponent<Manager_Player>().SetPlayerTypeIndex((ePlayerType)tmpInt));   //左右クリック
                                     tmp_Tec.GetComponent<Button>().onClick.AddListener(() => manager.GetComponent<Manager_Player_Technique>().SetOne(tmpInt_tec));  //左クリック
-                                    tmp_Tec.GetComponentInChildren<TextMeshProUGUI>().text = "";
-
-                                    //右
-                                    tmp_Tec = Instantiate(collection_Base);
-                                    tmp_Tec.transform.parent = tmp.transform;
-                                    tmp_Tec.transform.localPosition = new Vector2(12.5f, tec * -wideSize);
-                                    tmp_Tec.transform.localScale = new Vector2(0.5f, 1);
-                                    //tmp_Tec.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector2(50, 50);
-
-                                    //tmp_Tec.GetComponentInChildren<SpriteRenderer>().sprite = manager.GetComponent<Manager_Player_Technique>().GetAttackImage(tec);
-                                    tmp_Tec.GetComponentInChildren<Animator>().runtimeAnimatorController = null;
-                                    //tmpInt_tec = tec; //iを直接入れるとfor文のtecの最終値の値になる
-                                    tmp_Tec.GetComponent<Button>().onClick.AddListener(() => manager.GetComponent<Manager_Player>().SetPlayerTypeIndex((ePlayerType)tmpInt));   //左右クリック
-                                    tmp_Tec.GetComponent<Button>().onClick.AddListener(() => manager.GetComponent<Manager_Player_Technique>().SetTwo(tmpInt_tec));    //右クリック
+                                    tmp_Tec.GetComponent<Collection_Button_Right_Click>().SetPlayerType((ePlayerType)i);    //右クリック設定
+                                    tmp_Tec.GetComponent<Collection_Button_Right_Click>().SetTechniqueIndex(tec);
                                     tmp_Tec.GetComponentInChildren<TextMeshProUGUI>().text = "";
                                 }
                                 break;
                                 case ePlayerType.WereWolf:
                                 for (int tec = 1; tec < (int)ePlayerAttackType.max; tec++)
                                 {
-                                    //左
                                     GameObject tmp_Tec = Instantiate(collection_Base);
                                     tmp_Tec.transform.parent = tmp.transform;
-                                    tmp_Tec.transform.localPosition = new Vector2(-12.5f, tec * -wideSize );
-                                    tmp_Tec.transform.localScale = new Vector2(0.5f, 1);
-                                    tmp_Tec.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector2(100, 50);
-                                    tmp_Tec.GetComponentInChildren<SpriteRenderer>().transform.localPosition = new Vector2(25, 0);
+                                    tmp_Tec.transform.localPosition = new Vector2(0, tec * -wideSize);
+                                    tmp_Tec.transform.localScale = new Vector2(1, 1);
+                                    tmp_Tec.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector2(50, 50);
 
                                     tmp_Tec.GetComponentInChildren<SpriteRenderer>().sprite = manager.GetComponent<Manager_Player_Technique>().GetAttackImage(tec);
                                     tmp_Tec.GetComponentInChildren<Animator>().runtimeAnimatorController = null;
                                     int tmpInt_tec = tec; //iを直接入れるとfor文のtecの最終値の値になる
                                     tmp_Tec.GetComponent<Button>().onClick.AddListener(() => manager.GetComponent<Manager_Player>().SetPlayerTypeIndex((ePlayerType)tmpInt));   //左右クリック
                                     tmp_Tec.GetComponent<Button>().onClick.AddListener(() => manager.GetComponent<Manager_Player_Technique>().SetOne(tmpInt_tec));  //左クリック
-                                    tmp_Tec.GetComponentInChildren<TextMeshProUGUI>().text = "";
-
-                                    //右
-                                    tmp_Tec = Instantiate(collection_Base);
-                                    tmp_Tec.transform.parent = tmp.transform;
-                                    tmp_Tec.transform.localPosition = new Vector2(12.5f, tec * -wideSize );
-                                    tmp_Tec.transform.localScale = new Vector2(0.5f, 1);
-                                    //tmp_Tec.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector2(50, 50);
-
-                                    //tmp_Tec.GetComponentInChildren<SpriteRenderer>().sprite = manager.GetComponent<Manager_Player_Technique>().GetAttackImage(tec);
-                                    tmp_Tec.GetComponentInChildren<Animator>().runtimeAnimatorController = null;
-                                    //tmpInt_tec = tec; //iを直接入れるとfor文のtecの最終値の値になる
-                                    tmp_Tec.GetComponent<Button>().onClick.AddListener(() => manager.GetComponent<Manager_Player>().SetPlayerTypeIndex((ePlayerType)tmpInt));   //左右クリック
-                                    tmp_Tec.GetComponent<Button>().onClick.AddListener(() => manager.GetComponent<Manager_Player_Technique>().SetTwo(tmpInt_tec));    //右クリック
+                                    tmp_Tec.GetComponent<Collection_Button_Right_Click>().SetPlayerType((ePlayerType)i);    //右クリック設定
+                                    tmp_Tec.GetComponent<Collection_Button_Right_Click>().SetTechniqueIndex(tec);
                                     tmp_Tec.GetComponentInChildren<TextMeshProUGUI>().text = "";
                                 }
                                 break;

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Change_Music : MonoBehaviour
 {
@@ -25,6 +27,6 @@ public class Change_Music : MonoBehaviour
         if (oldMusicIndex == newMusicIndex) return; oldMusicIndex = newMusicIndex;
 
         GetComponent<AudioSource>().clip = manager_Music.GetMusicBase(oldMusicIndex);
-        GetComponent<AudioSource>().Play();
+        if(!(SceneManager.GetActiveScene().name == "Title") || manager_StageSelect.GetMusicSerect())GetComponent<AudioSource>().Play();
     }
 }

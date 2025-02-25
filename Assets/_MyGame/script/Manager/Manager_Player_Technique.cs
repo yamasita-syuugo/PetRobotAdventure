@@ -146,8 +146,7 @@ public class Manager_Player_Technique : MonoBehaviour
     {
         int playerTypeIndex = (int)manager_Player.GetPlayerTypeIndex();
         if (oldPlayerType == playerTypeIndex) return; oldPlayerType = playerTypeIndex;
-        SetOne(1);SetTwo(2); 
-
+        AddOneType(0);AddTwoType(0);
     }
     public void DataSave()
     {

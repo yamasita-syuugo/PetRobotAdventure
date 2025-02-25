@@ -8,6 +8,7 @@ public enum eFieldCreatType
 
     stage,
     labyrinth,
+    frameStage,
     //dungeon,
 
     [InspectorName("")] max,
@@ -50,14 +51,14 @@ public class Manager_Field : MonoBehaviour
     public float GetRandomBreak(eStage stage) { return manager_StageSelect.GetStageData(stage).GetRandomScaffoldBreak(); }
 
     private void OnEnable()
-    { 
+    {
         manager_StageSelect = GetComponent<Manager_StageSelect>();
     }
-        // Start is called before the first frame update
-        void Start()
-    {
+    // Start is called before the first frame update
+    //    void Start()
+    //{
 
-    }
+    //}
 
     // Update is called once per frame
     //void Update()
@@ -65,7 +66,7 @@ public class Manager_Field : MonoBehaviour
 
     //}
 
-    /*[SerializeField, Range(0, (int)eFieldCreatType.max - 1)]*/ 
+    /*[SerializeField, Range(0, (int)eFieldCreatType.max - 1)]*/
     //int[] fieldCreatTypeIndex;
     public eFieldCreatType GetFieldCreatTypeIndex(eStage stage) { return manager_StageSelect.GetStageData(stage).GetFieldCreatTypeIndex(); }
     //int []fieldSize;

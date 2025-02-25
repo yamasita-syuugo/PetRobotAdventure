@@ -20,6 +20,8 @@ public enum ePlayerType
 
 public class Manager_Player : MonoBehaviour
 {
+    Manager_Player_Technique manager_Player_Technique;
+
     [SerializeField]
     GameObject[] playerTypeBase;
     public GameObject GetPlayerTypeBase(int index_) {  return playerTypeBase[index_]; }
@@ -41,14 +43,15 @@ public class Manager_Player : MonoBehaviour
     [SerializeField]
     ePlayerType playerTypeIndex = ePlayerType.none;
     public ePlayerType GetPlayerTypeIndex() { return playerTypeIndex; }
-    public void SetPlayerTypeIndex(ePlayerType playerTypeIndex_) { playerTypeIndex = playerTypeIndex_; }
+    public void SetPlayerTypeIndex(ePlayerType playerTypeIndex_) { playerTypeIndex = playerTypeIndex_;
+        //manager_Player_Technique.SetOne(1); manager_Player_Technique.SetTwo(2);
+    }
     void AddPlayerTypeIndex(int add = 1)
     {
         playerTypeIndex = playerTypeIndex + add;
         if (playerTypeIndex < 0) playerTypeIndex = ePlayerType.max - 1;
         else if (playerTypeIndex >= ePlayerType.max) playerTypeIndex = 0;
 
-        Manager_Player_Technique manager_Player_Technique = GetComponent<Manager_Player_Technique>();
         manager_Player_Technique.SetOne(1);
         manager_Player_Technique.AddOneType(0);
         manager_Player_Technique.SetTwo(1);
@@ -75,6 +78,7 @@ public class Manager_Player : MonoBehaviour
     // Start is called before the first frame update
     private void OnEnable()
     {
+        manager_Player_Technique = GetComponent<Manager_Player_Technique>();
         SetPlayerSpeed();
     }
     //void Start()

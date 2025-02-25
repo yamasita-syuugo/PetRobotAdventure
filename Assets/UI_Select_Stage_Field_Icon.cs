@@ -23,6 +23,8 @@ public class UI_Select_Stage_Field_Icon : MonoBehaviour
             case eStage.fastPlay: break;
             case eStage.crowStage: break;
             case eStage.golemLabyrinth: break;
+            case eStage.iceBom: break;
+            case eStage.searchGate: break;
             case eStage.lastGame: break;
 
             default: Debug.Log("error : switch(eStage)"); break;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StageRandomCheck : MonoBehaviour
+public class Display_Music_Serect_onoff : MonoBehaviour
 {
     // Start is called before the first frame update
     //void Start()
@@ -12,13 +12,13 @@ public class StageRandomCheck : MonoBehaviour
     //}
 
     // Update is called once per frame
-    bool oldStageRandom = true;
+    bool oldMusicSerect = true;
     void Update()
     {
-        if (GameObject.FindWithTag("Manager").GetComponent<Manager_StageSelect>().GetRandomStage() == oldStageRandom) return;
-        oldStageRandom = !oldStageRandom;
+        if (GameObject.FindWithTag("Manager").GetComponent<Manager_StageSelect>().GetMusicSerect() == oldMusicSerect) return;
+        oldMusicSerect = !oldMusicSerect;
 
-        if (oldStageRandom )GetComponent<Image>().color = Color.red;
+        if (oldMusicSerect) GetComponent<Image>().color = Color.red;
         else GetComponent<Image>().color = Color.clear;
     }
 }

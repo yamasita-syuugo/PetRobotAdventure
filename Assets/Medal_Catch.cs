@@ -51,9 +51,8 @@ public class Medal_Catch : MonoBehaviour
         Vector2 rightUp = Camera.main.ViewportToWorldPoint(Vector2.one);
         if(transform.position.x < leftDown.x || transform.position.y < leftDown.y || transform.position.x > rightUp.x || transform.position.y > rightUp.y)
         {
-
-            Vector2 randomPos = new Vector2(Random.RandomRange(-0.5f, 0.5f), Random.RandomRange(-0.5f, 0.5f));
-            transform.position = randomPos;
+            eMedalType medalType = GetComponent<Medal_Type>().GetMedalType();
+            transform.position = new Vector3((int)medalType % 14 - 7, -(int)medalType / 14 + 1, 0); ;
         }
     }
 }
