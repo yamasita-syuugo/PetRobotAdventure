@@ -23,9 +23,9 @@ public class Manager_Camera : MonoBehaviour
         {
             case eStage.fastPlay: cameraMoveSpeedDeray = 1.26f; break;
             case eStage.crowStage: cameraMoveSpeedDeray = 1.26f; break;
-            case eStage.golemLabyrinth: cameraMoveSpeedDeray = 4f; break;
+            case eStage.golemLabyrinth: cameraMoveSpeedDeray = 5f; break;
             case eStage.iceBom: cameraMoveSpeedDeray = 1.26f; break;
-            case eStage.searchGate: cameraMoveSpeedDeray = 4f; break;
+            case eStage.searchGate: cameraMoveSpeedDeray = 5f; break;
             case eStage.lastGame: cameraMoveSpeedDeray = 1.26f; break;
             default: Debug.Log("error : switch(eStage)"); break;
         }

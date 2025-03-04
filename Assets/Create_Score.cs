@@ -24,15 +24,15 @@ public class Create_Score : MonoBehaviour
         int count = 0;
         int[] score = GameObject.FindWithTag("Manager").GetComponent<Manager_Score>().GetScore();
         int[] DisplayScoreNum = new int[score.Length];
-        for (int i = 0; i < score.Length; i++) { if (score[i] > 0) DisplayScoreNum[count++] = i; }
+        for (int i = 0; i < score.Length; i++) { if (score[i] > 0)  DisplayScoreNum[count++] = i; }
 
-        for (int i = 0;i < DisplayScoreNum.Length; i++) {
+        for (int i = 0;i < count; i++) {
             GameObject tmp = Instantiate<GameObject>(scoreObject);
             tmp.transform.parent = transform;
-            tmp.transform.position = new Vector3( i, 0, 0);
+            tmp.transform.position = new Vector3(-6 + i * 2.5f * (score.Length / count), 0, 0);
             tmp.transform.localScale = Vector3.one;
             ScoreDisplay []scoreDisplay = tmp.GetComponentsInChildren<ScoreDisplay>();
-            for (int j = 0; j < scoreDisplay.Length; j++) { scoreDisplay[j].SetScoreType((eScoreType)i); }
+            for (int j = 0; j < scoreDisplay.Length; j++) { scoreDisplay[j].SetScoreType((eScoreType)DisplayScoreNum[i]); }
         }
     }
 }

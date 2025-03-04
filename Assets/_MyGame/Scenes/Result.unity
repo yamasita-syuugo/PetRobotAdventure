@@ -271,7 +271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreType: -1
-  old: 0
+  scoreDisplayType: -1
 --- !u!1 &444038894
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,10 +418,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
-    - target: {fileID: 712451508107696023, guid: 93114f6b53f15c4458332ca9d64e7238, type: 3}
-      propertyPath: m_Name
-      value: Create_BackGround_Effect
-      objectReference: {fileID: 0}
     - target: {fileID: 1688757049891788216, guid: 93114f6b53f15c4458332ca9d64e7238, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -461,10 +457,6 @@ PrefabInstance:
     - target: {fileID: 1688757049891788216, guid: 93114f6b53f15c4458332ca9d64e7238, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5167795403942560539, guid: 93114f6b53f15c4458332ca9d64e7238, type: 3}
-      propertyPath: effectType
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1237,7 +1229,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 240.5}
+  m_AnchoredPosition: {x: 0, y: 229}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1285829484
@@ -1815,7 +1807,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreType: -1
-  old: 1
+  scoreDisplayType: -1
 --- !u!1 &2040021732
 GameObject:
   m_ObjectHideFlags: 0

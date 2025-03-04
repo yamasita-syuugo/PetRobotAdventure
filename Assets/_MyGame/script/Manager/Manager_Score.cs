@@ -49,22 +49,33 @@ public class Manager_Score : MonoBehaviour
     [SerializeField] Sprite Enemy_GolemImage;
 
     [Header("")]
-    [SerializeField]Sprite shotImage;
+    [SerializeField] Sprite shotImage;
 
 
     static int[] score = new int[(int)eScoreType.max];
-     public int[] GetScore() { return score; }
+    public int[] GetScore() { return score; }
     public int GetScore(eScoreType scoreType) { return score[(int)scoreType]; }
     static public void AddScore(eScoreType scoreType, int addNum = 1) { score[(int)scoreType] += addNum; }
     static int[] oldScore = new int[(int)eScoreType.max];
-     public int[] GetOldScore() { return oldScore; }
-     public int GetOldScore(eScoreType scoreType) { return oldScore[(int)scoreType]; }
+    public int[] GetOldScore() { return oldScore; }
+    public int GetOldScore(eScoreType scoreType) { return oldScore[(int)scoreType]; }
+    static bool[] oldScoreUpDate = new bool[(int)eScoreType.max];
+    public bool GetOldScoreUpDate(int index) { return oldScoreUpDate[index]; }
+    private void OnEnable()
+    {
+        SetScoreImage();
+        for (int i = 0; i < (int)eScoreType.max; i++)
+            if (score[i] > oldScore[i]) { oldScore[i] = score[i]; oldScoreUpDate[i] = true; } else oldScoreUpDate[i] = false;
+    }
     // Start is called before the first frame update
     void Start()
     {
-        SetScoreImage();
+        if (SceneManager.GetActiveScene().name == "MainGame") for (int i = 0; i < (int)eScoreType.max; i++) score[i] = 0;
 
-        for (int i = 0; i < score.Length; i++) score[i] = 0;
+        BestCheck();
+    }
+    void BestCheck()
+    {
     }
 
     // Update is called once per frame
@@ -130,12 +141,12 @@ public class Manager_Score : MonoBehaviour
         PlayerPrefs.SetInt("enemyBomPoint", score[(int)eScoreType.Enemy_Bom]);
 
 
-        PlayerPrefs.SetInt("oldTotalPoint", score[(int)eScoreType.total]);
+        PlayerPrefs.SetInt("oldTotalPoint", oldScore[(int)eScoreType.total]);
 
-        PlayerPrefs.SetInt("oldFlagGetPoint", score[(int)eScoreType.Get_Flag]);
-        PlayerPrefs.SetInt("oldDestroyPoint", score[(int)eScoreType.Destroy_Bom]);
+        PlayerPrefs.SetInt("oldFlagGetPoint", oldScore[(int)eScoreType.Get_Flag]);
+        PlayerPrefs.SetInt("oldDestroyPoint", oldScore[(int)eScoreType.Destroy_Bom]);
 
-        PlayerPrefs.SetInt("oldEnemyBomPoint", score[(int)eScoreType.Enemy_Bom]);
+        PlayerPrefs.SetInt("oldEnemyBomPoint", oldScore[(int)eScoreType.Enemy_Bom]);
 
 
     }
@@ -149,12 +160,12 @@ public class Manager_Score : MonoBehaviour
         score[(int)eScoreType.Enemy_Bom] = PlayerPrefs.GetInt("enemyBomPoint");
 
 
-        score[(int)eScoreType.total] = PlayerPrefs.GetInt("oldTotalPoint");
+        oldScore[(int)eScoreType.total] = PlayerPrefs.GetInt("oldTotalPoint");
 
-        score[(int)eScoreType.Get_Flag] = PlayerPrefs.GetInt("oldFlagGetPoint");
-        score[(int)eScoreType.Destroy_Bom] = PlayerPrefs.GetInt("oldDestroyPoint");
+        oldScore[(int)eScoreType.Get_Flag] = PlayerPrefs.GetInt("oldFlagGetPoint");
+        oldScore[(int)eScoreType.Destroy_Bom] = PlayerPrefs.GetInt("oldDestroyPoint");
 
-        score[(int)eScoreType.Enemy_Bom] = PlayerPrefs.GetInt("oldEnemyBomPoint");
+        oldScore[(int)eScoreType.Enemy_Bom] = PlayerPrefs.GetInt("oldEnemyBomPoint");
 
 
     }

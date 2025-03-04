@@ -5,20 +5,23 @@ using UnityEngine.UI;
 
 public class Display_Music_Serect_onoff : MonoBehaviour
 {
+    Manager_StageSelect manager_StageSelect;
+
     // Start is called before the first frame update
-    //void Start()
-    //{
-        
-    //}
+    void Start()
+    {
+        manager_StageSelect = GameObject.FindWithTag("Manager").GetComponent<Manager_StageSelect>();
+        if (manager_StageSelect.GetMusicSerect()) GetComponent<Image>().color = new Color(0.3f, 0.6f, 0.3f);
+        else GetComponent<Image>().color = Color.white;
+    }
 
     // Update is called once per frame
     bool oldMusicSerect = true;
     void Update()
     {
-        if (GameObject.FindWithTag("Manager").GetComponent<Manager_StageSelect>().GetMusicSerect() == oldMusicSerect) return;
-        oldMusicSerect = !oldMusicSerect;
+        if (manager_StageSelect.GetMusicSerect() == oldMusicSerect) return; oldMusicSerect = !oldMusicSerect;
 
-        if (oldMusicSerect) GetComponent<Image>().color = Color.red;
-        else GetComponent<Image>().color = Color.clear;
+        if (oldMusicSerect) GetComponent<Image>().color = new Color(0.3f,0.6f,0.3f);
+        else GetComponent<Image>().color = Color.white;
     }
 }

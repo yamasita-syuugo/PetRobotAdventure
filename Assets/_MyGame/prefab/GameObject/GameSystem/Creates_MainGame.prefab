@@ -99,9 +99,9 @@ MonoBehaviour:
   - 4
   - 1
   - 4.5
-  - 0
+  - 3
   - 15
-  - 0
+  - 3
   golemCountReset: 1
   livingArmorCountReset: 15
   nextPosition: {x: 12, y: 12, z: 0}

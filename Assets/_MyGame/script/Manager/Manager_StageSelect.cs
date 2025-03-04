@@ -41,6 +41,9 @@ public struct stStageData
     float randomScaffoldBreak;
     public float GetRandomScaffoldBreak() {  return randomScaffoldBreak; }
     public void SetRandomScaffoldBreak(float randomScaffoldBreak_) {  randomScaffoldBreak = randomScaffoldBreak_; }
+    int holeSize;
+    public int GetHoleSize() {  return holeSize; }
+    public void SetHoleSize(int holeSize_) {  holeSize = holeSize_; }
     eFieldCreatType fieldCreatTypeIndex;
     public eFieldCreatType GetFieldCreatTypeIndex() {  return fieldCreatTypeIndex; }
     public void SetFieldCreatTypeIndex(eFieldCreatType fieldCreatTypeIndex_) {   fieldCreatTypeIndex = fieldCreatTypeIndex_; }
@@ -260,6 +263,7 @@ public class Manager_StageSelect : MonoBehaviour
                     stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.frameStage);
                     stageData[stage].SetFieldSize(53);
                     stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.movePanelOnly);//todo:grass‚ÆBlock‚Ìƒ‰ƒ“ƒ_ƒ€‚ğì¬‚µ[‚Ä‚é
+                    stageData[stage].SetHoleSize(4);
                     stageData[stage].SetRandomScaffoldBreak(4);
                     break;
                 case eStage.lastGame:

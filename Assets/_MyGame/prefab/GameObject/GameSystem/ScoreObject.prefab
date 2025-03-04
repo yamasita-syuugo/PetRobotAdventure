@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7920115993761999435}
   - component: {fileID: 5789278911904934241}
   - component: {fileID: 9045920529686470321}
-  - component: {fileID: 2680907113569425665}
+  - component: {fileID: 3432967855279549320}
   m_Layer: 5
   m_Name: Score
   m_TagString: UI
@@ -30,8 +30,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7616105560415852728}
+  m_Children: []
   m_Father: {fileID: 4764488538563217706}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -136,7 +135,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &2680907113569425665
+--- !u!114 &3432967855279549320
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -308,8 +307,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: name
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1a415d74317f57440b1c4147b5b117b3, type: 2}
+  m_sharedMaterial: {fileID: -3967353781257768709, guid: 1a415d74317f57440b1c4147b5b117b3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -549,6 +548,7 @@ GameObject:
   - component: {fileID: 7616105560415852728}
   - component: {fileID: 6243281436743990262}
   - component: {fileID: 757050054509871091}
+  - component: {fileID: 271555809009005552}
   m_Layer: 5
   m_Name: NEW
   m_TagString: UI
@@ -563,12 +563,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4790149135379137490}
-  m_LocalRotation: {x: 0, y: 0, z: -0.20466691, w: 0.9788317}
+  m_LocalRotation: {x: -0, y: -0, z: -0.20466691, w: 0.9788317}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7920115993761999435}
+  m_Father: {fileID: 4764488538563217706}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -23.62}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -613,6 +613,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &271555809009005552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4790149135379137490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67a5bce3ebdc2bf46a6e4aa2d75ac029, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreType: -1
+  scoreDisplayType: 4
 --- !u!1 &4987923586445676661
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,6 +659,7 @@ RectTransform:
   - {fileID: 4157414066956166917}
   - {fileID: 7920115993761999435}
   - {fileID: 4042039505385435808}
+  - {fileID: 7616105560415852728}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}

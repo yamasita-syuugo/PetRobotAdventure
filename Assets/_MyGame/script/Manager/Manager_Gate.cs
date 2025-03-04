@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum eGateOpenType
 {
@@ -9,7 +10,7 @@ public enum eGateOpenType
     scoreCheck_Posi_Destroy_Bom,
     time_Countdown,
 
-    [InspectorName("")] gateOpenTypeMax,
+    [InspectorName("")] max,
 }
 public class Manager_Gate : MonoBehaviour
 {
@@ -27,6 +28,11 @@ public class Manager_Gate : MonoBehaviour
     Vector2 gatePos = new Vector2(0,0);
     public Vector2 GetGatePos() { return gatePos; }
     public void SerGatePos(Vector2 gatePos_) {  gatePos = gatePos_; }
+
+    private void OnEnable()
+    {
+        SetGateOpenImage();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -35,10 +41,21 @@ public class Manager_Gate : MonoBehaviour
         gateOpenNum = tmp.GetGateOpenNum(tmp.GetStage());
     }
 
+    eGateOpenType gateOpenType;
+    public eGateOpenType GetGateOpenType() { return gateOpenType; }
+    Sprite []gateOpenImage = new Sprite[(int)eGateOpenType.max];
+    public Sprite GetGateOpenImage(eGateOpenType gateOpenType_) { return gateOpenImage[(int)gateOpenType_]; } 
+    void SetGateOpenImage()
+    {
+        gateOpenImage[(int)eGateOpenType.scoreCheck_Posi_Destroy_Bom] = destroy_Bom_Image;
+        gateOpenImage[(int)eGateOpenType.time_Countdown] = timer_Image;
+    }
+    [SerializeField] Sprite destroy_Bom_Image;
+    [SerializeField] Sprite timer_Image;
 
     // Update is called once per frame
-    eGateOpenType gateOpenType;
     int gateOpenNum;
+    public int GetGateOpenNum() {  return gateOpenNum; }
     void Update()
     {
         switch (gateOpenType)

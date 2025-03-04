@@ -270,8 +270,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a5bce3ebdc2bf46a6e4aa2d75ac029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointType: 0
-  old: 0
+  scoreType: -1
+  scoreDisplayType: -1
 --- !u!1 &80615879
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,8 +419,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a5bce3ebdc2bf46a6e4aa2d75ac029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointType: 1
-  old: 0
+  scoreType: -1
+  scoreDisplayType: -1
 --- !u!1001 &116904389
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -781,8 +781,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a5bce3ebdc2bf46a6e4aa2d75ac029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointType: 1
-  old: 0
+  scoreType: -1
+  scoreDisplayType: -1
 --- !u!4 &267959237 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9120021975743158797, guid: a4f8ab4c2dfbff049b1b475882e4b8fc, type: 3}
@@ -1018,9 +1018,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 422360907}
-        m_TargetAssemblyTypeName: OldScoreDelete, Assembly-CSharp
-        m_MethodName: ScoreDelete
+      - m_Target: {fileID: 1749609569}
+        m_TargetAssemblyTypeName: Manager_Score, Assembly-CSharp
+        m_MethodName: OldScoreReset
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1710,8 +1710,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a5bce3ebdc2bf46a6e4aa2d75ac029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointType: 3
-  old: 0
+  scoreType: -1
+  scoreDisplayType: -1
 --- !u!1 &1135526053
 GameObject:
   m_ObjectHideFlags: 0
@@ -1859,8 +1859,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a5bce3ebdc2bf46a6e4aa2d75ac029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointType: 2
-  old: 1
+  scoreType: -1
+  scoreDisplayType: -1
 --- !u!1 &1219464949
 GameObject:
   m_ObjectHideFlags: 0
@@ -2008,8 +2008,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a5bce3ebdc2bf46a6e4aa2d75ac029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointType: 0
-  old: 1
+  scoreType: -1
+  scoreDisplayType: -1
 --- !u!1 &1285829482
 GameObject:
   m_ObjectHideFlags: 0
@@ -2437,8 +2437,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a5bce3ebdc2bf46a6e4aa2d75ac029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointType: 2
-  old: 0
+  scoreType: -1
+  scoreDisplayType: -1
 --- !u!1 &1656742595
 GameObject:
   m_ObjectHideFlags: 0
@@ -2708,6 +2708,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
+--- !u!114 &1749609569 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8340804698015479413, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
+  m_PrefabInstance: {fileID: 1749609568}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12e0c9ad008ac5348ac2cf2034d8104a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1974976248
 GameObject:
   m_ObjectHideFlags: 0
@@ -2855,8 +2866,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a5bce3ebdc2bf46a6e4aa2d75ac029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointType: 1
-  old: 1
+  scoreType: -1
+  scoreDisplayType: -1
 --- !u!1 &2020934765
 GameObject:
   m_ObjectHideFlags: 0
@@ -3004,8 +3015,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a5bce3ebdc2bf46a6e4aa2d75ac029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointType: 1
-  old: 1
+  scoreType: -1
+  scoreDisplayType: -1
 --- !u!1 &2040021732
 GameObject:
   m_ObjectHideFlags: 0
@@ -3592,8 +3603,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a5bce3ebdc2bf46a6e4aa2d75ac029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointType: 3
-  old: 1
+  scoreType: -1
+  scoreDisplayType: -1
 --- !u!1001 &2111313923
 PrefabInstance:
   m_ObjectHideFlags: 0

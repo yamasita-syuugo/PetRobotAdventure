@@ -12,13 +12,15 @@ public class UI_Text_StageName : MonoBehaviour
         manager_StageSelect = GameObject.FindWithTag("Manager").GetComponent<Manager_StageSelect>();
     }
 
-    int oldStageIndex = -1;
     // Update is called once per frame
+    int oldStageIndex = -1;
+    bool oldRandom = false;
     void Update()
     {
         int stageIndex = (int)manager_StageSelect.GetStage();
-        if (oldStageIndex == stageIndex) oldStageIndex = stageIndex;
+        if (oldStageIndex == stageIndex || oldRandom == manager_StageSelect.GetRandomStage()) { oldStageIndex = stageIndex; oldRandom = manager_StageSelect.GetRandomStage(); }
 
-        GetComponent<TextMeshProUGUI>().text = manager_StageSelect.GetStage().ToString();
+        if (oldRandom) GetComponent<TextMeshProUGUI>().text = "?";
+        else GetComponent<TextMeshProUGUI>().text = manager_StageSelect.GetStage().ToString();
     }
 }

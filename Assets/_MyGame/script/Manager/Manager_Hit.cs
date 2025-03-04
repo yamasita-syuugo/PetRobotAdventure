@@ -123,9 +123,7 @@ public class Manager_Hit : MonoBehaviour
                         break;
                     case eEnemyType.livingArmor:
 
-                        GetComponent<KnockBack>().SetKnockBackEnergy(collision.GetComponent<bulletMove>().GetMoveEnelgy());
-
-                        if (collision.name == "Bullet") Destroy(collision.gameObject);
+                 
                         break;
                     case eEnemyType.enemyMass: break;
 

@@ -49,6 +49,7 @@ public class Manager_Field : MonoBehaviour
     public eCreatScaffoldType GetScaffoldType(eStage stage) { return manager_StageSelect.GetStageData(stage).GetCreatScaffoldType(); }
     //float[] randomBreak = new float[(int)eStage.max];
     public float GetRandomBreak(eStage stage) { return manager_StageSelect.GetStageData(stage).GetRandomScaffoldBreak(); }
+    public int GetHoleSize(eStage stage) { return manager_StageSelect.GetStageData(stage).GetHoleSize(); }
 
     private void OnEnable()
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StageRandomCheck : MonoBehaviour
+public class StageContinuousCheck : MonoBehaviour
 {
     Manager_StageSelect manager_StageSelect;
 

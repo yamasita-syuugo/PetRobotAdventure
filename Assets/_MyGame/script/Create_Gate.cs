@@ -6,11 +6,14 @@ public class Create_Gate : MonoBehaviour
 {
     Manager_Gate manager_Gate;
 
-    GameObject gate;
+     GameObject gate;
+    private void OnEnable()
+    {
+        manager_Gate = GameObject.FindWithTag("Manager").GetComponent<Manager_Gate>();
+    }
     // Start is called before the first frame update
     void Start()
     {
-        manager_Gate = GameObject.FindWithTag("Manager").GetComponent<Manager_Gate>();
         gate = Instantiate(manager_Gate.GetGateBase());
         oldGatePos = new Vector3( manager_Gate.GetGatePos().x,manager_Gate.GetGatePos().y,1);
         gate.transform.localPosition = oldGatePos;

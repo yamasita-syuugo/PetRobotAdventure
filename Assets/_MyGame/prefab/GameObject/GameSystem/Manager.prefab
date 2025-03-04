@@ -199,6 +199,8 @@ MonoBehaviour:
   gateIndex: 0
   gateOpen: 0
   gatePos: {x: 0, y: 0}
+  destroy_Bom_Image: {fileID: 21300000, guid: 01271042cd8e6be4c9a030171ea91a84, type: 3}
+  timer_Image: {fileID: 21300000, guid: f0b075f5349feee42bb93ae11630fa34, type: 3}
 --- !u!114 &2980074079378534292
 MonoBehaviour:
   m_ObjectHideFlags: 0
