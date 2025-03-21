@@ -51,6 +51,10 @@ public struct stStageData
     public int GetFieldSize() { return fieldSize; }
     public void SetFieldSize(int fieldSize_) {  fieldSize = fieldSize_; }
 
+    eEffectType effectType;
+    public eEffectType GetEffectType() {  return effectType; }
+    public void SetEffectType(eEffectType effectType_) {  effectType = effectType_; }
+
     eGateOpenType gateOpenType;
     public eGateOpenType GetGateOpenType() { return gateOpenType; }
     public void SetGateOpenType(eGateOpenType gateOpenType_) {  gateOpenType = gateOpenType_; }
@@ -58,11 +62,11 @@ public struct stStageData
     public int GetGateOpenNum() {  return gateOpenNum; }
     public void SetGateOpenNum(int gateOpenNum_) { gateOpenNum = gateOpenNum_; }
 
-    int backGroundIndex;
-    public int GetBackGroundIndex() {  return backGroundIndex; }
-    public void SetBackGroundIndex(int backGroundIndex_) { 
+    eBackGroundType backGroundIndex;
+    public eBackGroundType GetBackGroundIndex() {  return backGroundIndex; }
+    public void SetBackGroundIndex(eBackGroundType backGroundIndex_) { 
         backGroundIndex = backGroundIndex_;
-        int backGroundNum = GameObject.FindWithTag("Manager").GetComponent<Manager_BackgroundType>().GetBackGroundBase().Length;
+        eBackGroundType backGroundNum = eBackGroundType.max;
         if (backGroundIndex < 0) backGroundIndex = 0; else if (backGroundIndex >= backGroundNum) backGroundIndex = backGroundNum - 1;
     }
 
@@ -143,6 +147,7 @@ public class Manager_StageSelect : MonoBehaviour
     {
         StageEnemySelect();
         StageScaffoldSelect();
+        StageEffectSelect();
         StageGatoOpenTypeSelect();
         StageBackGroundSelect();
         StageMusicSelect();
@@ -244,7 +249,7 @@ public class Manager_StageSelect : MonoBehaviour
                 case eStage.crowStage:
                     stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.stage);
                     stageData[stage].SetFieldSize(3);
-                    stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.blockOnly);
+                    stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.grassOnly);
                     stageData[stage].SetRandomScaffoldBreak(0.0f);
                     break;
                 case eStage.golemLabyrinth:
@@ -276,6 +281,24 @@ public class Manager_StageSelect : MonoBehaviour
             }
         }
     }
+
+    void StageEffectSelect()
+    {
+        for (int stage = 0; stage < (int)eStage.max; stage++)
+        {
+            switch ((eStage)stage)
+            {
+                case eStage.fastPlay: break;
+                case eStage.crowStage: break;
+                case eStage.golemLabyrinth: break;
+                case eStage.iceBom: break;
+                case eStage.searchGate: break;
+                case eStage.lastGame: break;
+                default: Debug.Log("StageEffectSelect : " + ((eStage)stage).HumanName()); break;
+            }
+        }
+    }
+
     void StageGatoOpenTypeSelect()
     {
         for (int stage = 0; stage < (int)eStage.max; stage++)
@@ -317,22 +340,22 @@ public class Manager_StageSelect : MonoBehaviour
             switch ((eStage)stage)
             {
                 case eStage.fastPlay:
-                    stageData[stage].SetBackGroundIndex(0);
+                    stageData[stage].SetBackGroundIndex(eBackGroundType.sea);
                     break;
                 case eStage.crowStage:
-                    stageData[stage].SetBackGroundIndex(1);
+                    stageData[stage].SetBackGroundIndex(eBackGroundType.forest);
                     break;
                 case eStage.golemLabyrinth:
-                    stageData[stage].SetBackGroundIndex(2);
+                    stageData[stage].SetBackGroundIndex(eBackGroundType.sea);
                     break;
                 case eStage.iceBom:
-                    stageData[stage].SetBackGroundIndex(3);
+                    stageData[stage].SetBackGroundIndex(eBackGroundType.sea);
                     break;
                 case eStage.searchGate:
-                    stageData[stage].SetBackGroundIndex(3);
+                    stageData[stage].SetBackGroundIndex(eBackGroundType.sea);
                     break;
                 case eStage.lastGame:
-                    stageData[stage].SetBackGroundIndex(4);
+                    stageData[stage].SetBackGroundIndex(eBackGroundType.sea);
                     break;
                 default: Debug.Log("StageBackGroundSelect : " + ((eStage)stage).HumanName()); break;
             }

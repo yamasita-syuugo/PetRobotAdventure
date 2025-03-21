@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Text_MusicTitle : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class Text_MusicTitle : MonoBehaviour
     void Update()
     {
         int newMusicIndex;
-        if(manager_StageSelect.GetMusicSerect())newMusicIndex = manager_Music.GetMusicIndex();
+        if(manager_StageSelect.GetMusicSerect() || SceneManager.GetActiveScene().name == "Collection")newMusicIndex = manager_Music.GetMusicIndex();
         else newMusicIndex = manager_StageSelect.GetStageData(manager_StageSelect.GetStage()).GetMusicIndex();
         if (oldMusicIndex == newMusicIndex) return; oldMusicIndex = newMusicIndex;
 

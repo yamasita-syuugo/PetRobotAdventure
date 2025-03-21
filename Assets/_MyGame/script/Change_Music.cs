@@ -22,7 +22,7 @@ public class Change_Music : MonoBehaviour
     void Update()
     {
         int newMusicIndex;
-        if (manager_StageSelect.GetMusicSerect()) newMusicIndex = manager_Music.GetMusicIndex();
+        if (manager_StageSelect.GetMusicSerect() || SceneManager.GetActiveScene().name == "Collection") newMusicIndex = manager_Music.GetMusicIndex();
         else newMusicIndex = manager_StageSelect.GetStageData(manager_StageSelect.GetStage()).GetMusicIndex();
         if (oldMusicIndex == newMusicIndex) return; oldMusicIndex = newMusicIndex;
 

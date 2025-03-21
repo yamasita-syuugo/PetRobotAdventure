@@ -182,21 +182,21 @@ public class Create_CollectionButton : MonoBehaviour
                 }
                 break;
             case eCollectionType.background:
-                collection = new GameObject[manager.GetComponent<Manager_BackgroundType>().GetBackGroundBase().Length];
-                for (int i = 0; i < manager.GetComponent<Manager_BackgroundType>().GetBackGroundBase().Length; i++)
+                collection = new GameObject[manager.GetComponent<Manager_BackgroundType>().GetBackGround_Panel_Base().Length];
+                for (int i = 0; i < manager.GetComponent<Manager_BackgroundType>().GetBackGround_Panel_Base().Length; i++)
                 {
                     GameObject tmp = Instantiate(collection_Base);
                     collection[i] = tmp;
                     tmp.transform.parent = transform;
                     tmp.transform.localPosition = new Vector2(i * wideSize, 0);
                     tmp.transform.localScale = new Vector2(1, 1);
-                    tmp.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector2(2f, 2f);
+                    tmp.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector2(45, 45);
 
                     if (manager.GetComponent<Manager_MousePointerType>().GetGetSituation(i))
                     {
                         int tmpInt = i; //iÇíºê⁄ì¸ÇÍÇÈÇ∆forï∂ÇÃiÇÃç≈èIílÇÃílÇ…Ç»ÇÈ
-                        tmp.GetComponent<Button>().onClick.AddListener(() => manager.GetComponent<Manager_BackgroundType>().SetBackGroundIndex(tmpInt));
-                        tmp.GetComponentInChildren<SpriteRenderer>().sprite = manager.GetComponent<Manager_BackgroundType>().GetBackGroundBase(i);
+                        tmp.GetComponent<Button>().onClick.AddListener(() => manager.GetComponent<Manager_BackgroundType>().SetBackGroundIndex((eBackGroundType)tmpInt));
+                        tmp.GetComponentInChildren<SpriteRenderer>().sprite = manager.GetComponent<Manager_BackgroundType>().GetBackGround_Panel_Base((eBackGroundType)i);
                         tmp.GetComponentInChildren<TextMeshProUGUI>().text = "";
                     }
                     else

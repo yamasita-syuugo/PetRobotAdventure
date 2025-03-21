@@ -23,22 +23,22 @@ public class Player_Technique_Play_EarthQuake : Player_Technique_Play__Base
     private bool creatBlockOn = false;
     override public void ControllerPlay()
     {
-                float playerPosX, playerPosY, playerDirectionX, playerDirectionY;
-                playerPosX = transform.position.x;
-                playerPosY = transform.position.y;
-                playerDirectionX = GetComponent<Player_Technique_Play_BulletShot>().moveDirectionX;
-                playerDirectionY = GetComponent<Player_Technique_Play_BulletShot>().moveDirectionY;
-                posX = playerPosX + playerDirectionX;
-                posY = playerPosY + playerDirectionY;
+        float playerPosX, playerPosY, playerDirectionX, playerDirectionY;
+        playerPosX = transform.position.x;
+        playerPosY = transform.position.y;
+        playerDirectionX = Input.GetAxis("AimX"); ;
+        playerDirectionY = Input.GetAxis("AimY"); ;
+        posX = playerPosX + playerDirectionX;
+        posY = playerPosY + playerDirectionY;
 
-                CreatBlock();
+        CreatBlock();
     }
     override public void MousePlay()
     {
-       
+
         Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        posX = pos.x;
-        posY = pos.y;
+        posX = pos.x; if (posX % 1 < 0.5f) posX = (int)posX; else posX = ((int)posX) + 1;
+        posY = pos.y; if (posY % 1 < 0.5f) posY = (int)posY; else posY = ((int)posY) + 1;
 
         CreatBlock();
     }

@@ -52,10 +52,12 @@ public class Manager_Score : MonoBehaviour
     [SerializeField] Sprite shotImage;
 
 
+    static int scoreUpdate = 2;
+    public bool ScoreUpdateCheck() { return scoreUpdate > 0; }
     static int[] score = new int[(int)eScoreType.max];
     public int[] GetScore() { return score; }
     public int GetScore(eScoreType scoreType) { return score[(int)scoreType]; }
-    static public void AddScore(eScoreType scoreType, int addNum = 1) { score[(int)scoreType] += addNum; }
+    static public void AddScore(eScoreType scoreType, int addNum = 1) { score[(int)scoreType] += addNum; if (score[(int)scoreType] == addNum) scoreUpdate = 2; }
     static int[] oldScore = new int[(int)eScoreType.max];
     public int[] GetOldScore() { return oldScore; }
     public int GetOldScore(eScoreType scoreType) { return oldScore[(int)scoreType]; }
@@ -79,10 +81,10 @@ public class Manager_Score : MonoBehaviour
     }
 
     // Update is called once per frame
-    //void Update()
-    //{
-
-    //}
+    void Update()
+    {
+        if (scoreUpdate > 0) scoreUpdate--;
+    }
 
     private static void TotalPointReset()
     {

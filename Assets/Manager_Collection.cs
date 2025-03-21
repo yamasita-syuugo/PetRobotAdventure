@@ -80,7 +80,7 @@ public class Manager_Collection : MonoBehaviour
         Manager_Save.BoolSave("PlayerGetSituation", (int)ePlayerType.max, getSituation_Player);
         Manager_Save.BoolSave("MedalGetSituation", (int)eMedalType.max, getSituation_Medal);
         Manager_Save.BoolSave("MousePointerGetSituation", GetComponent<Manager_MousePointerType>().GetMousePointerAnimations().Length, getSituation_MousePointer);
-        Manager_Save.BoolSave("BackGroundGetSituation", GetComponent<Manager_BackgroundType>().GetBackGroundBase().Length, getSituation_Background);
+        Manager_Save.BoolSave("BackGroundGetSituation", GetComponent<Manager_BackgroundType>().GetBackGround_Panel_Base().Length, getSituation_Background);
         Manager_Save.BoolSave("MusicGetSituation", GetComponent<Manager_Music>().GetMusicBase().Length, getSituation_Music);
     }
     public void DataLoad()
@@ -89,7 +89,7 @@ public class Manager_Collection : MonoBehaviour
         Manager_Save.BoolLoad("PlayerGetSituation", (int)ePlayerType.max, out getSituation_Player);
         Manager_Save.BoolLoad("MedalGetSituation", (int)eMedalType.max, out getSituation_Medal);
         Manager_Save.BoolLoad("MousePointerGetSituation", GetComponent<Manager_MousePointerType>().GetMousePointerAnimations().Length, out getSituation_MousePointer);
-        Manager_Save.BoolLoad("BackGroundGetSituation", GetComponent<Manager_BackgroundType>().GetBackGroundBase().Length, out getSituation_Background);
+        Manager_Save.BoolLoad("BackGroundGetSituation", GetComponent<Manager_BackgroundType>().GetBackGround_Panel_Base().Length, out getSituation_Background);
         Manager_Save.BoolLoad("MusicGetSituation", GetComponent<Manager_Music>().GetMusicBase().Length, out getSituation_Music);
     }
 }

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Player_Technique_Play_BulletShot : Player_Technique_Play__Base
 {
-    GameObject magazine;
-
     [SerializeField]
     bulletMove bulletBase;
     AudioSource shotSound ;

@@ -22,6 +22,24 @@ public class Manager_Enemy : MonoBehaviour
 {
     Manager_StageSelect manager_StageSelect;
 
+    Sprite[] enemyImage = new Sprite[(int)eEnemyType.max];
+    public Sprite GetEnemyImage(eEnemyType enemyType) { return enemyImage[(int)enemyType]; }
+    void SetEnemyImage()
+    {
+        enemyImage[(int)eEnemyType.bom] = image_Bom;
+        enemyImage[(int)eEnemyType.crow] = image_Crow;
+        enemyImage[(int)eEnemyType.golem] = image_Golem;
+        enemyImage[(int)eEnemyType.livingArmor] = image_LivingArmor;
+    }
+    [SerializeField] Sprite image_Bom;
+    [SerializeField] Sprite image_Crow;
+    [SerializeField] Sprite image_Golem;
+    [SerializeField] Sprite image_LivingArmor;
+
+    private void OnEnable()
+    {
+        SetEnemyImage();
+    }
     //敵の出現パターン
     public bool[] GetStageEnemy(eStage stage) { return manager_StageSelect.GetStageData(stage).GetEnemySerect(); }
     // Start is called before the first frame update

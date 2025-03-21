@@ -151,7 +151,9 @@ public class Manager_Hit : MonoBehaviour
                         Explosion(gameObject);
                         break;
                     case eEnemyType.crow: break;
-                    case eEnemyType.golem: break;
+                    case eEnemyType.golem:
+                        Explosion(gameObject);
+                        break;
                     case eEnemyType.livingArmor: break;
                     case eEnemyType.enemyMass: break;
 

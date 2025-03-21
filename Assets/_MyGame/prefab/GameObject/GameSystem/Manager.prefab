@@ -170,6 +170,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df91cc70d5e9cf74a9e38c60c2312136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  image_Bom: {fileID: 21300000, guid: 01271042cd8e6be4c9a030171ea91a84, type: 3}
+  image_Crow: {fileID: 21300000, guid: 97943d4ea49085d43a2695f0f94af7b3, type: 3}
+  image_Golem: {fileID: -2115553726, guid: 31d3c3b7612648241893f5c0793e3286, type: 3}
+  image_LivingArmor: {fileID: 21300000, guid: f6257b620afc21d48b542b971f7908cf, type: 3}
 --- !u!114 &5653854550284804236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +239,8 @@ MonoBehaviour:
   backGroundBase:
   - {fileID: 21300000, guid: 00995bb8248ea054d87a097d10b30223, type: 3}
   - {fileID: 21300000, guid: 464242f83045cf24fa4e17e00889aac5, type: 3}
+  backGround_Panel_sea: {fileID: 21300000, guid: 518bd4ad2560acc4fb8acdcc30059f1e, type: 3}
+  backGround_Panel_forest: {fileID: 21300000, guid: dbbbfd416eab3294d91cb0ec282f85da, type: 3}
 --- !u!114 &3831981519145628050
 MonoBehaviour:
   m_ObjectHideFlags: 0

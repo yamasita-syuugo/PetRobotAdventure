@@ -6,11 +6,13 @@ using UnityEngine.UI;
 
 public class ButtonControl_Start : MonoBehaviour
 {
+    GameObject manager;
+    Manager_GameSituation manager_GameSituation;
     // Start is called before the first frame update
-    bool gameClear = false;
     void Start()
     {
-        if(GameObject.FindWithTag("Manager").GetComponent<Manager_GameSituation>().GetGameSituation() == eGameSituation.clear) gameClear = true;
+        manager = GameObject.FindWithTag("Manager");
+        manager_GameSituation = manager.GetComponent<Manager_GameSituation>();
     }
 
     // Update is called once per frame
@@ -21,18 +23,18 @@ public class ButtonControl_Start : MonoBehaviour
 
     public void StartButton()
     {
-        GameObject.FindWithTag("Manager").GetComponent<Manager_Save>().DataSave();
+        manager.GetComponent<Manager_Save>().DataSave();
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainGame");
     }
     public void NextButton()
     {
-        if (!gameClear) { GetComponent<Image>().color = Color.gray; return; }
+        if (!(manager_GameSituation.GetGameSituation() == eGameSituation.clear)) { GetComponent<Image>().color = Color.gray; return; }
 
-        GameObject tmp = GameObject.FindWithTag("Manager");
-        if (tmp == null) return;
-        Manager_StageSelect manager_StageSelect = tmp.GetComponent<Manager_StageSelect>();
+        if (manager == null) return;
+        Manager_StageSelect manager_StageSelect = manager.GetComponent<Manager_StageSelect>();
         manager_StageSelect.SetStage(manager_StageSelect.GetStage() + 1);
-        GameObject.FindWithTag("Manager").GetComponent<Manager_Save>().DataSave();
+
+        manager.GetComponent<Manager_Save>().DataSave();
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainGame");
     }
 }

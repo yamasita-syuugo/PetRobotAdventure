@@ -10,6 +10,8 @@ public class Create_BackGround_Efecto : MonoBehaviour
 
     [SerializeField]
     GameObject cloudBase;
+    [SerializeField]
+    GameObject blackOut;
 
     float spawnPoint;
 
@@ -27,6 +29,8 @@ public class Create_BackGround_Efecto : MonoBehaviour
     void Update()
     {
         EfectoSpawn();
+
+
     }
     [SerializeField, Range(0, 20f)]
     float spawnDistance;
@@ -34,11 +38,11 @@ public class Create_BackGround_Efecto : MonoBehaviour
     float moveSpeed;
     [SerializeField]
     float spawnTime = 5;
-    float time;
+    float time = 0;
     eEffectType oldEffectType = eEffectType.max;
     void EfectoSpawn()
     {
-        eEffectType effectType = manager_Background_Effect.EffectType;
+        eEffectType effectType = manager_Background_Effect.GetEffectType();
 
         if (oldEffectType != effectType)
         {
@@ -86,13 +90,20 @@ public class Create_BackGround_Efecto : MonoBehaviour
                     tmp.GetComponent<SpriteRenderer>().sortingOrder = 10;
                 }
                 break;
+            case eEffectType.blackOut:
+                if (time == 0)
+                {
+                    GameObject tmp;
+                    tmp = Instantiate(cloudBase);
+                }
+                break;
             default: Debug.Log("error : efectoType : " + effectType.HumanName()); break;
         }
         time -= Time.deltaTime;
     }
     void EffectSpawnStart()
     {
-        eEffectType effectType = manager_Background_Effect.EffectType;
+        eEffectType effectType = manager_Background_Effect.GetEffectType();
 
         switch (effectType)
         {

@@ -35,12 +35,12 @@ public class Manager_Gacha : MonoBehaviour
             Debug.Log("getMouse "  + (getPrize + 1));
         }
         getPrize -= manager_MousePointerType.GetMousePointerAnimations().Length - 1;
-        if (getPrize >= 0 && getPrize < manager_BackgroundType.GetBackGroundBase().Length - 1)
+        if (getPrize >= 0 && getPrize < manager_BackgroundType.GetBackGround_Panel_Base().Length - 1)
         {
             manager_BackgroundType.SetGetSituation(getPrize + 1, true);
             Debug.Log("getBack " + (getPrize + 1));
         }
-        getPrize -= manager_BackgroundType.GetBackGroundBase().Length - 1;
+        getPrize -= manager_BackgroundType.GetBackGround_Panel_Base().Length - 1;
         if (getPrize >= 0 && getPrize < manager_Music.GetMusicBase().Length - 1)
         {
             manager_Music.SetGetSituation(getPrize + 1, true);
@@ -66,7 +66,7 @@ public class Manager_Gacha : MonoBehaviour
         manager_BackgroundType = GetComponent<Manager_BackgroundType>();
         manager_Music = GetComponent<Manager_Music>();
 
-        prizeNum = manager_Player.GetPlayerTypeBases().Length - 1 + manager_MousePointerType.GetMousePointerAnimations().Length - 1 + manager_BackgroundType.GetBackGroundBase().Length - 1 + manager_Music.GetMusicBase().Length - 1;
+        prizeNum = manager_Player.GetPlayerTypeBases().Length - 1 + manager_MousePointerType.GetMousePointerAnimations().Length - 1 + manager_BackgroundType.GetBackGround_Panel_Base().Length - 1 + manager_Music.GetMusicBase().Length - 1;
 
         DataLoad();
     }

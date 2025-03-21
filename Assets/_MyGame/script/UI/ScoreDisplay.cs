@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-enum eScoreDisplayType
+public enum eScoreDisplayType
 {
     none = -1,
 
@@ -25,6 +25,7 @@ public class ScoreDisplay : MonoBehaviour
     public void SetScoreType(eScoreType scoreType_) { scoreType = scoreType_; }
     [SerializeField]
     eScoreDisplayType scoreDisplayType = eScoreDisplayType.none;
+    public void SetScoreDisplayType(eScoreDisplayType scoreDisplayType_) {  scoreDisplayType = scoreDisplayType_; }
     // Start is called before the first frame update
     void Start()
     {
@@ -33,9 +34,11 @@ public class ScoreDisplay : MonoBehaviour
 
     // Update is called once per frame
     eScoreType oldScoreType = eScoreType.none;
+    int oldScore = -1;
     void Update()
     {
-        if (oldScoreType == scoreType) return; oldScoreType = scoreType;
+        if (scoreDisplayType == eScoreDisplayType.score) { if (oldScore == manager_Score.GetScore(scoreType)) return; oldScore = manager_Score.GetScore(scoreType); }
+        else if (oldScoreType == scoreType) return; oldScoreType = scoreType;
 
         switch (scoreDisplayType)
         {

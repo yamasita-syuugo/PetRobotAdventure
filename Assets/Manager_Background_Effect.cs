@@ -16,19 +16,25 @@ public enum eEffectType
 
 public class Manager_Background_Effect : MonoBehaviour
 {
+    Manager_StageSelect manager_StageSelect;
+
     [SerializeField]
     eEffectType effectType;
-    public eEffectType EffectType { get {  return effectType; } set {  effectType = value; } }
+    public eEffectType GetEffectType() { return manager_StageSelect.GetStageData(manager_StageSelect.GetStage()).GetEffectType();   }
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
-        
+        manager_StageSelect = GetComponent<Manager_StageSelect>();
     }
+    // Start is called before the first frame update
+    //void Start()
+    //{
+
+    //}
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //void Update()
+    //{
+
+    //}
 }

@@ -10,8 +10,10 @@ public class Display_ClearCondition_Type : MonoBehaviour
     void Start()
     {
         sprite = GetComponent<Image>();
-        Manager_Gate manager_Gate = GameObject.FindWithTag("Manager").GetComponent<Manager_Gate>();
-        sprite.sprite = manager_Gate.GetGateOpenImage(manager_Gate.GetGateOpenType());
+        GameObject manager = GameObject.FindWithTag("Manager");
+        Manager_Gate manager_Gate = manager.GetComponent<Manager_Gate>();
+        Manager_StageSelect manager_StageSelect = manager.GetComponent<Manager_StageSelect>();
+        sprite.sprite = manager_Gate.GetGateOpenImage(manager_StageSelect.GetGateOpenType(manager_StageSelect.GetStage()));
     }
 
     // Update is called once per frame

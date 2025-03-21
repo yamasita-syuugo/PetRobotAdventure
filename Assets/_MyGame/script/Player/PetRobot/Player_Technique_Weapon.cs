@@ -80,10 +80,27 @@ public class Player_Technique_Weapon : Player_Technique_
         for (int i = 0; i < weaponNum; i++)//0 = 左クリック;1 = 右クリック;2 = ホイールクリック;
         {
             UseSelect_Mouse(i);
-            //UseSelect_Controller(i);
+            UseSelect_Controller(i);
         }
     }
 
+    void UseSelect_Mouse(int useNum)
+    {
+        if (weapon[useNum] == null) return;
+
+        bool situation = false;
+        PushTypeCheck(useNum);
+        switch (pushType)
+        {
+            case ePushType.down: situation = Input.GetMouseButtonDown(useNum); break;
+            case ePushType.stey: situation = Input.GetMouseButton(useNum); break;
+            case ePushType.up: situation = Input.GetMouseButtonUp(useNum); break;
+        }
+
+        if (!situation) return;
+
+        weapon[useNum].GetComponent<Player_Technique_Play__Base>().MousePlay();
+    }
     enum ePushType
     {
         down,
@@ -104,23 +121,6 @@ public class Player_Technique_Weapon : Player_Technique_
             //case ePlayerTechniqueType.MeleeAttack: pushType = ePushType.down; break;
             default:Debug.Log("PushTypeCheck " + useNum + ": error");break;
         }
-    }
-    void UseSelect_Mouse(int useNum)
-    {
-        if (weapon[useNum] == null) return;
-
-        bool situation = false;
-        PushTypeCheck(useNum);
-        switch (pushType)
-        {
-            case ePushType.down: situation = Input.GetMouseButtonDown(useNum); break;
-            case ePushType.stey: situation = Input.GetMouseButton(useNum); break;
-            case ePushType.up: situation = Input.GetMouseButtonUp(useNum); break;
-        }
-
-        if (!situation) return;
-
-        weapon[useNum].GetComponent<Player_Technique_Play__Base>().MousePlay();
     }
     int ControllerShotButton;
     bool []techniqueTrigger = new bool[3];

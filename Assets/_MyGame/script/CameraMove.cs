@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class CameraMove : MonoBehaviour
 {
+    Manager_Camera manager_Camera;
+
     GameObject target;
 
     public float speedDelay = 2.0f;
     // Start is called before the first frame update
     void Start()
     {
+        manager_Camera = GameObject.FindWithTag("Manager").GetComponent<Manager_Camera>();
+
         target = GameObject.FindWithTag("Player");
+
+        speedDelay = manager_Camera.GetCameraMoveSpeedDeray();
 
         camera = GetComponent<Camera>();
 
@@ -26,8 +32,8 @@ public class CameraMove : MonoBehaviour
 
         Vector3 move = new Vector3(0.0f, 0.0f, 0.0f);
 
-        move.x = (target.transform.position.x - transform.position.x) / speedDelay * Time.deltaTime;
-        move.y = (target.transform.position.y - transform.position.y) / speedDelay * Time.deltaTime;
+        move.x = (target.transform.position.x - transform.position.x) / manager_Camera.GetCameraMoveSpeedDeray() * Time.deltaTime;
+        move.y = (target.transform.position.y - transform.position.y) / manager_Camera.GetCameraMoveSpeedDeray() * Time.deltaTime;
 
         transform.position += move;
     }

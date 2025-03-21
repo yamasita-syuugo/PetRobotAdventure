@@ -16,15 +16,15 @@ public class Select_BackGround_Image : MonoBehaviour
     }
 
     // Update is called once per frame
-    int oldBackGround = 0;
+    eBackGroundType oldBackGround = 0;
     void Update()
     {
-        int backGroundType;
+        eBackGroundType backGroundType;
         if (manager_StageSelect.GetBackGroundSerect() || SceneManager.GetActiveScene().name == "Collection") { backGroundType = manager_BackgroundType.GetBackGroundIndex();}
         else { backGroundType = manager_StageSelect.GetStageData(manager_StageSelect.GetStage()).GetBackGroundIndex(); }
         
         if(manager_BackgroundType == null) { return; }
         if (oldBackGround == backGroundType) return;oldBackGround = backGroundType;
-        GetComponent<SpriteRenderer>().sprite = manager_BackgroundType.GetBackGroundBase(backGroundType);
+        GetComponent<SpriteRenderer>().sprite = manager_BackgroundType.GetBackGround_Panel_Base((eBackGroundType)backGroundType);
     }
 }
