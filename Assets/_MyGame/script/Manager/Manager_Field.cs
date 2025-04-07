@@ -10,6 +10,7 @@ public enum eFieldCreatType
     labyrinth,
     frameStage,
     //dungeon,
+    bossStage,
 
     [InspectorName("")] max,
 }
@@ -42,8 +43,6 @@ public class Manager_Field : MonoBehaviour
 {
     Manager_StageSelect manager_StageSelect;
 
-
-
     //足場の配置パターン
     //eCreatScaffoldType[] creatType = new eCreatScaffoldType[(int)eStage.max];
     public eCreatScaffoldType GetScaffoldType(eStage stage) { return manager_StageSelect.GetStageData(stage).GetCreatScaffoldType(); }
@@ -51,9 +50,30 @@ public class Manager_Field : MonoBehaviour
     public float GetRandomBreak(eStage stage) { return manager_StageSelect.GetStageData(stage).GetRandomScaffoldBreak(); }
     public int GetHoleSize(eStage stage) { return manager_StageSelect.GetStageData(stage).GetHoleSize(); }
 
+    [Header("scaffoldBase")]
+    GameObject[] scaffoldBases = new GameObject[(int)eScaffoldType.max];
+    public GameObject GetScaffoldBases(eScaffoldType scaffoldType) { return scaffoldBases[(int)scaffoldType]; }
+    void SetScaffoldBases()
+    {
+        scaffoldBases[(int)eScaffoldType.block] = blockBase;
+        scaffoldBases[(int)eScaffoldType.ice] = iceBase;
+        scaffoldBases[(int)eScaffoldType.grass] = grassBase;
+        scaffoldBases[(int)eScaffoldType.movePanel] = movePanelBase;
+    }
+    [SerializeField]
+    GameObject blockBase;
+    [SerializeField]
+    GameObject iceBase;
+    [SerializeField]
+    GameObject grassBase;
+    [SerializeField]
+    GameObject movePanelBase;
+
     private void OnEnable()
     {
         manager_StageSelect = GetComponent<Manager_StageSelect>();
+
+        SetScaffoldBases();
     }
     // Start is called before the first frame update
     //    void Start()
@@ -67,6 +87,12 @@ public class Manager_Field : MonoBehaviour
 
     //}
 
+    public GameObject ScaffoldSelect()
+    {
+        eCreatScaffoldType creatScaffoldType = manager_StageSelect.GetStageData(manager_StageSelect.GetStage()).GetCreatScaffoldType();
+        if (creatScaffoldType == eCreatScaffoldType.random) return GetScaffoldBases((eScaffoldType)Random.Range(0, (int)eScaffoldType.max));
+        return GetScaffoldBases((eScaffoldType)creatScaffoldType);
+    }
     /*[SerializeField, Range(0, (int)eFieldCreatType.max - 1)]*/
     //int[] fieldCreatTypeIndex;
     public eFieldCreatType GetFieldCreatTypeIndex(eStage stage) { return manager_StageSelect.GetStageData(stage).GetFieldCreatTypeIndex(); }

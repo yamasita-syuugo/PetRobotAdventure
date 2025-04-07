@@ -20,7 +20,7 @@ public class Manager_Hit : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        explosionSource = GameObject.FindWithTag("Manager").GetComponent<Manager_Sounds>().GetSound("explosionSound");
+        explosionSource = GameObject.FindWithTag("Manager").GetComponent<Manager_Sounds>().GetSound(eSoundType.explosion);
     }
 
     // Update is called once per frame
@@ -145,13 +145,21 @@ public class Manager_Hit : MonoBehaviour
                 switch (collision.GetComponent<EnemyType>().GetEnemyType())
                 {
                     case eEnemyType.bom:
-                        Manager_Score.EnemyBomPointAdd(2);
+                        Manager_Score.AddScore(eScoreType.Enemy_Bom,2);
 
                         Explosion(collision);
                         Explosion(gameObject);
                         break;
-                    case eEnemyType.crow: break;
+                    case eEnemyType.crow:
+                        if (Math.Abs(gameObject.GetComponent<KnockBack>().GetKnockBackEnergy().x) < 0.01f &&
+                            Math.Abs(gameObject.GetComponent<KnockBack>().GetKnockBackEnergy().y) < 0.01f) return;
+                        Manager_Score.AddScore(eScoreType.Destroy_Bom);
+                        Explosion(gameObject);
+                        Destroy(collision);
+                        break;
                     case eEnemyType.golem:
+                        if (Math.Abs(gameObject.GetComponent<KnockBack>().GetKnockBackEnergy().x) < 0.01f &&
+                            Math.Abs(gameObject.GetComponent<KnockBack>().GetKnockBackEnergy().y) < 0.01f) return;
                         Explosion(gameObject);
                         break;
                     case eEnemyType.livingArmor: break;
@@ -163,12 +171,6 @@ public class Manager_Hit : MonoBehaviour
             case eEnemyType.crow:
                 switch (collision.GetComponent<EnemyType>().GetEnemyType())
                 {
-                    case eEnemyType.bom:
-                        Manager_Score.EnemyBomPointAdd();
-
-                        Explosion(collision);
-                        Explosion(gameObject);
-                        break;
                     case eEnemyType.crow: break;
                     case eEnemyType.golem: break;
                     case eEnemyType.livingArmor: break;
@@ -180,8 +182,6 @@ public class Manager_Hit : MonoBehaviour
             case eEnemyType.golem:
                 switch (collision.GetComponent<EnemyType>().GetEnemyType())
                 {
-                    case eEnemyType.bom: break;
-                    case eEnemyType.crow: break;
                     case eEnemyType.golem: break;
                     case eEnemyType.livingArmor: break;
                     case eEnemyType.enemyMass: break;
@@ -192,9 +192,6 @@ public class Manager_Hit : MonoBehaviour
             case eEnemyType.livingArmor:
                 switch (collision.GetComponent<EnemyType>().GetEnemyType())
                 {
-                    case eEnemyType.bom: break;
-                    case eEnemyType.crow: break;
-                    case eEnemyType.golem: break;
                     case eEnemyType.livingArmor: break;
                     case eEnemyType.enemyMass: break;
 
@@ -204,10 +201,6 @@ public class Manager_Hit : MonoBehaviour
             case eEnemyType.enemyMass:
                 switch (collision.GetComponent<EnemyType>().GetEnemyType())
                 {
-                    case eEnemyType.bom: break;
-                    case eEnemyType.crow: break;
-                    case eEnemyType.golem: break;
-                    case eEnemyType.livingArmor: break;
                     case eEnemyType.enemyMass: break;
 
                     case eEnemyType.bossEnemy: break;
@@ -217,12 +210,6 @@ public class Manager_Hit : MonoBehaviour
             case eEnemyType.bossEnemy:
                 switch (collision.GetComponent<EnemyType>().GetEnemyType())
                 {
-                    case eEnemyType.bom: break;
-                    case eEnemyType.crow: break;
-                    case eEnemyType.golem: break;
-                    case eEnemyType.livingArmor: break;
-                    case eEnemyType.enemyMass: break;
-
                     case eEnemyType.bossEnemy: break;
                 }
                 break;

@@ -476,6 +476,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7140798705473952029, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
+      propertyPath: enemySpaunTimeReset_Bom
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7140798705473952029, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
+      propertyPath: enemySpaunTimeReset_Crow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7140798705473952029, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
+      propertyPath: enemySpaunTimeReset_Golem
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7140798705473952029, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
+      propertyPath: enemySpaunTimeReset_EnemyMass
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7140798705473952029, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
+      propertyPath: enemySpaunTimeReset_LivingArmor
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -610,10 +630,6 @@ PrefabInstance:
     - target: {fileID: 3601898205048586669, guid: cb0ef692a80944242a2288638089a617, type: 3}
       propertyPath: m_Name
       value: Canvas_MainGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 7460001998142070680, guid: cb0ef692a80944242a2288638089a617, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -367.5
       objectReference: {fileID: 0}
     - target: {fileID: 8553515481810058292, guid: cb0ef692a80944242a2288638089a617, type: 3}
       propertyPath: m_Pivot.x

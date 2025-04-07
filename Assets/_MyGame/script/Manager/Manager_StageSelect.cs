@@ -19,8 +19,11 @@ public enum eStage
     golemLabyrinth,
     iceBom,
     searchGate,
+    bossStage,
 
     lastGame,
+
+    test_ç¨ì◊,
 
     [InspectorName("")]max,
 }
@@ -218,6 +221,16 @@ public class Manager_StageSelect : MonoBehaviour
                             case eEnemyType.enemyMass: break;
                         }
                         break;
+                    case eStage.bossStage:
+                        switch (enemy)
+                        {
+                            case eEnemyType.bom: tmp = true; break;
+                            case eEnemyType.crow: break;
+                            case eEnemyType.golem: break;
+                            case eEnemyType.livingArmor:  break;
+                            case eEnemyType.enemyMass: break;
+                        }
+                        break;
                     case eStage.lastGame:
                         switch (enemy)
                         {
@@ -226,6 +239,16 @@ public class Manager_StageSelect : MonoBehaviour
                             case eEnemyType.golem: break;
                             case eEnemyType.livingArmor: break;
                             case eEnemyType.enemyMass: break;
+                        }
+                        break;
+                    case eStage.test_ç¨ì◊:
+                        switch (enemy)
+                        {
+                            case eEnemyType.bom: tmp = true; break;
+                            case eEnemyType.crow: tmp = true; break;
+                            case eEnemyType.golem:  break;
+                            case eEnemyType.livingArmor:  break;
+                            case eEnemyType.enemyMass:  break;
                         }
                         break;
                     default: Debug.Log("StageEnemySelect : " + ((eStage)stage).HumanName()); break;
@@ -271,12 +294,27 @@ public class Manager_StageSelect : MonoBehaviour
                     stageData[stage].SetHoleSize(4);
                     stageData[stage].SetRandomScaffoldBreak(4);
                     break;
+                case eStage.bossStage:
+                    stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.bossStage);
+                    stageData[stage].SetFieldSize(15);
+                    stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.blockOnly);
+                    stageData[stage].SetHoleSize(11);
+                    //stageData[stage].SetRandomScaffoldBreak(4);
+                    break;
                 case eStage.lastGame:
                     stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.stage);
                     stageData[stage].SetFieldSize(9);
                     stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.random);
                     stageData[stage].SetRandomScaffoldBreak(50.0f);
                     break;
+                    
+                case eStage.test_ç¨ì◊:
+                    stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.stage);
+                    stageData[stage].SetFieldSize(9);
+                    stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.blockOnly);
+                    stageData[stage].SetRandomScaffoldBreak(0.0f);
+                    break;
+
                 default: Debug.Log("StageScaffoldSelect : " + ((eStage)stage).HumanName()); break;
             }
         }
@@ -288,12 +326,14 @@ public class Manager_StageSelect : MonoBehaviour
         {
             switch ((eStage)stage)
             {
-                case eStage.fastPlay: break;
-                case eStage.crowStage: break;
-                case eStage.golemLabyrinth: break;
-                case eStage.iceBom: break;
-                case eStage.searchGate: break;
-                case eStage.lastGame: break;
+                case eStage.fastPlay:stageData[stage].SetEffectType(eEffectType.cloud); break;
+                case eStage.crowStage: stageData[stage].SetEffectType(eEffectType.cloud); break;
+                case eStage.golemLabyrinth: stageData[stage].SetEffectType(eEffectType.cloud); break;
+                case eStage.iceBom: stageData[stage].SetEffectType(eEffectType.cloud); break;
+                case eStage.searchGate: stageData[stage].SetEffectType(eEffectType.cloud); break;
+                case eStage.bossStage: stageData[stage].SetEffectType(eEffectType.cloud); break;
+                case eStage.lastGame: stageData[stage].SetEffectType(eEffectType.cloud); break;
+                case eStage.test_ç¨ì◊: stageData[stage].SetEffectType(eEffectType.none); break;
                 default: Debug.Log("StageEffectSelect : " + ((eStage)stage).HumanName()); break;
             }
         }
@@ -325,9 +365,17 @@ public class Manager_StageSelect : MonoBehaviour
                     stageData[stage].SetGateOpenType(eGateOpenType.time_Countdown);
                     stageData[stage].SetGateOpenNum(5);
                     break;
+                case eStage.bossStage:
+                    stageData[stage].SetGateOpenType(eGateOpenType.time_Countdown);
+                    stageData[stage].SetGateOpenNum(5);
+                    break;
                 case eStage.lastGame:
                     stageData[stage].SetGateOpenType(eGateOpenType.time_Countdown);
                     stageData[stage].SetGateOpenNum(5);
+                    break;
+                case eStage.test_ç¨ì◊:
+                    stageData[stage].SetGateOpenType(eGateOpenType.time_Countdown);
+                    stageData[stage].SetGateOpenNum(60);
                     break;
                 default: Debug.Log("StageGatoOpenTypeSelect : " + ((eStage)stage).HumanName()); break;
             }
@@ -354,8 +402,14 @@ public class Manager_StageSelect : MonoBehaviour
                 case eStage.searchGate:
                     stageData[stage].SetBackGroundIndex(eBackGroundType.sea);
                     break;
+                case eStage.bossStage:
+                    stageData[stage].SetBackGroundIndex(eBackGroundType.forest);
+                    break;
                 case eStage.lastGame:
                     stageData[stage].SetBackGroundIndex(eBackGroundType.sea);
+                    break;
+                case eStage.test_ç¨ì◊:
+                    stageData[stage].SetBackGroundIndex(eBackGroundType.forest);
                     break;
                 default: Debug.Log("StageBackGroundSelect : " + ((eStage)stage).HumanName()); break;
             }
@@ -382,8 +436,14 @@ public class Manager_StageSelect : MonoBehaviour
                 case eStage.searchGate:
                     stageData[stage].SetMusicIndex(3);
                     break;
+                case eStage.bossStage:
+                    stageData[stage].SetMusicIndex(1);
+                    break;
                 case eStage.lastGame:
                     stageData[stage].SetMusicIndex(4);
+                    break;
+                case eStage.test_ç¨ì◊:
+                    stageData[stage].SetMusicIndex(0);
                     break;
                 default: Debug.Log("StageMusicSelect : " + ((eStage)stage).HumanName()); break;
             }

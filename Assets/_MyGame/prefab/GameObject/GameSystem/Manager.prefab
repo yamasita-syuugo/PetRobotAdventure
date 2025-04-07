@@ -174,6 +174,16 @@ MonoBehaviour:
   image_Crow: {fileID: 21300000, guid: 97943d4ea49085d43a2695f0f94af7b3, type: 3}
   image_Golem: {fileID: -2115553726, guid: 31d3c3b7612648241893f5c0793e3286, type: 3}
   image_LivingArmor: {fileID: 21300000, guid: f6257b620afc21d48b542b971f7908cf, type: 3}
+  enemyObject_Bom: {fileID: 7882004832147076534, guid: af61f766f8047ab4aa57ecc86036e3f9, type: 3}
+  enemyObject_Crou: {fileID: 1846042793416335476, guid: 5aec0b44d81ee454fb01a2547fd18a57, type: 3}
+  enemyObject_Golem: {fileID: 1846042793416335476, guid: d060a5b55893a8f49a19733d980fd5fd, type: 3}
+  enemyObject_LivingArmor: {fileID: 1846042793416335476, guid: b9a5fa8a3215ff242898661a5f4fe773, type: 3}
+  enemyObject_EnemyMass: {fileID: 3570103102265485630, guid: a25d743fd780b9c45a0f0829e62478dd, type: 3}
+  enemySpaunTimeReset_Bom: 3
+  enemySpaunTimeReset_Crow: 1
+  enemySpaunTimeReset_Golem: 4.5
+  enemySpaunTimeReset_LivingArmor: 3
+  enemySpaunTimeReset_EnemyMass: 15
 --- !u!114 &5653854550284804236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,6 +196,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a183b4e599e5d7346935907608267d5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockBase: {fileID: 1716873108787873888, guid: 1e457425f77454a40bfbcda0b1240cdb, type: 3}
+  iceBase: {fileID: 7285234217500196173, guid: ba29eb92117e8484c8561e9d49989168, type: 3}
+  grassBase: {fileID: 7285234217500196173, guid: d978f503312ba7442804a407d42ade34, type: 3}
+  movePanelBase: {fileID: 7285234217500196173, guid: 79e2b42da27f6bb4281353d1229dba0d, type: 3}
 --- !u!114 &2216643563423679949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,9 +250,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backGroundIndex: 0
-  backGroundBase:
-  - {fileID: 21300000, guid: 00995bb8248ea054d87a097d10b30223, type: 3}
-  - {fileID: 21300000, guid: 464242f83045cf24fa4e17e00889aac5, type: 3}
   backGround_Panel_sea: {fileID: 21300000, guid: 518bd4ad2560acc4fb8acdcc30059f1e, type: 3}
   backGround_Panel_forest: {fileID: 21300000, guid: dbbbfd416eab3294d91cb0ec282f85da, type: 3}
 --- !u!114 &3831981519145628050
@@ -270,12 +281,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3302b1ad6b5a22499d75f362ece1e4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundBase:
-  - {fileID: 4591723961618705102, guid: 332fd1b98f43e4d41bcbb69c2088b828, type: 3}
-  - {fileID: 845358859267371978, guid: 0a649a52105cf6e4684d76b678759ed3, type: 3}
-  - {fileID: 7531405937961074321, guid: f072615cd3e37864fa4af1ca170daeb3, type: 3}
-  - {fileID: 6548356121158598751, guid: fe05c5c7542e55f44bb147255e26e176, type: 3}
-  - {fileID: 647166838543247691, guid: 90883c0e207c5b94396c053623337aed, type: 3}
+  audioClip_Fall: {fileID: 8300000, guid: 8f107692bdabf3142a8dea7bd65fe6b8, type: 3}
+  audioClip_WaterSound: {fileID: 8300000, guid: 4483e081b65abee4180e8f8b834349b9, type: 3}
+  audioClip_Shot: {fileID: 8300000, guid: d5e218fd62ca45242b8e65a811ef7f5f, type: 3}
+  audioClip_Impact: {fileID: 8300000, guid: d68b940aa4c1d1843b892edffeac2a5e, type: 3}
+  audioClip_Explosion: {fileID: 8300000, guid: 9b8bcc98c584b324a8e23f7b23697eb3, type: 3}
   sound:
   - {fileID: 0}
   - {fileID: 0}

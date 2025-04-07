@@ -27,8 +27,9 @@ public class Manager_Camera : MonoBehaviour
             case eStage.golemLabyrinth: cameraMoveSpeedDeray = 0.5f; break;
             case eStage.iceBom: cameraMoveSpeedDeray = 1.26f; break;
             case eStage.searchGate: cameraMoveSpeedDeray = 0.5f; break;
+            case eStage.bossStage: cameraMoveSpeedDeray = 1.26f; break;
             case eStage.lastGame: cameraMoveSpeedDeray = 1.26f; break;
-            default: Debug.Log("error : switch(eStage)"); break;
+            default: Debug.Log("error_cameraMoveSpeedDeray : switch(eStage)"); break;
         }
     }
 }

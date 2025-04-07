@@ -31,14 +31,47 @@ public class Manager_Enemy : MonoBehaviour
         enemyImage[(int)eEnemyType.golem] = image_Golem;
         enemyImage[(int)eEnemyType.livingArmor] = image_LivingArmor;
     }
-    [SerializeField] Sprite image_Bom;
+    [SerializeField,Header("enemyImage")] Sprite image_Bom;
     [SerializeField] Sprite image_Crow;
     [SerializeField] Sprite image_Golem;
     [SerializeField] Sprite image_LivingArmor;
 
-    private void OnEnable()
+    GameObject[]enemyObject = new GameObject[(int)eEnemyType.max];
+    public GameObject GetEnemyObject(eEnemyType enemyType) { return enemyObject[(int)enemyType]; }
+    void SetEnemyObject()
     {
-        SetEnemyImage();
+        enemyObject[(int)eEnemyType.bom] = enemyObject_Bom;
+        enemyObject[(int)eEnemyType.crow] = enemyObject_Crou;
+        enemyObject[(int)eEnemyType.golem] = enemyObject_Golem;
+        enemyObject[(int)eEnemyType.livingArmor] = enemyObject_LivingArmor;
+        enemyObject[(int)eEnemyType.enemyMass] = enemyObject_EnemyMass;
+    }
+    [SerializeField,Header("enemyObject")] GameObject enemyObject_Bom;
+    [SerializeField] GameObject enemyObject_Crou;
+    [SerializeField] GameObject enemyObject_Golem;
+    [SerializeField] GameObject enemyObject_LivingArmor;
+    [SerializeField] GameObject enemyObject_EnemyMass;
+
+    float[] enemySpaunTimeReset = new float[(int)eEnemyType.max];
+    public float GetEnemySpaunTimeReset(eEnemyType enemyType) { return enemySpaunTimeReset[(int)enemyType]; } 
+    void SetEnemySpaunTimeReset()
+    {
+        enemySpaunTimeReset[(int)eEnemyType.bom] = enemySpaunTimeReset_Bom;
+        enemySpaunTimeReset[(int)eEnemyType.crow] = enemySpaunTimeReset_Crow;
+        enemySpaunTimeReset[(int)eEnemyType.golem] = enemySpaunTimeReset_Golem;
+        enemySpaunTimeReset[(int)eEnemyType.livingArmor] = enemySpaunTimeReset_LivingArmor;
+        enemySpaunTimeReset[(int)eEnemyType.enemyMass] = enemySpaunTimeReset_EnemyMass;
+    }
+    [SerializeField,Header("enemySpaunTimeReset")] float enemySpaunTimeReset_Bom;
+    [SerializeField] float enemySpaunTimeReset_Crow;
+    [SerializeField] float enemySpaunTimeReset_Golem;
+    [SerializeField] float enemySpaunTimeReset_LivingArmor;
+    [SerializeField] float enemySpaunTimeReset_EnemyMass;
+
+    void OnEnable(){
+        SetEnemyImage(); 
+        SetEnemyObject();
+        SetEnemySpaunTimeReset();
     }
     //敵の出現パターン
     public bool[] GetStageEnemy(eStage stage) { return manager_StageSelect.GetStageData(stage).GetEnemySerect(); }

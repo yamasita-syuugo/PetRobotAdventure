@@ -37,8 +37,8 @@ public class ObjectFall : MonoBehaviour
     void Start()
     {
         situation = eSituation.normal;
-        fallSound = GameObject.FindWithTag("Manager").GetComponent<Manager_Sounds>().GetSound("fallSound");
-        waterSound = GameObject.FindWithTag("Manager").GetComponent<Manager_Sounds>().GetSound("waterSound");
+        fallSound = GameObject.FindWithTag("Manager").GetComponent<Manager_Sounds>().GetSound(eSoundType.fall);
+        waterSound = GameObject.FindWithTag("Manager").GetComponent<Manager_Sounds>().GetSound(eSoundType.waterSound);
 
         baseSize = transform.localScale.x;
     }
@@ -71,6 +71,7 @@ public class ObjectFall : MonoBehaviour
             if (!fallSoundCheck)
             {
                 if (gameObject.tag == "Player") fallSound.Play();
+                GetComponent<SpriteRenderer>().sortingOrder = -2;
                 fallSoundCheck = true;
             }
         }

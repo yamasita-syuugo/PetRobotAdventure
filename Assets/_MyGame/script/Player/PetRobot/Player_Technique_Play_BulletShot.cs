@@ -12,32 +12,15 @@ public class Player_Technique_Play_BulletShot : Player_Technique_Play__Base
     // Start is called before the first frame update
     void Start()
     {
-        shotSound = GameObject.FindWithTag("Manager").GetComponent<Manager_Sounds>().GetSound("shotSound");
+        shotSound = GameObject.FindWithTag("Manager").GetComponent<Manager_Sounds>().GetSound(eSoundType.shot);
         aimMark = Instantiate<GameObject>(aimMarkBase);
     }
 
     // Update is called once per frame
-    //void Update()
-    //{
-
-    //}
-
-    [SerializeField]
-    GameObject aimMarkBase;
-    GameObject aimMark;
-    bool controllerShot = false;
-    public void SetControllerShot(bool shot_ = true) { controllerShot = shot_; }
-    override public void ControllerPlay()
+    void Update()
     {
         moveDirectionX = Input.GetAxis("AimX");
-        moveDirectionY = -Input.GetAxis("AimY");
-
-        if (controllerShot)
-        {
-            controllerShot = false;
-
-            Shot();
-        }
+        moveDirectionY = Input.GetAxis("AimY");
 
         float distance = Mathf.Sqrt(moveDirectionX * moveDirectionX + moveDirectionY * moveDirectionY);
         if (distance > 0.3f)
@@ -49,6 +32,19 @@ public class Player_Technique_Play_BulletShot : Player_Technique_Play__Base
         {
             aimMark.GetComponent<SpriteRenderer>().material.color = Color.clear;
         }
+
+    }
+
+    [SerializeField]
+    GameObject aimMarkBase;
+    GameObject aimMark;
+    bool controllerShot = false;
+    public void SetControllerShot(bool shot_ = true) { controllerShot = shot_; }
+    override public void ControllerPlay()
+    {
+        //if (!controllerShot) return; controllerShot = false;
+
+        Shot();
     }
     override public void MousePlay()
     {

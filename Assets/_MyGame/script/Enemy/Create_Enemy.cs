@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.Xml.Serialization;
+using Unity.VisualScripting;
 using UnityEditor;
 
 
@@ -12,14 +13,11 @@ using UnityEngine;
 public class Create_Enemy : MonoBehaviour
 {
     Manager_StageSelect manager_StageSelect;
+    Manager_Enemy manager_Enemy;
+    Manager_Time manager_Time;
 
     eStage stage;
     //public AudioSource setSound;
-
-    public GameObject enemyObjectBoss;
-    [SerializeField]
-    GameObject[] enemyObjectBase = new GameObject[(int)eEnemyType.max];
-    public GameObject GetEnemyObjectBase(eEnemyType enemyType) { return enemyObjectBase[(int)enemyType]; }
 
     enum eDirecttion
     {
@@ -30,16 +28,18 @@ public class Create_Enemy : MonoBehaviour
     }
 
     GameObject player = null;
-    Manager_Time timeManager;
     // Start is called before the first frame update
     void Start()
     {
-        manager_StageSelect = GameObject.FindWithTag("Manager").GetComponent<Manager_StageSelect>();
+        GameObject manager = GameObject.FindWithTag("Manager");
+        manager_StageSelect = manager.GetComponent<Manager_StageSelect>();
+        manager_Enemy = manager.GetComponent<Manager_Enemy>();
+        manager_Time = manager.GetComponent<Manager_Time>();
+
 
         stage = manager_StageSelect.GetStage();
 
         player = GameObject.FindWithTag("Player");
-        timeManager = GameObject.FindWithTag("Manager").GetComponent<Manager_Time>();
 
         for (int i = 0; i < enemySpaunTime.Length; i++)
         {
@@ -59,7 +59,7 @@ public class Create_Enemy : MonoBehaviour
     {
         if(player == null) { player = GameObject.FindWithTag("Player"); return; }
         if (player.GetComponent<ObjectFall>().GetSituation() != ObjectFall.eSituation.normal) return;
-        if (timeManager.GetTimeStop()) return;
+        if (manager_Time.GetTimeStop()) return;
 
         stStageData stageData = manager_StageSelect.GetStageData(stage);
         for(int i = 0;i < (int)eEnemyType.max; i++) { if (stageData.GetEnemySerect((eEnemyType)i)) EnemySpawnTimer((eEnemyType)i); }
@@ -106,12 +106,10 @@ public class Create_Enemy : MonoBehaviour
         EndGame();
     }
     float []enemySpaunTime = new float[(int)eEnemyType.max];
-    [SerializeField]
-    float[] enemySpaunTimeReset = new float[(int)eEnemyType.max];
     void EnemySpawnTimer(eEnemyType enemyType)
     {
         GameObject spawnEnemy = null;
-        spawnEnemy = enemyObjectBase[(int)enemyType];
+        spawnEnemy = manager_Enemy.GetEnemyObject(enemyType);
         //switch (enemyType)
         //{
         //    case eEnemyType.bom:  break;
@@ -126,13 +124,13 @@ public class Create_Enemy : MonoBehaviour
             GameObject tmp = Instantiate<GameObject>(spawnEnemy);
             EnemySpaunPositionSet(tmp);
 
-            enemySpaunTime[(int)enemyType] = enemySpaunTimeReset[(int)enemyType];
+            enemySpaunTime[(int)enemyType] = manager_Enemy.GetEnemySpaunTimeReset(enemyType);
         }
     }
     void EnemySpawnCrow()
     {
         if (GameObject.FindGameObjectWithTag("Player").GetComponent<player_Move>().GetMove() == new Vector2(0, 0)) EnemySpawnTimer(eEnemyType.crow);
-        else enemySpaunTime[(int)eEnemyType.crow] = enemySpaunTimeReset[(int)eEnemyType.crow];
+        else enemySpaunTime[(int)eEnemyType.crow] = manager_Enemy.GetEnemySpaunTimeReset(eEnemyType.crow);
     }
     [SerializeField]
     int golemCountReset = 1;
@@ -141,7 +139,7 @@ public class Create_Enemy : MonoBehaviour
     {
         if(golemCount <= 0)
         {
-            GameObject tmp = Instantiate<GameObject>(enemyObjectBase[(int)eEnemyType.golem]);
+            GameObject tmp = Instantiate<GameObject>(manager_Enemy.GetEnemyObject(eEnemyType.golem));
             EnemySpaunPositionSet(tmp);
             golemCount = golemCountReset;
         }
@@ -153,7 +151,7 @@ public class Create_Enemy : MonoBehaviour
     {
         if (livingArmorCount <= 0)
         {
-            GameObject tmp = Instantiate<GameObject>(enemyObjectBase[(int)eEnemyType.livingArmor]);
+            GameObject tmp = Instantiate<GameObject>(manager_Enemy.GetEnemyObject(eEnemyType.livingArmor));
             EnemySpaunPositionSet(tmp);
             livingArmorCount = livingArmorCountReset;
         }
@@ -169,7 +167,7 @@ public class Create_Enemy : MonoBehaviour
         }
 
         if (!enemyMassSpawn) return;
-        GameObject tmp = Instantiate<GameObject>(enemyObjectBase[(int)eEnemyType.enemyMass]);
+        GameObject tmp = Instantiate<GameObject>(manager_Enemy.GetEnemyObject(eEnemyType.enemyMass));
         EnemySpaunPositionSet(tmp);
         enemyMassSpawn = false;
     }
@@ -182,7 +180,7 @@ public class Create_Enemy : MonoBehaviour
     {
         if (bomSpawnNum <= 0) return;
 
-        GameObject tmp = Instantiate<GameObject>(enemyObjectBase[(int)eEnemyType.bom]);
+        GameObject tmp = Instantiate<GameObject>(manager_Enemy.GetEnemyObject(eEnemyType.bom));
         EnemySpaunPositionSet(tmp);
 
         bomSpawnNum--;
@@ -192,9 +190,9 @@ public class Create_Enemy : MonoBehaviour
     {
         if(endGame)
         {
-            GameObject tmp = Instantiate<GameObject>(enemyObjectBase[(int)eEnemyType.bom]);
+            GameObject tmp = Instantiate<GameObject>(manager_Enemy.GetEnemyObject(eEnemyType.bom));
             EnemySpaunPositionSet(tmp);
-            enemySpaunTime[(int)eEnemyType.bom] = enemySpaunTimeReset[(int)eEnemyType.bom];
+            enemySpaunTime[(int)eEnemyType.bom] = manager_Enemy.GetEnemySpaunTimeReset(eEnemyType.bom);
         }
     }
     public void EnemyCreate(GameObject enemy)

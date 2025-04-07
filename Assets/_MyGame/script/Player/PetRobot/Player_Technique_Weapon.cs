@@ -77,7 +77,7 @@ public class Player_Technique_Weapon : Player_Technique_
     {
         if (GameObject.FindGameObjectWithTag("Player").GetComponent<ObjectFall>().GetSituation() == ObjectFall.eSituation.fall) return;
 
-        for (int i = 0; i < weaponNum; i++)//0 = 左クリック;1 = 右クリック;2 = ホイールクリック;
+        for (int i = 0; i < weaponNum; i++)//0 = 左クリック;1 = 右クリック;
         {
             UseSelect_Mouse(i);
             UseSelect_Controller(i);
@@ -128,12 +128,8 @@ public class Player_Technique_Weapon : Player_Technique_
     {
         bool situation = false;
         string keyString = "Error";
-        switch (useNum)
-        {
-            case 0: keyString = "joystick button 7"; break;
-            case 1: keyString = "joystick button 5"; break;
-            case 2: keyString = "joystick button 6"; break;
-        }
+        keyString = "joystick button " + (5 + useNum * 2).ToString() ;
+
         PushTypeCheck(useNum);
         switch (pushType)
         {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Add_ScoreDisplay : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class Add_ScoreDisplay : MonoBehaviour
             if (manager_Score.GetScore((eScoreType)scoreType) <= 0) continue;
 
             CreatScoreUI((eScoreType)scoreType);
-            score[scoreType].transform.localPosition = new Vector3(0, count * -50, 0);
+            score[scoreType].transform.localPosition = new Vector3(-50, count * -50, 0);
 
             count++;
         }
@@ -39,18 +40,19 @@ public class Add_ScoreDisplay : MonoBehaviour
     {
         if (score[(int)scoreType] != null) return;
         score[(int)scoreType] = Instantiate<GameObject>(new GameObject());
-        SpriteRenderer tmp_sp = score[(int)scoreType].AddComponent<SpriteRenderer>();
+        Image tmp_sp = score[(int)scoreType].AddComponent<Image>();
+        score[(int)scoreType].GetComponent<RectTransform>().sizeDelta = new Vector2(50, 50);
+        score[(int)scoreType].transform.parent = transform;
         tmp_sp.sprite = manager_Score.GetScoreImage(scoreType);
-            score[(int)scoreType].transform.parent = transform;
-            score[(int)scoreType].transform.localScale = new Vector3(50,50,1);
+        score[(int)scoreType].transform.localScale = new Vector3(1, 1, 1);
 
         GameObject tmp = Instantiate<GameObject>(new GameObject());
         tmp.transform.parent = score[(int)scoreType].transform;
-        tmp.transform.localPosition = new Vector3(1,0,0);
-        tmp.transform.localScale = new Vector3(1,1,1);
+        tmp.transform.localPosition = new Vector3(0, 0, 0);
+        tmp.transform.localScale = new Vector3(1, 1, 1);
         ScoreDisplay scoreDisplay = tmp.AddComponent<ScoreDisplay>();
         scoreDisplay.SetScoreType(scoreType);
         scoreDisplay.SetScoreDisplayType(eScoreDisplayType.score);
-        tmp.AddComponent<TextMeshProUGUI>();
+        tmp.AddComponent<TextMeshProUGUI>().alignment = TextAlignmentOptions.Right;
     }
 }

@@ -12,27 +12,9 @@ public class Create_Scaffold : MonoBehaviour
 {
     Manager_StageSelect manager_StageSelect;
     Manager_Field manager_Field;
+    Manager_Gate manager_Gate;
 
     eScaffoldType scoffoldType = eScaffoldType.block;
-
-    [Header("scaffoldBase")]
-    GameObject[] scaffoldBases = new GameObject[(int)eScaffoldType.max];
-    void SetScaffoldBases() { 
-        scaffoldBases[(int)eScaffoldType.block] = blockBase;
-        scaffoldBases[(int)eScaffoldType.ice] = iceBase;
-        scaffoldBases[(int)eScaffoldType.grass] = grassBase;
-        scaffoldBases[(int)eScaffoldType.movePanel] = movePanelBase;
-    }
-    [SerializeField]
-    GameObject blockBase;
-    [SerializeField]
-    GameObject iceBase;
-    [SerializeField]
-    GameObject grassBase;
-    [SerializeField]
-    GameObject movePanelBase;
-
-
 
     [SerializeField]
     eCreatScaffoldType creatType = eCreatScaffoldType.blockOnly;
@@ -49,15 +31,16 @@ public class Create_Scaffold : MonoBehaviour
     int holeSize = 1;
     public void SetHoleSize(int holeSize_) {  holeSize = holeSize_; }
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
-        SetScaffoldBases();
-
         GameObject manager = GameObject.FindWithTag("Manager");
         manager_StageSelect = manager.GetComponent<Manager_StageSelect>();
         manager_Field = manager.GetComponent<Manager_Field>();
-
+        manager_Gate = manager.GetComponent<Manager_Gate>();
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
         Load();
 
         CreateObject();
@@ -97,7 +80,7 @@ public class Create_Scaffold : MonoBehaviour
                 {
                     for (int y = 0; y < fieldSize; y++)
                     {
-                        tmpBase = ScaffoldSelect();
+                        tmpBase = manager_Field.ScaffoldSelect();
 
                         if (randomBreak > Random.Range(0, 100) &&
                             !(fieldSize / 2 * 2 == fieldSize ? (x == fieldSize / 2 - 1 || x == fieldSize / 2) &&//初期地削除の制限
@@ -126,7 +109,7 @@ public class Create_Scaffold : MonoBehaviour
                 else { ScaffoldPos[1, 0] = ScaffoldPos[0, 0]; ScaffoldPos[1, 1] = ScaffoldPos[0, 1] - 1; }
                 for (int i = 0; i < 2; i++)
                 {
-                    tmpScaffold = Instantiate<GameObject>(ScaffoldSelect(), new Vector3(
+                    tmpScaffold = Instantiate<GameObject>(manager_Field.ScaffoldSelect(), new Vector3(
                 ScaffoldPos[i, 0] * blockSizeX,
                 ScaffoldPos[i, 1] * blockSizeY, 0),
                 Quaternion.identity);
@@ -161,7 +144,7 @@ public class Create_Scaffold : MonoBehaviour
 
                     }
 
-                    tmpScaffold = Instantiate<GameObject>(ScaffoldSelect(), new Vector3(
+                    tmpScaffold = Instantiate<GameObject>(manager_Field.ScaffoldSelect(), new Vector3(
                 ScaffoldPos[i, 0] * blockSizeX,
                 ScaffoldPos[i, 1] * blockSizeY, 0),
                 Quaternion.identity);
@@ -169,7 +152,7 @@ public class Create_Scaffold : MonoBehaviour
 
                     blocks[blockNum++] = tmpScaffold;
 
-                    if (i == scaffoldNum - 1) GameObject.FindWithTag("Manager").GetComponent<Manager_Gate>().SerGatePos(tmpScaffold.transform.position);
+                    if (i == scaffoldNum - 1) manager_Gate.SerGatePos(tmpScaffold.transform.position);
                 }
                 break;
             case eFieldCreatType.frameStage:     //正方形ステージ
@@ -182,7 +165,7 @@ public class Create_Scaffold : MonoBehaviour
                         if (holeOn && !(y % holeSize == 0) &&
                             ((y < fieldSize / 2 - holeSize / 2 || y > fieldSize / 2 + holeSize / 2) ||//初期地の確保
                             (x < fieldSize / 2 - holeSize / 2 || x > fieldSize / 2 + holeSize / 2))) continue;
-                        tmpBase = ScaffoldSelect();
+                        tmpBase = manager_Field.ScaffoldSelect();
 
                         if (randomBreak > Random.Range(0, 100) &&
                             !(fieldSize / 2 * 2 == fieldSize ? (x == fieldSize / 2 - 1 || x == fieldSize / 2) &&//初期地削除の制限
@@ -197,14 +180,34 @@ public class Create_Scaffold : MonoBehaviour
                         blocks[blockNum++] = tmpScaffold;
                     }
                 }
-                GameObject.FindWithTag("Manager").GetComponent<Manager_Gate>().SerGatePos(blocks[Random.Range(0, blockNum - 1)].transform.position);
+                manager_Gate.SerGatePos(blocks[Random.Range(0, blockNum - 1)].transform.position);
+                break;
+            case eFieldCreatType.bossStage:     //正方形ステージ
+                //holeSize
+                for (int x = 0; x < fieldSize; x++)
+                {
+                    for (int y = 0; y < fieldSize; y++)
+                    {
+                        int roadSize = (fieldSize - holeSize) / 2;
+                        if (x >= roadSize && x < fieldSize - roadSize && y >= roadSize && y < fieldSize - roadSize) continue;
+
+                        if (randomBreak > Random.Range(0, 100) &&
+                            !(fieldSize / 2 * 2 == fieldSize ? (x == fieldSize / 2 - 1 || x == fieldSize / 2) &&//初期地削除の制限
+                            (y == fieldSize / 2 - 1 || y == fieldSize / 2) : (x == fieldSize / 2) && (y == fieldSize / 2))) continue;
+
+                        tmpBase = manager_Field.ScaffoldSelect();
+
+                        tmpScaffold = Instantiate<GameObject>(tmpBase,
+                            new Vector3((x - (float)fieldSize / 2.0f) * blockSizeX + blockSizeX / 2.0f, y * blockSizeY , 0),
+                            Quaternion.identity);
+                        tmpScaffold.transform.parent = transform;
+
+                        blocks[blockNum++] = tmpScaffold;
+                    }
+                }
+                Vector2 BossSpawnPoint = new Vector2(0, fieldSize * blockSizeY / 2);
                 break;
         }
-    }
-    GameObject ScaffoldSelect()
-    {
-        if (creatType == eCreatScaffoldType.random) return scaffoldBases[Random.Range(0, (int)eScaffoldType.max)];
-        return scaffoldBases[(int)creatType];
     }
     //削除
     public void DeleteObject()
@@ -216,8 +219,6 @@ public class Create_Scaffold : MonoBehaviour
 
     public void Load()
     {
-        Manager_StageSelect manager_StageSelect = GameObject.FindWithTag("Manager").GetComponent<Manager_StageSelect>();
-
         creatType = manager_Field.GetScaffoldType(manager_StageSelect.GetStage());
         randomBreak = manager_Field.GetRandomBreak(manager_StageSelect.GetStage());
     }

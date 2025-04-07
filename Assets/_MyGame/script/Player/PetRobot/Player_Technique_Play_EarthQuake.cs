@@ -5,13 +5,20 @@ using UnityEngine;
 
 public class Player_Technique_Play_EarthQuake : Player_Technique_Play__Base
 {
-    [SerializeField]
-    GameObject blockBase;
+    Manager_StageSelect manager_StageSelect;
+    Manager_Field manager_Field;
+
     AudioSource blockCreateSound;
+
+    private void OnEnable()
+    {
+        manager_StageSelect = GameObject.FindWithTag("Manager").GetComponent<Manager_StageSelect>();
+        manager_Field = GameObject.FindWithTag("Manager").GetComponent<Manager_Field>();
+    }
     // Start is called before the first frame update
     void Start()
     {
-        blockCreateSound = GameObject.FindWithTag("Manager").GetComponent<Manager_Sounds>().GetSound("installation");
+        blockCreateSound = GameObject.FindWithTag("Manager").GetComponent<Manager_Sounds>().GetSound(eSoundType.impact);
     }
 
     // Update is called once per frame
@@ -50,11 +57,11 @@ public class Player_Technique_Play_EarthQuake : Player_Technique_Play__Base
         if (!GetComponent<Player_Technique_Container_MaterialBag>().MaterialsCheck()) return;
         GetComponent<Player_Technique_Container_MaterialBag>().AddEarthQuakeMaterials(-1);
 
-        GameObject tmp = Instantiate(blockBase);
+        GameObject tmp = Instantiate(manager_Field.ScaffoldSelect());
         tmp.transform.position = new Vector3(posX, posY, 0);
         tmp.transform.parent = GameObject.FindWithTag("Create").transform;
         GameObject imp = Instantiate<GameObject>(impact);
-        imp.transform.position = tmp.transform.position;
+        imp.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         blockCreateSound.Play();
 

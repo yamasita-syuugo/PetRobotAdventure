@@ -49,7 +49,7 @@ public class ResultSelect : MonoBehaviour
             }
         }
         if (Input.GetAxis("Decision") == 0) return;
-        Manager_StageSelect manager_StageSelect = GameObject.Find("Manager_Result").GetComponent<Manager_StageSelect>();
+        Manager_StageSelect manager_StageSelect = GameObject.FindWithTag("Manager").GetComponent<Manager_StageSelect>();
         switch (button)
         {
             case eButton.next:
