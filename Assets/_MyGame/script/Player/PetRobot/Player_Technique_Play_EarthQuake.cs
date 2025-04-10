@@ -18,14 +18,16 @@ public class Player_Technique_Play_EarthQuake : Player_Technique_Play__Base
     // Start is called before the first frame update
     void Start()
     {
+        a = 1 - manager_StageSelect.GetStageData(manager_StageSelect.GetStage()).GetFieldSize() % 2;
+
         blockCreateSound = GameObject.FindWithTag("Manager").GetComponent<Manager_Sounds>().GetSound(eSoundType.impact);
     }
 
     // Update is called once per frame
-    //void Update()
-    //{
-
-    //}
+    void Update()
+    {
+        Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+    }
 
     private bool creatBlockOn = false;
     override public void ControllerPlay()
@@ -40,12 +42,12 @@ public class Player_Technique_Play_EarthQuake : Player_Technique_Play__Base
 
         CreatBlock();
     }
+    int a;
     override public void MousePlay()
     {
-
         Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        posX = pos.x; if (posX % 1 < 0.5f) posX = (int)posX; else posX = ((int)posX) + 1;
-        posY = pos.y; if (posY % 1 < 0.5f) posY = (int)posY; else posY = ((int)posY) + 1;
+        posX = pos.x; if (posX > 0 && posX % 1 > 0.5f + a * 0.5f) posX = (int)posX + 1 + a * 0.5f; else if (posX < 0 && posX % 1 < -0.5f + a * 0.5f) posX = (int)posX - 1 + a * 0.5f; else posX = (int)posX + a * 0.5f;
+        posY = pos.y; if (posY > 0 && posY % 1 > 0.5f + a * 0.5f) posY = (int)posY + 1 + a * 0.5f; else if (posY < 0 && posY % 1 < -0.5f + a * 0.5f) posY = (int)posY - 1 + a * 0.5f; else posY = (int)posY + a * 0.5f;
 
         CreatBlock();
     }
@@ -61,7 +63,7 @@ public class Player_Technique_Play_EarthQuake : Player_Technique_Play__Base
         tmp.transform.position = new Vector3(posX, posY, 0);
         tmp.transform.parent = GameObject.FindWithTag("Create").transform;
         GameObject imp = Instantiate<GameObject>(impact);
-        imp.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        imp.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);//todo:コントローラーで生成時マウスの位置に出る
 
         blockCreateSound.Play();
 

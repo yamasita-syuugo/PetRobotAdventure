@@ -244,8 +244,8 @@ public class Manager_StageSelect : MonoBehaviour
                     case eStage.test_ç¨ì◊:
                         switch (enemy)
                         {
-                            case eEnemyType.bom: tmp = true; break;
-                            case eEnemyType.crow: tmp = true; break;
+                            case eEnemyType.bom: break;
+                            case eEnemyType.crow: break;
                             case eEnemyType.golem:  break;
                             case eEnemyType.livingArmor:  break;
                             case eEnemyType.enemyMass:  break;
@@ -310,7 +310,7 @@ public class Manager_StageSelect : MonoBehaviour
                     
                 case eStage.test_ç¨ì◊:
                     stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.stage);
-                    stageData[stage].SetFieldSize(9);
+                    stageData[stage].SetFieldSize(10);
                     stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.blockOnly);
                     stageData[stage].SetRandomScaffoldBreak(0.0f);
                     break;

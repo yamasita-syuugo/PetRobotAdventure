@@ -476,26 +476,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7140798705473952029, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
-      propertyPath: enemySpaunTimeReset_Bom
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7140798705473952029, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
-      propertyPath: enemySpaunTimeReset_Crow
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7140798705473952029, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
-      propertyPath: enemySpaunTimeReset_Golem
-      value: 4.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7140798705473952029, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
-      propertyPath: enemySpaunTimeReset_EnemyMass
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 7140798705473952029, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
-      propertyPath: enemySpaunTimeReset_LivingArmor
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

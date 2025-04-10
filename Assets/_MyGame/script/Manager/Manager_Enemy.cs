@@ -31,7 +31,8 @@ public class Manager_Enemy : MonoBehaviour
         enemyImage[(int)eEnemyType.golem] = image_Golem;
         enemyImage[(int)eEnemyType.livingArmor] = image_LivingArmor;
     }
-    [SerializeField,Header("enemyImage")] Sprite image_Bom;
+    [Header("enemyImage")]
+    [SerializeField] Sprite image_Bom;
     [SerializeField] Sprite image_Crow;
     [SerializeField] Sprite image_Golem;
     [SerializeField] Sprite image_LivingArmor;
@@ -46,7 +47,8 @@ public class Manager_Enemy : MonoBehaviour
         enemyObject[(int)eEnemyType.livingArmor] = enemyObject_LivingArmor;
         enemyObject[(int)eEnemyType.enemyMass] = enemyObject_EnemyMass;
     }
-    [SerializeField,Header("enemyObject")] GameObject enemyObject_Bom;
+    [Header("enemyObject")]
+    [SerializeField] GameObject enemyObject_Bom;
     [SerializeField] GameObject enemyObject_Crou;
     [SerializeField] GameObject enemyObject_Golem;
     [SerializeField] GameObject enemyObject_LivingArmor;
@@ -62,7 +64,8 @@ public class Manager_Enemy : MonoBehaviour
         enemySpaunTimeReset[(int)eEnemyType.livingArmor] = enemySpaunTimeReset_LivingArmor;
         enemySpaunTimeReset[(int)eEnemyType.enemyMass] = enemySpaunTimeReset_EnemyMass;
     }
-    [SerializeField,Header("enemySpaunTimeReset")] float enemySpaunTimeReset_Bom;
+    [Header("enemySpaunTimeReset")]
+    [SerializeField] float enemySpaunTimeReset_Bom;
     [SerializeField] float enemySpaunTimeReset_Crow;
     [SerializeField] float enemySpaunTimeReset_Golem;
     [SerializeField] float enemySpaunTimeReset_LivingArmor;
