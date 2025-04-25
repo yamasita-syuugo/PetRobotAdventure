@@ -24,16 +24,13 @@ public class Select_Stage_Enemy_Icon : MonoBehaviour
         [InspectorName("")] max,
     }[SerializeField]eArrangement arrangement = eArrangement.threeLines;
 
-    [SerializeField]
-    GameObject Image_Base;
-    [SerializeField]
-    GameObject[] enemyIconBase = new GameObject[(int)eEnemyType.max];
     GameObject[] enemyIcon = new GameObject[(int)eEnemyType.max];
     // Start is called before the first frame update
     void Start()
     {
-        manager_StageSelect = GameObject.FindWithTag("Manager").GetComponent<Manager_StageSelect>();
-        manager_Enemy = GameObject.FindWithTag("Manager").GetComponent<Manager_Enemy>();
+        GameObject manager = GameObject.FindWithTag("Manager");
+        manager_StageSelect = manager.GetComponent<Manager_StageSelect>();
+        manager_Enemy = manager.GetComponent<Manager_Enemy>();
     }
 
     // Update is called once per frame
@@ -44,7 +41,6 @@ public class Select_Stage_Enemy_Icon : MonoBehaviour
     eStage oldStage = eStage.none;
     void EnemyDistance()
     {
-
 
     }
     [SerializeField]
@@ -61,7 +57,7 @@ public class Select_Stage_Enemy_Icon : MonoBehaviour
 
         GameObject tmp;
         EnemyIconDelete();
-        enemyIcon = new GameObject[enemyIconBase.Length];
+        enemyIcon = new GameObject[(int)eEnemyType.max];
         int count = 0;
         for (int i = 0; i < enemyIcon.Length; i++)
         {

@@ -59,10 +59,6 @@ public class Manager_Collection : MonoBehaviour
             default: Debug.Log("NoSwitch"); break;
         }
     }
-    //private void OnEnable()
-    //{
-    //    DataLoad();
-    //}
     // Start is called before the first frame update
     //void Start()
     //{

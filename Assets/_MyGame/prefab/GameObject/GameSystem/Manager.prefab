@@ -31,6 +31,7 @@ GameObject:
   - component: {fileID: 7101852417421446616}
   - component: {fileID: 5505683979268049882}
   - component: {fileID: 5342352124609367597}
+  - component: {fileID: 9165536081219879886}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Manager
@@ -431,6 +432,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectType: 0
+--- !u!114 &9165536081219879886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492805992380382826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66ace1c4568d08b4194f3e85359923a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1163399678311762220
 PrefabInstance:
   m_ObjectHideFlags: 0

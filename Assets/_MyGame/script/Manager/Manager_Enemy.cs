@@ -82,6 +82,8 @@ public class Manager_Enemy : MonoBehaviour
     void Start()
     {
         manager_StageSelect = GetComponent<Manager_StageSelect>();
+        float[] enemySpawnTime = manager_StageSelect.GetStageData(manager_StageSelect.GetStage()).GetEnemySpaunTimeReset();
+        for(int i = 0;i < (int)eEnemyType.max; i++) if (enemySpawnTime[i] > 0) enemySpaunTimeReset[i] = enemySpawnTime[i];
     }
 
     // Update is called once per frame

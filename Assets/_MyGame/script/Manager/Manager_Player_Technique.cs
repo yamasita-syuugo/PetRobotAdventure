@@ -114,6 +114,7 @@ public class Manager_Player_Technique : MonoBehaviour
 
     [SerializeField,Header("Weapon")]
     Sprite[] WeaponImage = new Sprite[(int)ePlayerWeaponType.max];
+    public Sprite[] GetWeaponImage() { return WeaponImage; }
     public Sprite GetWeaponImage(int index_) { return WeaponImage[index_]; }
     bool[] getWeapon = new bool[(int)ePlayerWeaponType.max];
     [SerializeField]
@@ -124,10 +125,12 @@ public class Manager_Player_Technique : MonoBehaviour
     public GameObject GetTechniqueUIBase(int index_) { return techniqueUIBase[index_]; }
     [SerializeField,Header("Magic")]
     Sprite[] magicImage = new Sprite[(int)ePlayerMagicType.max];
+    public Sprite[] GetMagicImage() { return magicImage; }
     public Sprite GetMagicImage(int index_) { return magicImage[index_]; }
     bool[] getMagic = new bool[(int)ePlayerMagicType.max];
     [SerializeField,Header("Attack")]
     Sprite[] attackImage = new Sprite[(int)ePlayerAttackType.max];
+    public Sprite[] GetAttackImage() { return attackImage; }
     public Sprite GetAttackImage(int index_) { return attackImage[index_]; }
     bool[] getAttack = new bool[(int)ePlayerAttackType.max];
 

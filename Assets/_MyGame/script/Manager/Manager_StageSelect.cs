@@ -18,6 +18,7 @@ public enum eStage
     crowStage,
     golemLabyrinth,
     iceBom,
+    bomRush,
     searchGate,
     bossStage,
 
@@ -30,11 +31,17 @@ public enum eStage
 
 public struct stStageData
 {
+    //敵の出現状況
     bool []enemySerect;
     public void InitializeEnemySerect() { enemySerect = new bool[(int)eEnemyType.max];}
     public bool[] GetEnemySerect() {  return enemySerect; }
     public bool GetEnemySerect(eEnemyType enemyType) {  return enemySerect[(int)enemyType]; }
     public void SetEnemySerect(eEnemyType enemyType,bool enemySerect_) { enemySerect[(int)enemyType] = enemySerect_; }
+    float[] enemySpaunTimeReset;
+    public void InitializeEnemySpaunTimeReset() { enemySpaunTimeReset = new float[(int)eEnemyType.max]; }
+    public float[] GetEnemySpaunTimeReset() { return enemySpaunTimeReset; }
+    public float GetEnemySpaunTimeReset(eEnemyType enemyType) { return enemySpaunTimeReset[(int)enemyType]; }
+    public void SetEnemySpaunTimeReset(eEnemyType enemyType,float enemySpaunTimeReset_) {  enemySpaunTimeReset[(int)enemyType] = enemySpaunTimeReset_; }
 
 
     //足場の配置パターン
@@ -54,10 +61,12 @@ public struct stStageData
     public int GetFieldSize() { return fieldSize; }
     public void SetFieldSize(int fieldSize_) {  fieldSize = fieldSize_; }
 
+    //エフェクト選択
     eEffectType effectType;
     public eEffectType GetEffectType() {  return effectType; }
     public void SetEffectType(eEffectType effectType_) {  effectType = effectType_; }
 
+    //ゲート開錠条件
     eGateOpenType gateOpenType;
     public eGateOpenType GetGateOpenType() { return gateOpenType; }
     public void SetGateOpenType(eGateOpenType gateOpenType_) {  gateOpenType = gateOpenType_; }
@@ -65,6 +74,7 @@ public struct stStageData
     public int GetGateOpenNum() {  return gateOpenNum; }
     public void SetGateOpenNum(int gateOpenNum_) { gateOpenNum = gateOpenNum_; }
 
+    //背景選択
     eBackGroundType backGroundIndex;
     public eBackGroundType GetBackGroundIndex() {  return backGroundIndex; }
     public void SetBackGroundIndex(eBackGroundType backGroundIndex_) { 
@@ -73,6 +83,7 @@ public struct stStageData
         if (backGroundIndex < 0) backGroundIndex = 0; else if (backGroundIndex >= backGroundNum) backGroundIndex = backGroundNum - 1;
     }
 
+    //音楽選択
     int MusicIndex;
     public int GetMusicIndex() {  return MusicIndex; }
     public void SetMusicIndex(int MusicIndex_) {
@@ -165,10 +176,12 @@ public class Manager_StageSelect : MonoBehaviour
     {
         for (int stage = 0; stage < (int)eStage.max; stage++)
         {
-            stageData[stage].InitializeEnemySerect();
+            stageData[stage].InitializeEnemySerect(); 
+            stageData[stage].InitializeEnemySpaunTimeReset();
             for (eEnemyType enemy = 0; enemy < eEnemyType.max; enemy++)
             {
                 bool tmp = false;
+                float spawnTime = -1;
                 switch ((eStage)stage)
                 {
                     case eStage.fastPlay:
@@ -205,6 +218,16 @@ public class Manager_StageSelect : MonoBehaviour
                         switch (enemy)
                         {
                             case eEnemyType.bom: tmp = true; break;
+                            case eEnemyType.crow: break;
+                            case eEnemyType.golem: break;
+                            case eEnemyType.livingArmor: break;
+                            case eEnemyType.enemyMass: break;
+                        }
+                        break;
+                    case eStage.bomRush:
+                        switch (enemy)
+                        {
+                            case eEnemyType.bom: tmp = true; spawnTime = 1f; break;
                             case eEnemyType.crow: break;
                             case eEnemyType.golem: break;
                             case eEnemyType.livingArmor: break;
@@ -254,6 +277,7 @@ public class Manager_StageSelect : MonoBehaviour
                     default: Debug.Log("StageEnemySelect : " + ((eStage)stage).HumanName()); break;
                 }
                 stageData[stage].SetEnemySerect(enemy, tmp);
+                stageData[stage].SetEnemySpaunTimeReset(enemy, spawnTime);
             }
         }
     }
@@ -287,6 +311,12 @@ public class Manager_StageSelect : MonoBehaviour
                     stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.iceOnly);
                     stageData[stage].SetRandomScaffoldBreak(50.0f);
                     break;
+                case eStage.bomRush:
+                    stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.stage);
+                    stageData[stage].SetFieldSize(4);
+                    stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.blockOnly);
+                    stageData[stage].SetRandomScaffoldBreak(75.0f);
+                    break;
                 case eStage.searchGate:
                     stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.frameStage);
                     stageData[stage].SetFieldSize(53);
@@ -310,7 +340,7 @@ public class Manager_StageSelect : MonoBehaviour
                     
                 case eStage.test_混沌:
                     stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.stage);
-                    stageData[stage].SetFieldSize(10);
+                    stageData[stage].SetFieldSize(9);
                     stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.blockOnly);
                     stageData[stage].SetRandomScaffoldBreak(0.0f);
                     break;
@@ -330,6 +360,7 @@ public class Manager_StageSelect : MonoBehaviour
                 case eStage.crowStage: stageData[stage].SetEffectType(eEffectType.cloud); break;
                 case eStage.golemLabyrinth: stageData[stage].SetEffectType(eEffectType.cloud); break;
                 case eStage.iceBom: stageData[stage].SetEffectType(eEffectType.cloud); break;
+                case eStage.bomRush: stageData[stage].SetEffectType(eEffectType.cloud); break;
                 case eStage.searchGate: stageData[stage].SetEffectType(eEffectType.cloud); break;
                 case eStage.bossStage: stageData[stage].SetEffectType(eEffectType.cloud); break;
                 case eStage.lastGame: stageData[stage].SetEffectType(eEffectType.cloud); break;
@@ -360,6 +391,10 @@ public class Manager_StageSelect : MonoBehaviour
                 case eStage.iceBom:
                     stageData[stage].SetGateOpenType(eGateOpenType.scoreCheck_Posi_Destroy_Bom);
                     stageData[stage].SetGateOpenNum(20);
+                    break;
+                case eStage.bomRush:
+                    stageData[stage].SetGateOpenType(eGateOpenType.scoreCheck_Posi_Destroy_Bom);
+                    stageData[stage].SetGateOpenNum(15);
                     break;
                 case eStage.searchGate:
                     stageData[stage].SetGateOpenType(eGateOpenType.time_Countdown);
@@ -399,6 +434,9 @@ public class Manager_StageSelect : MonoBehaviour
                 case eStage.iceBom:
                     stageData[stage].SetBackGroundIndex(eBackGroundType.sea);
                     break;
+                case eStage.bomRush:
+                    stageData[stage].SetBackGroundIndex(eBackGroundType.forest);
+                    break;
                 case eStage.searchGate:
                     stageData[stage].SetBackGroundIndex(eBackGroundType.sea);
                     break;
@@ -432,6 +470,9 @@ public class Manager_StageSelect : MonoBehaviour
                     break;
                 case eStage.iceBom:
                     stageData[stage].SetMusicIndex(3);
+                    break;
+                case eStage.bomRush:
+                    stageData[stage].SetMusicIndex(2);
                     break;
                 case eStage.searchGate:
                     stageData[stage].SetMusicIndex(3);

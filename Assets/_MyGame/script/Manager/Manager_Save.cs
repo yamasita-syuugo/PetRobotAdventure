@@ -17,6 +17,7 @@ public class Manager_Save : MonoBehaviour
         GetComponent<Manager_Music>().DataSave();
 
         GetComponent<Manager_Collection>().DataSave();
+        GetComponent<Manager_PlayData>().DataSave();
 
         GetComponent<Manager_Gacha>().DataSave();
 
@@ -39,6 +40,7 @@ public class Manager_Save : MonoBehaviour
         GetComponent<Manager_Music>().DataLoad();
 
         GetComponent<Manager_Collection>().DataLoad();
+        GetComponent<Manager_PlayData>().DataLoad();
 
         GetComponent<Manager_Gacha>().DataLoad();
 

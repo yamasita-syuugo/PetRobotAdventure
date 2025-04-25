@@ -6,14 +6,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using Unity.Collections;
 
-
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
 public class Create_CollectionButton : MonoBehaviour
 {
-    GameObject manager;
+    Manager_StageSelect manager_StageSelect;
+    Manager_Player manager_Player;
+    Manager_Player_Technique manager_Player_Technique;
+    Manager_MousePointerType manager_MousePointerType;
+    Manager_BackgroundType manager_BackgroundType;
+    Manager_Music manager_Music;
+
 
     [SerializeField]
     GameObject collection_Base;
@@ -22,13 +27,19 @@ public class Create_CollectionButton : MonoBehaviour
 
     [SerializeField]
     eCollectionType collectionType = eCollectionType.none;
+    private void OnEnable()
+    {
+        GameObject manager = GameObject.FindWithTag("Manager");
+        manager_StageSelect = manager.GetComponent<Manager_StageSelect>();
+        manager_Player = manager.GetComponent<Manager_Player>();
+        manager_Player_Technique = manager.GetComponent<Manager_Player_Technique>();
+        manager_MousePointerType = manager.GetComponent<Manager_MousePointerType>();
+        manager_BackgroundType = manager.GetComponent<Manager_BackgroundType>();
+        manager_Music = manager.GetComponent<Manager_Music>();
+    }
     // Start is called before the first frame update
     void Start()
     {
-        if (collectionType == eCollectionType.none) Debug.Log(transform.name + " : TypeError");
-
-        if (manager == null) manager = GameObject.FindWithTag("Manager");
-
         CollectionCreate();
     }
 
@@ -37,8 +48,6 @@ public class Create_CollectionButton : MonoBehaviour
     int wideSize = 70;
     public void CollectionCreate()
     {
-        if(manager == null) manager = GameObject.FindWithTag("Manager");
-
         CollectionDelete();
 
         switch (collectionType)
@@ -51,15 +60,15 @@ public class Create_CollectionButton : MonoBehaviour
                     GameObject tmp = Instantiate(collection_Base);
                     collection[i] = tmp;
                     tmp.transform.parent = transform;
-                    tmp.transform.localPosition = new Vector2(i * wideSize, 0);
+                    tmp.transform.localPosition = new Vector2(i * wideSize - ((int)eStage.max - 1) * wideSize / 2, 165);
                     tmp.transform.localScale = new Vector2(1, 1);
                     tmp.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector2(50, 50);
 
-                    if (manager.GetComponent<Manager_StageSelect>().GetGetSituation((eStage)i))
+                    if (manager_StageSelect.GetGetSituation((eStage)i))
                     {
-                        //tmp.GetComponentInChildren<SpriteRenderer>().sprite = manager.GetComponent<Manager_StageSelect>().GetBackGroundBase(i);
+                        //tmp.GetComponentInChildren<SpriteRenderer>().sprite = manager_StageSelect.GetBackGroundBase(i);
                         int tmpInt = i; //iを直接入れるとfor文のiの最終値の値になる
-                        tmp.GetComponent<Button>().onClick.AddListener(() => manager.GetComponent<Manager_StageSelect>().SetStage((eStage)tmpInt));
+                        tmp.GetComponent<Button>().onClick.AddListener(() => manager_StageSelect.SetStage((eStage)tmpInt));
                         tmp.GetComponentInChildren<TextMeshProUGUI>().text = i.ToString();
                     }
                     else
@@ -69,86 +78,59 @@ public class Create_CollectionButton : MonoBehaviour
                 }
                 break;
             case eCollectionType.player:
-                collection = new GameObject[manager.GetComponent<Manager_Player>().GetPlayerTypeBases().Length];
-                for (int i = 0; i < manager.GetComponent<Manager_Player>().GetPlayerTypeBases().Length; i++)
+                collection = new GameObject[manager_Player.GetPlayerTypeBases().Length];
+                for (int i = 0; i < manager_Player.GetPlayerTypeBases().Length; i++)
                 {
                     GameObject tmp = Instantiate(collection_Base);
                     collection[i] = tmp;
                     tmp.transform.parent = transform;
-                    tmp.transform.localPosition = new Vector2(i * wideSize, 0);
+                    tmp.transform.localPosition = new Vector2(i * wideSize - (manager_Player.GetPlayerTypeBases().Length - 1) * wideSize / 2, 0);
                     tmp.transform.localScale = new Vector2(1, 1);
                     tmp.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector2(50, 50);
 
-                    if (manager.GetComponent<Manager_Player>().GetGetSituation(i))
+                    if (manager_Player.GetGetSituation(i))
                     {
-                        tmp.GetComponentInChildren<SpriteRenderer>().sprite = manager.GetComponent<Manager_Player>().GetPlayerTypeBase(i).GetComponent<SpriteRenderer>().sprite;
-                        tmp.GetComponentInChildren<Animator>().runtimeAnimatorController = manager.GetComponent<Manager_Player>().GetPlayerTypeBase(i).GetComponent<Animator>().runtimeAnimatorController;
+                        tmp.GetComponentInChildren<SpriteRenderer>().sprite = manager_Player.GetPlayerTypeBase(i).GetComponent<SpriteRenderer>().sprite;
+                        tmp.GetComponentInChildren<Animator>().runtimeAnimatorController = manager_Player.GetPlayerTypeBase(i).GetComponent<Animator>().runtimeAnimatorController;
                         int tmpInt = i; //iを直接入れるとfor文のiの最終値の値になる
-                        tmp.GetComponent<Button>().onClick.AddListener(() => manager.GetComponent<Manager_Player>().SetPlayerTypeIndex((ePlayerType)tmpInt));
+                        tmp.GetComponent<Button>().onClick.AddListener(() => manager_Player.SetPlayerTypeIndex((ePlayerType)tmpInt));
                         tmp.GetComponentInChildren<TextMeshProUGUI>().text = "";
 
                         //TechniqueButton
+                        int techniqueNum = 0;
+                        Sprite[] techniqueImage = null;
                         switch ((ePlayerType)i)
                         {
                             case ePlayerType.PetRobot:
-                                for (int tec = 1; tec < (int)ePlayerWeaponType.max; tec++)
-                                {
-                                    GameObject tmp_Tec = Instantiate(collection_Base);
-                                    tmp_Tec.transform.parent = tmp.transform;
-                                    tmp_Tec.transform.localPosition = new Vector2(0, tec * -wideSize);
-                                    tmp_Tec.transform.localScale = new Vector2(1, 1);
-                                    tmp_Tec.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector2(50, 50);
-
-                                    tmp_Tec.GetComponentInChildren<SpriteRenderer>().sprite = manager.GetComponent<Manager_Player_Technique>().GetWeaponImage(tec);
-                                    tmp_Tec.GetComponentInChildren<Animator>().runtimeAnimatorController = null;
-                                    int tmpInt_tec = tec; //iを直接入れるとfor文のtecの最終値の値になる
-                                    tmp_Tec.GetComponent<Button>().onClick.AddListener(() => manager.GetComponent<Manager_Player>().SetPlayerTypeIndex((ePlayerType)tmpInt));   //左右クリック
-                                    tmp_Tec.GetComponent<Button>().onClick.AddListener(() => manager.GetComponent<Manager_Player_Technique>().SetOne(tmpInt_tec));  //左クリック
-                                    tmp_Tec.GetComponent<Collection_Button_Right_Click>().SetPlayerType((ePlayerType)i);    //右クリック設定
-                                    tmp_Tec.GetComponent<Collection_Button_Right_Click>().SetTechniqueIndex(tec);
-                                    tmp_Tec.GetComponentInChildren<TextMeshProUGUI>().text = "";
-                                }
+                                techniqueNum = (int)ePlayerWeaponType.max;
+                                techniqueImage = manager_Player_Technique.GetWeaponImage();
                                 break;
-                                case ePlayerType.WizardGhost:
-                                for (int tec = 1; tec < (int)ePlayerMagicType.max; tec++)
-                                {
-                                    GameObject tmp_Tec = Instantiate(collection_Base);
-                                    tmp_Tec.transform.parent = tmp.transform;
-                                    tmp_Tec.transform.localPosition = new Vector2(0, tec * -wideSize);
-                                    tmp_Tec.transform.localScale = new Vector2(1, 1);
-                                    tmp_Tec.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector2(50, 50);
-
-                                    tmp_Tec.GetComponentInChildren<SpriteRenderer>().sprite = manager.GetComponent<Manager_Player_Technique>().GetMagicImage(tec);
-                                    tmp_Tec.GetComponentInChildren<Animator>().runtimeAnimatorController = null;
-                                    int tmpInt_tec = tec; //iを直接入れるとfor文のtecの最終値の値になる
-                                    tmp_Tec.GetComponent<Button>().onClick.AddListener(() => manager.GetComponent<Manager_Player>().SetPlayerTypeIndex((ePlayerType)tmpInt));   //左右クリック
-                                    tmp_Tec.GetComponent<Button>().onClick.AddListener(() => manager.GetComponent<Manager_Player_Technique>().SetOne(tmpInt_tec));  //左クリック
-                                    tmp_Tec.GetComponent<Collection_Button_Right_Click>().SetPlayerType((ePlayerType)i);    //右クリック設定
-                                    tmp_Tec.GetComponent<Collection_Button_Right_Click>().SetTechniqueIndex(tec);
-                                    tmp_Tec.GetComponentInChildren<TextMeshProUGUI>().text = "";
-                                }
+                            case ePlayerType.WizardGhost:
+                                techniqueNum = (int)ePlayerMagicType.max;
+                                techniqueImage = manager_Player_Technique.GetMagicImage();
                                 break;
-                                case ePlayerType.WereWolf:
-                                for (int tec = 1; tec < (int)ePlayerAttackType.max; tec++)
-                                {
-                                    GameObject tmp_Tec = Instantiate(collection_Base);
-                                    tmp_Tec.transform.parent = tmp.transform;
-                                    tmp_Tec.transform.localPosition = new Vector2(0, tec * -wideSize);
-                                    tmp_Tec.transform.localScale = new Vector2(1, 1);
-                                    tmp_Tec.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector2(50, 50);
-
-                                    tmp_Tec.GetComponentInChildren<SpriteRenderer>().sprite = manager.GetComponent<Manager_Player_Technique>().GetAttackImage(tec);
-                                    tmp_Tec.GetComponentInChildren<Animator>().runtimeAnimatorController = null;
-                                    int tmpInt_tec = tec; //iを直接入れるとfor文のtecの最終値の値になる
-                                    tmp_Tec.GetComponent<Button>().onClick.AddListener(() => manager.GetComponent<Manager_Player>().SetPlayerTypeIndex((ePlayerType)tmpInt));   //左右クリック
-                                    tmp_Tec.GetComponent<Button>().onClick.AddListener(() => manager.GetComponent<Manager_Player_Technique>().SetOne(tmpInt_tec));  //左クリック
-                                    tmp_Tec.GetComponent<Collection_Button_Right_Click>().SetPlayerType((ePlayerType)i);    //右クリック設定
-                                    tmp_Tec.GetComponent<Collection_Button_Right_Click>().SetTechniqueIndex(tec);
-                                    tmp_Tec.GetComponentInChildren<TextMeshProUGUI>().text = "";
-                                }
+                            case ePlayerType.WereWolf:
+                                techniqueNum = (int)ePlayerAttackType.max;
+                                techniqueImage = manager_Player_Technique.GetAttackImage();
                                 break;
                         }
+                        for (int tec = 1; tec < techniqueNum; tec++)
+                        {
+                            GameObject tmp_Tec = Instantiate(collection_Base);
+                            tmp_Tec.transform.parent = tmp.transform;
+                            tmp_Tec.transform.localPosition = new Vector2(0, tec * -wideSize);
+                            tmp_Tec.transform.localScale = new Vector2(1, 1);
+                            tmp_Tec.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector2(50, 50);
 
+                            tmp_Tec.GetComponentInChildren<SpriteRenderer>().sprite = techniqueImage[tec];
+                            tmp_Tec.GetComponentInChildren<Animator>().runtimeAnimatorController = null;
+                            int tmpInt_tec = tec; //iを直接入れるとfor文のtecの最終値の値になる
+                            tmp_Tec.GetComponent<Button>().onClick.AddListener(() => manager_Player.SetPlayerTypeIndex((ePlayerType)tmpInt));   //左右クリック
+                            tmp_Tec.GetComponent<Button>().onClick.AddListener(() => manager_Player_Technique.SetOne(tmpInt_tec));  //左クリック
+                            tmp_Tec.GetComponent<Collection_Button_Right_Click>().SetPlayerType((ePlayerType)i);    //右クリック設定
+                            tmp_Tec.GetComponent<Collection_Button_Right_Click>().SetTechniqueIndex(tec);
+                            tmp_Tec.GetComponentInChildren<TextMeshProUGUI>().text = "";
+                        }
                     }
                     else
                     {
@@ -158,21 +140,21 @@ public class Create_CollectionButton : MonoBehaviour
                 break;
             case eCollectionType.medal:break;
             case eCollectionType.mousePointer:
-                collection = new GameObject[manager.GetComponent<Manager_MousePointerType>().GetMousePointerAnimations().Length];
-                for (int i = 0; i < manager.GetComponent<Manager_MousePointerType>().GetMousePointerAnimations().Length; i++)
+                collection = new GameObject[manager_MousePointerType.GetMousePointerAnimations().Length];
+                for (int i = 0; i < manager_MousePointerType.GetMousePointerAnimations().Length; i++)
                 {
                     GameObject tmp = Instantiate(collection_Base);
                     collection[i] = tmp;
                     tmp.transform.parent = transform;
-                    tmp.transform.localPosition = new Vector2(i * wideSize, 0);
+                    tmp.transform.localPosition = new Vector2(i * wideSize - (manager_MousePointerType.GetMousePointerAnimations().Length - 1) * wideSize / 2, 0);
                     tmp.transform.localScale = new Vector2(1, 1);
                     tmp.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector2(50, 50);
 
-                    if (manager.GetComponent<Manager_MousePointerType>().GetGetSituation(i))
+                    if (manager_MousePointerType.GetGetSituation(i))
                     {
-                        tmp.GetComponentInChildren<Animator>().runtimeAnimatorController = manager.GetComponent<Manager_MousePointerType>().GetMousePointerAnimation(i);
+                        tmp.GetComponentInChildren<Animator>().runtimeAnimatorController = manager_MousePointerType.GetMousePointerAnimation(i);
                         int tmpInt = i; //iを直接入れるとfor文のiの最終値の値になる
-                        tmp.GetComponent<Button>().onClick.AddListener(() => manager.GetComponent<Manager_MousePointerType>().SetMousePointerIndex(tmpInt));
+                        tmp.GetComponent<Button>().onClick.AddListener(() => manager_MousePointerType.SetMousePointerIndex(tmpInt));
                         tmp.GetComponentInChildren<TextMeshProUGUI>().text = "";
                     }
                     else
@@ -182,21 +164,21 @@ public class Create_CollectionButton : MonoBehaviour
                 }
                 break;
             case eCollectionType.background:
-                collection = new GameObject[manager.GetComponent<Manager_BackgroundType>().GetBackGround_Panel_Base().Length];
-                for (int i = 0; i < manager.GetComponent<Manager_BackgroundType>().GetBackGround_Panel_Base().Length; i++)
+                collection = new GameObject[manager_BackgroundType.GetBackGround_Panel_Base().Length];
+                for (int i = 0; i < manager_BackgroundType.GetBackGround_Panel_Base().Length; i++)
                 {
                     GameObject tmp = Instantiate(collection_Base);
                     collection[i] = tmp;
                     tmp.transform.parent = transform;
-                    tmp.transform.localPosition = new Vector2(i * wideSize, 0);
+                    tmp.transform.localPosition = new Vector2(i * wideSize - (manager_BackgroundType.GetBackGround_Panel_Base().Length - 1) * wideSize / 2, 0);
                     tmp.transform.localScale = new Vector2(1, 1);
                     tmp.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector2(45, 45);
 
-                    if (manager.GetComponent<Manager_MousePointerType>().GetGetSituation(i))
+                    if (manager_BackgroundType.GetGetSituation(i))
                     {
                         int tmpInt = i; //iを直接入れるとfor文のiの最終値の値になる
-                        tmp.GetComponent<Button>().onClick.AddListener(() => manager.GetComponent<Manager_BackgroundType>().SetBackGroundIndex((eBackGroundType)tmpInt));
-                        tmp.GetComponentInChildren<SpriteRenderer>().sprite = manager.GetComponent<Manager_BackgroundType>().GetBackGround_Panel_Base((eBackGroundType)i);
+                        tmp.GetComponent<Button>().onClick.AddListener(() => manager_BackgroundType.SetBackGroundIndex((eBackGroundType)tmpInt));
+                        tmp.GetComponentInChildren<SpriteRenderer>().sprite = manager_BackgroundType.GetBackGround_Panel_Base((eBackGroundType)i);
                         tmp.GetComponentInChildren<TextMeshProUGUI>().text = "";
                     }
                     else
@@ -206,20 +188,20 @@ public class Create_CollectionButton : MonoBehaviour
                 }
                 break;
             case eCollectionType.music:
-                collection = new GameObject[manager.GetComponent<Manager_Music>().GetMusicBase().Length];
-                for (int i = 0; i < manager.GetComponent<Manager_Music>().GetMusicBase().Length; i++)
+                collection = new GameObject[manager_Music.GetMusicBase().Length];
+                for (int i = 0; i < manager_Music.GetMusicBase().Length; i++)
                 {
                     GameObject tmp = Instantiate(collection_Base);
                     collection[i] = tmp;
                     tmp.transform.parent = transform;
-                    tmp.transform.localPosition = new Vector2(i * wideSize, 0);
+                    tmp.transform.localPosition = new Vector2(i * wideSize - (manager_Music.GetMusicBase().Length - 1) * wideSize / 2, 0);
                     tmp.transform.localScale = new Vector2(1, 1);
                     tmp.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector2(35, 35);
 
-                    if (manager.GetComponent<Manager_MousePointerType>().GetGetSituation(i))
+                    if (manager_Music.GetGetSituation(i))
                     {
                         int tmpInt = i; //iを直接入れるとfor文のiの最終値の値になる
-                        tmp.GetComponent<Button>().onClick.AddListener(() => manager.GetComponent<Manager_Music>().SetMusicIndex(tmpInt));
+                        tmp.GetComponent<Button>().onClick.AddListener(() => manager_Music.SetMusicIndex(tmpInt));
                         tmp.GetComponentInChildren<SpriteRenderer>().sprite = musicSprite;
                         tmp.GetComponentInChildren<TextMeshProUGUI>().text = "";
                     }

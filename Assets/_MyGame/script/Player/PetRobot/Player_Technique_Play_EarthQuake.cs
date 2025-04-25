@@ -24,10 +24,10 @@ public class Player_Technique_Play_EarthQuake : Player_Technique_Play__Base
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-    }
+    //void Update()
+    //{
+        
+    //}
 
     private bool creatBlockOn = false;
     override public void ControllerPlay()
