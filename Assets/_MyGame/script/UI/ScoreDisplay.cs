@@ -44,7 +44,7 @@ public class ScoreDisplay : MonoBehaviour
         {
             case eScoreDisplayType.none: Debug.Log("scoreDisplayType == none"); return;
             case eScoreDisplayType.image: GetComponent<Image>().sprite = manager_Score.GetScoreImage(scoreType); break;
-            case eScoreDisplayType.name: GetComponent<TextMeshProUGUI>().text = oldScoreType.HumanName(); break;
+            case eScoreDisplayType.name: GetComponent<TextMeshProUGUI>().text = oldScoreType.ToString(); break;
             case eScoreDisplayType.score: GetComponent<TextMeshProUGUI>().text = manager_Score.GetScore(scoreType).ToString(); break;
             case eScoreDisplayType.bestScore: GetComponent<TextMeshProUGUI>().text = manager_Score.GetOldScore(scoreType).ToString(); break;
             case eScoreDisplayType.bestScoreUpDate:

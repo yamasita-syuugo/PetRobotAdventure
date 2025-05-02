@@ -31,7 +31,7 @@ public class PlayerHit : MonoBehaviour
                     GameObject.FindWithTag("Player").GetComponent<Player_Technique_>().GetPoint(); 
                     break;
                     case ePlayerType.WereWolf: break;
-                    default: Debug.Log("PlayerHit : " + GetComponent<PlayerType>().GetPlayerType().HumanName()); break;
+                    default: Debug.Log("PlayerHit : " + GetComponent<PlayerType>().GetPlayerType().ToString()); break;
             }
 
             Destroy(collision.GameObject());

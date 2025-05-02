@@ -97,7 +97,7 @@ public class Create_BackGround_Efecto : MonoBehaviour
                     tmp = Instantiate(cloudBase);
                 }
                 break;
-            default: Debug.Log("error : efectoType : " + effectType.HumanName()); break;
+            default: Debug.Log("error : efectoType : " + effectType.ToString()); break;
         }
         time -= Time.deltaTime;
     }
@@ -143,7 +143,7 @@ public class Create_BackGround_Efecto : MonoBehaviour
                     tmp.GetComponent<SpriteRenderer>().sortingOrder = 10;
                 }
                 break;
-            default: Debug.Log("error : efectoType : " + effectType.HumanName()); break;
+            default: Debug.Log("error : efectoType : " + effectType.ToString()); break;
         }
     }
 }

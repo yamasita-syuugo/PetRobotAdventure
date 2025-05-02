@@ -146,7 +146,7 @@ public class Create_CollectionButton : MonoBehaviour
                     GameObject tmp = Instantiate(collection_Base);
                     collection[i] = tmp;
                     tmp.transform.parent = transform;
-                    tmp.transform.localPosition = new Vector2(i * wideSize - (manager_MousePointerType.GetMousePointerAnimations().Length - 1) * wideSize / 2, 0);
+                    tmp.transform.localPosition = new Vector2(i * wideSize - (manager_MousePointerType.GetMousePointerAnimations().Length - 1) * wideSize / 2, 65);
                     tmp.transform.localScale = new Vector2(1, 1);
                     tmp.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector2(50, 50);
 
@@ -170,7 +170,7 @@ public class Create_CollectionButton : MonoBehaviour
                     GameObject tmp = Instantiate(collection_Base);
                     collection[i] = tmp;
                     tmp.transform.parent = transform;
-                    tmp.transform.localPosition = new Vector2(i * wideSize - (manager_BackgroundType.GetBackGround_Panel_Base().Length - 1) * wideSize / 2, 0);
+                    tmp.transform.localPosition = new Vector2(i * wideSize - (manager_BackgroundType.GetBackGround_Panel_Base().Length - 1) * wideSize / 2, -35);
                     tmp.transform.localScale = new Vector2(1, 1);
                     tmp.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector2(45, 45);
 
@@ -194,7 +194,7 @@ public class Create_CollectionButton : MonoBehaviour
                     GameObject tmp = Instantiate(collection_Base);
                     collection[i] = tmp;
                     tmp.transform.parent = transform;
-                    tmp.transform.localPosition = new Vector2(i * wideSize - (manager_Music.GetMusicBase().Length - 1) * wideSize / 2, 0);
+                    tmp.transform.localPosition = new Vector2(i * wideSize - (manager_Music.GetMusicBase().Length - 1) * wideSize / 2, -135);
                     tmp.transform.localScale = new Vector2(1, 1);
                     tmp.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector2(35, 35);
 

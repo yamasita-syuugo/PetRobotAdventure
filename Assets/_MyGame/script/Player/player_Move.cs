@@ -87,7 +87,7 @@ public class player_Move : MonoBehaviour
             case eScaffoldType.movePanel:
                 move = new Vector3(0.0f, 0.0f, 0.0f);
                 break;
-            default: Debug.Log("scaffold : " + scaffold.HumanName());break;
+            default: Debug.Log("scaffold : " + scaffold.ToString());break;
         }
         moveSpeed = moveSpeedSetting[(int)scaffold];
         moveMax = moveMaxSetting[(int)scaffold];

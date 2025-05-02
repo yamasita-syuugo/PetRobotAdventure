@@ -29,8 +29,9 @@ public class Display_Situation_Gate_Text : MonoBehaviour
         switch (manager_Gate.GetGateOpenType())
         {
             case eGateOpenType.none:textMeshPro.text = "OPEN";break;
-            case eGateOpenType.scoreCheck_Posi_Destroy_Bom:textMeshPro.text = manager_Score.GetScore(eScoreType.Destroy_Bom).ToString() + " / " + manager_Gate.GetGateOpenNum().ToString();break;
+            case eGateOpenType.scoreCheck_Posi_Destroy_ + (int)eEnemyType.bom:textMeshPro.text = manager_Score.GetScore(eScoreType.Destroy_ + (int)eEnemyType.bom).ToString() + " / " + manager_Gate.GetGateOpenNum().ToString();break;
             case eGateOpenType.time_Countdown: textMeshPro.text = ((int)manager_Time.GetPlayTime()).ToString() + " / " + manager_Gate.GetGateOpenNum().ToString(); break;
+            default:Debug.Log("switch : error_" + manager_Gate.GetGateOpenType().ToString());break;
         }
         
     }

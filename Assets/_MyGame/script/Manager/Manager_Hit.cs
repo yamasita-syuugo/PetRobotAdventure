@@ -145,7 +145,7 @@ public class Manager_Hit : MonoBehaviour
                 switch (collision.GetComponent<EnemyType>().GetEnemyType())
                 {
                     case eEnemyType.bom:
-                        Manager_Score.AddScore(eScoreType.Enemy_Bom,2);
+                        Manager_Score.AddScore(eScoreType.Enemy_ + (int)eEnemyType.bom);
 
                         Explosion(collision);
                         Explosion(gameObject);
@@ -153,16 +153,25 @@ public class Manager_Hit : MonoBehaviour
                     case eEnemyType.crow:
                         if (Math.Abs(gameObject.GetComponent<KnockBack>().GetKnockBackEnergy().x) < 0.01f &&
                             Math.Abs(gameObject.GetComponent<KnockBack>().GetKnockBackEnergy().y) < 0.01f) return;
-                        Manager_Score.AddScore(eScoreType.Destroy_Bom);
+                        Manager_Score.AddScore(eScoreType.Destroy_ + (int)eEnemyType.bom);
+                        Manager_Score.AddScore(eScoreType.Destroy_ + (int)eEnemyType.crow);
                         Explosion(gameObject);
                         Destroy(collision);
                         break;
                     case eEnemyType.golem:
                         if (Math.Abs(gameObject.GetComponent<KnockBack>().GetKnockBackEnergy().x) < 0.01f &&
                             Math.Abs(gameObject.GetComponent<KnockBack>().GetKnockBackEnergy().y) < 0.01f) return;
+                        Manager_Score.AddScore(eScoreType.Destroy_ + (int)eEnemyType.bom);
+                        Manager_Score.AddScore(eScoreType.Destroy_ + (int)eEnemyType.golem);
                         Explosion(gameObject);
                         break;
-                    case eEnemyType.livingArmor: break;
+                    case eEnemyType.livingArmor:
+                        if (Math.Abs(gameObject.GetComponent<KnockBack>().GetKnockBackEnergy().x) < 0.01f &&
+                            Math.Abs(gameObject.GetComponent<KnockBack>().GetKnockBackEnergy().y) < 0.01f) return;
+                        Manager_Score.AddScore(eScoreType.Destroy_ + (int)eEnemyType.bom);
+                        Manager_Score.AddScore(eScoreType.Destroy_ + (int)eEnemyType.livingArmor);
+                        Explosion(gameObject);
+                        break;
                     case eEnemyType.enemyMass: break;
 
                     case eEnemyType.bossEnemy: break;

@@ -5,11 +5,13 @@ using UnityEngine.UI;
 
 public class GateProcess : MonoBehaviour
 {
+    GameObject manager;
     Manager_Gate manager_GateOpen;
     // Start is called before the first frame update
     void Start()
     {
-        manager_GateOpen = GameObject.FindWithTag("Manager").GetComponent<Manager_Gate>();
+        manager = GameObject.FindWithTag("Manager");
+        manager_GateOpen = manager.GetComponent<Manager_Gate>();
     }
 
     // Update is called once per frame
@@ -29,9 +31,14 @@ public class GateProcess : MonoBehaviour
         if (collision.tag != "Player") return;
         if (manager_GateOpen == null || !manager_GateOpen.GetGateOpen()) return;
 
-        GameObject.FindWithTag("Manager").GetComponent<Manager_Score>().DataSave();
-        GameObject.FindWithTag("Manager").GetComponent<Manager_GameSituation>().SetGameSituation(eGameSituation.clear);
-        GameObject.FindWithTag("Manager").GetComponent<Manager_GameSituation>().DataSave();
+        manager.GetComponent<Manager_Score>().DataSave();
+        Manager_GameSituation manager_GameSituation = manager.GetComponent<Manager_GameSituation>();
+        manager_GameSituation.SetGameSituation(eGameSituation.clear);
+        manager_GameSituation.DataSave();
+        Manager_Collection manager_Collection = manager.GetComponent<Manager_Collection>();
+        manager_Collection.SetGetSituation(eCollectionType.stage, (int)manager.GetComponent<Manager_StageSelect>().GetStage() + 1, true);
+        manager_Collection.DataSave();
+
         UnityEngine.SceneManagement.SceneManager.LoadScene("Result");
     }
 }

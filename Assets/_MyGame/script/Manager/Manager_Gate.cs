@@ -7,7 +7,8 @@ public enum eGateOpenType
 {
     [InspectorName("")] none,
 
-    scoreCheck_Posi_Destroy_Bom,
+    scoreCheck_Posi_Destroy_,
+    scoreCheck_Posi_Destroy_Max = eGateOpenType.scoreCheck_Posi_Destroy_ + (int)eEnemyType.max,
     time_Countdown,
 
     [InspectorName("")] max,
@@ -47,7 +48,7 @@ public class Manager_Gate : MonoBehaviour
     public Sprite GetGateOpenImage(eGateOpenType gateOpenType_) { return gateOpenImage[(int)gateOpenType_]; } 
     void SetGateOpenImage()
     {
-        gateOpenImage[(int)eGateOpenType.scoreCheck_Posi_Destroy_Bom] = destroy_Bom_Image;
+        gateOpenImage[(int)eGateOpenType.scoreCheck_Posi_Destroy_ + (int)eEnemyType.bom] = destroy_Bom_Image;
         gateOpenImage[(int)eGateOpenType.time_Countdown] = timer_Image;
     }
     [SerializeField] Sprite destroy_Bom_Image;
@@ -66,7 +67,7 @@ public class Manager_Gate : MonoBehaviour
             case eGateOpenType.time_Countdown:
                 if (GetComponent<Manager_Time>().GetPlayTime() >= gateOpenNum) SetGateOpen();
                 break;
-            case eGateOpenType.scoreCheck_Posi_Destroy_Bom:
+            case eGateOpenType.scoreCheck_Posi_Destroy_ + (int)eEnemyType.bom:
                 if (Manager_Score.GetDestroyPoint() >= gateOpenNum) SetGateOpen();
                 break;
         }

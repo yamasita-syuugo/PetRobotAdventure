@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using UnityEditor;
 using UnityEngine;
 
 public class Player_Technique_Play_EarthQuake : Player_Technique_Play__Base
@@ -49,12 +50,12 @@ public class Player_Technique_Play_EarthQuake : Player_Technique_Play__Base
         posX = pos.x; if (posX > 0 && posX % 1 > 0.5f + a * 0.5f) posX = (int)posX + 1 + a * 0.5f; else if (posX < 0 && posX % 1 < -0.5f + a * 0.5f) posX = (int)posX - 1 + a * 0.5f; else posX = (int)posX + a * 0.5f;
         posY = pos.y; if (posY > 0 && posY % 1 > 0.5f + a * 0.5f) posY = (int)posY + 1 + a * 0.5f; else if (posY < 0 && posY % 1 < -0.5f + a * 0.5f) posY = (int)posY - 1 + a * 0.5f; else posY = (int)posY + a * 0.5f;
 
-        CreatBlock();
+        CreatBlock(true);
     }
     float posX, posY;
     [SerializeField]
     GameObject impact;
-    void CreatBlock()
+    void CreatBlock(bool mouseUse = false)
     {
         if (!GetComponent<Player_Technique_Container_MaterialBag>().MaterialsCheck()) return;
         GetComponent<Player_Technique_Container_MaterialBag>().AddEarthQuakeMaterials(-1);
@@ -63,7 +64,8 @@ public class Player_Technique_Play_EarthQuake : Player_Technique_Play__Base
         tmp.transform.position = new Vector3(posX, posY, 0);
         tmp.transform.parent = GameObject.FindWithTag("Create").transform;
         GameObject imp = Instantiate<GameObject>(impact);
-        imp.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);//todo:コントローラーで生成時マウスの位置に出る
+        if (mouseUse) imp.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        else imp.transform.position = tmp.transform.position;
 
         blockCreateSound.Play();
 
