@@ -13,6 +13,7 @@ public class Display_GameSituation : MonoBehaviour
         {
             case eGameSituation.clear: text.text = "clear";text.color = Color.red; break;
             case eGameSituation.failure: text.text = "failure"; text.color = Color.blue; break;
+            default: text.text = "error"; text.color = Color.blue; break;
         }
     }
 

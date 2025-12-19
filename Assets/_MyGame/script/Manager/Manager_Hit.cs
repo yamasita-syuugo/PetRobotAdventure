@@ -126,6 +126,12 @@ public class Manager_Hit : MonoBehaviour
                  
                         break;
                     case eEnemyType.enemyMass: break;
+                    case eEnemyType.fakeGate:
+                        Type_Scaffold[] scaffold = GameObject.FindWithTag("Create_Scaffold").GetComponentsInChildren<Type_Scaffold>();
+                        collision.transform.position =scaffold[UnityEngine.Random.Range(0,scaffold.Length)].transform.position;
+                        GameObject.FindWithTag("MainCamera").GetComponent<CameraMove>().PosReset();
+                        break;
+
 
                     case eEnemyType.bossEnemy: break;
                 }
@@ -145,7 +151,9 @@ public class Manager_Hit : MonoBehaviour
                 switch (collision.GetComponent<EnemyType>().GetEnemyType())
                 {
                     case eEnemyType.bom:
-                        Manager_Score.AddScore(eScoreType.Enemy_ + (int)eEnemyType.bom);
+                        if (gameObject.GetComponent<KnockBack>().GetKnockBackEnergy() != Vector3.zero ||
+                            collision.GetComponent<KnockBack>().GetKnockBackEnergy() != Vector3.zero)
+                            Manager_Score.AddScore(eScoreType.Enemy_ + (int)eEnemyType.bom);//todo:アースクエイクではじいた場合失点にならないようにする
 
                         Explosion(collision);
                         Explosion(gameObject);

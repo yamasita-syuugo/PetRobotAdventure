@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 370803924297187137}
   m_Layer: 0
   m_Name: Create_Scaffold
-  m_TagString: Untagged
+  m_TagString: Create_Scaffold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,9 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 832bccf010f77b64c9583ecef9353e4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockBase: {fileID: 1716873108787873888, guid: 1e457425f77454a40bfbcda0b1240cdb, type: 3}
-  iceBase: {fileID: 7285234217500196173, guid: ba29eb92117e8484c8561e9d49989168, type: 3}
-  grassBase: {fileID: 7285234217500196173, guid: d978f503312ba7442804a407d42ade34, type: 3}
-  movePanelBase: {fileID: 7285234217500196173, guid: 79e2b42da27f6bb4281353d1229dba0d, type: 3}
   creatType: 1
   randomBreak: 50.9

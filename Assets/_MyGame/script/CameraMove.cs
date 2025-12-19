@@ -39,8 +39,7 @@ public class CameraMove : MonoBehaviour
     }
 
     Camera camera;
-    [SerializeField]
-    float zoomSpeed = 1.0f;
+    float zoomSpeed = 0.1f;
     [SerializeField]
     float maxSize = 6;
     [SerializeField]
@@ -48,11 +47,16 @@ public class CameraMove : MonoBehaviour
     float size;
     void SizeZoom()
     {
-        if(Input.mouseScrollDelta.y != 0) size += Input.mouseScrollDelta.y * zoomSpeed;
+        if(Input.mouseScrollDelta.y != 0) size -= Input.mouseScrollDelta.y * zoomSpeed;
 
         if(size > maxSize) size = maxSize;
         else if(size < minSize) size = minSize;
 
         camera.orthographicSize += (size - camera.orthographicSize) / 1.1f * Time.deltaTime;
+    }
+    public void PosReset()
+    {
+        Vector2 pos = GameObject.FindWithTag("Player").transform.position;
+        transform.position = new Vector3(pos.x, pos.y, transform.position.z);
     }
 }

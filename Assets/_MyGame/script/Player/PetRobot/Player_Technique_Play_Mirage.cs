@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_Technique_Play_Mirage : Player_Technique_Play__Base
+public class Player_Technique_Play_Mirage : Player_Technique_Play_Base
 {
     [SerializeField]
     GameObject mirageBase;

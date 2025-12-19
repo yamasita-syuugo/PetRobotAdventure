@@ -9,6 +9,9 @@ public class Manager_PlayData : MonoBehaviour
     int[][] failureStage = new int[(int)ePlayerType.max][];
 
     int[][] useTechnique = new int[(int)ePlayerType.max][];
+    public int GetUseTechnique(ePlayerType playerType, int techniqueNum) { return useTechnique[(int)playerType][techniqueNum]; }
+    public void SetUseTechnique(ePlayerType playerType,int techniqueNum, int useTechnique_) { useTechnique[(int)playerType][techniqueNum] = useTechnique_; }
+    public void AddUseTechnique(ePlayerType playerType,int techniqueNum, int useTechnique_ = 1) { useTechnique[(int)playerType][techniqueNum] += useTechnique_; }
     void instantiate()
     {
         for (int i = 0; i < (int)ePlayerType.max; i++) playStage[i] = new int[(int)eStage.max];

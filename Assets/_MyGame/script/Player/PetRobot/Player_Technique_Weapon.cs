@@ -69,7 +69,7 @@ public class Player_Technique_Weapon : Player_Technique_
         for(int i = 0;i < weaponNum; i++)
         {
             if (weapon[i] == null) continue;
-            weapon[i].GetComponent<Player_Technique_Container__Base>().GetPoint();
+            weapon[i].GetComponent<Player_Technique_Container_Base>().GetPoint();
         }
     }
 
@@ -99,7 +99,7 @@ public class Player_Technique_Weapon : Player_Technique_
 
         if (!situation) return;
 
-        weapon[useNum].GetComponent<Player_Technique_Play__Base>().MousePlay();
+        weapon[useNum].GetComponent<Player_Technique_Play_Base>().MousePlay();
     }
     enum ePushType
     {
@@ -139,6 +139,6 @@ public class Player_Technique_Weapon : Player_Technique_
         }
 
         if (!situation) return;
-        weapon[useNum].GetComponent<Player_Technique_Play__Base>().ControllerPlay();
+        weapon[useNum].GetComponent<Player_Technique_Play_Base>().ControllerPlay();
     }
 }

@@ -49,10 +49,12 @@ public class Manager_Sounds : MonoBehaviour
         {
             if (soundBase[i] == null) continue;
             ;
-            sound[i] = Instantiate<GameObject>(new GameObject()).AddComponent<AudioSource>();
+            sound[i] = new GameObject().AddComponent<AudioSource>();
             sound[i].clip = soundBase[i];
             sound[i].name = soundBase[i].name;
             sound[i].transform.parent = transform;
+
+            sound[i].volume = 0.5f;
         }
     }
     // Start is called before the first frame update

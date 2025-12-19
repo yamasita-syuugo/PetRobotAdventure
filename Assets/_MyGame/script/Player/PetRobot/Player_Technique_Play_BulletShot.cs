@@ -2,12 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_Technique_Play_BulletShot : Player_Technique_Play__Base
+public class Player_Technique_Play_BulletShot : Player_Technique_Play_Base
 {
+    Manager_Player manager_Player;
+    Manager_PlayData manager_PlayData;
+
     [SerializeField]
     bulletMove bulletBase;
     AudioSource shotSound ;
     public float moveDirectionX, moveDirectionY;
+
+    private void OnEnable()
+    {
+        GameObject manager = GameObject.FindWithTag("Manager");
+        manager_Player = manager.GetComponent<Manager_Player>();
+        manager_PlayData = manager.GetComponent<Manager_PlayData>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -62,7 +72,12 @@ public class Player_Technique_Play_BulletShot : Player_Technique_Play__Base
     {
         if (!GetComponent<Player_Technique_Container_BulletMagazine>().BulletCheck()) return;
 
-        Manager_Score.ShotNumAdd();
+        switch (manager_Player.GetPlayerTypeIndex())
+        {
+            case ePlayerType.PetRobot:manager_PlayData.AddUseTechnique(manager_Player.GetPlayerTypeIndex(), (int)ePlayerWeaponType.Bullet);break;
+            default:Debug.Log("switch : error_PlayerType");break;
+        }
+        
 
         bulletMove tmp1 = Instantiate<bulletMove>(bulletBase);
         tmp1.transform.position = this.transform.position;

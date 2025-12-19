@@ -15,6 +15,7 @@ public class UI_Display_EarthQuakeBag : UI_Display__Base
     void Update()
     {
         int materialsNum = connectTechnique.GetComponent<Player_Technique_Container_MaterialBag>().GetEarthQuakeMaterials();
-        GetComponent<TextMeshProUGUI>().text = materialsNum.ToString();
+        if (materialsNum <= 9) GetComponent<TextMeshProUGUI>().text = materialsNum.ToString();
+        else GetComponent<TextMeshProUGUI>().text = "9+";
     }
 }

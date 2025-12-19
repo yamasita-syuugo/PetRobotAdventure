@@ -12,6 +12,7 @@ public enum eEnemyType
     golem,          //Golem         :地面を歩きプレイヤーを弾き出す
     livingArmor,    //LivingArmor   :地面を歩き武器を振り回す
     enemyMass,      //EnemyMass     :敵の集合体すべて倒すと消える
+    fakeGate,       //FakeGate      :偽のゲート当たるとランダムな足場にワープさせられる
 
     //              //足場を壊して回る  空中を移動する     いくつかの攻撃に耐える
     bossEnemy,    //カウントでendGameを発動   攻撃でカウントを遅らせる    近づくと連続で攻撃できるのでカメラに収まる範囲で距離を取り遠距離攻撃する  遠距離攻撃は
@@ -30,12 +31,14 @@ public class Manager_Enemy : MonoBehaviour
         enemyImage[(int)eEnemyType.crow] = image_Crow;
         enemyImage[(int)eEnemyType.golem] = image_Golem;
         enemyImage[(int)eEnemyType.livingArmor] = image_LivingArmor;
+        enemyImage[(int)eEnemyType.fakeGate] = image_FakeGate;
     }
     [Header("enemyImage")]
     [SerializeField] Sprite image_Bom;
     [SerializeField] Sprite image_Crow;
     [SerializeField] Sprite image_Golem;
     [SerializeField] Sprite image_LivingArmor;
+    [SerializeField] Sprite image_FakeGate;
 
     GameObject[]enemyObject = new GameObject[(int)eEnemyType.max];
     public GameObject GetEnemyObject(eEnemyType enemyType) { return enemyObject[(int)enemyType]; }
@@ -46,6 +49,7 @@ public class Manager_Enemy : MonoBehaviour
         enemyObject[(int)eEnemyType.golem] = enemyObject_Golem;
         enemyObject[(int)eEnemyType.livingArmor] = enemyObject_LivingArmor;
         enemyObject[(int)eEnemyType.enemyMass] = enemyObject_EnemyMass;
+        enemyObject[(int)eEnemyType.fakeGate] = enemyObject_FakeGate;
     }
     [Header("enemyObject")]
     [SerializeField] GameObject enemyObject_Bom;
@@ -53,6 +57,7 @@ public class Manager_Enemy : MonoBehaviour
     [SerializeField] GameObject enemyObject_Golem;
     [SerializeField] GameObject enemyObject_LivingArmor;
     [SerializeField] GameObject enemyObject_EnemyMass;
+    [SerializeField] GameObject enemyObject_FakeGate;
 
     float[] enemySpaunTimeReset = new float[(int)eEnemyType.max];
     public float GetEnemySpaunTimeReset(eEnemyType enemyType) { return enemySpaunTimeReset[(int)enemyType]; } 
@@ -77,7 +82,7 @@ public class Manager_Enemy : MonoBehaviour
         SetEnemySpaunTimeReset();
     }
     //敵の出現パターン
-    public bool[] GetStageEnemy(eStage stage) { return manager_StageSelect.GetStageData(stage).GetEnemySerect(); }
+    public float[] GetStageEnemy(eStage stage) { return manager_StageSelect.GetStageData(stage).GetEnemySerect(); }
     // Start is called before the first frame update
     void Start()
     {

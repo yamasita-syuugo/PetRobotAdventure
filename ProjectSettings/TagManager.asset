@@ -17,6 +17,9 @@ TagManager:
   - Sound
   - Create
   - MousePointer
+  - Create_Scaffold
+  - Coin
+  - Create_Coins
   layers:
   - Default
   - TransparentFX

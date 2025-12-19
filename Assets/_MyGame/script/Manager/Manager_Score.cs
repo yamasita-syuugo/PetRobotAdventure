@@ -21,9 +21,6 @@ public enum eScoreType
         Enemy_,
         Enemy_Max = eScoreType.Enemy_ + eEnemyType.max,
 
-        shot,
-
-
         max,
     }
 public class Manager_Score : MonoBehaviour
@@ -46,9 +43,8 @@ public class Manager_Score : MonoBehaviour
         scoreImage[(int)eScoreType.Enemy_ + (int)eEnemyType.livingArmor] = Enemy_GolemImage;
         scoreImage[(int)eScoreType.Enemy_ + (int)eEnemyType.enemyMass] = Enemy_GolemImage;
         scoreImage[(int)eScoreType.Enemy_ + (int)eEnemyType.bossEnemy] = Enemy_GolemImage;
-        scoreImage[(int)eScoreType.shot] = shotImage;
 
-        for (int i = 0; i < (int)eScoreType.max; i++) if (scoreImage[i] == null) Debug.Log("scoreImage == null : " + ((eScoreType)i).ToString());
+        for (int i = 0; i < (int)eScoreType.max; i++) if (scoreImage[i] == null) Debug.Log("scoreImage == <color=red>null</color> : " + ((eScoreType)i).ToString());
     }
     [SerializeField] Sprite totalImage;
     [Header("positive")]
@@ -66,9 +62,6 @@ public class Manager_Score : MonoBehaviour
     [SerializeField] Sprite Enemy_LivingArmorImage;
     [SerializeField] Sprite Enemy_EnemyMassImage;
     [SerializeField] Sprite Enemy_BossEnemyImage;
-
-    [Header("")]
-    [SerializeField] Sprite shotImage;
 
 
     static int scoreUpdate = 2;
@@ -128,11 +121,6 @@ public class Manager_Score : MonoBehaviour
         AddScore(eScoreType.Enemy_ + (int)eEnemyType. bom);
 
         TotalPointReset();
-    }
-
-    public static void ShotNumAdd()
-    {
-        AddScore(eScoreType.shot);
     }
 
     public static int GetTotalPoint()

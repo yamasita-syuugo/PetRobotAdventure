@@ -11,6 +11,9 @@ public enum eMedalType
 
     Boots_Spike,
 
+    EnemyFoot_speed_UP,
+    EnemyFoot_speed_DOWN,
+
     [InspectorName("")]max,
 }
 
@@ -24,10 +27,15 @@ public class Manager_Medal : MonoBehaviour
         medalImageBase[(int)eMedalType.Boots_speed_DOWN] = boots_Speed_DOWNMedalImage;
 
         medalImageBase[(int)eMedalType.Boots_Spike] = boots_SpikeImage;
+
+        medalImageBase[(int)eMedalType.EnemyFoot_speed_UP] = EnemyFoot_Speed_UPMedalImage;
+        medalImageBase[(int)eMedalType.EnemyFoot_speed_DOWN] = EnemyFoot_Speed_DOWNMedalImage;
     }
     [SerializeField] Sprite boots_Speed_UPMedalImage;
     [SerializeField] Sprite boots_Speed_DOWNMedalImage;
     [SerializeField] Sprite boots_SpikeImage;
+    [SerializeField] Sprite EnemyFoot_Speed_UPMedalImage;
+    [SerializeField] Sprite EnemyFoot_Speed_DOWNMedalImage;
 
 
     public const int medalPocketNum = 3;
@@ -44,7 +52,7 @@ public class Manager_Medal : MonoBehaviour
     // Start is called before the first frame update
     //void Start()
     //{
-
+        
     //}
 
     // Update is called once per frame
@@ -68,22 +76,26 @@ public class Manager_Medal : MonoBehaviour
     {
         //if (oldMedalType[0] == medalType[0] && oldMedalType[1] == medalType[1] && oldMedalType[2] == medalType[2]) return;
         bool update = false;
-        for (int i = 0; i < oldMedalType.Length; i++) { if (oldMedalType[i] == medalType[i]) continue; update = true; }
+        for (int i = 0; i < medalPocketNum; i++) { if (oldMedalType[i] == medalType[i]) continue; oldMedalType[i] = medalType[i]; update = true; }
         if (!update) return;
 
         moveSpeedBuff = 1;
         bootsSpike = false;
+        enemyMoveSpeedBuff = 1;
 
-        for (int i = 0; i < oldMedalType.Length; i++)
+        for (int i = 0; i < medalPocketNum; i++)
         {
-            switch (oldMedalType[i])
+            switch (medalType[i])
             {
                 case eMedalType.none: continue;
 
                 case eMedalType.Boots_speed_UP: moveSpeedBuff += 0.3f; continue;
                 case eMedalType.Boots_speed_DOWN: moveSpeedBuff -= 0.3f; continue;
 
-                case eMedalType.Boots_Spike:bootsSpike = true; continue;
+                case eMedalType.Boots_Spike: bootsSpike = true; continue;
+
+                case eMedalType.EnemyFoot_speed_UP: enemyMoveSpeedBuff *= 2f; continue;
+                case eMedalType.EnemyFoot_speed_DOWN: enemyMoveSpeedBuff /= 2f; continue;
             }
         }
     }
@@ -91,5 +103,7 @@ public class Manager_Medal : MonoBehaviour
     public float GetMoveSpeedBuff() { return moveSpeedBuff; }
     bool bootsSpike = false;
     public bool GetBootsSpike() { return bootsSpike; }
+    float enemyMoveSpeedBuff = 1;
+    public float GetEnemyMoveSpeedBuff() { return enemyMoveSpeedBuff; }
 
 }

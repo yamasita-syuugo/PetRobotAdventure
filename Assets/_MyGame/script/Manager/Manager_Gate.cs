@@ -7,9 +7,9 @@ public enum eGateOpenType
 {
     [InspectorName("")] none,
 
-    scoreCheck_Posi_Destroy_,
-    scoreCheck_Posi_Destroy_Max = eGateOpenType.scoreCheck_Posi_Destroy_ + (int)eEnemyType.max,
     time_Countdown,
+    scoreCheck_Posi_Destroy_,
+    scoreCheck_Posi_Destroy_Max = eGateOpenType.scoreCheck_Posi_Destroy_ + ((int)eEnemyType.max - 1),
 
     [InspectorName("")] max,
 }
@@ -49,9 +49,11 @@ public class Manager_Gate : MonoBehaviour
     void SetGateOpenImage()
     {
         gateOpenImage[(int)eGateOpenType.scoreCheck_Posi_Destroy_ + (int)eEnemyType.bom] = destroy_Bom_Image;
+        gateOpenImage[(int)eGateOpenType.scoreCheck_Posi_Destroy_ + (int)eEnemyType.golem] = destroy_Golem_Image;
         gateOpenImage[(int)eGateOpenType.time_Countdown] = timer_Image;
     }
     [SerializeField] Sprite destroy_Bom_Image;
+    [SerializeField] Sprite destroy_Golem_Image;
     [SerializeField] Sprite timer_Image;
 
     // Update is called once per frame

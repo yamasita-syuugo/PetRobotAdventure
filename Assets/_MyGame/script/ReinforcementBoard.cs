@@ -23,13 +23,11 @@ public class ReinforcementBoard : MonoBehaviour
     void Start()
     {
         panel = new eReinforcementType[boardSizeX * boardSizeY];
-
-
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    //void Update()
+    //{
         
-    }
+    //}
 }

@@ -20,13 +20,25 @@ public class GateProcess : MonoBehaviour
     bool oldGateOpen;
     void Update()
     {
-        if(oldGateOpen != manager_GateOpen.GetGateOpen())
-        {oldGateOpen = manager_GateOpen.GetGateOpen();
+        if (oldGateOpen == manager_GateOpen.GetGateOpen()) return;oldGateOpen = manager_GateOpen.GetGateOpen();
+
             GetComponent<SpriteRenderer>().sprite = gateBase[oldGateOpen?1:0];
+        if (oldGateOpen)
+        {
+            GameObject player = GameObject.FindWithTag("Player");
+            float x = transform.position.x - player.transform.position.x;
+            float y = transform.position.y - player.transform.position.y;
+            float distance = Mathf.Sqrt(x * x + y * y);
+            if (player.GetComponent<CircleCollider2D>().radius + GetComponent<CircleCollider2D>().radius > distance) Clear(player.GetComponent<Collider2D>());
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Clear(collision);
+    }
+
+    void Clear(Collider2D collision)
     {
         if (collision.tag != "Player") return;
         if (manager_GateOpen == null || !manager_GateOpen.GetGateOpen()) return;
@@ -36,7 +48,8 @@ public class GateProcess : MonoBehaviour
         manager_GameSituation.SetGameSituation(eGameSituation.clear);
         manager_GameSituation.DataSave();
         Manager_Collection manager_Collection = manager.GetComponent<Manager_Collection>();
-        manager_Collection.SetGetSituation(eCollectionType.stage, (int)manager.GetComponent<Manager_StageSelect>().GetStage() + 1, true);
+        if(manager.GetComponent<Manager_StageSelect>().GetStage() != eStage.max - 1)
+            manager_Collection.SetGetSituation(eCollectionType.stage, (int)manager.GetComponent<Manager_StageSelect>().GetStage() + 1, true);
         manager_Collection.DataSave();
 
         UnityEngine.SceneManagement.SceneManager.LoadScene("Result");

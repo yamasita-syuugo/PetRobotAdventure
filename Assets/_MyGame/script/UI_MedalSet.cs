@@ -32,9 +32,9 @@ public class UI_MedalSet : MonoBehaviour
 
     public void MedalSet_Update()
     {
-        if (manager_Medal.GetMedalType(pos) == eMedalType.none) { medal.color = Color.clear; return; }
         Sprite medalImageBase = manager_Medal.GetMedalImageBase((int)manager_Medal.GetMedalType(pos));
-        if (manager_Medal.GetMedalType(pos) != eMedalType.none) { medal.sprite = medalImageBase; medal.color = Color.white; }
+        if (manager_Medal.GetMedalType(pos) == eMedalType.none) { medal.color = Color.clear; return; }
+        else { medal.sprite = medalImageBase; medal.color = Color.white; }
     }
 
     void MedalCatch()

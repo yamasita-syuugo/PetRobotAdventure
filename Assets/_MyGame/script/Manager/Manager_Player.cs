@@ -54,7 +54,7 @@ public class Manager_Player : MonoBehaviour
 
         manager_Player_Technique.SetOne(1);
         manager_Player_Technique.AddOneType(0);
-        manager_Player_Technique.SetTwo(1);
+        manager_Player_Technique.SetTwo(2);
         manager_Player_Technique.AddTwoType(0);
     }
     public void PlayerTypeIndexLeftButton() { AddPlayerTypeIndex(-1); }

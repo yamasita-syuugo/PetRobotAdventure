@@ -5,7 +5,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Player_Technique_Play_MeleeAttack : Player_Technique_Play__Base
+public class Player_Technique_Play_MeleeAttack : Player_Technique_Play_Base
 {
     [SerializeField]
     GameObject meleeAttackBase;

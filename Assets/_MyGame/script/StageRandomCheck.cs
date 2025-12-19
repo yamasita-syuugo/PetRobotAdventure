@@ -7,12 +7,15 @@ public class StageRandomCheck : MonoBehaviour
 {
     Manager_StageSelect manager_StageSelect;
 
+    [SerializeField]
+    Color serectColor = new Color(0.6f, 0.3f, 0.3f);
+
     // Start is called before the first frame update
     void Start()
     {
         manager_StageSelect = GameObject.FindWithTag("Manager").GetComponent<Manager_StageSelect>();
 
-        if (manager_StageSelect.GetRandomStage()) GetComponent<Image>().color = new Color(0.6f, 0.3f, 0.3f);
+        if (manager_StageSelect.GetRandomStage()) GetComponent<Image>().color = serectColor;
         else GetComponent<Image>().color = Color.white;
     }
 
@@ -22,7 +25,7 @@ public class StageRandomCheck : MonoBehaviour
     {
         if (manager_StageSelect.GetRandomStage() == oldStageRandom) return; oldStageRandom = !oldStageRandom;
 
-        if (oldStageRandom )GetComponent<Image>().color = new Color(0.6f,0.3f,0.3f);
+        if (oldStageRandom )GetComponent<Image>().color = serectColor;
         else GetComponent<Image>().color = Color.white;
     }
 }

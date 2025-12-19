@@ -29,7 +29,7 @@ public class Create_Score : MonoBehaviour
         for (int i = 0;i < count; i++) {
             GameObject tmp = Instantiate<GameObject>(scoreObject);
             tmp.transform.parent = transform;
-            tmp.transform.position = new Vector3(-6 + i * 2.5f * (score.Length / count), 0, 0);
+            tmp.transform.position = new Vector3(-6 + i * 2.5f , 0, 0);
             tmp.transform.localScale = Vector3.one;
             ScoreDisplay []scoreDisplay = tmp.GetComponentsInChildren<ScoreDisplay>();
             for (int j = 0; j < scoreDisplay.Length; j++) { scoreDisplay[j].SetScoreType((eScoreType)DisplayScoreNum[i]); }

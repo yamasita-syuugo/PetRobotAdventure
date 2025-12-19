@@ -17,7 +17,7 @@ public class Display_Image_StageEnemy : MonoBehaviour
         int count = 0;
         for(int enemyType = 0; enemyType < (int)eEnemyType.max; enemyType++)
         {
-            if (manager_StageSelect.GetStageData(manager_StageSelect.GetStage()).GetEnemySerect((eEnemyType)enemyType))
+            if (manager_StageSelect.GetStageData(manager_StageSelect.GetStage()).GetEnemySerect((eEnemyType)enemyType) >=1)
             {
                 GameObject tmp = Instantiate<GameObject>(imageBase);
                 tmp.GetComponent<Image>().sprite = manager_Enemy.GetEnemyImage((eEnemyType)enemyType);

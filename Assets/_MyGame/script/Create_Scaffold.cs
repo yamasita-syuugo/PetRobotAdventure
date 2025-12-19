@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.VisualScripting;
 using static Unity.Burst.Intrinsics.X86.Avx;
+using UnityEditor.SearchService;
+using UnityEngine.SceneManagement;
+
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -13,6 +17,9 @@ public class Create_Scaffold : MonoBehaviour
     Manager_StageSelect manager_StageSelect;
     Manager_Field manager_Field;
     Manager_Gate manager_Gate;
+    Manager_Collection manager_Collection;
+
+    Create_Coins create_Coins;
 
     eScaffoldType scoffoldType = eScaffoldType.block;
 
@@ -31,12 +38,18 @@ public class Create_Scaffold : MonoBehaviour
     int holeSize = 1;
     public void SetHoleSize(int holeSize_) {  holeSize = holeSize_; }
 
+    float deleteTime;
+
     private void OnEnable()
     {
         GameObject manager = GameObject.FindWithTag("Manager");
         manager_StageSelect = manager.GetComponent<Manager_StageSelect>();
         manager_Field = manager.GetComponent<Manager_Field>();
         manager_Gate = manager.GetComponent<Manager_Gate>();
+        manager_Collection = manager.GetComponent<Manager_Collection>();
+
+        GameObject create_Coins_ = GameObject.FindWithTag("Create_Coins");
+        if(create_Coins_ != null) create_Coins = create_Coins_.GetComponent<Create_Coins>();
     }
     // Start is called before the first frame update
     void Start()
@@ -48,14 +61,42 @@ public class Create_Scaffold : MonoBehaviour
 
     // Update is called once per frame
     eStage oldStage = eStage.none;
+    bool oldRandom = false;
     void Update()
     {
+        FieldBreak();
+
         eStage stage = manager_StageSelect.GetStage();
-        if (oldStage == stage) return; oldStage = stage;
-        SetCreatType(manager_Field.GetScaffoldType(stage));
-        SetRandomBreak(manager_Field.GetRandomBreak(stage));
-        SetHoleSize(manager_Field.GetHoleSize(stage));
-        CreateObject();
+        bool random = manager_StageSelect.GetRandomStage();
+        if (oldStage == stage && oldRandom == random) return; oldStage = stage;oldRandom = random;
+        
+        if(random && SceneManager.GetActiveScene().name == "Title") { DeleteObject(); }
+        else if (random)
+        {
+            //eCreatScaffoldType random = (eCreatScaffoldType)Random.Range(0, 10);
+            SetCreatType(manager_Field.GetScaffoldType(stage));
+            SetRandomBreak(manager_Field.GetRandomBreak(stage));
+            SetHoleSize(manager_Field.GetHoleSize(stage));
+            CreateObject();
+        }
+        else {
+            SetCreatType(manager_Field.GetScaffoldType(stage));
+            SetRandomBreak(manager_Field.GetRandomBreak(stage));
+            SetHoleSize(manager_Field.GetHoleSize(stage));
+            CreateObject();
+        }
+    }
+
+    void FieldBreak()
+    {
+        if (manager_Field.GetBreak_StratTime() < 1f) return;
+
+        deleteTime -= Time.deltaTime;
+        if(deleteTime < 0f)
+        {
+            deleteTime = manager_Field.GetBreak_ReTime();
+            Destroy(GetComponentInChildren<Type_Scaffold>().gameObject);
+        }
     }
 
     //生成
@@ -87,11 +128,10 @@ public class Create_Scaffold : MonoBehaviour
                             (y == fieldSize / 2 - 1 || y == fieldSize / 2) : (x == fieldSize / 2) && (y == fieldSize / 2))) continue;
 
                         tmpScaffold = Instantiate<GameObject>(tmpBase, new Vector3(
-                    (x - (float)fieldSize / 2.0f) * blockSizeX + blockSizeX / 2.0f,
-                    (y - (float)fieldSize / 2.0f) * blockSizeY + blockSizeY / 2.0f, 0),
-                    Quaternion.identity);
+                            (x - (float)fieldSize / 2.0f) * blockSizeX + blockSizeX / 2.0f,
+                            (y - (float)fieldSize / 2.0f) * blockSizeY + blockSizeY / 2.0f, 0),
+                            Quaternion.identity);
                         tmpScaffold.transform.parent = transform;
-
                         blocks[blockNum++] = tmpScaffold;
                     }
                 }
@@ -143,16 +183,17 @@ public class Create_Scaffold : MonoBehaviour
                         }
 
                     }
+                    if (randomBreak < Random.Range(0, 100) || i == scaffoldNum - 1)
+                    {
+                        tmpScaffold = Instantiate<GameObject>(manager_Field.ScaffoldSelect(), new Vector3(
+                    ScaffoldPos[i, 0] * blockSizeX,
+                    ScaffoldPos[i, 1] * blockSizeY, 0),
+                    Quaternion.identity);
+                        tmpScaffold.transform.parent = transform;
+                        blocks[blockNum++] = tmpScaffold;
 
-                    tmpScaffold = Instantiate<GameObject>(manager_Field.ScaffoldSelect(), new Vector3(
-                ScaffoldPos[i, 0] * blockSizeX,
-                ScaffoldPos[i, 1] * blockSizeY, 0),
-                Quaternion.identity);
-                    tmpScaffold.transform.parent = transform;
-
-                    blocks[blockNum++] = tmpScaffold;
-
-                    if (i == scaffoldNum - 1) manager_Gate.SerGatePos(tmpScaffold.transform.position);
+                        if (i == scaffoldNum - 1) manager_Gate.SerGatePos(tmpScaffold.transform.position);
+                    }
                 }
                 break;
             case eFieldCreatType.frameStage:     //正方形ステージ
@@ -176,7 +217,6 @@ public class Create_Scaffold : MonoBehaviour
                     (y - (float)fieldSize / 2.0f) * blockSizeY + blockSizeY / 2.0f, 0),
                     Quaternion.identity);
                         tmpScaffold.transform.parent = transform;
-
                         blocks[blockNum++] = tmpScaffold;
                     }
                 }
@@ -198,7 +238,7 @@ public class Create_Scaffold : MonoBehaviour
                         tmpBase = manager_Field.ScaffoldSelect();
 
                         tmpScaffold = Instantiate<GameObject>(tmpBase,
-                            new Vector3((x - (float)fieldSize / 2.0f) * blockSizeX + blockSizeX / 2.0f, y * blockSizeY , 0),
+                            new Vector3((x - (float)fieldSize / 2.0f) * blockSizeX + blockSizeX / 2.0f, y * blockSizeY, 0),
                             Quaternion.identity);
                         tmpScaffold.transform.parent = transform;
 
@@ -208,6 +248,7 @@ public class Create_Scaffold : MonoBehaviour
                 Vector2 BossSpawnPoint = new Vector2(0, fieldSize * blockSizeY / 2);
                 break;
         }
+        if(create_Coins != null && manager_StageSelect.GetRandomStage())create_Coins.CreateObject(blocks);
     }
     //削除
     public void DeleteObject()
@@ -215,12 +256,14 @@ public class Create_Scaffold : MonoBehaviour
         Transform[] blocks = GetComponentsInChildren<Transform>();
         if (blocks == null) return;
         for (int i = 0; i < blocks.Length; i++) if (blocks[i].tag == "Scaffold") DestroyImmediate(blocks[i].gameObject);
+        if(create_Coins != null) create_Coins.DeleteObject();
     }
 
     public void Load()
     {
         creatType = manager_Field.GetScaffoldType(manager_StageSelect.GetStage());
         randomBreak = manager_Field.GetRandomBreak(manager_StageSelect.GetStage());
+        deleteTime = manager_Field.GetBreak_StratTime();
     }
 }
 

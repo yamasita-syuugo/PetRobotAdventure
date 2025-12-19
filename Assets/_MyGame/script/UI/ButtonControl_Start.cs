@@ -32,7 +32,8 @@ public class ButtonControl_Start : MonoBehaviour
 
         if (manager == null) return;
         Manager_StageSelect manager_StageSelect = manager.GetComponent<Manager_StageSelect>();
-        manager_StageSelect.SetStage(manager_StageSelect.GetStage() + 1);
+        if(manager_StageSelect.GetStage() != eStage.max - 1) manager_StageSelect.SetStage(manager_StageSelect.GetStage() + 1);
+        else manager_StageSelect.SetStage(eStage.none + 1);
 
         manager.GetComponent<Manager_Save>().DataSave();
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainGame");

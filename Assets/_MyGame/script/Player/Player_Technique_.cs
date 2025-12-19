@@ -5,6 +5,15 @@ using UnityEngine.EventSystems;
 
 public class Player_Technique_ : MonoBehaviour
 {
+    Manager_Player manager_Player;
+    Manager_PlayData manager_PlayData;
+
+    private void OnEnable()
+    {
+        GameObject manager = GameObject.FindWithTag("Manager");
+        manager_Player = manager.GetComponent<Manager_Player>();
+        manager_PlayData = manager.GetComponent<Manager_PlayData>();
+    }
     // Start is called before the first frame update
     //void Start()
     //{
@@ -37,7 +46,11 @@ public class Player_Technique_ : MonoBehaviour
 
         //if (!GetComponent<Player_Technique_Container_BulletMagazine>().BulletCheck()) return;
 
-        Manager_Score.ShotNumAdd();
+        switch (manager_Player.GetPlayerTypeIndex())
+        {
+            case ePlayerType.PetRobot: manager_PlayData.AddUseTechnique(manager_Player.GetPlayerTypeIndex(), (int)ePlayerWeaponType.Bullet); break;
+            default: Debug.Log("switch : error_PlayerType"); break;
+        }
 
         bulletMove tmp1 = Instantiate<bulletMove>(bulletBase);
         tmp1.transform.position = this.transform.position;
@@ -64,5 +77,10 @@ public class Player_Technique_ : MonoBehaviour
         if (swordSound != null) swordSound.Play(0);
 
         return tmp1.gameObject;
+    }
+
+    protected void TheEnd()
+    {
+
     }
 }

@@ -12,7 +12,8 @@ public class CPU_Move : MonoBehaviour
     GameObject player;
     ObjectFall playerFall;
 
-    public float moveSpeed = 1.0f; 
+    const float enemyMoveSpeed = 1;
+    float moveSpeed = 1.0f; 
     [SerializeField]
     Vector3 move;
 
@@ -36,6 +37,8 @@ public class CPU_Move : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(tag == "Enemy")moveSpeed = enemyMoveSpeed * GameObject.FindWithTag("Manager").GetComponent<Manager_Medal>().GetEnemyMoveSpeedBuff();Debug.Log("enemyMoveSpeed : " + moveSpeed);
+
         //todo:playerのオートサーチ(複数の場合の対応)
         player = GameObject.FindWithTag("Player");
         if (player == null)
@@ -96,6 +99,7 @@ public class CPU_Move : MonoBehaviour
     {
         if (playerFall == null) return;
         if (playerFall.GetSituation() == ObjectFall.eSituation.fall) return;
+
         Vector3 move = new Vector3(0.0f,0.0f,0.0f);
         move.x = player.transform.position.x - transform.position.x;
         move.y = player.transform.position.y - transform.position.y;

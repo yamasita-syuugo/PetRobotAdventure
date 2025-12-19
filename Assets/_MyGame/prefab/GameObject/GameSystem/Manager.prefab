@@ -68,6 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f56f00428eddeff409e030bb3c572e75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collectionCoin: {fileID: 8390818184305424821, guid: f1531a9da32921e4e854fe97801f6955, type: 3}
   getSituation_Stage: 000000
   getSituation_Player: 00000000
   getSituation_Medal: 00000000000000000000000000000000
@@ -87,6 +88,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stage: 0
+  randomStage: 0
+  musicSerect: 0
+  backGroundSerect: 0
 --- !u!114 &4625129172083975772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,6 +162,8 @@ MonoBehaviour:
   boots_Speed_UPMedalImage: {fileID: 21300000, guid: c4dfbd77c3f740c448b5f0eee7a2bde8, type: 3}
   boots_Speed_DOWNMedalImage: {fileID: 21300000, guid: c254762abb579284095ed81ad53e6448, type: 3}
   boots_SpikeImage: {fileID: 21300000, guid: d711250b26fb7904ba9bd2948cdc9fd2, type: 3}
+  EnemyFoot_Speed_UPMedalImage: {fileID: 21300000, guid: 8f39e076078d510478552d60c2114d8e, type: 3}
+  EnemyFoot_Speed_DOWNMedalImage: {fileID: 21300000, guid: edeb618fa20e81749a314cfefd5d1e51, type: 3}
   medalType: 000000000000000000000000
 --- !u!114 &7140798705473952029
 MonoBehaviour:
@@ -175,11 +181,13 @@ MonoBehaviour:
   image_Crow: {fileID: 21300000, guid: 97943d4ea49085d43a2695f0f94af7b3, type: 3}
   image_Golem: {fileID: -2115553726, guid: 31d3c3b7612648241893f5c0793e3286, type: 3}
   image_LivingArmor: {fileID: 21300000, guid: f6257b620afc21d48b542b971f7908cf, type: 3}
+  image_FakeGate: {fileID: -786470411, guid: 7b933009b1620b14d86f803538b5aebe, type: 3}
   enemyObject_Bom: {fileID: 7882004832147076534, guid: af61f766f8047ab4aa57ecc86036e3f9, type: 3}
   enemyObject_Crou: {fileID: 1846042793416335476, guid: 5aec0b44d81ee454fb01a2547fd18a57, type: 3}
   enemyObject_Golem: {fileID: 1846042793416335476, guid: d060a5b55893a8f49a19733d980fd5fd, type: 3}
   enemyObject_LivingArmor: {fileID: 1846042793416335476, guid: b9a5fa8a3215ff242898661a5f4fe773, type: 3}
   enemyObject_EnemyMass: {fileID: 3570103102265485630, guid: a25d743fd780b9c45a0f0829e62478dd, type: 3}
+  enemyObject_FakeGate: {fileID: 7882004832147076534, guid: 6f33e28f2e94e0742a64704193c6dbae, type: 3}
   enemySpaunTimeReset_Bom: 3
   enemySpaunTimeReset_Crow: 1
   enemySpaunTimeReset_Golem: 4.5
@@ -219,6 +227,7 @@ MonoBehaviour:
   gateOpen: 0
   gatePos: {x: 0, y: 0}
   destroy_Bom_Image: {fileID: 21300000, guid: 01271042cd8e6be4c9a030171ea91a84, type: 3}
+  destroy_Golem_Image: {fileID: 0}
   timer_Image: {fileID: 21300000, guid: f0b075f5349feee42bb93ae11630fa34, type: 3}
 --- !u!114 &2980074079378534292
 MonoBehaviour:
@@ -251,6 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backGroundIndex: 0
+  backGround_Panel_question: {fileID: 21300000, guid: 690ca69340e887d41b007ab14695b796, type: 3}
   backGround_Panel_sea: {fileID: 21300000, guid: 518bd4ad2560acc4fb8acdcc30059f1e, type: 3}
   backGround_Panel_forest: {fileID: 21300000, guid: dbbbfd416eab3294d91cb0ec282f85da, type: 3}
 --- !u!114 &3831981519145628050
@@ -269,6 +279,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 8300000, guid: 37961ea07f915c44e819f3732ea51bcc, type: 3}
   - {fileID: 8300000, guid: cff094d52b2df26409c57a2d4498e902, type: 3}
+  - {fileID: 8300000, guid: 44c18cdc64da3894a9ce38f765ed2a48, type: 3}
   musicIndex: 0
 --- !u!114 &8236429974492470528
 MonoBehaviour:
@@ -366,9 +377,17 @@ MonoBehaviour:
   totalImage: {fileID: 388234297, guid: b0687eb97c0a0954a880ff91a6e7be93, type: 3}
   Get_FlagImage: {fileID: 21300000, guid: 9cde90ea0dc3e5f41a3e3873c942fb2c, type: 3}
   Destroy_BomImage: {fileID: 2106291162, guid: 71aff854a94546646ac914a63229c4f5, type: 3}
+  Destroy_CrowImage: {fileID: 21300000, guid: 97943d4ea49085d43a2695f0f94af7b3, type: 3}
+  Destroy_GolemImage: {fileID: -2115553726, guid: 31d3c3b7612648241893f5c0793e3286, type: 3}
+  Destroy_LivingArmorImage: {fileID: 0}
+  Destroy_EnemyMassImage: {fileID: 0}
+  Destroy_BossEnemyImage: {fileID: 0}
   Enemy_BomImage: {fileID: 21300000, guid: 01271042cd8e6be4c9a030171ea91a84, type: 3}
+  Enemy_CrowImage: {fileID: 0}
   Enemy_GolemImage: {fileID: -2115553726, guid: 31d3c3b7612648241893f5c0793e3286, type: 3}
-  shotImage: {fileID: 21300000, guid: 5bfe0a6d02d500c41aeefc0c23cee935, type: 3}
+  Enemy_LivingArmorImage: {fileID: 0}
+  Enemy_EnemyMassImage: {fileID: 0}
+  Enemy_BossEnemyImage: {fileID: 0}
 --- !u!114 &7225526075513606991
 MonoBehaviour:
   m_ObjectHideFlags: 0

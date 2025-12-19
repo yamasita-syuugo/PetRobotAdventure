@@ -38,6 +38,8 @@ public enum eCreatScaffoldType
     movePanelOnly,
 
     random,
+
+    [InspectorName("")] max
 }
 public class Manager_Field : MonoBehaviour
 {
@@ -49,6 +51,14 @@ public class Manager_Field : MonoBehaviour
     //float[] randomBreak = new float[(int)eStage.max];
     public float GetRandomBreak(eStage stage) { return manager_StageSelect.GetStageData(stage).GetRandomScaffoldBreak(); }
     public int GetHoleSize(eStage stage) { return manager_StageSelect.GetStageData(stage).GetHoleSize(); }
+
+    //éûä‘åoâﬂÇ≈ë´èÍÇîjâÛ
+    float break_StratTime = 0f;
+    public float GetBreak_StratTime() {  return break_StratTime; }
+    public void SetBreak_StratTime(float break_StratTime_) { break_StratTime  = break_StratTime_; }
+    float break_ReTime = 3f;
+    public float GetBreak_ReTime() {  return break_ReTime; }
+    public void SetBreak_ReTime(float break_ReTime_) {  break_ReTime = break_ReTime_; }
 
     [Header("scaffoldBase")]
     GameObject[] scaffoldBases = new GameObject[(int)eScaffoldType.max];
@@ -95,7 +105,7 @@ public class Manager_Field : MonoBehaviour
     }
     /*[SerializeField, Range(0, (int)eFieldCreatType.max - 1)]*/
     //int[] fieldCreatTypeIndex;
-    public eFieldCreatType GetFieldCreatTypeIndex(eStage stage) { return manager_StageSelect.GetStageData(stage).GetFieldCreatTypeIndex(); }
+    public eFieldCreatType GetFieldCreatTypeIndex(eStage stage) {if(!manager_StageSelect.GetRandomStage()) return manager_StageSelect.GetStageData(stage).GetFieldCreatTypeIndex(); else return manager_StageSelect.GetRandomStageData().GetFieldCreatTypeIndex(); }
     //int []fieldSize;
     public int GetFieldSize(eStage stage) { return manager_StageSelect.GetStageData(stage).GetFieldSize(); }
 }

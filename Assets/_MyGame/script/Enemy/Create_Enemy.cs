@@ -28,18 +28,21 @@ public class Create_Enemy : MonoBehaviour
     }
 
     GameObject player = null;
-    // Start is called before the first frame update
-    void Start()
+
+    private void OnEnable()
     {
         GameObject manager = GameObject.FindWithTag("Manager");
         manager_StageSelect = manager.GetComponent<Manager_StageSelect>();
         manager_Enemy = manager.GetComponent<Manager_Enemy>();
         manager_Time = manager.GetComponent<Manager_Time>();
-
-
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
         stage = manager_StageSelect.GetStage();
 
         player = GameObject.FindWithTag("Player");
+
 
         for (int i = 0; i < enemySpaunTime.Length; i++)
         {
@@ -53,57 +56,39 @@ public class Create_Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        EnemySpaunSchedule();
+        EnemyStartSpawn();
+
+        EnemySpawnSchedule();
     }
-    void EnemySpaunSchedule()
+    void EnemySpawnSchedule()
     {
         if(player == null) { player = GameObject.FindWithTag("Player"); return; }
         if (player.GetComponent<ObjectFall>().GetSituation() != ObjectFall.eSituation.normal) return;
         if (manager_Time.GetTimeStop()) return;
 
         stStageData stageData = manager_StageSelect.GetStageData(stage);
-        for(int i = 0;i < (int)eEnemyType.max; i++) { if (stageData.GetEnemySerect((eEnemyType)i)) EnemySpawnTimer((eEnemyType)i); }
+        for(int i = 0;i < (int)eEnemyType.max; i++) {float eneSerect = stageData.GetEnemySerect((eEnemyType)i); if (eneSerect < manager_Time.GetPlayTime() && eneSerect >= 0) EnemySpawnTimer((eEnemyType)i); }
 
-        //switch (stage)
-        //{
-        //    case eStage.fastPlay:
-        //        EnemySpawnTimer(eWaveType.bom);
-        //        break;
-        //    case eStage.crowStage:
-        //        EnemySpawnTimer(eWaveType.crow);
-        //        break;
-        //    case eStage.golemLabyrinth:
-        //        EnemySpawnTimer(eWaveType.golem);
-        //        break;
-
-        //    case eStage.lastGame:
-        //        BomSpawn();
-        //        switch (timeManager.GetComponent<Manager_Wave>().GetWaveType())
-        //        {
-        //            case eWaveType.bom: break;
-        //            case eWaveType.crow:
-        //                EnemySpawnCrow(); break;
-        //            case eWaveType.golem:
-        //                EnemySpawnCrow();
-        //                EnemySpawnGolem(); break;
-        //            case eWaveType.livingArmor:
-        //                EnemySpawnCrow();
-        //                EnemySpawnGolem();
-        //                EnemySpawnLivingArmor(); break;
-        //            case eWaveType.enemyMass:
-        //                EnemySpawnCrow();
-        //                EnemySpawnGolem();
-        //                EnemySpawnLivingArmor();
-        //                EnemySpawnEnemyMass();
-        //                break;
-
-        //            case eWaveType.max: EndGame(); break;
-        //            default: for (int i = 1; i < (int)eWaveType.max - 1; i++) EnemySpawnTimer((eWaveType)i); break;
-        //        }
-        //        break;
-        //    default: Debug.Log("error : switch(eStage)"); break;
-        //}
         EndGame();
+    }
+    bool startSpawn = false;
+    void EnemyStartSpawn()
+    {
+        if (!startSpawn) startSpawn = true;  
+        else return;
+
+        GameObject create_Scaffold = GameObject.FindWithTag("Create_Scaffold");
+        Transform[]scaffolds = create_Scaffold.GetComponentsInChildren<Transform>();
+        int scaffoldNum = scaffolds.Length;
+        for (int i = 0; i < (int)eEnemyType.max; i++)
+        {
+            for (int j = 0; j < manager_StageSelect.GetStageData(stage).GetEnemyStartSpaun()[i]; j++)
+            {
+                GameObject enemy = Instantiate<GameObject>(manager_Enemy.GetEnemyObject((eEnemyType)i));
+                enemy.transform.parent = transform;
+                enemy.transform.localPosition = scaffolds[Random.Range(0,scaffoldNum)].position;
+            }
+        }
     }
     float []enemySpaunTime = new float[(int)eEnemyType.max];
     void EnemySpawnTimer(eEnemyType enemyType)

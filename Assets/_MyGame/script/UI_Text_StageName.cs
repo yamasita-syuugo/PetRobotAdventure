@@ -21,6 +21,6 @@ public class UI_Text_StageName : MonoBehaviour
         if (oldStageIndex == stageIndex || oldRandom == manager_StageSelect.GetRandomStage()) { oldStageIndex = stageIndex; oldRandom = manager_StageSelect.GetRandomStage(); }
 
         if (oldRandom) GetComponent<TextMeshProUGUI>().text = "?";
-        else GetComponent<TextMeshProUGUI>().text = manager_StageSelect.GetStage().ToString();
+        else GetComponent<TextMeshProUGUI>().text = ((int)manager_StageSelect.GetStage()).ToString("00") + ":" + manager_StageSelect.GetStage().ToString();
     }
 }

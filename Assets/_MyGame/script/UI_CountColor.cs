@@ -42,36 +42,38 @@ public class UI_CountColor : MonoBehaviour
         int techniqueIndex;
         if(one) techniqueIndex = manager_Player_Technique.GetOne();else techniqueIndex = manager_Player_Technique.GetTwo();
         Color color = GetComponent<Image>().color;
-        switch ((ePlayerType)manager_Player.GetPlayerTypeIndex())
-        {
-            case ePlayerType.PetRobot:
-                switch ((ePlayerWeaponType)techniqueIndex)
-                {
-                    case ePlayerWeaponType.Bullet:
-                        color = Color.yellow;
-                        break;
-                    case ePlayerWeaponType.EarthQuakeInpact:
-                        color = new Color(0.7f, 0.2f, 0, 1);
-                        break;
-                }
-                break;
-            case ePlayerType.WizardGhost:
-                switch ((ePlayerMagicType)techniqueIndex)
-                {
-                    case ePlayerMagicType.rubyRing:
-                        color = Color.red;
-                        break;
-                }
-                break;
-            case ePlayerType.WereWolf:
-                switch ((ePlayerAttackType)techniqueIndex)
-                {
-                    case ePlayerAttackType.MeleeAttack: 
-                        color = Color.red;
-                        break;
-                }
-                break;
-        }
+        //switch ((ePlayerType)manager_Player.GetPlayerTypeIndex())
+        //{
+        //    case ePlayerType.PetRobot:
+        //        switch ((ePlayerWeaponType)techniqueIndex)
+        //        {
+        //            case ePlayerWeaponType.Bullet:
+        //                color = Color.yellow;
+        //                break;
+        //            case ePlayerWeaponType.EarthQuakeInpact:
+        //                color = new Color(0.7f, 0.2f, 0, 1);
+        //                break;
+        //        }
+        //        break;
+        //    case ePlayerType.WizardGhost:
+        //        switch ((ePlayerMagicType)techniqueIndex)
+        //        {
+        //            case ePlayerMagicType.rubyRing:
+        //                color = Color.red;
+        //                break;
+        //        }
+        //        break;
+        //    case ePlayerType.WereWolf:
+        //        switch ((ePlayerAttackType)techniqueIndex)
+        //        {
+        //            case ePlayerAttackType.MeleeAttack: 
+        //                color = Color.red;
+        //                break;
+        //        }
+        //        break;
+        //}
+        color = Color.white;
+
         color.a = 0.3f;
 
         GetComponent<Image>().color = color;

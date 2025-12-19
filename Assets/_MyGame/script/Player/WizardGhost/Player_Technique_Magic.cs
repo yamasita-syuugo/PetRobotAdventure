@@ -67,6 +67,10 @@ public class Player_Technique_Magic : Player_Technique_
             chanting = 0;
         }
     }
+    override public void GetPoint()
+    {
+        //todo:フラグゲット処理
+    }
     private void Magic_()
     {
         Debug.Log("MagicBase");

@@ -21,11 +21,13 @@ public class Change_Music : MonoBehaviour
     void Update()
     {
         int newMusicIndex;
-        if (manager_StageSelect.GetMusicSerect() || SceneManager.GetActiveScene().name == "Collection") newMusicIndex = manager_Music.GetMusicIndex();
+        if (SceneManager.GetActiveScene().name == "Title" && !manager_StageSelect.GetMusicSerect()) newMusicIndex = 1;
+        else if (manager_StageSelect.GetMusicSerect() || SceneManager.GetActiveScene().name == "Collection") newMusicIndex = manager_Music.GetMusicIndex();
         else newMusicIndex = manager_StageSelect.GetStageData(manager_StageSelect.GetStage()).GetMusicIndex();
+
         if (oldMusicIndex == newMusicIndex) return; oldMusicIndex = newMusicIndex;
 
         GetComponent<AudioSource>().clip = manager_Music.GetMusicBase(oldMusicIndex);
-        if(!(SceneManager.GetActiveScene().name == "Title") || manager_StageSelect.GetMusicSerect())GetComponent<AudioSource>().Play();
+        GetComponent<AudioSource>().Play();
     }
 }

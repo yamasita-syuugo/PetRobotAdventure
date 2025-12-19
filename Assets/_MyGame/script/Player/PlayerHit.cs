@@ -25,14 +25,20 @@ public class PlayerHit : MonoBehaviour
             switch (GetComponent<PlayerType>().GetPlayerType())
             {
                 case ePlayerType.PetRobot:
-                    GameObject.FindWithTag("Player").GetComponent<Player_Technique_>().GetPoint();
+                    GameObject.FindWithTag("Player").GetComponentInChildren<Player_Technique_>().GetPoint();
                     break;
                 case ePlayerType.WizardGhost:
-                    GameObject.FindWithTag("Player").GetComponent<Player_Technique_>().GetPoint(); 
+                    GameObject.FindWithTag("Player").GetComponentInChildren<Player_Technique_>().GetPoint();
                     break;
-                    case ePlayerType.WereWolf: break;
-                    default: Debug.Log("PlayerHit : " + GetComponent<PlayerType>().GetPlayerType().ToString()); break;
+                case ePlayerType.WereWolf: break;
+                default: Debug.Log("PlayerHit : " + GetComponent<PlayerType>().GetPlayerType().ToString()); break;
             }
+
+            Destroy(collision.GameObject());
+        }
+        else if(collision.tag == "Coin")
+        {
+            GameObject.FindWithTag("Manager").GetComponent<Manager_Collection>().AddCollectionCoins();
 
             Destroy(collision.GameObject());
         }

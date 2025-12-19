@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 using UnityEditor;
 using UnityEngine;
 
-public class Player_Technique_Play_EarthQuake : Player_Technique_Play__Base
+public class Player_Technique_Play_EarthQuake : Player_Technique_Play_Base
 {
     Manager_StageSelect manager_StageSelect;
     Manager_Field manager_Field;
@@ -62,7 +62,7 @@ public class Player_Technique_Play_EarthQuake : Player_Technique_Play__Base
 
         GameObject tmp = Instantiate(manager_Field.ScaffoldSelect());
         tmp.transform.position = new Vector3(posX, posY, 0);
-        tmp.transform.parent = GameObject.FindWithTag("Create").transform;
+        tmp.transform.parent = GameObject.FindWithTag("Create_Scaffold").transform;
         GameObject imp = Instantiate<GameObject>(impact);
         if (mouseUse) imp.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         else imp.transform.position = tmp.transform.position;

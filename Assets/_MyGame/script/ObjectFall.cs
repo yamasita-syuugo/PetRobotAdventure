@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ObjectFall : MonoBehaviour
 {
+    GameObject manager;
+    Manager_GameSituation manager_GameSituation;
+    Manager_Score manager_Score;
     public enum eSituation
     {
         [InspectorName("")] none,
@@ -33,12 +36,19 @@ public class ObjectFall : MonoBehaviour
     [SerializeField]
     eFallType fallType = eFallType.sky;
 
+    private void OnEnable()
+    {
+        manager = GameObject.FindWithTag("Manager");
+        manager_GameSituation = manager.GetComponent<Manager_GameSituation>();
+        manager_Score = manager.GetComponent<Manager_Score>();
+    }
     // Start is called before the first frame update
     void Start()
     {
         situation = eSituation.normal;
-        fallSound = GameObject.FindWithTag("Manager").GetComponent<Manager_Sounds>().GetSound(eSoundType.fall);
-        waterSound = GameObject.FindWithTag("Manager").GetComponent<Manager_Sounds>().GetSound(eSoundType.waterSound);
+        Manager_Sounds manager_Sounds = manager.GetComponent<Manager_Sounds>();
+        fallSound = manager_Sounds.GetSound(eSoundType.fall);
+        waterSound = manager_Sounds.GetSound(eSoundType.waterSound);
 
         baseSize = transform.localScale.x;
     }
@@ -112,7 +122,7 @@ public class ObjectFall : MonoBehaviour
         {
             if (tag == "Player")
             {
-                GameObject.FindWithTag("Manager").GetComponent<Manager_Score>().DataSave();
+                manager_Score.DataSave();
                 UnityEngine.SceneManagement.SceneManager.LoadScene("Result");
             }
             else Destroy(gameObject);
@@ -131,9 +141,9 @@ public class ObjectFall : MonoBehaviour
         {
             if (tag == "Player")
             {
-                GameObject.FindWithTag("Manager").GetComponent<Manager_Score>().DataSave();
-                GameObject.FindWithTag("Manager").GetComponent<Manager_GameSituation>().SetGameSituation(eGameSituation.failure);
-                GameObject.FindWithTag("Manager").GetComponent<Manager_GameSituation>().DataSave();
+                manager_Score.DataSave();
+                manager_GameSituation.SetGameSituation(eGameSituation.failure);
+                manager_GameSituation.DataSave();
                 UnityEngine.SceneManagement.SceneManager.LoadScene("Result");
             }
             else if(tag == "Enemy")

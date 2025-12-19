@@ -23,9 +23,9 @@ public class KnockBack : MonoBehaviour
     {
         float friction = (frictionBase / 1000) + 1;
         knockBackEnergy /= new Vector3(friction, friction, friction);
+        if ((knockBackEnergy.x < 0.1 && knockBackEnergy.x > -0.1) && (knockBackEnergy.y < 0.1 && knockBackEnergy.y > -0.1)) knockBackEnergy = Vector3.zero; 
 
         Vector2 energy = knockBackEnergy * moveSpeed;
-        if ((energy.x < 0.2 && energy.x > -0.2) && (energy.y < 0.2 && energy.y > -0.2)) energy = Vector2.zero; 
         transform.position += (Vector3)energy * Time.deltaTime;
     }
 

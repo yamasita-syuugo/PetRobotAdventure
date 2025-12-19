@@ -39,6 +39,7 @@ public class Select_Stage_Enemy_Icon : MonoBehaviour
         EnemyIconCreate();
     }
     eStage oldStage = eStage.none;
+    bool rondom = false;
     void EnemyDistance()
     {
 
@@ -51,9 +52,14 @@ public class Select_Stage_Enemy_Icon : MonoBehaviour
     int lineNum = 3;
     public void EnemyIconCreate()
     {
+        float[] enemy = { };
         eStage stageIndex = manager_StageSelect.GetStage();
-        if (oldStage == stageIndex) return; oldStage = stageIndex;
-        bool[] enemy = manager_Enemy.GetStageEnemy(oldStage);
+        bool rondom_ = manager_StageSelect.GetRandomStage();
+        if (oldStage != stageIndex) { oldStage = stageIndex; enemy = manager_Enemy.GetStageEnemy(oldStage); }
+        else if (rondom != rondom_) { rondom = rondom_; EnemyIconDelete(); }
+        else return;
+
+        if (rondom) return;
 
         GameObject tmp;
         EnemyIconDelete();
@@ -65,7 +71,7 @@ public class Select_Stage_Enemy_Icon : MonoBehaviour
 
             if (enemyImage == null) continue;
 
-            if (enemy[i]) tmp = Instantiate(new GameObject());
+            if (enemy[i] >= 1) tmp = new GameObject();
             else continue;
             tmp.name = enemyImage.name;
             tmp.transform.parent = transform;

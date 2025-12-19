@@ -13,7 +13,7 @@ enum eMaterialType
 
     materialTypeMax,
 }
-public class Player_Technique_Container_MaterialBag : Player_Technique_Container__Base
+public class Player_Technique_Container_MaterialBag : Player_Technique_Container_Base
 {
     [SerializeField]
     eMaterialType materialType;

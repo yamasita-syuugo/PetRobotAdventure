@@ -8,6 +8,8 @@ public enum eBackGroundType
 
     sea,
     forest,
+    
+    question,
 
     [InspectorName("")] max,
 }
@@ -34,9 +36,13 @@ public class Manager_BackgroundType : MonoBehaviour
     {
         backGround_Panel_Base[(int)eBackGroundType.sea] = backGround_Panel_sea;
         backGround_Panel_Base[(int)eBackGroundType.forest] = backGround_Panel_forest;
+
+        backGround_Panel_Base[(int)eBackGroundType.question] = backGround_Panel_question;
     }
     [SerializeField] Sprite backGround_Panel_sea;
     [SerializeField] Sprite backGround_Panel_forest;
+
+    [SerializeField] Sprite backGround_Panel_question;
 
     //GetSituation
     public bool GetGetSituation(int index) { return GetComponent<Manager_Collection>().GetGetSituation(eCollectionType.background,index); }

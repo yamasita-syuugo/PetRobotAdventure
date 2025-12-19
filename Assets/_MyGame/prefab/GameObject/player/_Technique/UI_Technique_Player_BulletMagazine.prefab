@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletIconBase: {fileID: 2986695717267288662, guid: ecd621f4507373348a9d6b31b7d236f1, type: 3}
-  wide: 150
+  wide: 110
 --- !u!222 &2765618365361175392
 CanvasRenderer:
   m_ObjectHideFlags: 0
