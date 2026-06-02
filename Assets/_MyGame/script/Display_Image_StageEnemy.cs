@@ -15,15 +15,17 @@ public class Display_Image_StageEnemy : MonoBehaviour
         Manager_Enemy manager_Enemy = GameObject.FindWithTag("Manager").GetComponent<Manager_Enemy>();
 
         int count = 0;
-        for(int enemyType = 0; enemyType < (int)eEnemyType.max; enemyType++)
+        for (int enemyType = 0; enemyType < (int)eEnemyType.max; enemyType++)
         {
-            if (manager_StageSelect.GetStageData(manager_StageSelect.GetStage()).GetEnemySerect((eEnemyType)enemyType) >=1)
+            float enemySerect = manager_StageSelect.GetStageData(manager_StageSelect.GetStage()).GetEnemySerect((eEnemyType)enemyType);
+            if (manager_StageSelect.GetRandomStage()) enemySerect = manager_StageSelect.GetRandomStageData().GetEnemySerect((eEnemyType)enemyType);
+            if (enemySerect >= 1)
             {
                 GameObject tmp = Instantiate<GameObject>(imageBase);
                 tmp.GetComponent<Image>().sprite = manager_Enemy.GetEnemyImage((eEnemyType)enemyType);
                 tmp.transform.parent = transform;
                 tmp.transform.localScale = Vector3.one;
-                tmp.transform.localPosition = new Vector2(-imageSpase + count % 3 * imageSpase,-count / 3 * imageSpase);
+                tmp.transform.localPosition = new Vector2(-imageSpase + count % 3 * imageSpase, -count / 3 * imageSpase);
                 count++;
             }
         }

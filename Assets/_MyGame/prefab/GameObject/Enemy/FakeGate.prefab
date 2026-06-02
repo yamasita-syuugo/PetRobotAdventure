@@ -191,9 +191,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b98f266acff714c4c80829c4500e4536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
   move: {x: 0, y: 0, z: 0}
-  moveType: 0
+  moveType: 6
   topToFall_toPlayer: 0
 --- !u!114 &4333262851320761444
 MonoBehaviour:

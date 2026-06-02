@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static ObjectFall;
 
 
@@ -31,6 +32,8 @@ public enum eCollectionsTab
 
 public class Manager_Collection : MonoBehaviour
 {
+    Manager_StageSelect manager_StageSelect;
+
     [SerializeField]
     GameObject collectionCoin;
     public GameObject GetCollectionCoin() { return collectionCoin; }
@@ -94,11 +97,24 @@ public class Manager_Collection : MonoBehaviour
             default: Debug.Log("NoSwitch"); break;
         }
     }
+    private void OnEnable()
+    {
+        manager_StageSelect = GetComponent<Manager_StageSelect>();
+    }
     // Start is called before the first frame update
-    //void Start()
-    //{
+    void Start()
+    {
+        CollectionRelease();
+    }
+    private void CollectionRelease() {
+        if (SceneManager.GetActiveScene().name != "MainGame") return;
+        if (manager_StageSelect.GetRandomStage()) return;
 
-    //}
+        SetGetSituation(eCollectionType.background, (int)manager_StageSelect.GetStageData(manager_StageSelect.GetStage()).GetBackGroundIndex(), true);
+        SetGetSituation(eCollectionType.music, (int)manager_StageSelect.GetStageData(manager_StageSelect.GetStage()).GetMusicIndex(), true);
+        int stage = (int)manager_StageSelect.GetStage();int mousePointerNum = GetComponent<Manager_MousePointerType>().GetMousePointerAnimations().Length;
+        SetGetSituation(eCollectionType.mousePointer, stage > mousePointerNum ? mousePointerNum - 1 : stage, true);
+    }
 
     // Update is called once per frame
     //void Update()

@@ -9,7 +9,7 @@ public class Create_BackGround_Panel : MonoBehaviour
     Manager_BackgroundType manager_BackgroundType;
 
     // Start is called before the first frame update
-    const int wide = 25;const int height = 20;
+    const int wide = 25; const int height = 20;
     void Start()
     {
         manager_StageSelect = GameObject.FindWithTag("Manager").GetComponent<Manager_StageSelect>();
@@ -32,16 +32,27 @@ public class Create_BackGround_Panel : MonoBehaviour
     bool oldRandom = false;
     void Update()
     {
-        bool backGroundSerect = false;
         eBackGroundType backGroundType;
-        if (manager_StageSelect.GetBackGroundSerect() || SceneManager.GetActiveScene().name == "Collection") { backGroundType = manager_BackgroundType.GetBackGroundIndex(); backGroundSerect = true; }
-        else { backGroundType = manager_StageSelect.GetStageData(manager_StageSelect.GetStage()).GetBackGroundIndex(); backGroundSerect = false; }
         bool random = manager_StageSelect.GetRandomStage();
+        if (manager_StageSelect.GetBackGroundSerect() || SceneManager.GetActiveScene().name == "Collection") { backGroundType = manager_BackgroundType.GetBackGroundIndex(); }
+        else if (random)
+        {
+            if (!(SceneManager.GetActiveScene().name == "MainGame")) backGroundType = eBackGroundType.question;
+            else backGroundType = manager_StageSelect.GetRandomStageData().GetBackGroundIndex();
+        }
+        else { backGroundType = manager_StageSelect.GetStageData(manager_StageSelect.GetStage()).GetBackGroundIndex(); }
 
-        if (oldBackGroundType == (eBackGroundType)backGroundType && oldRandom == random) return; oldBackGroundType = (eBackGroundType)backGroundType;oldRandom = random;
+        if (oldBackGroundType == (eBackGroundType)backGroundType) return; oldBackGroundType = (eBackGroundType)backGroundType; oldRandom = random;
 
-        if (!backGroundSerect && random) { backGroundType = eBackGroundType.question; }
-        SpriteRenderer []tmp_sp = GetComponentsInChildren<SpriteRenderer>();
-        for (int i = 0; i < tmp_sp.Length; i++) tmp_sp[i].sprite = manager_BackgroundType.GetBackGround_Panel_Base(backGroundType);
+        SpriteRenderer[] tmp_sp = GetComponentsInChildren<SpriteRenderer>();
+        for (int i = 0; i < tmp_sp.Length; i++)
+        {
+            tmp_sp[i].sprite = manager_BackgroundType.GetBackGround_Panel_Base(oldBackGroundType);
+            if (oldBackGroundType == eBackGroundType.pipe)
+            {
+                int tmp = 1; if (Random.Range(0, 2) == 1) tmp = -1;
+                tmp_sp[i].transform.localScale = new Vector2(tmp, 1);
+            }
+        }
     }
 }

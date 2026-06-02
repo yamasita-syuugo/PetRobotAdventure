@@ -8,18 +8,24 @@ using UnityEngine;
 public class player_Move : MonoBehaviour
 {
     Manager_Medal manager_Medal;
+    Manager_PlayerController manager_PlayerController;
     
     //todo;ノックバックを
     [SerializeField]
     eScaffoldType scaffold = eScaffoldType.block;
 
+    private void OnEnable()
+    {
+        GameObject manager = GameObject.FindWithTag("Manager");
+        manager_Medal = manager.GetComponent<Manager_Medal>();
+        manager_PlayerController = manager.GetComponent<Manager_PlayerController>();
+
+        playerAnimation = GetComponent<Animator>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        manager_Medal = GameObject.FindWithTag("Manager").GetComponent<Manager_Medal>();
-
-        playerAnimation = GetComponent<Animator>();
-
         playerTypeSpeed = GameObject.FindWithTag("Manager").GetComponent<Manager_Player>().GetPlayerTypeSpeed(GetComponent<PlayerType>().GetPlayerType());
 
         moveSpeedSetting[(int)eScaffoldType.block] = moveSpeedSetting_block;
@@ -71,7 +77,7 @@ public class player_Move : MonoBehaviour
             GetComponent<ObjectFall>().GetSituation() == ObjectFall.eSituation.chanting) return;
 
         transform.position += move * playerTypeSpeed * manager_Medal.GetMoveSpeedBuff() * Time.deltaTime;
-
+        //Debug.Log(scaffold.HumanName());
         switch (scaffold)
         {
             case eScaffoldType.block:
@@ -92,8 +98,9 @@ public class player_Move : MonoBehaviour
         moveSpeed = moveSpeedSetting[(int)scaffold];
         moveMax = moveMaxSetting[(int)scaffold];
 
-        move.x += Input.GetAxis("Horizontal") * moveSpeed;
-        move.y += Input.GetAxis("Vertical") * moveSpeed;
+        Vector2 transfer = manager_PlayerController.GetTransfer();
+        move.x += transfer.x * moveSpeed;
+        move.y += transfer.y * moveSpeed;
         if (move.x > moveMax) move.x = moveMax;
         if (move.y > moveMax) move.y = moveMax;
         if (move.x < -moveMax) move.x = -moveMax;
@@ -105,8 +112,9 @@ public class player_Move : MonoBehaviour
     {
         if (playerAnimation == null) return;
 
-        float directionX = Input.GetAxis("Horizontal");
-        float directionY = Input.GetAxis("Vertical");
+        Vector2 transfer = manager_PlayerController.GetTransfer();
+        float directionX = transfer.x;
+        float directionY = transfer.y;
         if (directionX * directionX > directionY * directionY)
         {
             if (directionX < 0) playerAnimation.SetInteger("direction", 3);

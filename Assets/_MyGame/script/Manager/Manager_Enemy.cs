@@ -41,6 +41,7 @@ public class Manager_Enemy : MonoBehaviour
     [SerializeField] Sprite image_FakeGate;
 
     GameObject[]enemyObject = new GameObject[(int)eEnemyType.max];
+    [SerializeField] int orderInLayer = 7;
     public GameObject GetEnemyObject(eEnemyType enemyType) { return enemyObject[(int)enemyType]; }
     void SetEnemyObject()
     {
@@ -50,6 +51,7 @@ public class Manager_Enemy : MonoBehaviour
         enemyObject[(int)eEnemyType.livingArmor] = enemyObject_LivingArmor;
         enemyObject[(int)eEnemyType.enemyMass] = enemyObject_EnemyMass;
         enemyObject[(int)eEnemyType.fakeGate] = enemyObject_FakeGate;
+        for (int i = 0; i < enemyObject.Length; i++) enemyObject[i].GetComponent<SpriteRenderer>().sortingOrder = orderInLayer;
     }
     [Header("enemyObject")]
     [SerializeField] GameObject enemyObject_Bom;
@@ -83,12 +85,14 @@ public class Manager_Enemy : MonoBehaviour
     }
     //敵の出現パターン
     public float[] GetStageEnemy(eStage stage) { return manager_StageSelect.GetStageData(stage).GetEnemySerect(); }
+    public float[] GetRandomStageEnemy() { return manager_StageSelect.GetRandomStageData().GetEnemySerect(); }
     // Start is called before the first frame update
     void Start()
     {
         manager_StageSelect = GetComponent<Manager_StageSelect>();
         float[] enemySpawnTime = manager_StageSelect.GetStageData(manager_StageSelect.GetStage()).GetEnemySpaunTimeReset();
-        for(int i = 0;i < (int)eEnemyType.max; i++) if (enemySpawnTime[i] > 0) enemySpaunTimeReset[i] = enemySpawnTime[i];
+        if(manager_StageSelect.GetRandomStage()) enemySpawnTime = manager_StageSelect.GetRandomStageData().GetEnemySpaunTimeReset();
+        for (int i = 0;i < (int)eEnemyType.max; i++) if (enemySpawnTime[i] > 0) enemySpaunTimeReset[i] = enemySpawnTime[i];
     }
 
     // Update is called once per frame

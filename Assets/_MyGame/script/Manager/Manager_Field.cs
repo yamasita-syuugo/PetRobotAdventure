@@ -50,7 +50,9 @@ public class Manager_Field : MonoBehaviour
     public eCreatScaffoldType GetScaffoldType(eStage stage) { return manager_StageSelect.GetStageData(stage).GetCreatScaffoldType(); }
     //float[] randomBreak = new float[(int)eStage.max];
     public float GetRandomBreak(eStage stage) { return manager_StageSelect.GetStageData(stage).GetRandomScaffoldBreak(); }
+    public float GetRandomRandomBreak() { return manager_StageSelect.GetRandomStageData().GetRandomScaffoldBreak(); }
     public int GetHoleSize(eStage stage) { return manager_StageSelect.GetStageData(stage).GetHoleSize(); }
+    public int GetRandomHoleSize() { return manager_StageSelect.GetRandomStageData().GetHoleSize(); }
 
     //éûä‘åoâﬂÇ≈ë´èÍÇîjâÛ
     float break_StratTime = 0f;
@@ -100,12 +102,15 @@ public class Manager_Field : MonoBehaviour
     public GameObject ScaffoldSelect()
     {
         eCreatScaffoldType creatScaffoldType = manager_StageSelect.GetStageData(manager_StageSelect.GetStage()).GetCreatScaffoldType();
+        if(manager_StageSelect.GetRandomStage()) creatScaffoldType = manager_StageSelect.GetRandomStageData().GetCreatScaffoldType();
         if (creatScaffoldType == eCreatScaffoldType.random) return GetScaffoldBases((eScaffoldType)Random.Range(0, (int)eScaffoldType.max));
         return GetScaffoldBases((eScaffoldType)creatScaffoldType);
     }
     /*[SerializeField, Range(0, (int)eFieldCreatType.max - 1)]*/
     //int[] fieldCreatTypeIndex;
-    public eFieldCreatType GetFieldCreatTypeIndex(eStage stage) {if(!manager_StageSelect.GetRandomStage()) return manager_StageSelect.GetStageData(stage).GetFieldCreatTypeIndex(); else return manager_StageSelect.GetRandomStageData().GetFieldCreatTypeIndex(); }
+    public eFieldCreatType GetFieldCreatTypeIndex(eStage stage) { return manager_StageSelect.GetStageData(stage).GetFieldCreatTypeIndex(); }
+    public eFieldCreatType GetRandomFieldCreatTypeIndex() { return manager_StageSelect.GetRandomStageData().GetFieldCreatTypeIndex(); }
     //int []fieldSize;
     public int GetFieldSize(eStage stage) { return manager_StageSelect.GetStageData(stage).GetFieldSize(); }
+    public int GetRandomFieldSize() { return manager_StageSelect.GetRandomStageData().GetFieldSize(); }
 }

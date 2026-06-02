@@ -24,8 +24,8 @@ public class Manager_Camera : MonoBehaviour
         {
             case eStage.fastPlay: cameraMoveSpeedDeray = 1.26f; break;
             case eStage.crowStage: cameraMoveSpeedDeray = 1.26f; break;
-            case eStage.golemLabyrinth: cameraMoveSpeedDeray = 0.5f; break;
-            case eStage.iceBom: cameraMoveSpeedDeray = 1.26f; break;
+            case eStage.golemPush: cameraMoveSpeedDeray = 0.5f; break;
+            case eStage.iceLabyrinth: cameraMoveSpeedDeray = 1.26f; break;
             case eStage.searchGate: cameraMoveSpeedDeray = 0.5f; break;
             case eStage.bomRush: cameraMoveSpeedDeray = 1.26f; break;
             case eStage.bossStage: cameraMoveSpeedDeray = 1.26f; break;

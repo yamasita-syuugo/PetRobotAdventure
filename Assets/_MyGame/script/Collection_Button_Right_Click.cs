@@ -6,12 +6,15 @@ public class Collection_Button_Right_Click : MonoBehaviour
 {
     Manager_Player manager_Player;
     Manager_Player_Technique manager_Player_Technique;
+    Manager_PlayerController manager_PlayerController;
 
     // Start is called before the first frame update
     void Start()
     {
-        manager_Player = GameObject.FindWithTag("Manager").GetComponent<Manager_Player>();
-        manager_Player_Technique = GameObject.FindWithTag("Manager").GetComponent<Manager_Player_Technique>();
+        GameObject manager = GameObject.FindWithTag("Manager");
+        manager_Player = manager.GetComponent<Manager_Player>();
+        manager_Player_Technique = manager.GetComponent<Manager_Player_Technique>();
+        manager_PlayerController = manager.GetComponent<Manager_PlayerController>();
     }
 
     // Update is called once per frame
@@ -27,7 +30,7 @@ public class Collection_Button_Right_Click : MonoBehaviour
     {
         if (playerType == ePlayerType.none) return;
 
-        if (onMouse == true && Input.GetMouseButtonDown(1))
+        if (onMouse == true && manager_PlayerController.GetMouseButtonDown(1))
         {
             manager_Player.SetPlayerTypeIndex(playerType);
             manager_Player_Technique.SetTwo(TechniqueIndex);

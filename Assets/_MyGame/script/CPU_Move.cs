@@ -26,8 +26,9 @@ public class CPU_Move : MonoBehaviour
         topToFall,
         walk,
         runAway,
+        steatSetPos,
 
-        moveTyptMax,
+        [InspectorName("")] Max,
     }
     [SerializeField]
     eMoveType moveType = eMoveType.tracking;
@@ -76,10 +77,13 @@ public class CPU_Move : MonoBehaviour
             case eMoveType.runAway:
                 MoveRunAway();
                 break;
+            case eMoveType.steatSetPos:
+                MoveSteatSetPos();
+                break;
         }
     }
 
-    void MoveGoStraight()
+    void MoveGoStraight()//初期地からプレイヤーの角度に移動し続ける
     {
         if (move == new Vector3(0.0f, 0.0f, 0.0f))
         {
@@ -95,7 +99,7 @@ public class CPU_Move : MonoBehaviour
 
         transform.position += move * moveSpeed * Time.deltaTime;
     }
-    void MoveTracking()
+    void MoveTracking()//プレイヤーめがけて移動し続ける
     {
         if (playerFall == null) return;
         if (playerFall.GetSituation() == ObjectFall.eSituation.fall) return;
@@ -113,7 +117,7 @@ public class CPU_Move : MonoBehaviour
     Vector2 tmpPosishon;
     [SerializeField,Header("TopToFallの落下先をplayerにするかどうか")]
     bool topToFall_toPlayer = false;
-    void MoveTopToFall()
+    void MoveTopToFall()//プレイヤーかブロックめがけて移動
     {
         if (playerFall == null) return;
         if (move == new Vector3(0.0f, 0.0f, 0.0f))
@@ -138,13 +142,14 @@ public class CPU_Move : MonoBehaviour
         move /= distance;
         if ((move.x < 0 && tmpPosishon.x <= transform.position.x) || (move.x > 0 && tmpPosishon.x >= transform.position.x))
         {
-            transform.position += move * moveSpeed * Time.deltaTime;
+            if (topToFall_toPlayer) transform.position += move * moveSpeed * Time.deltaTime;
+            else transform.position += move * 6 * Time.deltaTime;
         }
     }
     static Type_Scaffold[] position = new Type_Scaffold[200];
     GameObject []previousPos = new GameObject[20];
     GameObject nextPos = null;
-    void MoveWalk()
+    void MoveWalk()//ブロックからブロックへ歩き続ける
     {
         if (nextPos == null || (nextPos.transform.position.x <= transform.position.x + 0.1f && nextPos.transform.position.x >= transform.position.x - 0.1f &&
             nextPos.transform.position.y <= transform.position.y + 0.1f && nextPos.transform.position.y >= transform.position.y - 0.1f))
@@ -190,7 +195,7 @@ public class CPU_Move : MonoBehaviour
 
         transform.position += move * moveSpeed * Time.deltaTime;
     }
-    void MoveRunAway()
+    void MoveRunAway()//プレイヤーから逃げる
     {
         if (nextPos == null || (nextPos.transform.position.x <= transform.position.x + 0.1f && nextPos.transform.position.x >= transform.position.x - 0.1f &&
     nextPos.transform.position.y <= transform.position.y + 0.1f && nextPos.transform.position.y >= transform.position.y - 0.1f))
@@ -260,6 +265,13 @@ public class CPU_Move : MonoBehaviour
         move /= distance;
 
         transform.position += move * moveSpeed * Time.deltaTime;
+    }
+    bool steat = false;
+    void MoveSteatSetPos()
+    {
+        if (steat) return; steat = true;
+
+        transform.position = position[Random.Range(0, position.Length - 1)].transform.position +new Vector3(0,0,1);
     }
 
     public void SetScaffold(GameObject createScaffold)

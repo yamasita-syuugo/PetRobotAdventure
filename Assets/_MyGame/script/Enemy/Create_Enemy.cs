@@ -77,16 +77,19 @@ public class Create_Enemy : MonoBehaviour
         if (!startSpawn) startSpawn = true;  
         else return;
 
-        GameObject create_Scaffold = GameObject.FindWithTag("Create_Scaffold");
-        Transform[]scaffolds = create_Scaffold.GetComponentsInChildren<Transform>();
+        Debug.Log("Enemy - StartSpawn");
+
+        Transform[]scaffolds = GameObject.FindWithTag("Create_Scaffold").GetComponentsInChildren<Transform>();
         int scaffoldNum = scaffolds.Length;
         for (int i = 0; i < (int)eEnemyType.max; i++)
-        {
-            for (int j = 0; j < manager_StageSelect.GetStageData(stage).GetEnemyStartSpaun()[i]; j++)
+        {int enemyStartSpaun;
+            if (manager_StageSelect.GetRandomStage())enemyStartSpaun = manager_StageSelect.GetRandomStageData().GetEnemyStartSpaun()[i];
+            else enemyStartSpaun = manager_StageSelect.GetStageData(stage).GetEnemyStartSpaun()[i];
+            for (int j = 0; j < enemyStartSpaun; j++)
             {
                 GameObject enemy = Instantiate<GameObject>(manager_Enemy.GetEnemyObject((eEnemyType)i));
                 enemy.transform.parent = transform;
-                enemy.transform.localPosition = scaffolds[Random.Range(0,scaffoldNum)].position;
+                EnemySpaunPositionSet(enemy);
             }
         }
     }

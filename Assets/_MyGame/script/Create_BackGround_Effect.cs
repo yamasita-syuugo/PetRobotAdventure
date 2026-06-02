@@ -7,6 +7,7 @@ using UnityEngine;
 public class Create_BackGround_Effect : MonoBehaviour
 {
     Manager_Background_Effect manager_Background_Effect;
+    GameObject camera;
 
     [SerializeField]
     GameObject cloudBase;
@@ -17,12 +18,17 @@ public class Create_BackGround_Effect : MonoBehaviour
 
     const int effectNum = 200;
     GameObject[] effectObject = new GameObject[effectNum];
+    private void OnEnable()
+    {
+        manager_Background_Effect = GameObject.FindWithTag("Manager").GetComponent<Manager_Background_Effect>();
+        camera = GameObject.FindWithTag("MainCamera");
+
+        spawnPoint = UnityEngine.Random.Range(0f, 6.28f);
+    }
     // Start is called before the first frame update
     void Start()
     {
-        manager_Background_Effect = GameObject.FindWithTag("Manager").GetComponent<Manager_Background_Effect>();
-
-        spawnPoint = UnityEngine.Random.Range(0f, 6.28f);
+        EffectSpawnStart();
     }
 
     // Update is called once per frame
@@ -31,77 +37,6 @@ public class Create_BackGround_Effect : MonoBehaviour
         EfectoSpawn();
     }
 
-    [SerializeField, Range(0, 20f)]
-    float spawnDistance;
-    [SerializeField, Range(0, 1f)]
-    float moveSpeed;
-    [SerializeField]
-    float spawnTime = 5;
-    float time = 0;
-    eEffectType oldEffectType = eEffectType.max;
-    void EfectoSpawn()
-    {
-        eEffectType effectType = manager_Background_Effect.GetEffectType();
-
-        if (oldEffectType != effectType)
-        {
-            oldEffectType = effectType;
-            for (int i = 0; i < effectNum; i++) { Destroy(effectObject[i]); }
-            spawnPoint = UnityEngine.Random.Range(0f, 6.28f);
-            EffectSpawnStart();
-        }
-
-        switch (effectType)
-        {
-            case eEffectType.none: break;
-            case eEffectType.cloud:
-                if (time < 0)
-                {
-                    time = spawnTime;
-                    GameObject tmp = Instantiate(cloudBase);
-                    tmp.transform.parent = transform;
-                    for (int i = 0; i < effectNum; i++) { if (effectObject[i] == null) { effectObject[i] = tmp; break; } else { continue; } }
-
-                    float x = math.cos(spawnPoint) * spawnDistance;
-                    float y = math.sin(spawnPoint) * spawnDistance;
-                    float spaceRandom = UnityEngine.Random.Range(-11, 11);
-                    float spaceX = math.cos(spawnPoint + 1.57f) * spaceRandom;
-                    float spaceY = math.sin(spawnPoint + 1.57f) * spaceRandom;
-                    tmp.transform.position = new Vector2(x + spaceX, y + spaceY);
-                    tmp.GetComponent<Effect_Move_Cloud>().SetMove(new Vector2(-x * moveSpeed, -y * moveSpeed));
-                }
-                break;
-            case eEffectType.rainClouds:
-                if (time < 0)
-                {
-                    time = spawnTime;
-                    GameObject tmp = Instantiate(cloudBase);
-                    tmp.transform.parent = transform;
-                    for (int i = 0; i < effectNum; i++) { if (effectObject[i] == null) { effectObject[i] = tmp; break; } else { continue; } }
-
-                    float x = math.cos(spawnPoint) * spawnDistance;
-                    float y = math.sin(spawnPoint) * spawnDistance;
-                    float spaceRandom = UnityEngine.Random.Range(-11, 11);
-                    float spaceX = math.cos(spawnPoint + 1.57f) * spaceRandom;
-                    float spaceY = math.sin(spawnPoint + 1.57f) * spaceRandom;
-                    tmp.transform.position = new Vector2(x + spaceX, y + spaceY);
-                    tmp.GetComponent<Effect_Move_Cloud>().SetMove(new Vector2(-x * moveSpeed, -y * moveSpeed));
-
-                    tmp.GetComponent<SpriteRenderer>().color = Color.black;
-                    tmp.GetComponent<SpriteRenderer>().sortingOrder = 10;
-                }
-                break;
-            case eEffectType.blackOut:
-                if (time == 0)
-                {
-                    GameObject tmp;
-                    tmp = Instantiate(cloudBase);
-                }
-                break;
-            default: Debug.Log("error : efectoType : " + effectType.ToString()); break;
-        }
-        time -= Time.deltaTime;
-    }
     void EffectSpawnStart()
     {
         eEffectType effectType = manager_Background_Effect.GetEffectType();
@@ -148,5 +83,77 @@ public class Create_BackGround_Effect : MonoBehaviour
                 break;
             default: Debug.Log("error : efectoType : " + effectType.ToString()); break;
         }
+    }
+    [SerializeField, Range(0, 20f)]
+    float spawnDistance;
+    [SerializeField, Range(0, 1f)]
+    float moveSpeed;
+    [SerializeField]
+    float spawnTime = 5;
+    float time = 0;
+    eEffectType oldEffectType = eEffectType.max;
+    void EfectoSpawn()
+    {
+        eEffectType effectType = manager_Background_Effect.GetEffectType();
+
+        //if (oldEffectType != effectType)
+        //{
+        //    oldEffectType = effectType;
+        //    for (int i = 0; i < effectNum; i++) { Destroy(effectObject[i]); }
+        //    spawnPoint = UnityEngine.Random.Range(0f, 6.28f);
+        //    EffectSpawnStart();
+        //}
+
+        Vector2 cameraPos = camera.transform.position;
+        switch (effectType)
+        {
+            case eEffectType.none: break;
+            case eEffectType.cloud:
+                if (time < 0)
+                {
+                    time = spawnTime;
+                    GameObject tmp = Instantiate(cloudBase);
+                    tmp.transform.parent = transform;
+                    for (int i = 0; i < effectNum; i++) { if (effectObject[i] == null) { effectObject[i] = tmp; break; } else { continue; } }
+
+                    float x = math.cos(spawnPoint) * spawnDistance;
+                    float y = math.sin(spawnPoint) * spawnDistance;
+                    float spaceRandom = UnityEngine.Random.Range(-11, 11);
+                    float spaceX = math.cos(spawnPoint + 1.57f) * spaceRandom + cameraPos.x;
+                    float spaceY = math.sin(spawnPoint + 1.57f) * spaceRandom + cameraPos.y;
+                    tmp.transform.position = new Vector2(x + spaceX, y + spaceY);
+                    tmp.GetComponent<Effect_Move_Cloud>().SetMove(new Vector2(-x * moveSpeed, -y * moveSpeed));
+                }
+                break;
+            case eEffectType.rainClouds:
+                if (time < 0)
+                {
+                    time = spawnTime;
+                    GameObject tmp = Instantiate(cloudBase);
+                    tmp.transform.parent = transform;
+                    for (int i = 0; i < effectNum; i++) { if (effectObject[i] == null) { effectObject[i] = tmp; break; } else { continue; } }
+
+                    float x = math.cos(spawnPoint) * spawnDistance;
+                    float y = math.sin(spawnPoint) * spawnDistance;
+                    float spaceRandom = UnityEngine.Random.Range(-11, 11);
+                    float spaceX = math.cos(spawnPoint + 1.57f) * spaceRandom + cameraPos.x;
+                    float spaceY = math.sin(spawnPoint + 1.57f) * spaceRandom + cameraPos.y;
+                    tmp.transform.position = new Vector2(x + spaceX, y + spaceY);
+                    tmp.GetComponent<Effect_Move_Cloud>().SetMove(new Vector2(-x * moveSpeed, -y * moveSpeed));
+
+                    tmp.GetComponent<SpriteRenderer>().color = Color.black;
+                    tmp.GetComponent<SpriteRenderer>().sortingOrder = 10;
+                }
+                break;
+            case eEffectType.blackOut:
+                if (time == 0)
+                {
+                    GameObject tmp;
+                    //tmp = Instantiate(cloudBase);
+                }
+                break;
+            default: Debug.Log("error : efectoType : " + effectType.ToString()); break;
+        }
+        time -= Time.deltaTime;
     }
 }

@@ -6,6 +6,7 @@ public class Player_Technique_Play_BulletShot : Player_Technique_Play_Base
 {
     Manager_Player manager_Player;
     Manager_PlayData manager_PlayData;
+    Manager_PlayerController manager_PlayerController;
 
     [SerializeField]
     bulletMove bulletBase;
@@ -17,6 +18,7 @@ public class Player_Technique_Play_BulletShot : Player_Technique_Play_Base
         GameObject manager = GameObject.FindWithTag("Manager");
         manager_Player = manager.GetComponent<Manager_Player>();
         manager_PlayData = manager.GetComponent<Manager_PlayData>();
+        manager_PlayerController = manager.GetComponent<Manager_PlayerController>();
     }
 
     // Start is called before the first frame update
@@ -29,8 +31,8 @@ public class Player_Technique_Play_BulletShot : Player_Technique_Play_Base
     // Update is called once per frame
     void Update()
     {
-        moveDirectionX = Input.GetAxis("AimX");
-        moveDirectionY = Input.GetAxis("AimY");
+        moveDirectionX = manager_PlayerController.GetAim().x;
+        moveDirectionY = manager_PlayerController.GetAim().y;
 
         float distance = Mathf.Sqrt(moveDirectionX * moveDirectionX + moveDirectionY * moveDirectionY);
         if (distance > 0.3f)

@@ -29,6 +29,7 @@ public class Manager_Gate : MonoBehaviour
     Vector2 gatePos = new Vector2(0,0);
     public Vector2 GetGatePos() { return gatePos; }
     public void SerGatePos(Vector2 gatePos_) {  gatePos = gatePos_; }
+    public bool GetRandomPos() { Manager_StageSelect manager_StageSelect = GetComponent<Manager_StageSelect>(); return manager_StageSelect.GetStageData(manager_StageSelect.GetStage()).GetGatePosRandom(); }
 
     private void OnEnable()
     {

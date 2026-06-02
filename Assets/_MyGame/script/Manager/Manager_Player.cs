@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public enum ePlayerType
@@ -21,6 +22,7 @@ public enum ePlayerType
 public class Manager_Player : MonoBehaviour
 {
     Manager_Player_Technique manager_Player_Technique;
+    Manager_PlayerController manager_PlayerController;
 
     [SerializeField]
     GameObject[] playerTypeBase;
@@ -79,6 +81,7 @@ public class Manager_Player : MonoBehaviour
     private void OnEnable()
     {
         manager_Player_Technique = GetComponent<Manager_Player_Technique>();
+        manager_PlayerController = GetComponent<Manager_PlayerController>();
         SetPlayerSpeed();
     }
     //void Start()
@@ -87,11 +90,18 @@ public class Manager_Player : MonoBehaviour
     //}
 
     // Update is called once per frame
-    //void Update()
-    //{
+    void Update()
+    {
+        JoystickSelect();
+    }
+    void JoystickSelect()
+    {
 
-    //}
-
+        if (SceneManager.GetActiveScene().name == "Title")
+        {
+            //if (manager_PlayerController.JoystickButtonDown(eJoystickButton.L1)) AddStage(-1);//todo:十字キー実装後に対応、上を押しながらでoneの、下を押しながらでtwoのテクニックを切り替え
+        }
+    }
     public void DataSave()
     {
         PlayerPrefs.SetInt("playerTypeIndex", (int)playerTypeIndex);

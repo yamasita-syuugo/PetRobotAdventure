@@ -48,7 +48,8 @@ public class GateProcess : MonoBehaviour
         manager_GameSituation.SetGameSituation(eGameSituation.clear);
         manager_GameSituation.DataSave();
         Manager_Collection manager_Collection = manager.GetComponent<Manager_Collection>();
-        if(manager.GetComponent<Manager_StageSelect>().GetStage() != eStage.max - 1)
+        Manager_StageSelect manager_StageSelect = manager.GetComponent<Manager_StageSelect>();
+        if(manager_StageSelect.GetStage() != eStage.max - 1 || !manager_StageSelect.GetRandomStage())
             manager_Collection.SetGetSituation(eCollectionType.stage, (int)manager.GetComponent<Manager_StageSelect>().GetStage() + 1, true);
         manager_Collection.DataSave();
 

@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static UnityEngine.EventSystems.EventTrigger;
 
 public enum eStage
@@ -17,9 +18,9 @@ public enum eStage
 
     fastPlay,
     crowStage,
-    golemLabyrinth,
-    iceBom,
     bomRush,
+    golemPush,
+    iceLabyrinth,
     searchGate,
     dummyGate,
     bossStage,
@@ -80,6 +81,9 @@ public struct stStageData
     int gateOpenNum;
     public int GetGateOpenNum() {  return gateOpenNum; }
     public void SetGateOpenNum(int gateOpenNum_) { gateOpenNum = gateOpenNum_; }
+    bool gatePosRandom;
+    public bool GetGatePosRandom() {  return gatePosRandom; }
+    public void SetGatePosRandom(bool gatePosRandom_) {  gatePosRandom = gatePosRandom_; }
 
     //背景選択
     eBackGroundType backGroundIndex;
@@ -102,6 +106,9 @@ public struct stStageData
 
 public class Manager_StageSelect : MonoBehaviour
 {
+    Manager_PlayerController manager_PlayerController;
+    Manager_Collection manager_Collection;
+
     //ステージの選択
     [SerializeField, ReadOnly]
     eStage stage;
@@ -111,12 +118,16 @@ public class Manager_StageSelect : MonoBehaviour
         stage = stage_;
         if (stage <= eStage.none) stage = eStage.max - 1;
         else if (stage >= eStage.max) stage = eStage.none + 1;
+
+        for (; (stage) > 0; stage--) { if (manager_Collection.GetGetSituation(eCollectionType.stage, (int)stage)) break; else continue; }
     }
-    public void AddStage()
+    public void AddStage(int num = 1)
     {
-        stage += 1;
-        if (stage <= eStage.none) stage = eStage.max - 1;
-        else if (stage >= eStage.max) stage = eStage.none + 1;
+        stage += num;
+        if (stage <= eStage.none) stage = eStage.none + 1;
+        else if (stage >= eStage.max) stage = eStage.max - 1;
+
+        for (; (stage) > 0; stage--) { if (manager_Collection.GetGetSituation(eCollectionType.stage, (int)stage)) break; else continue; }
     }
 
     [SerializeField] bool randomStage = false;
@@ -154,7 +165,7 @@ public class Manager_StageSelect : MonoBehaviour
         musicSerect = customData[1];
         backGroundSerect = customData[2];
 
-        if (randomStage) stage = (eStage)UnityEngine.Random.Range(0, (int)eStage.max - 1);//todo::ランダムステージをステージ選択から要素全てランダムに変える
+        //if (randomStage) stage = (eStage)UnityEngine.Random.Range(0, (int)eStage.max - 1);//todo::ランダムステージをステージ選択から要素全てランダムに変える
     }
 
     stStageData[] stageData = new stStageData[(int)eStage.max];
@@ -168,6 +179,9 @@ public class Manager_StageSelect : MonoBehaviour
 
     private void OnEnable()
     {
+        manager_PlayerController = GetComponent<Manager_PlayerController>();
+        manager_Collection = GetComponent<Manager_Collection>();
+
         StageScaffoldSelect();
         StageGatoOpenTypeSelect();
         StageEnemySelect();
@@ -186,304 +200,306 @@ public class Manager_StageSelect : MonoBehaviour
 
     void StageScaffoldSelect()
     {
-        if (!randomStage)
-            for (int stage = 0; stage < (int)eStage.max; stage++)
-            {
-                switch ((eStage)stage)//labyrinthのsizeは奇数
-                {
-                    case eStage.fastPlay:
-                        stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.stage);
-                        stageData[stage].SetFieldSize(7);
-                        stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.blockOnly);
-                        stageData[stage].SetRandomScaffoldBreak(0.0f);
-                        break;
-                    case eStage.crowStage:
-                        stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.stage);
-                        stageData[stage].SetFieldSize(5);
-                        stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.grassOnly);
-                        stageData[stage].SetRandomScaffoldBreak(0.0f);
-                        break;
-                    case eStage.golemLabyrinth:
-                        stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.labyrinth);
-                        stageData[stage].SetFieldSize(15);
-                        stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.movePanelOnly);
-                        stageData[stage].SetRandomScaffoldBreak(0.0f);
-                        break;
-                    case eStage.iceBom:
-                        stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.stage);
-                        stageData[stage].SetFieldSize(5);
-                        stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.iceOnly);
-                        stageData[stage].SetRandomScaffoldBreak(30.0f);
-                        break;
-                    case eStage.dummyGate:
-                        stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.frameStage);
-                        stageData[stage].SetFieldSize(56);
-                        stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.blockOnly);
-                        stageData[stage].SetHoleSize(4);
-                        stageData[stage].SetRandomScaffoldBreak(20);
-                        break;
-                    case eStage.bomRush:
-                        stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.stage);
-                        stageData[stage].SetFieldSize(4);
-                        stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.blockOnly);
-                        stageData[stage].SetRandomScaffoldBreak(75.0f);
-                        break;
-                    case eStage.searchGate:
-                        stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.frameStage);
-                        stageData[stage].SetFieldSize(56);
-                        stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.movePanelOnly);//todo:grassとBlockのランダムを作成し充てる
-                        stageData[stage].SetHoleSize(4);
-                        stageData[stage].SetRandomScaffoldBreak(4);
-                        break;
-                    case eStage.bossStage:
-                        stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.bossStage);
-                        stageData[stage].SetFieldSize(15);
-                        stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.blockOnly);
-                        stageData[stage].SetHoleSize(11);
-                        //stageData[stage].SetRandomScaffoldBreak(4);
-                        break;
-                    case eStage.lastGame:
-                        stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.stage);
-                        stageData[stage].SetFieldSize(9);
-                        stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.random);
-                        stageData[stage].SetRandomScaffoldBreak(50.0f);
-                        break;
-
-                    case eStage.test_混沌:
-                        stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.stage);
-                        stageData[stage].SetFieldSize(9);
-                        stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.blockOnly);
-                        stageData[stage].SetRandomScaffoldBreak(0.0f);
-                        break;
-
-                    default: Debug.Log("StageScaffoldSelect : " + ((eStage)stage).ToString()); break;
-                }
-            }
-        else
+        for (int stage = 0; stage < (int)eStage.max; stage++)
         {
-            eFieldCreatType fieldType = (eFieldCreatType)UnityEngine.Random.Range(0, (int)eFieldCreatType.max - 1);
-            stageData[(int)GetStage()].SetFieldCreatTypeIndex(fieldType);
-                    stageData[(int)GetStage()].SetCreatScaffoldType((eCreatScaffoldType)UnityEngine.Random.Range(0,(int)eCreatScaffoldType.max - 1));
-            switch (fieldType)
+            stageData[stage].SetGatePosRandom(false);
+            switch ((eStage)stage)//labyrinthのsizeは奇数
             {
-                case eFieldCreatType.stage:
-                    randomStageData.SetFieldSize(UnityEngine.Random.Range(3,20));
-                    randomStageData.SetRandomScaffoldBreak(UnityEngine.Random.Range(0, 50)); break;
-                case eFieldCreatType.labyrinth:
-                    randomStageData.SetFieldSize(UnityEngine.Random.Range(7, 20));
-                    randomStageData.SetRandomScaffoldBreak(UnityEngine.Random.Range(0, 20)); break;
-                case eFieldCreatType.frameStage:
-                    randomStageData.SetFieldSize(UnityEngine.Random.Range(12, 100));
-                    randomStageData.SetHoleSize(UnityEngine.Random.Range(2, 6));
-                    randomStageData.SetRandomScaffoldBreak(UnityEngine.Random.Range(0, 50)); break;
-                case eFieldCreatType.bossStage:
-                    int stageSize = UnityEngine.Random.Range(7, 12);
-                    randomStageData.SetFieldSize(stageSize);
-                    randomStageData.SetHoleSize(stageSize - UnityEngine.Random.Range(1, 4));
-                    randomStageData.SetRandomScaffoldBreak(UnityEngine.Random.Range(0, 50)); break;
+                case eStage.fastPlay:
+                    stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.stage);
+                    stageData[stage].SetFieldSize(7);
+                    stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.blockOnly);
+                    stageData[stage].SetRandomScaffoldBreak(0.0f);
+                    break;
+                case eStage.crowStage:
+                    stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.stage);
+                    stageData[stage].SetFieldSize(5);
+                    stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.grassOnly);
+                    stageData[stage].SetRandomScaffoldBreak(0.0f);
+                    break;
+                case eStage.golemPush:
+                    stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.stage);
+                    stageData[stage].SetFieldSize(14);
+                    stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.blockOnly);
+                    stageData[stage].SetRandomScaffoldBreak(60);
+                    stageData[stage].SetGatePosRandom(true);
+                    break;
+                case eStage.iceLabyrinth:
+                    stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.labyrinth);
+                    stageData[stage].SetFieldSize(10);
+                    stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.iceOnly);
+                    stageData[stage].SetRandomScaffoldBreak(10.0f);
+                    break;
+                case eStage.dummyGate:
+                    stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.frameStage);
+                    stageData[stage].SetFieldSize(56);
+                    stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.blockOnly);
+                    stageData[stage].SetHoleSize(4);
+                    stageData[stage].SetRandomScaffoldBreak(20);
+                    break;
+                case eStage.bomRush:
+                    stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.stage);
+                    stageData[stage].SetFieldSize(4);
+                    stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.blockOnly);
+                    stageData[stage].SetRandomScaffoldBreak(75.0f);
+                    break;
+                case eStage.searchGate:
+                    stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.frameStage);
+                    stageData[stage].SetFieldSize(56);
+                    stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.movePanelOnly);//todo:grassとBlockのランダムを作成し充てる
+                    stageData[stage].SetHoleSize(4);
+                    stageData[stage].SetRandomScaffoldBreak(4);
+                    break;
+                case eStage.bossStage:
+                    stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.bossStage);
+                    stageData[stage].SetFieldSize(15);
+                    stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.blockOnly);
+                    stageData[stage].SetHoleSize(11);
+                    //stageData[stage].SetRandomScaffoldBreak(4);
+                    break;
+                case eStage.lastGame:
+                    stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.stage);
+                    stageData[stage].SetFieldSize(9);
+                    stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.random);
+                    stageData[stage].SetRandomScaffoldBreak(50.0f);
+                    break;
+
+                case eStage.test_混沌:
+                    stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.stage);
+                    stageData[stage].SetFieldSize(9);
+                    stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.blockOnly);
+                    stageData[stage].SetRandomScaffoldBreak(0.0f);
+                    break;
+
+                default: Debug.Log("StageScaffoldSelect : " + ((eStage)stage).ToString()); break;
             }
         }
+
+        eFieldCreatType fieldType = (eFieldCreatType)UnityEngine.Random.Range(0, (int)eFieldCreatType.max - 1);
+        randomStageData.SetFieldCreatTypeIndex(fieldType);
+        eCreatScaffoldType creatScaffoldType = (eCreatScaffoldType)UnityEngine.Random.Range(0, (int)eCreatScaffoldType.max - 1);
+        randomStageData.SetCreatScaffoldType(creatScaffoldType);
+        switch (fieldType)
+        {
+            case eFieldCreatType.stage:
+                randomStageData.SetFieldSize(UnityEngine.Random.Range(3, 20));
+                randomStageData.SetRandomScaffoldBreak(UnityEngine.Random.Range(0, 50)); break;//0:穴なし　100:全損
+            case eFieldCreatType.labyrinth:
+                randomStageData.SetFieldSize(UnityEngine.Random.Range(7, 20));
+                randomStageData.SetRandomScaffoldBreak(UnityEngine.Random.Range(0, 10)); break;
+            case eFieldCreatType.frameStage:
+                randomStageData.SetFieldSize(UnityEngine.Random.Range(25, 100));
+                randomStageData.SetHoleSize(UnityEngine.Random.Range(2, 6));
+                randomStageData.SetRandomScaffoldBreak(UnityEngine.Random.Range(0, 30)); break;
+            case eFieldCreatType.bossStage:
+                int stageSize = UnityEngine.Random.Range(7, 12);
+                randomStageData.SetFieldSize(stageSize);
+                randomStageData.SetHoleSize(stageSize - UnityEngine.Random.Range(1, 4));
+                randomStageData.SetRandomScaffoldBreak(UnityEngine.Random.Range(0, 50)); break;
+
+        }
+        //Debug.Log("randomField : " + fieldType.HumanName() +"; scaffoldType : " + creatScaffoldType.HumanName() + "; fieldSize : " + 
+        //    randomStageData.GetFieldSize() + "; holeSize : " + randomStageData.GetHoleSize() + "; randomBreak : " + randomStageData.GetRandomScaffoldBreak());
     }
     void StageGatoOpenTypeSelect()
     {
-        if (!randomStage)
-            for (int stage = 0; stage < (int)eStage.max; stage++)
-            {
-                switch ((eStage)stage)
-                {
-                    case eStage.fastPlay:
-                        stageData[stage].SetGateOpenType(eGateOpenType.scoreCheck_Posi_Destroy_ + (int)eEnemyType.bom);
-                        stageData[stage].SetGateOpenNum(10);
-                        break;
-                    case eStage.crowStage:
-                        stageData[stage].SetGateOpenType(eGateOpenType.time_Countdown);
-                        stageData[stage].SetGateOpenNum(20);
-                        break;
-                    case eStage.golemLabyrinth:
-                        stageData[stage].SetGateOpenType(eGateOpenType.time_Countdown);
-                        stageData[stage].SetGateOpenNum(5);
-                        break;
-                    case eStage.iceBom:
-                        stageData[stage].SetGateOpenType(eGateOpenType.scoreCheck_Posi_Destroy_ + (int)eEnemyType.bom);
-                        stageData[stage].SetGateOpenNum(15);
-                        break;
-                    case eStage.dummyGate:
-                        stageData[stage].SetGateOpenType(eGateOpenType.scoreCheck_Posi_Destroy_ + (int)eEnemyType.bom);//ゲートを一定数くぐる
-                        stageData[stage].SetGateOpenNum(15);
-                        break;
-                    case eStage.bomRush:
-                        stageData[stage].SetGateOpenType(eGateOpenType.scoreCheck_Posi_Destroy_ + (int)eEnemyType.bom);
-                        stageData[stage].SetGateOpenNum(15);
-                        break;
-                    case eStage.searchGate:
-                        stageData[stage].SetGateOpenType(eGateOpenType.time_Countdown);
-                        stageData[stage].SetGateOpenNum(5);
-                        break;
-                    case eStage.bossStage:
-                        stageData[stage].SetGateOpenType(eGateOpenType.time_Countdown);
-                        stageData[stage].SetGateOpenNum(5);
-                        break;
-                    case eStage.lastGame:
-                        stageData[stage].SetGateOpenType(eGateOpenType.time_Countdown);
-                        stageData[stage].SetGateOpenNum(5);
-                        break;
-                    case eStage.test_混沌:
-                        stageData[stage].SetGateOpenType(eGateOpenType.time_Countdown);
-                        stageData[stage].SetGateOpenNum(60);
-                        break;
-                    default: Debug.Log("StageGatoOpenTypeSelect : " + ((eStage)stage).ToString()); break;
-                }
-            }
-        else
+        for (int stage = 0; stage < (int)eStage.max; stage++)
         {
-            int openType = UnityEngine.Random.Range(0, 1);
-            switch (openType)
+            switch ((eStage)stage)
             {
-                case 0: randomStageData.SetGateOpenType(eGateOpenType.time_Countdown); break;
-                case 1:randomStageData.SetGateOpenType(eGateOpenType.scoreCheck_Posi_Destroy_ + UnityEngine.Random.Range(0, (int)eEnemyType.max - 1));break;
+                case eStage.fastPlay:
+                    stageData[stage].SetGateOpenType(eGateOpenType.scoreCheck_Posi_Destroy_ + (int)eEnemyType.bom);
+                    stageData[stage].SetGateOpenNum(10);
+                    break;
+                case eStage.crowStage:
+                    stageData[stage].SetGateOpenType(eGateOpenType.time_Countdown);
+                    stageData[stage].SetGateOpenNum(20);
+                    break;
+                case eStage.golemPush:
+                    stageData[stage].SetGateOpenType(eGateOpenType.time_Countdown);
+                    stageData[stage].SetGateOpenNum(30);
+                    break;
+                case eStage.iceLabyrinth:
+                    stageData[stage].SetGateOpenType(eGateOpenType.time_Countdown);
+                    stageData[stage].SetGateOpenNum(5);
+                    break;
+                case eStage.dummyGate:
+                    stageData[stage].SetGateOpenType(eGateOpenType.scoreCheck_Posi_Destroy_ + (int)eEnemyType.bom);//ゲートを一定数くぐる
+                    stageData[stage].SetGateOpenNum(7);
+                    break;
+                case eStage.bomRush:
+                    stageData[stage].SetGateOpenType(eGateOpenType.scoreCheck_Posi_Destroy_ + (int)eEnemyType.bom);
+                    stageData[stage].SetGateOpenNum(15);
+                    break;
+                case eStage.searchGate:
+                    stageData[stage].SetGateOpenType(eGateOpenType.time_Countdown);
+                    stageData[stage].SetGateOpenNum(5);
+                    break;
+                case eStage.bossStage:
+                    stageData[stage].SetGateOpenType(eGateOpenType.scoreCheck_Posi_Destroy_ + (int)eEnemyType.bom);
+                    stageData[stage].SetGateOpenNum(25);
+                    break;
+                case eStage.lastGame:
+                    stageData[stage].SetGateOpenType(eGateOpenType.time_Countdown);
+                    stageData[stage].SetGateOpenNum(5);
+                    break;
+                case eStage.test_混沌:
+                    stageData[stage].SetGateOpenType(eGateOpenType.time_Countdown);
+                    stageData[stage].SetGateOpenNum(60);
+                    break;
+                default: Debug.Log("StageGatoOpenTypeSelect : " + ((eStage)stage).ToString()); break;
             }
-            int[] openNum = new int[2];
-            switch (stageData[(int)GetStage()].GetFieldCreatTypeIndex())
-            {
-                case eFieldCreatType.stage://0 = time; 1 = enemy;
-                    switch (openType) { case 0: openNum[0] = 20; openNum[1] = 30; break; case 1: openNum[0] = 5; openNum[1] = 20; break; }
-                    break;
-                case eFieldCreatType.labyrinth:
-                    switch (openType) { case 0: openNum[0] = 5; openNum[1] = 40; break; case 1: openNum[0] = 5; openNum[1] = 20; break; }
-                    break;
-                case eFieldCreatType.frameStage:
-                    switch (openType) { case 0: openNum[0] = 5; openNum[1] = 30; break; case 1: openNum[0] = 15; openNum[1] = 60; break; }
-                    break;
-                case eFieldCreatType.bossStage:
-                    switch (openType) { case 0: openNum[0] = 20; openNum[1] = 30; break; case 1: openNum[0] = 10; openNum[1] = 30; break; }
-                    break;
-            }randomStageData.SetGateOpenNum(UnityEngine.Random.Range(openNum[0], openNum[1]));
         }
+
+
+        int openType = UnityEngine.Random.Range(0, 1);
+        switch (openType)
+        {
+            case 0: randomStageData.SetGateOpenType(eGateOpenType.time_Countdown); break;
+            case 1: randomStageData.SetGateOpenType(eGateOpenType.scoreCheck_Posi_Destroy_ + UnityEngine.Random.Range(0, (int)eEnemyType.max - 1)); break;
+        }
+        int[] openNum = new int[2];
+        switch (stageData[(int)GetStage()].GetFieldCreatTypeIndex())
+        {
+            case eFieldCreatType.stage://0 = time; 1 = enemy;
+                switch (openType) { case 0: openNum[0] = 20; openNum[1] = 30; break; case 1: openNum[0] = 5; openNum[1] = 20; break; }
+                break;
+            case eFieldCreatType.labyrinth:
+                switch (openType) { case 0: openNum[0] = 5; openNum[1] = 40; break; case 1: openNum[0] = 5; openNum[1] = 20; break; }
+                break;
+            case eFieldCreatType.frameStage:
+                switch (openType) { case 0: openNum[0] = 5; openNum[1] = 30; break; case 1: openNum[0] = 15; openNum[1] = 60; break; }
+                break;
+            case eFieldCreatType.bossStage:
+                switch (openType) { case 0: openNum[0] = 20; openNum[1] = 30; break; case 1: openNum[0] = 10; openNum[1] = 30; break; }
+                break;
+        }
+        randomStageData.SetGateOpenNum(UnityEngine.Random.Range(openNum[0], openNum[1]));
+
     }
     void StageEnemySelect()
     {
-        if (!randomStage)
-            for (int stage = 0; stage < (int)eStage.max; stage++)
+        for (int stage = 0; stage < (int)eStage.max; stage++)
+        {
+            stageData[stage].InitializeEnemySerect();
+            stageData[stage].InitializeEnemyStartSpaun();
+            stageData[stage].InitializeEnemySpaunTimeReset();
+            for (eEnemyType enemy = 0; enemy < eEnemyType.max; enemy++)
             {
-                stageData[stage].InitializeEnemySerect();
-                stageData[stage].InitializeEnemyStartSpaun();
-                stageData[stage].InitializeEnemySpaunTimeReset();
-                for (eEnemyType enemy = 0; enemy < eEnemyType.max; enemy++)
+                int enemyStartSpawn = -1;
+                float spawnStratTime = -1;
+                float spawnTime = -1;
+                switch ((eStage)stage)
                 {
-                    int enemyStartSpawn = -1;
-                    float spawnStratTime = -1;
-                    float spawnTime = -1;
-                    switch ((eStage)stage)
-                    {
-                        case eStage.fastPlay:
-                            switch (enemy)
-                            {
-                                case eEnemyType.bom: spawnStratTime = 1; break;
-                                case eEnemyType.crow: break;
-                                case eEnemyType.golem: break;
-                                case eEnemyType.livingArmor: break;
-                                case eEnemyType.enemyMass: break;
-                            }
-                            break;
-                        case eStage.crowStage:
-                            switch (enemy)
-                            {
-                                case eEnemyType.bom: break;
-                                case eEnemyType.crow: spawnStratTime = 1; break;
-                                case eEnemyType.golem: break;
-                                case eEnemyType.livingArmor: break;
-                                case eEnemyType.enemyMass: break;
-                            }
-                            break;
-                        case eStage.golemLabyrinth:
-                            switch (enemy)
-                            {
-                                case eEnemyType.bom: break;
-                                case eEnemyType.crow: break;
-                                case eEnemyType.golem: spawnStratTime = 1; break;
-                                case eEnemyType.livingArmor: break;
-                                case eEnemyType.enemyMass: break;
-                            }
-                            break;
-                        case eStage.iceBom:
-                            switch (enemy)
-                            {
-                                case eEnemyType.bom: spawnStratTime = 1; break;
-                                case eEnemyType.crow: break;
-                                case eEnemyType.golem: break;
-                                case eEnemyType.livingArmor: break;
-                                case eEnemyType.enemyMass: break;
-                            }
-                            break;
-                        case eStage.dummyGate:
-                            switch (enemy)
-                            {
-                                case eEnemyType.bom: spawnStratTime = 1; break;
-                                case eEnemyType.crow: spawnStratTime = 1; spawnTime = 3f; break;
-                                case eEnemyType.golem: break;
-                                case eEnemyType.livingArmor: break;
-                                case eEnemyType.enemyMass: break;
-                                case eEnemyType.fakeGate: spawnStratTime = 100; spawnTime = 10; enemyStartSpawn = 80; break;
-                            }
-                            break;
-                        case eStage.bomRush:
-                            switch (enemy)
-                            {
-                                case eEnemyType.bom: spawnStratTime = 1; spawnTime = 1.5f; break;
-                                case eEnemyType.crow: break;
-                                case eEnemyType.golem: break;
-                                case eEnemyType.livingArmor: break;
-                                case eEnemyType.enemyMass: break;
-                            }
-                            break;
-                        case eStage.searchGate:
-                            switch (enemy)
-                            {
-                                case eEnemyType.bom: spawnStratTime = 1; break;
-                                case eEnemyType.crow: break;
-                                case eEnemyType.golem: spawnStratTime = 1; break;
-                                case eEnemyType.livingArmor: spawnStratTime = 1; break;
-                                case eEnemyType.enemyMass: break;
-                            }
-                            break;
-                        case eStage.bossStage:
-                            switch (enemy)
-                            {
-                                case eEnemyType.bom: spawnStratTime = 1; break;
-                                case eEnemyType.crow: break;
-                                case eEnemyType.golem: break;
-                                case eEnemyType.livingArmor: break;
-                                case eEnemyType.enemyMass: break;
-                            }
-                            break;
-                        case eStage.lastGame:
-                            switch (enemy)
-                            {
-                                case eEnemyType.bom: spawnStratTime = 1; break;
-                                case eEnemyType.crow: break;
-                                case eEnemyType.golem: break;
-                                case eEnemyType.livingArmor: break;
-                                case eEnemyType.enemyMass: break;
-                            }
-                            break;
-                        case eStage.test_混沌:
-                            switch (enemy)
-                            {
-                                case eEnemyType.bom: break;
-                                case eEnemyType.crow: break;
-                                case eEnemyType.golem: break;
-                                case eEnemyType.livingArmor: break;
-                                case eEnemyType.enemyMass: break;
-                            }
-                            break;
-                        default: Debug.Log("StageEnemySelect : " + ((eStage)stage).ToString()); break;
-                    }
-                    stageData[stage].SetEnemySerect(enemy, spawnStratTime);
-                    stageData[stage].SetEnemyStartSpaun(enemy, enemyStartSpawn);
-                    stageData[stage].SetEnemySpaunTimeReset(enemy, spawnTime);
+                    case eStage.fastPlay:
+                        switch (enemy)
+                        {
+                            case eEnemyType.bom: spawnStratTime = 1; break;
+                            case eEnemyType.crow: break;
+                            case eEnemyType.golem: break;
+                            case eEnemyType.livingArmor: break;
+                            case eEnemyType.enemyMass: break;
+                        }
+                        break;
+                    case eStage.crowStage:
+                        switch (enemy)
+                        {
+                            case eEnemyType.bom: break;
+                            case eEnemyType.crow: spawnStratTime = 1; break;
+                            case eEnemyType.golem: break;
+                            case eEnemyType.livingArmor: break;
+                            case eEnemyType.enemyMass: break;
+                        }
+                        break;
+                    case eStage.golemPush:
+                        switch (enemy)
+                        {
+                            case eEnemyType.bom:spawnStratTime = 1;spawnTime = 2;  break;
+                            case eEnemyType.crow: break;
+                            case eEnemyType.golem: spawnStratTime = 1;spawnTime = 1; enemyStartSpawn = 7; break;
+                            case eEnemyType.livingArmor: break;
+                            case eEnemyType.enemyMass: break;
+                        }
+                        break;
+                    case eStage.iceLabyrinth:
+                        switch (enemy)
+                        {
+                            case eEnemyType.bom: spawnStratTime = 1; enemyStartSpawn = 5; break;
+                            case eEnemyType.crow: break;
+                            case eEnemyType.golem: break;
+                            case eEnemyType.livingArmor: break;
+                            case eEnemyType.enemyMass: break;
+                        }
+                        break;
+                    case eStage.dummyGate:
+                        switch (enemy)
+                        {
+                            case eEnemyType.bom: spawnStratTime = 1; break;
+                            case eEnemyType.crow: spawnStratTime = 1; spawnTime = 3f; break;
+                            case eEnemyType.golem: break;
+                            case eEnemyType.livingArmor: break;
+                            case eEnemyType.enemyMass: break;
+                            case eEnemyType.fakeGate: spawnStratTime = 100; spawnTime = 10; enemyStartSpawn = 80; break;
+                        }
+                        break;
+                    case eStage.bomRush:
+                        switch (enemy)
+                        {
+                            case eEnemyType.bom: spawnStratTime = 1; spawnTime = 1.5f; break;
+                            case eEnemyType.crow: break;
+                            case eEnemyType.golem: break;
+                            case eEnemyType.livingArmor: break;
+                            case eEnemyType.enemyMass: break;
+                        }
+                        break;
+                    case eStage.searchGate:
+                        switch (enemy)
+                        {
+                            case eEnemyType.bom: spawnStratTime = 1; break;
+                            case eEnemyType.crow: break;
+                            case eEnemyType.golem: spawnStratTime = 1; break;
+                            case eEnemyType.livingArmor: spawnStratTime = 1; break;
+                            case eEnemyType.enemyMass: break;
+                        }
+                        break;
+                    case eStage.bossStage:
+                        switch (enemy)
+                        {
+                            case eEnemyType.bom: spawnStratTime = 1; break;
+                            case eEnemyType.crow: break;
+                            case eEnemyType.golem: break;
+                            case eEnemyType.livingArmor: break;
+                            case eEnemyType.enemyMass: break;
+                        }
+                        break;
+                    case eStage.lastGame:
+                        switch (enemy)
+                        {
+                            case eEnemyType.bom: spawnStratTime = 1; break;
+                            case eEnemyType.crow: break;
+                            case eEnemyType.golem: break;
+                            case eEnemyType.livingArmor: break;
+                            case eEnemyType.enemyMass: break;
+                        }
+                        break;
+                    case eStage.test_混沌:
+                        switch (enemy)
+                        {
+                            case eEnemyType.bom: break;
+                            case eEnemyType.crow: break;
+                            case eEnemyType.golem: break;
+                            case eEnemyType.livingArmor: break;
+                            case eEnemyType.enemyMass: break;
+                        }
+                        break;
+                    default: Debug.Log("StageEnemySelect : " + ((eStage)stage).ToString()); break;
                 }
+                stageData[stage].SetEnemySerect(enemy, spawnStratTime);
+                stageData[stage].SetEnemyStartSpaun(enemy, enemyStartSpawn);
+                stageData[stage].SetEnemySpaunTimeReset(enemy, spawnTime);
             }
-        else
+        }
+
         {
             randomStageData.InitializeEnemySerect();
             randomStageData.InitializeEnemyStartSpaun();
@@ -496,7 +512,7 @@ public class Manager_StageSelect : MonoBehaviour
                 float spawnTime = -1;//スポーン間隔
                 switch (enemy)
                 {
-                    case eEnemyType.bom: enemyStartSpawn = UnityEngine.Random.Range(0, 7); spawnStratTime = UnityEngine.Random.Range(-1,0 ); spawnTime = 10; break;
+                    case eEnemyType.bom: enemyStartSpawn = UnityEngine.Random.Range(0, 7); spawnStratTime = UnityEngine.Random.Range(-1, 0); spawnTime = 10; break;
                     case eEnemyType.crow: break;
                     case eEnemyType.golem: break;
                     case eEnemyType.livingArmor: break;
@@ -516,8 +532,8 @@ public class Manager_StageSelect : MonoBehaviour
             {
                 case eStage.fastPlay:stageData[stage].SetEffectType(eEffectType.cloud); break;
                 case eStage.crowStage: stageData[stage].SetEffectType(eEffectType.cloud); break;
-                case eStage.golemLabyrinth: stageData[stage].SetEffectType(eEffectType.cloud); break;
-                case eStage.iceBom: stageData[stage].SetEffectType(eEffectType.cloud); break;
+                case eStage.golemPush: stageData[stage].SetEffectType(eEffectType.cloud); break;
+                case eStage.iceLabyrinth: stageData[stage].SetEffectType(eEffectType.cloud); break;
                 case eStage.dummyGate: stageData[stage].SetEffectType(eEffectType.cloud); break;
                 case eStage.bomRush: stageData[stage].SetEffectType(eEffectType.cloud); break;
                 case eStage.searchGate: stageData[stage].SetEffectType(eEffectType.cloud); break;
@@ -527,6 +543,8 @@ public class Manager_StageSelect : MonoBehaviour
                 default: Debug.Log("StageEffectSelect : " + ((eStage)stage).ToString()); break;
             }
         }
+
+        randomStageData.SetEffectType((eEffectType)UnityEngine.Random.Range(0, (int)eEffectType.max - 1)); 
     }
 
     void StageBackGroundSelect()
@@ -539,13 +557,13 @@ public class Manager_StageSelect : MonoBehaviour
                     stageData[stage].SetBackGroundIndex(eBackGroundType.sea);
                     break;
                 case eStage.crowStage:
+                    stageData[stage].SetBackGroundIndex(eBackGroundType.sea);
+                    break;
+                case eStage.golemPush:
+                    stageData[stage].SetBackGroundIndex(eBackGroundType.sea);
+                    break;
+                case eStage.iceLabyrinth:
                     stageData[stage].SetBackGroundIndex(eBackGroundType.forest);
-                    break;
-                case eStage.golemLabyrinth:
-                    stageData[stage].SetBackGroundIndex(eBackGroundType.sea);
-                    break;
-                case eStage.iceBom:
-                    stageData[stage].SetBackGroundIndex(eBackGroundType.sea);
                     break;
                 case eStage.dummyGate:
                     stageData[stage].SetBackGroundIndex(eBackGroundType.forest);
@@ -568,6 +586,10 @@ public class Manager_StageSelect : MonoBehaviour
                 default: Debug.Log("StageBackGroundSelect : " + ((eStage)stage).ToString()); break;
             }
         }
+
+        randomStageData.SetBackGroundIndex((eBackGroundType)UnityEngine.Random.Range(0,(int)eBackGroundType.max - 1));
+        if (SceneManager.GetActiveScene().name == "Result") PlayerPrefs.SetInt("ResultBackGroundIndex", (int)randomStageData.GetBackGroundIndex());
+        randomStageData.SetBackGroundIndex((eBackGroundType)PlayerPrefs.GetInt("ResultBackGroundIndex"));
     }
     void StageMusicSelect()
     {
@@ -581,10 +603,10 @@ public class Manager_StageSelect : MonoBehaviour
                 case eStage.crowStage:
                     stageData[stage].SetMusicIndex(1);
                     break;
-                case eStage.golemLabyrinth:
+                case eStage.golemPush:
                     stageData[stage].SetMusicIndex(1);
                     break;
-                case eStage.iceBom:
+                case eStage.iceLabyrinth:
                     stageData[stage].SetMusicIndex(1);
                     break;
                 case eStage.dummyGate:
@@ -608,17 +630,30 @@ public class Manager_StageSelect : MonoBehaviour
                 default: Debug.Log("StageMusicSelect : " + ((eStage)stage).ToString()); break;
             }
         }
+
+        randomStageData.SetMusicIndex(UnityEngine.Random.Range(0, GameObject.FindWithTag("Manager").GetComponent<Manager_Music>().GetMusicBase().Length));
     }
 
     // Update is called once per frame
     void Update()
     {
         Special();
+
+        JoystickSelect();
     }
 
     int count = (int)eEnemyType.bom;
     private void Special()
     {
         if (stage == eStage.lastGame) if (count < (int)GetComponent<Manager_Time>().GetPlayTime() / 30) { count++; stageData[(int)eStage.lastGame].SetEnemySerect((eEnemyType)count, 1); }
+    }
+
+    void JoystickSelect() { 
+        if(SceneManager.GetActiveScene().name == "Title") {
+            if (manager_PlayerController.JoystickButtonDown(eJoystickButton.L1)) AddStage(-1);
+            if (manager_PlayerController.JoystickButtonDown(eJoystickButton.R1)) AddStage(1);
+            if (manager_PlayerController.JoystickButtonDown(eJoystickButton.L2)) SetStage(eStage.none + 1);
+            if (manager_PlayerController.JoystickButtonDown(eJoystickButton.R2)) SetStage(eStage.max - 1);
+        }
     }
 }

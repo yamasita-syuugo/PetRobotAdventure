@@ -207,9 +207,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 311657609}
-        m_TargetAssemblyTypeName: TitleButtonControl, Assembly-CSharp
-        m_MethodName: TitleButton
+      - m_Target: {fileID: 1918549127}
+        m_TargetAssemblyTypeName: Manager_SceneSelect, Assembly-CSharp
+        m_MethodName: TitleSteat
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -959,6 +959,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
+--- !u!114 &1918549127 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2332144724393024931, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
+  m_PrefabInstance: {fileID: 1918549126}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: decd8012849d51d4cbbf8047c3b7a4e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1965817524
 GameObject:
   m_ObjectHideFlags: 0

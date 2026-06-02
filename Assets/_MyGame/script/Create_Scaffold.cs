@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.VisualScripting;
 using static Unity.Burst.Intrinsics.X86.Avx;
-using UnityEditor.SearchService;
 using UnityEngine.SceneManagement;
 
 
@@ -110,11 +109,19 @@ public class Create_Scaffold : MonoBehaviour
         int blockNum = 0;
 
         int fieldSize = manager_Field.GetFieldSize(manager_StageSelect.GetStage());
+        if(manager_StageSelect.GetRandomStage()) fieldSize = manager_Field.GetRandomFieldSize();
+        randomBreak = manager_Field.GetRandomBreak(manager_StageSelect.GetStage());
+        if(manager_StageSelect.GetRandomStage()) randomBreak = manager_Field.GetRandomRandomBreak();
 
         GameObject[] blocks = new GameObject[fieldSize * fieldSize];
         GameObject tmpBase;
         GameObject tmpScaffold;
-        switch ((eFieldCreatType)manager_Field.GetFieldCreatTypeIndex(manager_StageSelect.GetStage()))
+        eFieldCreatType fieldCreatType = (eFieldCreatType)manager_Field.GetFieldCreatTypeIndex(manager_StageSelect.GetStage());;
+        if (manager_StageSelect.GetRandomStage()) fieldCreatType = (eFieldCreatType)manager_Field.GetRandomFieldCreatTypeIndex();
+        holeSize = manager_Field.GetHoleSize(manager_StageSelect.GetStage()); 
+        if (manager_StageSelect.GetRandomStage()) holeSize = manager_Field.GetRandomHoleSize();
+
+        switch (fieldCreatType)
         {
             case eFieldCreatType.stage:     //正方形ステージ
                 for (int x = 0; x < fieldSize; x++)
@@ -248,7 +255,8 @@ public class Create_Scaffold : MonoBehaviour
                 Vector2 BossSpawnPoint = new Vector2(0, fieldSize * blockSizeY / 2);
                 break;
         }
-        if(create_Coins != null && manager_StageSelect.GetRandomStage())create_Coins.CreateObject(blocks);
+        if (manager_Gate.GetRandomPos()) manager_Gate.SerGatePos(blocks[Random.Range(0, blockNum)].transform.position);//ゲートのランダム化
+        if (create_Coins != null && manager_StageSelect.GetRandomStage())create_Coins.CreateObject(blocks);//コイン生成
     }
     //削除
     public void DeleteObject()

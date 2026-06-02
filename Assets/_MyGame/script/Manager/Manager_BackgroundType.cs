@@ -8,6 +8,7 @@ public enum eBackGroundType
 
     sea,
     forest,
+    pipe,
     
     question,
 
@@ -36,11 +37,13 @@ public class Manager_BackgroundType : MonoBehaviour
     {
         backGround_Panel_Base[(int)eBackGroundType.sea] = backGround_Panel_sea;
         backGround_Panel_Base[(int)eBackGroundType.forest] = backGround_Panel_forest;
+        backGround_Panel_Base[(int)eBackGroundType.pipe] = backGround_Panel_pipe;
 
         backGround_Panel_Base[(int)eBackGroundType.question] = backGround_Panel_question;
     }
     [SerializeField] Sprite backGround_Panel_sea;
     [SerializeField] Sprite backGround_Panel_forest;
+    [SerializeField] Sprite backGround_Panel_pipe;
 
     [SerializeField] Sprite backGround_Panel_question;
 
@@ -60,10 +63,10 @@ public class Manager_BackgroundType : MonoBehaviour
         SetBackGround_Panel_Base();
     }
     // Start is called before the first frame update
-    void Start()
-    {
+    //void Start()
+    //{
 
-    }
+    //}
 
     // Update is called once per frame
     //void Update()
