@@ -51,7 +51,7 @@ public class Manager_Enemy : MonoBehaviour
         enemyObject[(int)eEnemyType.livingArmor] = enemyObject_LivingArmor;
         enemyObject[(int)eEnemyType.enemyMass] = enemyObject_EnemyMass;
         enemyObject[(int)eEnemyType.fakeGate] = enemyObject_FakeGate;
-        for (int i = 0; i < enemyObject.Length; i++) enemyObject[i].GetComponent<SpriteRenderer>().sortingOrder = orderInLayer;
+        for (int i = 0; i < enemyObject.Length; i++) { if (enemyObject[i] == null) continue; enemyObject[i].GetComponent<SpriteRenderer>().sortingOrder = orderInLayer; }
     }
     [Header("enemyObject")]
     [SerializeField] GameObject enemyObject_Bom;

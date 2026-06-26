@@ -197,6 +197,7 @@ MonoBehaviour:
   image_Golem: {fileID: -2115553726, guid: 31d3c3b7612648241893f5c0793e3286, type: 3}
   image_LivingArmor: {fileID: 21300000, guid: f6257b620afc21d48b542b971f7908cf, type: 3}
   image_FakeGate: {fileID: -786470411, guid: 7b933009b1620b14d86f803538b5aebe, type: 3}
+  orderInLayer: 7
   enemyObject_Bom: {fileID: 7882004832147076534, guid: af61f766f8047ab4aa57ecc86036e3f9, type: 3}
   enemyObject_Crou: {fileID: 1846042793416335476, guid: 5aec0b44d81ee454fb01a2547fd18a57, type: 3}
   enemyObject_Golem: {fileID: 1846042793416335476, guid: d060a5b55893a8f49a19733d980fd5fd, type: 3}
@@ -277,7 +278,7 @@ MonoBehaviour:
   musicBase:
   - {fileID: 0}
   - {fileID: 8300000, guid: 37961ea07f915c44e819f3732ea51bcc, type: 3}
-  - {fileID: 8300000, guid: cff094d52b2df26409c57a2d4498e902, type: 3}
+  - {fileID: 8300000, guid: 351699a4dc82e924893003332d6ba6ea, type: 3}
   - {fileID: 8300000, guid: 44c18cdc64da3894a9ce38f765ed2a48, type: 3}
   musicIndex: 0
 --- !u!114 &8236429974492470528
@@ -503,6 +504,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 726c0c73c0373264485bf7671abbb5f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fastButton: {fileID: 0}
+  button: {fileID: 0}
 --- !u!1001 &1163399678311762220
 PrefabInstance:
   m_ObjectHideFlags: 0

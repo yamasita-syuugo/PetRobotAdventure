@@ -5330,7 +5330,7 @@ MonoBehaviour:
   m_text: "\u266A - \u97F3\u697D - \u30A2\u30FC\u30C6\u30A3\u30B9\u30C8"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1a415d74317f57440b1c4147b5b117b3, type: 2}
-  m_sharedMaterial: {fileID: -3967353781257768709, guid: 1a415d74317f57440b1c4147b5b117b3, type: 2}
+  m_sharedMaterial: {fileID: 8243975659143959626, guid: 1a415d74317f57440b1c4147b5b117b3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
