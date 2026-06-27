@@ -256,7 +256,7 @@ public class Create_Scaffold : MonoBehaviour
                 break;
         }
         if (manager_Gate.GetRandomPos()) manager_Gate.SerGatePos(blocks[Random.Range(0, blockNum)].transform.position);//ゲートのランダム化
-        if (create_Coins != null && manager_StageSelect.GetRandomStage())create_Coins.CreateObject(blocks);//コイン生成
+        if (create_Coins != null /*&& manager_StageSelect.GetRandomStage()*/)create_Coins.CreateObject(blocks);//コイン生成
     }
     //削除
     public void DeleteObject()

@@ -41,6 +41,7 @@ public class Manager_Collection : MonoBehaviour
     public int GetCollectionCoins() { return collectionCoins; }
     public bool AddCollectionCoins(int add = 1)
     {
+        RandomCheckGetSituation_Medal();
         if (collectionCoins >= -add)
         {
             collectionCoins += add; return true;
@@ -64,6 +65,7 @@ public class Manager_Collection : MonoBehaviour
     bool[] getSituation_Player = new bool[16];
     [SerializeField]
     bool[] getSituation_Medal = new bool[16];
+    void RandomCheckGetSituation_Medal() { getSituation_Medal[Random.RandomRange(0, (int)eMedalType.max - 1)] = true; }
     [SerializeField]
     bool[] getSituation_MousePointer = new bool[16];
     [SerializeField]
