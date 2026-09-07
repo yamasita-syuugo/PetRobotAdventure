@@ -19,7 +19,7 @@ public class Player_Technique_Play_EarthQuake : Player_Technique_Play_Base
     // Start is called before the first frame update
     void Start()
     {
-        a = 1 - manager_StageSelect.GetStageData(manager_StageSelect.GetStage()).GetFieldSize() % 2;
+        halfSlide = 1 - manager_StageSelect.GetStageData(manager_StageSelect.GetStage()).GetFieldSize() % 2;
 
         blockCreateSound = GameObject.FindWithTag("Manager").GetComponent<Manager_Sounds>().GetSound(eSoundType.impact);
     }
@@ -43,12 +43,12 @@ public class Player_Technique_Play_EarthQuake : Player_Technique_Play_Base
 
         CreatBlock();
     }
-    int a;
+    public int halfSlide;
     override public void MousePlay()
     {
         Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        posX = pos.x; if (posX > 0 && posX % 1 > 0.5f + a * 0.5f) posX = (int)posX + 1 + a * 0.5f; else if (posX < 0 && posX % 1 < -0.5f + a * 0.5f) posX = (int)posX - 1 + a * 0.5f; else posX = (int)posX + a * 0.5f;
-        posY = pos.y; if (posY > 0 && posY % 1 > 0.5f + a * 0.5f) posY = (int)posY + 1 + a * 0.5f; else if (posY < 0 && posY % 1 < -0.5f + a * 0.5f) posY = (int)posY - 1 + a * 0.5f; else posY = (int)posY + a * 0.5f;
+        posX = pos.x; if (posX > 0 && posX % 1 > 0.5f + halfSlide * 0.5f) posX = (int)posX + 1 + halfSlide * 0.5f; else if (posX < 0 && posX % 1 < -0.5f + halfSlide * 0.5f) posX = (int)posX - 1 + halfSlide * 0.5f; else posX = (int)posX + halfSlide * 0.5f;
+        posY = pos.y; if (posY > 0 && posY % 1 > 0.5f + halfSlide * 0.5f) posY = (int)posY + 1 + halfSlide * 0.5f; else if (posY < 0 && posY % 1 < -0.5f + halfSlide * 0.5f) posY = (int)posY - 1 + halfSlide * 0.5f; else posY = (int)posY + halfSlide * 0.5f;
 
         CreatBlock(true);
     }

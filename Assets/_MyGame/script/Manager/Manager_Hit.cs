@@ -100,6 +100,7 @@ public class Manager_Hit : MonoBehaviour
         }
     }
 
+    [SerializeField] float GhostBuff = 0.6f;
     void EnemyTo()
     {
         switch (collisionGameObjectType)
@@ -115,7 +116,7 @@ public class Manager_Hit : MonoBehaviour
                     case eEnemyType.crow:
 
                         CPU_Move enemyMove = gameObject.GetComponent<CPU_Move>();
-                        collision.GetComponent<player_Move>().AddPosition(enemyMove.GetMove() * enemyMove.GetMoveSpeed() * Time.deltaTime);
+                        collision.GetComponent<Player_Move>().AddPosition(enemyMove.GetMove() * enemyMove.GetMoveSpeed() * Time.deltaTime);
                         break;
                     case eEnemyType.golem:
                         Vector3 enelgy = collision.transform.position - transform.position;
@@ -131,6 +132,7 @@ public class Manager_Hit : MonoBehaviour
                         collision.transform.position =scaffold[UnityEngine.Random.Range(0,scaffold.Length)].transform.position;
                         GameObject.FindWithTag("MainCamera").GetComponent<CameraMove>().PosReset();
                         break;
+                    case eEnemyType.ghost: collision.GetComponent<Player_Move>().SetMoveBuff(GhostBuff); collision.GetComponent<Player_Move>().SetMoveBuffCount(12); break;
 
 
                     case eEnemyType.bossEnemy: break;

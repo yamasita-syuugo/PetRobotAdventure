@@ -13,6 +13,7 @@ public enum eEnemyType
     livingArmor,    //LivingArmor   :’n–Ê‚ğ•à‚«•Ší‚ğU‚è‰ñ‚·
     enemyMass,      //EnemyMass     :“G‚ÌW‡‘Ì‚·‚×‚Ä“|‚·‚ÆÁ‚¦‚é
     fakeGate,       //FakeGate      :‹U‚ÌƒQ[ƒg“–‚½‚é‚Æƒ‰ƒ“ƒ_ƒ€‚È‘«ê‚Éƒ[ƒv‚³‚¹‚ç‚ê‚é
+    ghost,          //Ghost         :UŒ‚‚Ì“–‚½‚ç‚È‚¢“GAG‚ê‚Ä‚éŠÔˆÚ“®‘¬“x‚ª—‚¿Aˆê’èŠÔG‚ê‚Ä‚é‚ÆƒQ[ƒ€ƒI[ƒo[
 
     //              //‘«ê‚ğ‰ó‚µ‚Ä‰ñ‚é  ‹ó’†‚ğˆÚ“®‚·‚é     ‚¢‚­‚Â‚©‚ÌUŒ‚‚É‘Ï‚¦‚é
     bossEnemy,    //ƒJƒEƒ“ƒg‚ÅendGame‚ğ”­“®   UŒ‚‚ÅƒJƒEƒ“ƒg‚ğ’x‚ç‚¹‚é    ‹ß‚Ã‚­‚Æ˜A‘±‚ÅUŒ‚‚Å‚«‚é‚Ì‚ÅƒJƒƒ‰‚Éû‚Ü‚é”ÍˆÍ‚Å‹——£‚ğæ‚è‰“‹——£UŒ‚‚·‚é  ‰“‹——£UŒ‚‚Í
@@ -32,6 +33,7 @@ public class Manager_Enemy : MonoBehaviour
         enemyImage[(int)eEnemyType.golem] = image_Golem;
         enemyImage[(int)eEnemyType.livingArmor] = image_LivingArmor;
         enemyImage[(int)eEnemyType.fakeGate] = image_FakeGate;
+        enemyImage[(int)eEnemyType.ghost] = image_Ghost;
     }
     [Header("enemyImage")]
     [SerializeField] Sprite image_Bom;
@@ -39,6 +41,7 @@ public class Manager_Enemy : MonoBehaviour
     [SerializeField] Sprite image_Golem;
     [SerializeField] Sprite image_LivingArmor;
     [SerializeField] Sprite image_FakeGate;
+    [SerializeField] Sprite image_Ghost;
 
     GameObject[]enemyObject = new GameObject[(int)eEnemyType.max];
     [SerializeField] int orderInLayer = 7;
@@ -51,6 +54,7 @@ public class Manager_Enemy : MonoBehaviour
         enemyObject[(int)eEnemyType.livingArmor] = enemyObject_LivingArmor;
         enemyObject[(int)eEnemyType.enemyMass] = enemyObject_EnemyMass;
         enemyObject[(int)eEnemyType.fakeGate] = enemyObject_FakeGate;
+        enemyObject[(int)eEnemyType.ghost] = enemyObject_Ghost;
         for (int i = 0; i < enemyObject.Length; i++) { if (enemyObject[i] == null) continue; enemyObject[i].GetComponent<SpriteRenderer>().sortingOrder = orderInLayer; }
     }
     [Header("enemyObject")]
@@ -60,6 +64,7 @@ public class Manager_Enemy : MonoBehaviour
     [SerializeField] GameObject enemyObject_LivingArmor;
     [SerializeField] GameObject enemyObject_EnemyMass;
     [SerializeField] GameObject enemyObject_FakeGate;
+    [SerializeField] GameObject enemyObject_Ghost;
 
     float[] enemySpaunTimeReset = new float[(int)eEnemyType.max];
     public float GetEnemySpaunTimeReset(eEnemyType enemyType) { return enemySpaunTimeReset[(int)enemyType]; } 
@@ -70,6 +75,7 @@ public class Manager_Enemy : MonoBehaviour
         enemySpaunTimeReset[(int)eEnemyType.golem] = enemySpaunTimeReset_Golem;
         enemySpaunTimeReset[(int)eEnemyType.livingArmor] = enemySpaunTimeReset_LivingArmor;
         enemySpaunTimeReset[(int)eEnemyType.enemyMass] = enemySpaunTimeReset_EnemyMass;
+        enemySpaunTimeReset[(int)eEnemyType.ghost] = enemySpaunTimeReset_Ghost;
     }
     [Header("enemySpaunTimeReset")]
     [SerializeField] float enemySpaunTimeReset_Bom;
@@ -77,6 +83,7 @@ public class Manager_Enemy : MonoBehaviour
     [SerializeField] float enemySpaunTimeReset_Golem;
     [SerializeField] float enemySpaunTimeReset_LivingArmor;
     [SerializeField] float enemySpaunTimeReset_EnemyMass;
+    [SerializeField] float enemySpaunTimeReset_Ghost;
 
     void OnEnable(){
         SetEnemyImage(); 

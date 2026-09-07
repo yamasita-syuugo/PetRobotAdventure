@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2262980405609510523}
   - component: {fileID: 4111167878237020882}
   - component: {fileID: 597098589953460740}
+  - component: {fileID: 2896461134827109473}
   m_Layer: 0
   m_Name: Scaffold_MovePlate
   m_TagString: Scaffold
@@ -172,3 +173,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaffoldType: 3
+--- !u!114 &2896461134827109473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7285234217500196173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2707ee8250b005c4a994e6bc2f1c6d82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plannedBreakOn: 0
+  breakStartTime: 0
+  blinkingTime: 0.3
+  blinkingOffTime: 0.5
+  breakTime: 3

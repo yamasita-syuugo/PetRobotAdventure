@@ -10,6 +10,7 @@ public enum eCollectionType
     [InspectorName("")] none = -1,
 
     stage,
+    stageClear,
     player,
     medal,
     mousePointer,
@@ -62,6 +63,8 @@ public class Manager_Collection : MonoBehaviour
     [SerializeField]
     bool[] getSituation_Stage = new bool[(int)eStage.max];
     [SerializeField]
+    bool[] getSituation_StageClear = new bool[(int)eStage.max];
+    [SerializeField]
     bool[] getSituation_Player = new bool[16];
     [SerializeField]
     bool[] getSituation_Medal = new bool[16];
@@ -77,6 +80,7 @@ public class Manager_Collection : MonoBehaviour
         switch (collectionType)
         {
             case eCollectionType.stage: return getSituation_Stage[index]; break;
+            case eCollectionType.stageClear: return getSituation_StageClear[index]; break;
             case eCollectionType.player: return getSituation_Player[index]; break;
             case eCollectionType.medal: return getSituation_Medal[index]; break;
             case eCollectionType.mousePointer: return getSituation_MousePointer[index]; break;
@@ -91,6 +95,7 @@ public class Manager_Collection : MonoBehaviour
         switch (collectionType)
         {
             case eCollectionType.stage: getSituation_Stage[index] = getSituation_; break;
+            case eCollectionType.stageClear: getSituation_StageClear[index] = getSituation_; break;
             case eCollectionType.player: getSituation_Player[index] = getSituation_; break;
             case eCollectionType.medal: getSituation_Medal[index] = getSituation_; break;
             case eCollectionType.mousePointer: getSituation_MousePointer[index] = getSituation_; break;
@@ -128,6 +133,7 @@ public class Manager_Collection : MonoBehaviour
         PlayerPrefs.SetInt("CollectionCoins", collectionCoins);
 
         Manager_Save.BoolSave("StageSituation", (int)eStage.max, getSituation_Stage);
+        Manager_Save.BoolSave("StageClearSituation", (int)eStage.max, getSituation_StageClear);
         Manager_Save.BoolSave("PlayerGetSituation", (int)ePlayerType.max, getSituation_Player);
         Manager_Save.BoolSave("MedalGetSituation", (int)eMedalType.max, getSituation_Medal);
         Manager_Save.BoolSave("MousePointerGetSituation", GetComponent<Manager_MousePointerType>().GetMousePointerAnimations().Length, getSituation_MousePointer);
@@ -140,6 +146,7 @@ public class Manager_Collection : MonoBehaviour
 
         Manager_Save.BoolLoad("StageSituation", (int)eStage.max, out getSituation_Stage);
         getSituation_Stage[0] = true;
+        Manager_Save.BoolLoad("StageClearSituation", (int)eStage.max, out getSituation_StageClear);
         Manager_Save.BoolLoad("PlayerGetSituation", (int)ePlayerType.max, out getSituation_Player);
         getSituation_Player[0] = true;
         Manager_Save.BoolLoad("MedalGetSituation", (int)eMedalType.max, out getSituation_Medal);

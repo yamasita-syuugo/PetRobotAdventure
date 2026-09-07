@@ -23,6 +23,8 @@ public enum eStage
     iceLabyrinth,
     searchGate,
     dummyGate,
+    ghostPhase,
+
     bossStage,
 
     lastGame,
@@ -50,6 +52,9 @@ public struct stStageData
     public float[] GetEnemySpaunTimeReset() { return enemySpaunTimeReset; }
     public float GetEnemySpaunTimeReset(eEnemyType enemyType) { return enemySpaunTimeReset[(int)enemyType]; }
     public void SetEnemySpaunTimeReset(eEnemyType enemyType,float enemySpaunTimeReset_) {  enemySpaunTimeReset[(int)enemyType] = enemySpaunTimeReset_; }
+    bool playerMoveSkewedDistribution;
+    public bool GetPlayerMoveSkewedDistribution() { return playerMoveSkewedDistribution; }
+    public void SetPlayerMoveSkewedDistribution(bool playerMoveSkewedDistribution_) { playerMoveSkewedDistribution = playerMoveSkewedDistribution_; }
 
 
     //足場の配置パターン
@@ -68,6 +73,12 @@ public struct stStageData
     int fieldSize;
     public int GetFieldSize() { return fieldSize; }
     public void SetFieldSize(int fieldSize_) {  fieldSize = fieldSize_; }
+    bool scaffoldBreakRun;
+    public bool GetScaffoldBreakRun() {  return scaffoldBreakRun; }
+    public void SetScaffoldBreakRun(bool scaffoldBreakRun_) { scaffoldBreakRun = scaffoldBreakRun_; }
+    int labyrinthCurvePercent;
+    public int GetLabyrinthCurvePercent() {  return labyrinthCurvePercent; }
+    public void SetLabyrinthCurvePercent(int labyrinthCurvePercent_) {  labyrinthCurvePercent = labyrinthCurvePercent_; }
 
     //エフェクト選択
     eEffectType effectType;
@@ -203,6 +214,8 @@ public class Manager_StageSelect : MonoBehaviour
         for (int stage = 0; stage < (int)eStage.max; stage++)
         {
             stageData[stage].SetGatePosRandom(false);
+            stageData[stage].SetScaffoldBreakRun(false);
+            stageData[stage].SetLabyrinthCurvePercent(20);
             switch ((eStage)stage)//labyrinthのsizeは奇数
             {
                 case eStage.fastPlay:
@@ -217,6 +230,12 @@ public class Manager_StageSelect : MonoBehaviour
                     stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.grassOnly);
                     stageData[stage].SetRandomScaffoldBreak(0.0f);
                     break;
+                case eStage.bomRush:
+                    stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.stage);
+                    stageData[stage].SetFieldSize(4);
+                    stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.blockOnly);
+                    stageData[stage].SetRandomScaffoldBreak(75.0f);
+                    break;
                 case eStage.golemPush:
                     stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.stage);
                     stageData[stage].SetFieldSize(14);
@@ -226,22 +245,9 @@ public class Manager_StageSelect : MonoBehaviour
                     break;
                 case eStage.iceLabyrinth:
                     stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.labyrinth);
-                    stageData[stage].SetFieldSize(10);
+                    stageData[stage].SetFieldSize(11);
                     stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.iceOnly);
                     stageData[stage].SetRandomScaffoldBreak(10.0f);
-                    break;
-                case eStage.dummyGate:
-                    stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.frameStage);
-                    stageData[stage].SetFieldSize(56);
-                    stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.blockOnly);
-                    stageData[stage].SetHoleSize(4);
-                    stageData[stage].SetRandomScaffoldBreak(20);
-                    break;
-                case eStage.bomRush:
-                    stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.stage);
-                    stageData[stage].SetFieldSize(4);
-                    stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.blockOnly);
-                    stageData[stage].SetRandomScaffoldBreak(75.0f);
                     break;
                 case eStage.searchGate:
                     stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.frameStage);
@@ -250,6 +256,23 @@ public class Manager_StageSelect : MonoBehaviour
                     stageData[stage].SetHoleSize(4);
                     stageData[stage].SetRandomScaffoldBreak(4);
                     break;
+                case eStage.dummyGate:
+                    stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.frameStage);
+                    stageData[stage].SetFieldSize(56);
+                    stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.blockOnly);
+                    stageData[stage].SetHoleSize(4);
+                    stageData[stage].SetRandomScaffoldBreak(20);
+                    break;
+                case eStage.ghostPhase:
+                    stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.labyrinth);
+                    stageData[stage].SetLabyrinthCurvePercent(40);
+                    stageData[stage].SetFieldSize(17);
+                    stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.blockOnly);
+                    stageData[stage].SetHoleSize(0);
+                    stageData[stage].SetRandomScaffoldBreak(0);
+                    stageData[stage].SetScaffoldBreakRun(true);
+                    break;
+
                 case eStage.bossStage:
                     stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.bossStage);
                     stageData[stage].SetFieldSize(15);
@@ -315,6 +338,10 @@ public class Manager_StageSelect : MonoBehaviour
                     stageData[stage].SetGateOpenType(eGateOpenType.time_Countdown);
                     stageData[stage].SetGateOpenNum(20);
                     break;
+                case eStage.bomRush:
+                    stageData[stage].SetGateOpenType(eGateOpenType.scoreCheck_Posi_Destroy_ + (int)eEnemyType.bom);
+                    stageData[stage].SetGateOpenNum(15);
+                    break;
                 case eStage.golemPush:
                     stageData[stage].SetGateOpenType(eGateOpenType.time_Countdown);
                     stageData[stage].SetGateOpenNum(30);
@@ -323,18 +350,19 @@ public class Manager_StageSelect : MonoBehaviour
                     stageData[stage].SetGateOpenType(eGateOpenType.time_Countdown);
                     stageData[stage].SetGateOpenNum(5);
                     break;
-                case eStage.dummyGate:
-                    stageData[stage].SetGateOpenType(eGateOpenType.scoreCheck_Posi_Destroy_ + (int)eEnemyType.bom);//ゲートを一定数くぐる
-                    stageData[stage].SetGateOpenNum(7);
-                    break;
-                case eStage.bomRush:
-                    stageData[stage].SetGateOpenType(eGateOpenType.scoreCheck_Posi_Destroy_ + (int)eEnemyType.bom);
-                    stageData[stage].SetGateOpenNum(15);
-                    break;
                 case eStage.searchGate:
                     stageData[stage].SetGateOpenType(eGateOpenType.time_Countdown);
                     stageData[stage].SetGateOpenNum(5);
                     break;
+                case eStage.dummyGate:
+                    stageData[stage].SetGateOpenType(eGateOpenType.scoreCheck_Posi_Destroy_ + (int)eEnemyType.bom);//ゲートを一定数くぐる
+                    stageData[stage].SetGateOpenNum(7);
+                    break;
+                case eStage.ghostPhase:
+                    stageData[stage].SetGateOpenType(eGateOpenType.time_Countdown );
+                    stageData[stage].SetGateOpenNum(1);
+                    break;
+
                 case eStage.bossStage:
                     stageData[stage].SetGateOpenType(eGateOpenType.scoreCheck_Posi_Destroy_ + (int)eEnemyType.bom);
                     stageData[stage].SetGateOpenNum(25);
@@ -411,12 +439,22 @@ public class Manager_StageSelect : MonoBehaviour
                             case eEnemyType.enemyMass: break;
                         }
                         break;
+                    case eStage.bomRush:
+                        switch (enemy)
+                        {
+                            case eEnemyType.bom: spawnStratTime = 1; spawnTime = 1.5f; break;
+                            case eEnemyType.crow: break;
+                            case eEnemyType.golem: break;
+                            case eEnemyType.livingArmor: break;
+                            case eEnemyType.enemyMass: break;
+                        }
+                        break;
                     case eStage.golemPush:
                         switch (enemy)
                         {
-                            case eEnemyType.bom:spawnStratTime = 1;spawnTime = 2;  break;
+                            case eEnemyType.bom:spawnStratTime = 1;spawnTime = 4;  break;
                             case eEnemyType.crow: break;
-                            case eEnemyType.golem: spawnStratTime = 1;spawnTime = 1; enemyStartSpawn = 7; break;
+                            case eEnemyType.golem: spawnStratTime = 1;spawnTime = 2; enemyStartSpawn = 4; break;
                             case eEnemyType.livingArmor: break;
                             case eEnemyType.enemyMass: break;
                         }
@@ -424,28 +462,7 @@ public class Manager_StageSelect : MonoBehaviour
                     case eStage.iceLabyrinth:
                         switch (enemy)
                         {
-                            case eEnemyType.bom: spawnStratTime = 1; enemyStartSpawn = 5; break;
-                            case eEnemyType.crow: break;
-                            case eEnemyType.golem: break;
-                            case eEnemyType.livingArmor: break;
-                            case eEnemyType.enemyMass: break;
-                        }
-                        break;
-                    case eStage.dummyGate:
-                        switch (enemy)
-                        {
-                            case eEnemyType.bom: spawnStratTime = 1; break;
-                            case eEnemyType.crow: spawnStratTime = 1; spawnTime = 3f; break;
-                            case eEnemyType.golem: break;
-                            case eEnemyType.livingArmor: break;
-                            case eEnemyType.enemyMass: break;
-                            case eEnemyType.fakeGate: spawnStratTime = 100; spawnTime = 10; enemyStartSpawn = 80; break;
-                        }
-                        break;
-                    case eStage.bomRush:
-                        switch (enemy)
-                        {
-                            case eEnemyType.bom: spawnStratTime = 1; spawnTime = 1.5f; break;
+                            case eEnemyType.bom: spawnStratTime = 1; enemyStartSpawn = 3; break;
                             case eEnemyType.crow: break;
                             case eEnemyType.golem: break;
                             case eEnemyType.livingArmor: break;
@@ -462,6 +479,31 @@ public class Manager_StageSelect : MonoBehaviour
                             case eEnemyType.enemyMass: break;
                         }
                         break;
+                    case eStage.dummyGate:
+                        switch (enemy)
+                        {
+                            case eEnemyType.bom: spawnStratTime = 1; break;
+                            case eEnemyType.crow: spawnStratTime = 1; spawnTime = 3f; break;
+                            case eEnemyType.golem: break;
+                            case eEnemyType.livingArmor: break;
+                            case eEnemyType.enemyMass: break;
+                            case eEnemyType.fakeGate: spawnStratTime = 100; spawnTime = 10; enemyStartSpawn = 80; break;
+                        }
+                        break;
+                    case eStage.ghostPhase:
+                        switch (enemy)
+                        {
+                            case eEnemyType.bom:  break;
+                            case eEnemyType.crow: spawnStratTime = 1; spawnTime = 3f; break;
+                            case eEnemyType.golem: break;
+                            case eEnemyType.livingArmor: break;
+                            case eEnemyType.ghost: spawnStratTime = 1; spawnTime = 3f; break;
+                            case eEnemyType.enemyMass: break;
+                            case eEnemyType.fakeGate: break;
+                        }
+                        break;
+
+
                     case eStage.bossStage:
                         switch (enemy)
                         {
@@ -523,6 +565,14 @@ public class Manager_StageSelect : MonoBehaviour
                 randomStageData.SetEnemySpaunTimeReset(enemy, spawnTime);
             }
         }
+        for(int stage = 0; stage < (int)eStage.max; stage++)
+        {
+        stageData[stage].SetPlayerMoveSkewedDistribution(false);
+            switch ((eStage)stage)
+            {
+                case eStage.ghostPhase: stageData[stage].SetPlayerMoveSkewedDistribution(true); break;
+            }
+        }
     }
     void StageEffectSelect()
     {
@@ -532,11 +582,13 @@ public class Manager_StageSelect : MonoBehaviour
             {
                 case eStage.fastPlay:stageData[stage].SetEffectType(eEffectType.cloud); break;
                 case eStage.crowStage: stageData[stage].SetEffectType(eEffectType.cloud); break;
+                case eStage.bomRush: stageData[stage].SetEffectType(eEffectType.cloud); break;
                 case eStage.golemPush: stageData[stage].SetEffectType(eEffectType.cloud); break;
                 case eStage.iceLabyrinth: stageData[stage].SetEffectType(eEffectType.cloud); break;
-                case eStage.dummyGate: stageData[stage].SetEffectType(eEffectType.cloud); break;
-                case eStage.bomRush: stageData[stage].SetEffectType(eEffectType.cloud); break;
                 case eStage.searchGate: stageData[stage].SetEffectType(eEffectType.cloud); break;
+                case eStage.dummyGate: stageData[stage].SetEffectType(eEffectType.cloud); break;
+                case eStage.ghostPhase: stageData[stage].SetEffectType(eEffectType.cloud); break;
+
                 case eStage.bossStage: stageData[stage].SetEffectType(eEffectType.cloud); break;
                 case eStage.lastGame: stageData[stage].SetEffectType(eEffectType.cloud); break;
                 case eStage.test_混沌: stageData[stage].SetEffectType(eEffectType.none); break;
@@ -559,21 +611,25 @@ public class Manager_StageSelect : MonoBehaviour
                 case eStage.crowStage:
                     stageData[stage].SetBackGroundIndex(eBackGroundType.sea);
                     break;
+                case eStage.bomRush:
+                    stageData[stage].SetBackGroundIndex(eBackGroundType.forest);
+                    break;
                 case eStage.golemPush:
                     stageData[stage].SetBackGroundIndex(eBackGroundType.sea);
                     break;
                 case eStage.iceLabyrinth:
                     stageData[stage].SetBackGroundIndex(eBackGroundType.forest);
                     break;
-                case eStage.dummyGate:
-                    stageData[stage].SetBackGroundIndex(eBackGroundType.forest);
-                    break;
-                case eStage.bomRush:
-                    stageData[stage].SetBackGroundIndex(eBackGroundType.forest);
-                    break;
                 case eStage.searchGate:
                     stageData[stage].SetBackGroundIndex(eBackGroundType.sea);
                     break;
+                case eStage.dummyGate:
+                    stageData[stage].SetBackGroundIndex(eBackGroundType.forest);
+                    break;
+                case eStage.ghostPhase:
+                    stageData[stage].SetBackGroundIndex(eBackGroundType.pipe);
+                    break;
+
                 case eStage.bossStage:
                     stageData[stage].SetBackGroundIndex(eBackGroundType.forest);
                     break;
@@ -581,7 +637,7 @@ public class Manager_StageSelect : MonoBehaviour
                     stageData[stage].SetBackGroundIndex(eBackGroundType.sea);
                     break;
                 case eStage.test_混沌:
-                    stageData[stage].SetBackGroundIndex(eBackGroundType.forest);
+                    stageData[stage].SetBackGroundIndex(eBackGroundType.question);
                     break;
                 default: Debug.Log("StageBackGroundSelect : " + ((eStage)stage).ToString()); break;
             }
@@ -603,21 +659,25 @@ public class Manager_StageSelect : MonoBehaviour
                 case eStage.crowStage:
                     stageData[stage].SetMusicIndex(1);
                     break;
+                case eStage.bomRush:
+                    stageData[stage].SetMusicIndex(1);
+                    break;
                 case eStage.golemPush:
                     stageData[stage].SetMusicIndex(1);
                     break;
                 case eStage.iceLabyrinth:
-                    stageData[stage].SetMusicIndex(1);
-                    break;
-                case eStage.dummyGate:
-                    stageData[stage].SetMusicIndex(1);
-                    break;
-                case eStage.bomRush:
-                    stageData[stage].SetMusicIndex(1);
+                    stageData[stage].SetMusicIndex(2);
                     break;
                 case eStage.searchGate:
-                    stageData[stage].SetMusicIndex(1);
+                    stageData[stage].SetMusicIndex(2);
                     break;
+                case eStage.dummyGate:
+                    stageData[stage].SetMusicIndex(2);
+                    break;
+                case eStage.ghostPhase:
+                    stageData[stage].SetMusicIndex(2);
+                    break;
+
                 case eStage.bossStage:
                     stageData[stage].SetMusicIndex(1);
                     break;

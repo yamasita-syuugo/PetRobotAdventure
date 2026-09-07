@@ -20,6 +20,7 @@ TagManager:
   - Create_Scaffold
   - Coin
   - Create_Coins
+  - TriggerCheck
   layers:
   - Default
   - TransparentFX

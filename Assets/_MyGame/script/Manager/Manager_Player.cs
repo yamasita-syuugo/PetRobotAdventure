@@ -21,6 +21,7 @@ public enum ePlayerType
 
 public class Manager_Player : MonoBehaviour
 {
+    Manager_Collection manager_Collection;
     Manager_Player_Technique manager_Player_Technique;
     Manager_PlayerController manager_PlayerController;
 
@@ -50,7 +51,19 @@ public class Manager_Player : MonoBehaviour
     }
     void AddPlayerTypeIndex(int add = 1)
     {
-        playerTypeIndex = playerTypeIndex + add;
+        int playerTypeNum = (int)ePlayerType.max;
+        ePlayerType oldOlayerType = playerTypeIndex;
+        while (true)
+        {
+            playerTypeIndex = playerTypeIndex + add;
+            if (playerTypeIndex >= ePlayerType.max) playerTypeIndex = ePlayerType.none + 1;
+            if (playerTypeIndex <= ePlayerType.none) playerTypeIndex = ePlayerType.max - 1;
+
+            if (manager_Collection.GetGetSituation(eCollectionType.player, (int)playerTypeIndex)) break;
+
+            playerTypeNum--;
+            if (playerTypeNum < 0) { playerTypeIndex = oldOlayerType;break; }
+        }
         if (playerTypeIndex < 0) playerTypeIndex = ePlayerType.max - 1;
         else if (playerTypeIndex >= ePlayerType.max) playerTypeIndex = 0;
 
@@ -80,6 +93,7 @@ public class Manager_Player : MonoBehaviour
     // Start is called before the first frame update
     private void OnEnable()
     {
+        manager_Collection = GetComponent<Manager_Collection>();
         manager_Player_Technique = GetComponent<Manager_Player_Technique>();
         manager_PlayerController = GetComponent<Manager_PlayerController>();
         SetPlayerSpeed();

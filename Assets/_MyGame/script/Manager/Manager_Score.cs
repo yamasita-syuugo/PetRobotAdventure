@@ -44,7 +44,7 @@ public class Manager_Score : MonoBehaviour
         scoreImage[(int)eScoreType.Enemy_ + (int)eEnemyType.enemyMass] = Enemy_GolemImage;
         scoreImage[(int)eScoreType.Enemy_ + (int)eEnemyType.bossEnemy] = Enemy_GolemImage;
 
-        for (int i = 0; i < (int)eScoreType.max; i++) if (scoreImage[i] == null) Debug.Log("scoreImage == <color=red>null</color> : " + ((eScoreType)i).ToString());
+        //for (int i = 0; i < (int)eScoreType.max; i++) if (scoreImage[i] == null) Debug.Log("scoreImage == <color=red>null</color> : " + ((eScoreType)i).ToString());
     }
     [SerializeField] Sprite totalImage;
     [Header("positive")]

@@ -277,7 +277,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collection_Base: {fileID: 8199763754023068179, guid: 573c46f15e9f64f429422c6e40c025db, type: 3}
   collection: []
-  collectionType: 1
+  collectionType: 2
   musicSprite: {fileID: 0}
 --- !u!114 &50789965
 MonoBehaviour:
@@ -2496,7 +2496,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collection_Base: {fileID: 8199763754023068179, guid: 573c46f15e9f64f429422c6e40c025db, type: 3}
   collection: []
-  collectionType: 4
+  collectionType: 5
   musicSprite: {fileID: 0}
 --- !u!114 &793870923
 MonoBehaviour:
@@ -3432,7 +3432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collection_Base: {fileID: 8199763754023068179, guid: 573c46f15e9f64f429422c6e40c025db, type: 3}
   collection: []
-  collectionType: 2
+  collectionType: 3
   musicSprite: {fileID: 0}
 --- !u!114 &1246736289
 MonoBehaviour:
@@ -4779,14 +4779,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4625129172083975772, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
-      propertyPath: playerIconAnimaterBase.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4625129172083975772, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
-      propertyPath: playerIconAnimaterBase.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5672,7 +5664,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collection_Base: {fileID: 8199763754023068179, guid: 573c46f15e9f64f429422c6e40c025db, type: 3}
   collection: []
-  collectionType: 3
+  collectionType: 4
   musicSprite: {fileID: 0}
 --- !u!114 &2055323607
 MonoBehaviour:

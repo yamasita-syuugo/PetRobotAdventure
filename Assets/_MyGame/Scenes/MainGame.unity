@@ -320,10 +320,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Manager
       objectReference: {fileID: 0}
-    - target: {fileID: 2216643563423679949, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
-      propertyPath: destroy_Golem_Image
-      value: 
-      objectReference: {fileID: -2115553726, guid: 31d3c3b7612648241893f5c0793e3286, type: 3}
+    - target: {fileID: 2715966263701131368, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2838408346344982493, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -362,6 +362,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2838408346344982493, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4071238493058078371, guid: c3b6a8c69bbb08d43a5a26021e625d66, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

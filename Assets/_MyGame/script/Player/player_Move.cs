@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 //using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class player_Move : MonoBehaviour
+public class Player_Move : MonoBehaviour
 {
     Manager_Medal manager_Medal;
     Manager_PlayerController manager_PlayerController;
@@ -48,6 +48,12 @@ public class player_Move : MonoBehaviour
     [SerializeField]
     float playerTypeSpeed = 1;
     public void SetPlayerTypeSpeed(float speed) {  playerTypeSpeed = speed; }
+    float moveBuff = 1f;
+    public void SetMoveBuff(float moveBuff_) { moveBuff = moveBuff_; }
+    public void MulMoveBuff(float moveBuff_) { moveBuff *= moveBuff_; }
+    public void MoveBuffReset() { moveBuff = 1f; }//onTrigger1巡ごと用:Manager_TriggerCheck
+    int moveBuffCount = 0;
+    public void SetMoveBuffCount(int count) {  moveBuffCount = count; }
     Vector3 move;
     float moveSpeed;
     float moveMax = 1.5f;
@@ -75,9 +81,9 @@ public class player_Move : MonoBehaviour
     {
         if (GetComponent<ObjectFall>().GetSituation() == ObjectFall.eSituation.fall ||
             GetComponent<ObjectFall>().GetSituation() == ObjectFall.eSituation.chanting) return;
-
-        transform.position += move * playerTypeSpeed * manager_Medal.GetMoveSpeedBuff() * Time.deltaTime;
-        //Debug.Log(scaffold.HumanName());
+        Debug.Log("moveBuff : " + moveBuff.ToString());
+        transform.position += move * playerTypeSpeed * manager_Medal.GetMoveSpeedBuff() * moveBuff * Time.deltaTime;
+        if (moveBuffCount <= 0) moveBuff = 1;else moveBuffCount--;
         switch (scaffold)
         {
             case eScaffoldType.block:
@@ -108,7 +114,9 @@ public class player_Move : MonoBehaviour
 
     }
     Animator playerAnimation;
-    void Direction()//todo:アニメーションの変更
+    int playerDirectionNum = 0;//0=下 , 1=上 , 2=右 , 3=左
+    public int GetPlayerDirectionNum() {  return playerDirectionNum; }
+    void Direction()
     {
         if (playerAnimation == null) return;
 
@@ -117,14 +125,15 @@ public class player_Move : MonoBehaviour
         float directionY = transfer.y;
         if (directionX * directionX > directionY * directionY)
         {
-            if (directionX < 0) playerAnimation.SetInteger("direction", 3);
-            else playerAnimation.SetInteger("direction", 2);
+            if (directionX < 0)playerDirectionNum = 3;
+        else playerDirectionNum = 2;
         }
         else
         {
-            if (directionY <= 0) playerAnimation.SetInteger("direction", 0);
-            else playerAnimation.SetInteger("direction", 1);
+            if (directionY <= 0) playerDirectionNum = 0;
+            else playerDirectionNum = 1;
         }
+        playerAnimation.SetInteger("direction", playerDirectionNum);
     }
 
     public void AddPosition(Vector3 addMove)

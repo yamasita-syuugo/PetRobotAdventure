@@ -8,6 +8,8 @@ public class Manager_Music : MonoBehaviour
     AudioClip[] musicBase;
     public AudioClip[] GetMusicBase() { return musicBase; }
     public AudioClip GetMusicBase(int index_) { return musicBase[index_]; }
+    [SerializeField] float[] musicVolume;
+    public float GetVolume(int musicIndex) { return musicVolume[musicIndex]; }
     [SerializeField]
     int musicIndex = 0;
     public int GetMusicIndex() { return musicIndex; }

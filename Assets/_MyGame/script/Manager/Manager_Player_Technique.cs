@@ -53,7 +53,7 @@ public class Manager_Player_Technique : MonoBehaviour
 
     [Header("TechniqueIndex")]
     [SerializeField]
-    int one = 0;
+    int one = 1;
     public int GetOne() { return one; }
     public void SetOne(int one_) { one = one_; AddOneType(0); }
     public void AddOneType(int add = 1)
@@ -83,7 +83,7 @@ public class Manager_Player_Technique : MonoBehaviour
     public void OneRightButton() { AddOneType(1); }
 
     [SerializeField]
-    int two = 0;
+    int two = 2;
     public int GetTwo() { return two; }
     public void SetTwo(int two_) { two = two_; AddTwoType(0); }
     public void AddTwoType(int add = 1)
@@ -162,8 +162,8 @@ public class Manager_Player_Technique : MonoBehaviour
     }
     public void DataLoad()
     {
-        SetOne(PlayerPrefs.GetInt("playerTechniqueOne"));
-        SetTwo(PlayerPrefs.GetInt("playerTechniqueTwo"));
+        if(PlayerPrefs.HasKey("playerTechniqueOne")) SetOne(PlayerPrefs.GetInt("playerTechniqueOne"));
+        if (PlayerPrefs.HasKey("playerTechniqueTwo")) SetTwo(PlayerPrefs.GetInt("playerTechniqueTwo"));
 
         Manager_Save.BoolLoad("GetPlayerWeapon", (int)ePlayerWeaponType.max, out getWeapon);
         Manager_Save.BoolLoad("GetPlayerMagic", (int)ePlayerMagicType.max, out getMagic);

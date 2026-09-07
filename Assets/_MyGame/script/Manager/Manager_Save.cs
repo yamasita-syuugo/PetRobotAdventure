@@ -30,6 +30,8 @@ public class Manager_Save : MonoBehaviour
     }
     public void DataLoad()
     {
+        if(PlayerPrefs.GetInt("FastGame") == 0) { PlayerPrefs.SetInt("FastGame", 1);DataSave();return; }
+
         GetComponent<Manager_StageSelect>().DataLoad();
 
         GetComponent<Manager_Player>().DataLoad();

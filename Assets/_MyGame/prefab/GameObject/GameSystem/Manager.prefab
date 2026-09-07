@@ -35,6 +35,8 @@ GameObject:
   - component: {fileID: 9165536081219879886}
   - component: {fileID: 2332144724393024931}
   - component: {fileID: 2616855217541710757}
+  - component: {fileID: 4071238493058078371}
+  - component: {fileID: 2715966263701131368}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Manager
@@ -73,6 +75,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectionCoin: {fileID: 8390818184305424821, guid: f1531a9da32921e4e854fe97801f6955, type: 3}
   getSituation_Stage: 000000
+  getSituation_StageClear: 00000000000000000000
   getSituation_Player: 00000000
   getSituation_Medal: 00000000000000000000000000000000
   getSituation_MousePointer: 0000000000
@@ -113,6 +116,7 @@ MonoBehaviour:
   playerIconAnimaterBase:
   - {fileID: 9100000, guid: 506a6060f6a657e46afba3dce3483f5f, type: 2}
   - {fileID: 9100000, guid: da49c1fbb734baa4783d6ff7b34ecfa9, type: 2}
+  - {fileID: 0}
   playerTypeIndex: 0
   petRobotTypeSpeed: 1
   wizardGhostTypeSpeed: 0.6
@@ -142,7 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   one: 1
-  two: 1
+  two: 2
   WeaponImage:
   - {fileID: 0}
   - {fileID: 21300000, guid: 5bfe0a6d02d500c41aeefc0c23cee935, type: 3}
@@ -195,8 +199,9 @@ MonoBehaviour:
   image_Bom: {fileID: 21300000, guid: 01271042cd8e6be4c9a030171ea91a84, type: 3}
   image_Crow: {fileID: 21300000, guid: 97943d4ea49085d43a2695f0f94af7b3, type: 3}
   image_Golem: {fileID: -2115553726, guid: 31d3c3b7612648241893f5c0793e3286, type: 3}
-  image_LivingArmor: {fileID: 21300000, guid: f6257b620afc21d48b542b971f7908cf, type: 3}
-  image_FakeGate: {fileID: -786470411, guid: 7b933009b1620b14d86f803538b5aebe, type: 3}
+  image_LivingArmor: {fileID: 1279251034, guid: a8a92f23786103743b6340543cfa979f, type: 3}
+  image_FakeGate: {fileID: -458712972, guid: 7b933009b1620b14d86f803538b5aebe, type: 3}
+  image_Ghost: {fileID: -238886921, guid: ff06efafb8aff124fb409d4e486060d5, type: 3}
   orderInLayer: 7
   enemyObject_Bom: {fileID: 7882004832147076534, guid: af61f766f8047ab4aa57ecc86036e3f9, type: 3}
   enemyObject_Crou: {fileID: 1846042793416335476, guid: 5aec0b44d81ee454fb01a2547fd18a57, type: 3}
@@ -204,11 +209,13 @@ MonoBehaviour:
   enemyObject_LivingArmor: {fileID: 1846042793416335476, guid: b9a5fa8a3215ff242898661a5f4fe773, type: 3}
   enemyObject_EnemyMass: {fileID: 3570103102265485630, guid: a25d743fd780b9c45a0f0829e62478dd, type: 3}
   enemyObject_FakeGate: {fileID: 7882004832147076534, guid: 6f33e28f2e94e0742a64704193c6dbae, type: 3}
+  enemyObject_Ghost: {fileID: 8916860074870586615, guid: 327acf744702329429a39929cef791bb, type: 3}
   enemySpaunTimeReset_Bom: 3
   enemySpaunTimeReset_Crow: 1
   enemySpaunTimeReset_Golem: 4.5
   enemySpaunTimeReset_LivingArmor: 3
   enemySpaunTimeReset_EnemyMass: 15
+  enemySpaunTimeReset_Ghost: 1
 --- !u!114 &5653854550284804236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,7 +250,7 @@ MonoBehaviour:
   gateOpen: 0
   gatePos: {x: 0, y: 0}
   destroy_Bom_Image: {fileID: 21300000, guid: 01271042cd8e6be4c9a030171ea91a84, type: 3}
-  destroy_Golem_Image: {fileID: 0}
+  destroy_Golem_Image: {fileID: -2115553726, guid: 31d3c3b7612648241893f5c0793e3286, type: 3}
   timer_Image: {fileID: 21300000, guid: f0b075f5349feee42bb93ae11630fa34, type: 3}
 --- !u!114 &2980074079378534292
 MonoBehaviour:
@@ -280,6 +287,15 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 37961ea07f915c44e819f3732ea51bcc, type: 3}
   - {fileID: 8300000, guid: 351699a4dc82e924893003332d6ba6ea, type: 3}
   - {fileID: 8300000, guid: 44c18cdc64da3894a9ce38f765ed2a48, type: 3}
+  - {fileID: 8300000, guid: 9299418db12fed74a8359ca4736a2cb6, type: 3}
+  - {fileID: 8300000, guid: 9bc601dfb9f2dd24a8208abcafb608af, type: 3}
+  musicVolume:
+  - 0.3
+  - 0.3
+  - 0.3
+  - 0.3
+  - 0.4
+  - 0.4
   musicIndex: 0
 --- !u!114 &8236429974492470528
 MonoBehaviour:
@@ -321,6 +337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d55b19b54981d2d4f81e60ac0361267f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GhostBuff: 0.6
   explosion: {fileID: 422756626205993004, guid: 539f0e49c86f54440bcfe188ba8f6bb7, type: 3}
 --- !u!114 &6027745835776846830
 MonoBehaviour:
@@ -506,6 +523,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fastButton: {fileID: 0}
   button: {fileID: 0}
+--- !u!58 &4071238493058078371
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492805992380382826}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!114 &2715966263701131368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492805992380382826}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8d2f69922d3fc744a93f0d9012d7c8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1163399678311762220
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -708,6 +772,10 @@ PrefabInstance:
     - target: {fileID: 1741807500527791540, guid: c11631aacc6f2f64ebac47c742a061c3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5656696006178861868, guid: c11631aacc6f2f64ebac47c742a061c3, type: 3}
+      propertyPath: m_Volume
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7914236001151910410, guid: c11631aacc6f2f64ebac47c742a061c3, type: 3}
       propertyPath: m_Name

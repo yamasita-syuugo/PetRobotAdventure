@@ -5,8 +5,6 @@ using Unity.VisualScripting;
 using static Unity.Burst.Intrinsics.X86.Avx;
 using UnityEngine.SceneManagement;
 
-
-
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -17,6 +15,9 @@ public class Create_Scaffold : MonoBehaviour
     Manager_Field manager_Field;
     Manager_Gate manager_Gate;
     Manager_Collection manager_Collection;
+
+    GameObject[] blocks;
+    public GameObject[] GetBlocks() { return blocks; }
 
     Create_Coins create_Coins;
 
@@ -46,13 +47,13 @@ public class Create_Scaffold : MonoBehaviour
         manager_Field = manager.GetComponent<Manager_Field>();
         manager_Gate = manager.GetComponent<Manager_Gate>();
         manager_Collection = manager.GetComponent<Manager_Collection>();
-
-        GameObject create_Coins_ = GameObject.FindWithTag("Create_Coins");
-        if(create_Coins_ != null) create_Coins = create_Coins_.GetComponent<Create_Coins>();
     }
     // Start is called before the first frame update
     void Start()
     {
+        GameObject create_Coins_ = GameObject.FindWithTag("Create_Coins");
+        if(create_Coins_ != null) create_Coins = create_Coins_.GetComponent<Create_Coins>();
+
         Load();
 
         CreateObject();
@@ -113,7 +114,7 @@ public class Create_Scaffold : MonoBehaviour
         randomBreak = manager_Field.GetRandomBreak(manager_StageSelect.GetStage());
         if(manager_StageSelect.GetRandomStage()) randomBreak = manager_Field.GetRandomRandomBreak();
 
-        GameObject[] blocks = new GameObject[fieldSize * fieldSize];
+        blocks = new GameObject[fieldSize * fieldSize];
         GameObject tmpBase;
         GameObject tmpScaffold;
         eFieldCreatType fieldCreatType = (eFieldCreatType)manager_Field.GetFieldCreatTypeIndex(manager_StageSelect.GetStage());;
@@ -161,6 +162,7 @@ public class Create_Scaffold : MonoBehaviour
                 ScaffoldPos[i, 1] * blockSizeY, 0),
                 Quaternion.identity);
                     tmpScaffold.transform.parent = transform;
+                    blocks[blockNum++] = tmpScaffold;
                 }
 
                 for (int i = 2; i < scaffoldNum; i++)
@@ -173,12 +175,13 @@ public class Create_Scaffold : MonoBehaviour
                         old1Pos[0] = ScaffoldPos[i - 1, 0]; old1Pos[1] = ScaffoldPos[i - 1, 1];
 
                         int random = Random.Range(0, 100);
-                        if (random <= 80)
+                        int labyrinthCurvePercent = manager_StageSelect.GetStageData(manager_StageSelect.GetStage()).GetLabyrinthCurvePercent();
+                        if (random <= 100 - labyrinthCurvePercent)
                         {
                             ScaffoldPos[i, 0] = old1Pos[0] + (old1Pos[0] - old2Pos[0]);
                             ScaffoldPos[i, 1] = old1Pos[1] + (old1Pos[1] - old2Pos[1]);
                         }
-                        else if (random <= 90)
+                        else if (random <= 100-(labyrinthCurvePercent / 2))
                         {
                             ScaffoldPos[i, 0] = old1Pos[0] + (old1Pos[1] - old2Pos[1]);
                             ScaffoldPos[i, 1] = old1Pos[1] + (old1Pos[0] - old2Pos[0]);

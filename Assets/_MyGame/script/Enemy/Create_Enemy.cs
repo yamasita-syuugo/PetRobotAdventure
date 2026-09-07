@@ -117,7 +117,7 @@ public class Create_Enemy : MonoBehaviour
     }
     void EnemySpawnCrow()
     {
-        if (GameObject.FindGameObjectWithTag("Player").GetComponent<player_Move>().GetMove() == new Vector2(0, 0)) EnemySpawnTimer(eEnemyType.crow);
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Move>().GetMove() == new Vector2(0, 0)) EnemySpawnTimer(eEnemyType.crow);
         else enemySpaunTime[(int)eEnemyType.crow] = manager_Enemy.GetEnemySpaunTimeReset(eEnemyType.crow);
     }
     [SerializeField]
@@ -197,18 +197,19 @@ public class Create_Enemy : MonoBehaviour
         spawnEnemy.transform.parent = transform;
         spawnEnemy.transform.position = nextPosition;
 
-        int directtion = Random.Range(0, 4);
+        int direction = Random.Range(0, 4);
+        if (manager_StageSelect.GetStageData(manager_StageSelect.GetStage()).GetPlayerMoveSkewedDistribution()) direction = player.GetComponent<Player_Move>().GetPlayerDirectionNum(); 
         float x = Camera.main.ViewportToWorldPoint(new Vector3(1.1f, 1.1f, Camera.main.nearClipPlane)).x;
         float y = Camera.main.ViewportToWorldPoint(new Vector3(1.1f, 1.1f, Camera.main.nearClipPlane)).y;
         float width = Random.Range(-x, x);
-        float height = Random.Range(-y, y);
-        switch (directtion)
+        float height = Random.Range(-y, y);Debug.Log("direction" + direction);
+        switch (direction)//0=â∫ , 1=è„ , 2=âE , 3=ç∂
         {
             case 0:
-                nextPosition = new Vector2(width, y);
+                nextPosition = new Vector2(width, -y);
                 break;
             case 1:
-                nextPosition = new Vector2(width, -y);
+                nextPosition = new Vector2(width, y);
                 break;
             case 2:
                 nextPosition = new Vector2(x, height);
