@@ -66,7 +66,10 @@ public class Manager_Gacha : MonoBehaviour
         manager_BackgroundType = GetComponent<Manager_BackgroundType>();
         manager_Music = GetComponent<Manager_Music>();
 
-        prizeNum = manager_Player.GetPlayerTypeBases().Length - 1 + manager_MousePointerType.GetMousePointerAnimations().Length - 1 + manager_BackgroundType.GetBackGround_Panel_Base().Length - 1 + manager_Music.GetMusicBase().Length - 1;
+        prizeNum = manager_Player.GetPlayerTypeBases().Length - 1 + 
+            manager_MousePointerType.GetMousePointerAnimations().Length - 1 + 
+            manager_BackgroundType.GetBackGround_Panel_Base().Length - 1 + 
+            manager_Music.GetMusicBase().Length - 1;
 
         DataLoad();
     }

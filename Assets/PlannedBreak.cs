@@ -28,12 +28,12 @@ public class PlannedBreak : MonoBehaviour
         if (!plannedBreakOn) return;
         time += Time.deltaTime;
 
-        //if (breakStartTime < time) return;
+        //if (breakStartTime < time) return
 
         float blinkingLoopTime = blinkingTime + blinkingOffTime;
         if (((time*10) % (blinkingLoopTime*10)) < blinkingTime) GetComponent<SpriteRenderer>().color = Color.red;
         else GetComponent<SpriteRenderer>().color = Color.white;
 
-        if(time > breakTime)Destroy(gameObject);
+        if (time > breakTime) {  Manager_Score.AddScore(eScoreType.ScaffoldBreak);Destroy(gameObject); }
     }
 }

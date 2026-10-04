@@ -78,8 +78,8 @@ public class Create_CollectionButton : MonoBehaviour
                 }
                 break;
             case eCollectionType.player:
-                collection = new GameObject[manager_Player.GetPlayerTypeBases().Length];
-                for (int i = 0; i < manager_Player.GetPlayerTypeBases().Length; i++)
+                collection = new GameObject[(int)ePlayerType.max];
+                for (int i = 0; i < (int)ePlayerType.max; i++)
                 {
                     GameObject tmp = Instantiate(collection_Base);
                     collection[i] = tmp;

@@ -10,12 +10,12 @@ public enum eCollectionType
     [InspectorName("")] none = -1,
 
     stage,
-    stageClear,
     player,
     medal,
     mousePointer,
     background,
     music,
+    stageClear,
 
     [InspectorName("")] max,
 }
@@ -53,7 +53,7 @@ public class Manager_Collection : MonoBehaviour
     public int GetCoinDenominator() {  return coinDenominator; }
     public void SetCoinDenominator(int coinDenominator_) { coinDenominator = coinDenominator_; }
 
-    eCollectionsTab collectionsTab = eCollectionsTab.stage;
+    [SerializeField] eCollectionsTab collectionsTab = eCollectionsTab.stage;
     public eCollectionsTab GetCollectionsTab() { return collectionsTab; }
     public void SetCollectionsTab(int collectionsType_) { collectionsTab = (eCollectionsTab)collectionsType_; }
     public void AddCollectionsTab(int add) { collectionsTab += add;if (collectionsTab <= eCollectionsTab.none) collectionsTab = eCollectionsTab.max - 1;if (collectionsTab >= eCollectionsTab.max) collectionsTab = eCollectionsTab.none + 1; }

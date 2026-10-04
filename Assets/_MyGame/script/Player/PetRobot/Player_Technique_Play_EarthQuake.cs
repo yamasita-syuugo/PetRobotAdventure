@@ -36,10 +36,14 @@ public class Player_Technique_Play_EarthQuake : Player_Technique_Play_Base
         float playerPosX, playerPosY, playerDirectionX, playerDirectionY;
         playerPosX = transform.position.x;
         playerPosY = transform.position.y;
-        playerDirectionX = Input.GetAxis("AimX"); ;
-        playerDirectionY = Input.GetAxis("AimY"); ;
-        posX = playerPosX + playerDirectionX;
-        posY = playerPosY + playerDirectionY;
+        Vector2 pos = GameObject.FindWithTag("AimMark").transform.position;
+        //playerDirectionX = Input.GetAxis("AimX");
+        //playerDirectionY = Input.GetAxis("AimY");
+        //posX = playerPosX + playerDirectionX;
+        //posY = playerPosY + playerDirectionY;
+        //Vector2 pos = new Vector2(playerPosX + playerDirectionX,playerPosY + playerDirectionY);
+        posX = pos.x; if (posX > 0 && posX % 1 > 0.5f + halfSlide * 0.5f) posX = (int)posX + 1 + halfSlide * 0.5f; else if (posX < 0 && posX % 1 < -0.5f + halfSlide * 0.5f) posX = (int)posX - 1 + halfSlide * 0.5f; else posX = (int)posX + halfSlide * 0.5f;
+        posY = pos.y; if (posY > 0 && posY % 1 > 0.5f + halfSlide * 0.5f) posY = (int)posY + 1 + halfSlide * 0.5f; else if (posY < 0 && posY % 1 < -0.5f + halfSlide * 0.5f) posY = (int)posY - 1 + halfSlide * 0.5f; else posY = (int)posY + halfSlide * 0.5f;
 
         CreatBlock();
     }

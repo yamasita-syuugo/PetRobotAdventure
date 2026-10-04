@@ -30,7 +30,7 @@ public class PlayerHit : MonoBehaviour
                 case ePlayerType.WizardGhost:
                     GameObject.FindWithTag("Player").GetComponentInChildren<Player_Technique_>().GetPoint();
                     break;
-                case ePlayerType.WereWolf: break;
+                //case ePlayerType.WereWolf: break;
                 default: Debug.Log("PlayerHit : " + GetComponent<PlayerType>().GetPlayerType().ToString()); break;
             }
 

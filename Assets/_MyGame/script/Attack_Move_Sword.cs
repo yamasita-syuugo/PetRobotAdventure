@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Attack_Move_Sword : MonoBehaviour
 {
-    Transform center;
-    public void SetCenter(Transform center_) {  center = center_; }
+    Vector2 center;
+    public void SetCenter(Vector2 center_) {  center = center_; }
 
     // Start is called before the first frame update
     //void Start()
@@ -29,7 +29,7 @@ public class Attack_Move_Sword : MonoBehaviour
     {
         float x = math.cos(movePoint);
         float y = math.sin(movePoint);
-        transform.position = center.position + new Vector3(x,y);
+        transform.position = center + new Vector2(x,y);
         float z = -Mathf.Atan2(x, y) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, z );
 

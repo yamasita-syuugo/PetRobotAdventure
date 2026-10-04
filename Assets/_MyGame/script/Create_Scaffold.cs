@@ -114,7 +114,9 @@ public class Create_Scaffold : MonoBehaviour
         randomBreak = manager_Field.GetRandomBreak(manager_StageSelect.GetStage());
         if(manager_StageSelect.GetRandomStage()) randomBreak = manager_Field.GetRandomRandomBreak();
 
-        blocks = new GameObject[fieldSize * fieldSize];
+        bool labyrinth2Way = manager_StageSelect.GetStageData(manager_StageSelect.GetStage()).GetLabyrinth2Way();
+        if (labyrinth2Way) blocks = new GameObject[fieldSize * fieldSize * 2];
+        else blocks = new GameObject[fieldSize * fieldSize];
         GameObject tmpBase;
         GameObject tmpScaffold;
         eFieldCreatType fieldCreatType = (eFieldCreatType)manager_Field.GetFieldCreatTypeIndex(manager_StageSelect.GetStage());;
@@ -147,6 +149,7 @@ public class Create_Scaffold : MonoBehaviour
             case eFieldCreatType.labyrinth:
                 int scaffoldNum = fieldSize * fieldSize;
                 int[,] ScaffoldPos = new int[scaffoldNum, 2];//0 = x;1 = y;
+                int[,] labyrinth2WayScaffoldPos = new int[scaffoldNum, 2];//0 = x;1 = y;
 
                 ScaffoldPos[0, 0] = 0; ScaffoldPos[0, 1] = 0;
 
@@ -161,6 +164,19 @@ public class Create_Scaffold : MonoBehaviour
                 ScaffoldPos[i, 0] * blockSizeX,
                 ScaffoldPos[i, 1] * blockSizeY, 0),
                 Quaternion.identity);
+                    tmpScaffold.transform.parent = transform;
+                    blocks[blockNum++] = tmpScaffold;
+                }
+                if (labyrinth2Way)
+                {
+                    if (old1Random <= 0) { labyrinth2WayScaffoldPos[0, 0] = ScaffoldPos[0, 0]; labyrinth2WayScaffoldPos[0, 1] = ScaffoldPos[0, 1] + 1; }
+                    else if (old1Random <= 1) { labyrinth2WayScaffoldPos[0, 0] = ScaffoldPos[0, 0]; labyrinth2WayScaffoldPos[0, 1] = labyrinth2WayScaffoldPos[0, 1] - 1; }
+                    else if (old1Random <= 2) { labyrinth2WayScaffoldPos[0, 0] = ScaffoldPos[0, 0] - 1; labyrinth2WayScaffoldPos[0, 1] = labyrinth2WayScaffoldPos[0, 1]; }
+                    else { labyrinth2WayScaffoldPos[0, 0] = labyrinth2WayScaffoldPos[0, 0] + 1; labyrinth2WayScaffoldPos[0, 1] = labyrinth2WayScaffoldPos[0, 1]; }
+                    tmpScaffold = Instantiate<GameObject>(manager_Field.ScaffoldSelect(), new Vector3(
+                        labyrinth2WayScaffoldPos[0, 0] * blockSizeX,
+                        labyrinth2WayScaffoldPos[0, 1] * blockSizeY, 0),
+                        Quaternion.identity);
                     tmpScaffold.transform.parent = transform;
                     blocks[blockNum++] = tmpScaffold;
                 }
@@ -203,6 +219,30 @@ public class Create_Scaffold : MonoBehaviour
                         blocks[blockNum++] = tmpScaffold;
 
                         if (i == scaffoldNum - 1) manager_Gate.SerGatePos(tmpScaffold.transform.position);
+                    }
+                    if (labyrinth2Way)
+                    {
+                        switch(ScaffoldPos[i, 0] - ScaffoldPos[i - 1, 0])
+                        {
+                            case 1:labyrinth2WayScaffoldPos[i - 1, 0] = ScaffoldPos[i - 1, 0];labyrinth2WayScaffoldPos[i - 1, 1] = ScaffoldPos[i - 1, 1] + 1;break;
+                            case -1: labyrinth2WayScaffoldPos[i - 1, 0] = ScaffoldPos[i - 1, 0]; labyrinth2WayScaffoldPos[i - 1, 1] = ScaffoldPos[i - 1, 1] - 1;break;
+                            case 0:
+                                switch (ScaffoldPos[i, 1] - ScaffoldPos[i - 1, 1])
+                                {
+                                    case 1: labyrinth2WayScaffoldPos[i - 1, 0] = ScaffoldPos[i - 1, 0] - 1; labyrinth2WayScaffoldPos[i - 1, 1] = ScaffoldPos[i - 1, 1]; break;
+                                    case -1: labyrinth2WayScaffoldPos[i - 1, 0] = ScaffoldPos[i - 1, 0] + 1; labyrinth2WayScaffoldPos[i - 1, 1] = ScaffoldPos[i - 1, 1]; break;
+                                }
+                                break;
+                        }
+                        if (randomBreak < Random.Range(0, 100) || i == scaffoldNum - 1)
+                        {
+                            tmpScaffold = Instantiate<GameObject>(manager_Field.ScaffoldSelect(), new Vector3(
+                        labyrinth2WayScaffoldPos[i - 1, 0] * blockSizeX,
+                        labyrinth2WayScaffoldPos[i - 1, 1] * blockSizeY, 0),
+                        Quaternion.identity);
+                            tmpScaffold.transform.parent = transform;
+                            blocks[blockNum++] = tmpScaffold;
+                        }
                     }
                 }
                 break;
@@ -255,6 +295,7 @@ public class Create_Scaffold : MonoBehaviour
                         blocks[blockNum++] = tmpScaffold;
                     }
                 }
+                manager_Gate.SerGatePos(new Vector2(0, fieldSize / 2));
                 Vector2 BossSpawnPoint = new Vector2(0, fieldSize * blockSizeY / 2);
                 break;
         }

@@ -2,6 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum eDirecttion
+{
+    [InspectorName("")] none = -1,
+
+    north,  //北、W
+    west,   //西、A
+    south,  //南、S
+    east,   //東、D
+
+    [InspectorName("")] max
+}
+
 public class Manager_Camera : MonoBehaviour
 {
     Manager_StageSelect manager_StageSelect;
@@ -24,10 +36,11 @@ public class Manager_Camera : MonoBehaviour
         {
             case eStage.fastPlay: cameraMoveSpeedDeray = 1.26f; break;
             case eStage.crowStage: cameraMoveSpeedDeray = 1.26f; break;
+            case eStage.bomRush: cameraMoveSpeedDeray = 1.26f; break;
             case eStage.golemPush: cameraMoveSpeedDeray = 0.5f; break;
             case eStage.iceLabyrinth: cameraMoveSpeedDeray = 1.26f; break;
             case eStage.searchGate: cameraMoveSpeedDeray = 0.5f; break;
-            case eStage.bomRush: cameraMoveSpeedDeray = 1.26f; break;
+            case eStage.ghostPhase: cameraMoveSpeedDeray = 1.26f; break;
             case eStage.bossStage: cameraMoveSpeedDeray = 1.26f; break;
             case eStage.lastGame: cameraMoveSpeedDeray = 1.26f; break;
             case eStage.test_混沌: break;

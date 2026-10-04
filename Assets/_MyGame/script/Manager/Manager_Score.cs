@@ -21,6 +21,8 @@ public enum eScoreType
         Enemy_,
         Enemy_Max = eScoreType.Enemy_ + eEnemyType.max,
 
+        ScaffoldBreak,
+
         max,
     }
 public class Manager_Score : MonoBehaviour
@@ -43,12 +45,14 @@ public class Manager_Score : MonoBehaviour
         scoreImage[(int)eScoreType.Enemy_ + (int)eEnemyType.livingArmor] = Enemy_GolemImage;
         scoreImage[(int)eScoreType.Enemy_ + (int)eEnemyType.enemyMass] = Enemy_GolemImage;
         scoreImage[(int)eScoreType.Enemy_ + (int)eEnemyType.bossEnemy] = Enemy_GolemImage;
+        scoreImage[(int)eScoreType.ScaffoldBreak] = ScaffoldBreakImage;
 
         //for (int i = 0; i < (int)eScoreType.max; i++) if (scoreImage[i] == null) Debug.Log("scoreImage == <color=red>null</color> : " + ((eScoreType)i).ToString());
     }
     [SerializeField] Sprite totalImage;
     [Header("positive")]
     [SerializeField] Sprite Get_FlagImage;
+
     [SerializeField] Sprite Destroy_BomImage;
     [SerializeField] Sprite Destroy_CrowImage;
     [SerializeField] Sprite Destroy_GolemImage;
@@ -62,6 +66,8 @@ public class Manager_Score : MonoBehaviour
     [SerializeField] Sprite Enemy_LivingArmorImage;
     [SerializeField] Sprite Enemy_EnemyMassImage;
     [SerializeField] Sprite Enemy_BossEnemyImage;
+
+    [SerializeField] Sprite ScaffoldBreakImage;
 
 
     static int scoreUpdate = 2;
@@ -131,13 +137,21 @@ public class Manager_Score : MonoBehaviour
     {
         return score[(int)eScoreType.Get_Flag];
     }
-    public static int GetDestroyPoint()
+    public static int GetDestroyPoint_Bom()
     {
         return score[(int)eScoreType.Destroy_ + (int)eEnemyType.bom];
+    }
+    public static int GetDestroyPoint_Golem()
+    {
+        return score[(int)eScoreType.Destroy_ + (int)eEnemyType.golem];
     }
     public static int GetEnemyBomPoint()
     {
         return score[(int)eScoreType.Enemy_ + (int)eEnemyType.bom];
+    }
+    public static int GetScaffoldBreakPoint()
+    {
+        return score[(int)eScoreType.ScaffoldBreak];
     }
 
     public void DataSave()
@@ -156,6 +170,8 @@ public class Manager_Score : MonoBehaviour
         PlayerPrefs.SetInt("oldDestroyPoint", oldScore[(int)eScoreType.Destroy_ + (int)eEnemyType.bom]);
 
         PlayerPrefs.SetInt("oldEnemyBomPoint", oldScore[(int)eScoreType.Enemy_ + (int)eEnemyType.bom]);
+
+        PlayerPrefs.SetInt("oldScaffoldBreak", oldScore[(int)eScoreType.ScaffoldBreak]);
 
 
     }
@@ -176,6 +192,8 @@ public class Manager_Score : MonoBehaviour
 
         oldScore[(int)eScoreType.Enemy_ + (int)eEnemyType.bom] = PlayerPrefs.GetInt("oldEnemyBomPoint");
 
+        oldScore[(int)eScoreType.ScaffoldBreak] = PlayerPrefs.GetInt("oldScaffoldBreak");
+
 
     }
 
@@ -189,6 +207,7 @@ public class Manager_Score : MonoBehaviour
         PlayerPrefs.SetInt("flagGetPoint", 0);
         PlayerPrefs.SetInt("destroyPoint", 0);
         PlayerPrefs.SetInt("enemyBomPoint", 0);
+        PlayerPrefs.SetInt("oldScaffoldBreak", 0);
 
         UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

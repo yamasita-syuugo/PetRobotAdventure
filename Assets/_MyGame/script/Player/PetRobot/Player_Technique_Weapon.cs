@@ -5,33 +5,47 @@ using UnityEngine;
 
 public class Player_Technique_Weapon : Player_Technique_
 {
-    Manager_PlayerController manager_PlayerController;
-    Manager_Player_Technique manager_Player_Technique;
+    protected Manager_PlayerController manager_PlayerController;
+    protected Manager_Player_Technique manager_Player_Technique;
 
     [SerializeField]
-    const int weaponNum = (int)eTechnicControl.max;
+    protected const int weaponNum = (int)eTechnicControl.max;
     [SerializeField]
-    int[] use = new int[(int)eTechnicControl.max];
+    protected int[] use = new int[(int)eTechnicControl.max];
     [Header("0 = none; 1 = Bullet; 2 = EarthQuake; 3 = MeleeAttack; 4 = Mirage")]
     GameObject[] weapon = new GameObject[(int)eTechnicControl.max]; 
     GameObject[] weaponUI = new GameObject[(int)eTechnicControl.max];
 
+    protected GameObject aimMark;
+    [SerializeField] float aimMaxDistance = 4.5f;
+
     private void OnEnable()
     {
+
+
         GameObject manager = GameObject.FindWithTag("Manager");
         manager_PlayerController = manager.GetComponent<Manager_PlayerController>();
         manager_Player_Technique = manager.GetComponent<Manager_Player_Technique>();
+
+        aimMark = Instantiate(new GameObject());
+        aimMark.name = "AimMark";
+        aimMark.tag = "AimMark";
+        aimMark.transform.parent = transform;
+        aimMark.AddComponent<SpriteRenderer>();
+        aimMark.AddComponent<Animator>().runtimeAnimatorController = manager.GetComponent<Manager_MousePointerType>().GetMousePointerAnimation(manager.GetComponent<Manager_MousePointerType>().GetMousePointerIndex());
+        aimMark.AddComponent<Player_AimMark_Move>().SetMaxDistance(aimMaxDistance);
     }
     // Start is called before the first frame update
     void Start()
     {
-        use[(int)eTechnicControl.one] = manager_Player_Technique.GetOne();
-        use[(int)eTechnicControl.two] = manager_Player_Technique.GetTwo();
-
         CreateTechniqueAndUI();
     }
     void CreateTechniqueAndUI()
     {
+        
+        use[(int)eTechnicControl.one] = manager_Player_Technique.GetOne();
+        use[(int)eTechnicControl.two] = manager_Player_Technique.GetTwo();
+
         GameObject playerUIParent = GameObject.Find("PlayerUI");
         for (int i = 0; i < weaponNum; i++)
         {

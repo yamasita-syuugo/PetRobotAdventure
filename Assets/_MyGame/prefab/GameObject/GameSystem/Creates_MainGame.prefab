@@ -91,7 +91,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   golemCountReset: 1
   livingArmorCountReset: 15
-  nextPosition: {x: 12, y: 12, z: 0}
+  nextPosition: {x: 13, y: 13, z: 0}
 --- !u!1001 &4383131647948070316
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -297,6 +297,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf155bfb1f084c84198d6c713b59d051, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blocks: []
+  time: 0
+  breakOn: 0
 --- !u!4 &6541342456667144275 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 843713029819574323, guid: c986d8f8c953e9d4f8a90e1919964ba3, type: 3}

@@ -8,8 +8,11 @@ public enum eGateOpenType
     [InspectorName("")] none,
 
     time_Countdown,
+
     scoreCheck_Posi_Destroy_,
     scoreCheck_Posi_Destroy_Max = eGateOpenType.scoreCheck_Posi_Destroy_ + ((int)eEnemyType.max - 1),
+
+    scaffoldBreak,
 
     [InspectorName("")] max,
 }
@@ -49,13 +52,15 @@ public class Manager_Gate : MonoBehaviour
     public Sprite GetGateOpenImage(eGateOpenType gateOpenType_) { return gateOpenImage[(int)gateOpenType_]; } 
     void SetGateOpenImage()
     {
+        gateOpenImage[(int)eGateOpenType.time_Countdown] = timer_Image;
         gateOpenImage[(int)eGateOpenType.scoreCheck_Posi_Destroy_ + (int)eEnemyType.bom] = destroy_Bom_Image;
         gateOpenImage[(int)eGateOpenType.scoreCheck_Posi_Destroy_ + (int)eEnemyType.golem] = destroy_Golem_Image;
-        gateOpenImage[(int)eGateOpenType.time_Countdown] = timer_Image;
+        gateOpenImage[(int)eGateOpenType.scaffoldBreak] = scaffoldBreak_Image;
     }
+    [SerializeField] Sprite timer_Image;
     [SerializeField] Sprite destroy_Bom_Image;
     [SerializeField] Sprite destroy_Golem_Image;
-    [SerializeField] Sprite timer_Image;
+    [SerializeField] Sprite scaffoldBreak_Image;
 
     // Update is called once per frame
     int gateOpenNum;
@@ -71,7 +76,13 @@ public class Manager_Gate : MonoBehaviour
                 if (GetComponent<Manager_Time>().GetPlayTime() >= gateOpenNum) SetGateOpen();
                 break;
             case eGateOpenType.scoreCheck_Posi_Destroy_ + (int)eEnemyType.bom:
-                if (Manager_Score.GetDestroyPoint() >= gateOpenNum) SetGateOpen();
+                if (Manager_Score.GetDestroyPoint_Bom() >= gateOpenNum) SetGateOpen();
+                break;
+            case eGateOpenType.scoreCheck_Posi_Destroy_ + (int)eEnemyType.golem:
+                if (Manager_Score.GetDestroyPoint_Golem() >= gateOpenNum) SetGateOpen();
+                break;
+            case eGateOpenType.scaffoldBreak:
+                if (Manager_Score.GetScaffoldBreakPoint() >= gateOpenNum) SetGateOpen();
                 break;
         }
         if (false) SetGateOpen(true);

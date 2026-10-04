@@ -345,6 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c426e51d10ceec34b877a306c21b22f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aimMarkBase: {fileID: 21300000, guid: e54c088b1b556b047ab4fa51b2ea4e36, type: 3}
   bulletBase: {fileID: 0}
   shotSound: {fileID: 0}
   moveDirectionX: 0

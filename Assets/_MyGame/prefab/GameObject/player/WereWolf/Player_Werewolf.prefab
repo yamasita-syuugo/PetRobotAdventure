@@ -130,7 +130,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: 97943d4ea49085d43a2695f0f94af7b3, type: 3}
+  m_Sprite: {fileID: -879253572, guid: 678210a6c4fe770409fc2900f6197075, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -151,7 +151,7 @@ Animator:
   m_GameObject: {fileID: 3585340084940987012}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 31e478802e7d2bc40811e814c524f4a9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -310,7 +310,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3412939748804623948}
-  - component: {fileID: 5366203994249599780}
   - component: {fileID: 218072427585842802}
   m_Layer: 0
   m_Name: Player_Action
@@ -334,19 +333,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2398295004591014780}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5366203994249599780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7100693945898959825}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c426e51d10ceec34b877a306c21b22f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  use: 0100000001000000
 --- !u!114 &218072427585842802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,3 +345,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7232eb7f4aa8dd44581d12d345852311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aimMaxDistance: 4.5
+  bulletBase: {fileID: 0}
+  shotSound: {fileID: 0}
+  moveDirectionX: 0
+  moveDirectionY: 0
+  swordBase: {fileID: 1369618293143239369, guid: 15be66f49a9f73748a7a9f8402177416, type: 3}
+  swordSound: {fileID: 0}
+  meleeAttack_Base: {fileID: 4588897879956829703, guid: fa3040f43ba5ec64fa1f286ec06e8135, type: 3}

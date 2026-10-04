@@ -79,6 +79,9 @@ public struct stStageData
     int labyrinthCurvePercent;
     public int GetLabyrinthCurvePercent() {  return labyrinthCurvePercent; }
     public void SetLabyrinthCurvePercent(int labyrinthCurvePercent_) {  labyrinthCurvePercent = labyrinthCurvePercent_; }
+    bool labyrinth2Way;
+    public bool GetLabyrinth2Way() {  return labyrinth2Way; }
+    public void SetLabyrinth2Way(bool labyrinth2Way_) { labyrinth2Way = labyrinth2Way_; }
 
     //エフェクト選択
     eEffectType effectType;
@@ -216,6 +219,7 @@ public class Manager_StageSelect : MonoBehaviour
             stageData[stage].SetGatePosRandom(false);
             stageData[stage].SetScaffoldBreakRun(false);
             stageData[stage].SetLabyrinthCurvePercent(20);
+            stageData[stage].SetLabyrinth2Way(false);
             switch ((eStage)stage)//labyrinthのsizeは奇数
             {
                 case eStage.fastPlay:
@@ -245,6 +249,7 @@ public class Manager_StageSelect : MonoBehaviour
                     break;
                 case eStage.iceLabyrinth:
                     stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.labyrinth);
+                    stageData[stage].SetLabyrinth2Way(true);
                     stageData[stage].SetFieldSize(11);
                     stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.iceOnly);
                     stageData[stage].SetRandomScaffoldBreak(10.0f);
@@ -266,7 +271,7 @@ public class Manager_StageSelect : MonoBehaviour
                 case eStage.ghostPhase:
                     stageData[stage].SetFieldCreatTypeIndex(eFieldCreatType.labyrinth);
                     stageData[stage].SetLabyrinthCurvePercent(40);
-                    stageData[stage].SetFieldSize(17);
+                    stageData[stage].SetFieldSize(19);
                     stageData[stage].SetCreatScaffoldType(eCreatScaffoldType.blockOnly);
                     stageData[stage].SetHoleSize(0);
                     stageData[stage].SetRandomScaffoldBreak(0);
@@ -462,7 +467,7 @@ public class Manager_StageSelect : MonoBehaviour
                     case eStage.iceLabyrinth:
                         switch (enemy)
                         {
-                            case eEnemyType.bom: spawnStratTime = 1; enemyStartSpawn = 3; break;
+                            case eEnemyType.bom: spawnStratTime = 1;spawnTime = 4   ; enemyStartSpawn = 3; break;
                             case eEnemyType.crow: break;
                             case eEnemyType.golem: break;
                             case eEnemyType.livingArmor: break;
@@ -474,8 +479,8 @@ public class Manager_StageSelect : MonoBehaviour
                         {
                             case eEnemyType.bom: spawnStratTime = 1; break;
                             case eEnemyType.crow: break;
-                            case eEnemyType.golem: spawnStratTime = 1; break;
-                            case eEnemyType.livingArmor: spawnStratTime = 1; break;
+                            case eEnemyType.golem: spawnStratTime = 1; enemyStartSpawn = 20; break;
+                            case eEnemyType.livingArmor: spawnStratTime = 1; enemyStartSpawn = 10; break;
                             case eEnemyType.enemyMass: break;
                         }
                         break;
@@ -570,6 +575,7 @@ public class Manager_StageSelect : MonoBehaviour
         stageData[stage].SetPlayerMoveSkewedDistribution(false);
             switch ((eStage)stage)
             {
+                case eStage.searchGate: stageData[stage].SetPlayerMoveSkewedDistribution(true); break;
                 case eStage.ghostPhase: stageData[stage].SetPlayerMoveSkewedDistribution(true); break;
             }
         }

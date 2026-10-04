@@ -8,7 +8,9 @@ public enum eTechniqueObjectType
 
     Bullet,
     Inpact,
+    MeleeAttack,
     Sword,
+    Pounce,
 
     [InspectorName("")] max,
 }
@@ -43,6 +45,7 @@ public enum ePlayerAttackType
     none,
 
     MeleeAttack,
+    pounce,
 
     [InspectorName("")] max,
 }
@@ -67,13 +70,13 @@ public class Manager_Player_Technique : MonoBehaviour
                 if (one < (int)ePlayerWeaponType.none) one = (int)ePlayerWeaponType.max - 1;
                 else if (one >= (int)ePlayerWeaponType.max) one = (int)ePlayerWeaponType.none;
                 break;
-            case ePlayerType.WereWolf:
-                if (one < (int)ePlayerAttackType.none) one = (int)ePlayerAttackType.max - 1;
-                else if (one >= (int)ePlayerAttackType.max) one = (int)ePlayerAttackType.none;
-                break;
             case ePlayerType.WizardGhost:
                 if (one < (int)ePlayerMagicType.none) one = (int)ePlayerMagicType.max - 1;
                 else if (one >= (int)ePlayerMagicType.max) one = (int)ePlayerMagicType.none;
+                break;
+            case ePlayerType.WereWolf:
+                if (one < (int)ePlayerAttackType.none) one = (int)ePlayerAttackType.max - 1;
+                else if (one >= (int)ePlayerAttackType.max) one = (int)ePlayerAttackType.none;
                 break;
 
             case ePlayerType.max: break;
@@ -97,13 +100,13 @@ public class Manager_Player_Technique : MonoBehaviour
                 if (two < (int)ePlayerWeaponType.none) two = (int)ePlayerWeaponType.max - 1;
                 else if (two >= (int)ePlayerWeaponType.max) two = (int)ePlayerWeaponType.none;
                 break;
-            case ePlayerType.WereWolf:
-                if (two < (int)ePlayerAttackType.none) two = (int)ePlayerAttackType.max - 1;
-                else if (two >= (int)ePlayerAttackType.max) two = (int)ePlayerAttackType.none;
-                break;
             case ePlayerType.WizardGhost:
                 if (two <= (int)ePlayerMagicType.none) two = (int)ePlayerMagicType.max - 1;
                 else if (two >= (int)ePlayerMagicType.max) two = (int)ePlayerMagicType.none;
+                break;
+            case ePlayerType.WereWolf:
+                if (two < (int)ePlayerAttackType.none) two = (int)ePlayerAttackType.max - 1;
+                else if (two >= (int)ePlayerAttackType.max) two = (int)ePlayerAttackType.none;
                 break;
 
             case ePlayerType.max: break;

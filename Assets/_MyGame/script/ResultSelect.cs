@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class ResultSelect : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    Manager_PlayerController manager_PlayerController;
+    private void OnEnable()
     {
-
+        manager_PlayerController = GameObject.FindWithTag("Manager").GetComponent<Manager_PlayerController>();
     }
+    // Start is called before the first frame update
+    //void Start()
+    //{
+
+    //}
 
     // Update is called once per frame
     void Update()
@@ -48,7 +53,7 @@ public class ResultSelect : MonoBehaviour
                 triggerBut = true;
             }
         }
-        if (Input.GetAxis("Decision") == 0) return;
+        if(!manager_PlayerController.JoystickButtonDown(eJoystickButton.circle)) return;
         Manager_StageSelect manager_StageSelect = GameObject.FindWithTag("Manager").GetComponent<Manager_StageSelect>();
         switch (button)
         {

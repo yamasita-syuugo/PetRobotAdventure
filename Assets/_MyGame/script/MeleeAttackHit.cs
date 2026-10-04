@@ -25,7 +25,7 @@ public class MeleeAttackHit : MonoBehaviour
     eEffect effect = eEffect.destroy;
 
     [SerializeField]
-    //float knockBackPower = 0;
+    float knockBackPower = 2;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Enemy")
@@ -38,7 +38,7 @@ public class MeleeAttackHit : MonoBehaviour
                 case eEffect.knockBack:
                     float x = collision.gameObject.transform.position.x - gameObject.transform.position.x;
                     float y = collision.gameObject.transform.position.y - gameObject.transform.position.y;
-                    collision.GetComponent<KnockBack>().SetKnockBackEnergy(new Vector3 (x,y,0));
+                    collision.GetComponent<KnockBack>().SetKnockBackEnergy(new Vector3 (x,y,0) * knockBackPower);
                     collision.GetComponent<KnockBack>().AddMoveSpeed(2);
                     break;
             }

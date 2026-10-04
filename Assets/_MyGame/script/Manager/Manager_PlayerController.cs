@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public enum eJoystickButton
 {
@@ -28,6 +30,15 @@ public enum eJoystickButton
     Joystick1Button19   = UnityEngine.KeyCode.Joystick1Button19,
 }
 
+public enum eController
+{
+    [InspectorName("")] none = -1,
+
+    mouse,
+    pad,
+
+    [InspectorName("")] max,
+}
 public enum eTechnicControl
 {
     [InspectorName("")] none = -1,
@@ -48,6 +59,8 @@ public enum ePushType
 
 public class Manager_PlayerController : MonoBehaviour
 {
+    public const int padNumMax = 4;
+
     Vector2 transfer = new Vector2();//移動
     public Vector2 GetTransfer() { return transfer; }
     private void UpdateTransfer()
@@ -56,30 +69,35 @@ public class Manager_PlayerController : MonoBehaviour
             ((GetKey(KeyCode.D) ? 1 : 0) - (GetKey(KeyCode.A) ? 1 : 0)) +
             (Input.GetAxis("Horizontal")/* + Input.GetAxis("Horizontal-ArrowKey")*/);//todo:コントローラースティックの値を直接取得する方法
         if (horizontal < -1) horizontal = -1; else if (horizontal > 1) horizontal = 1;
-        float vertical = 
-            ((GetKey(KeyCode.W) ? 1 : 0) - (GetKey(KeyCode.S) ? 1 : 0)) + 
+        float vertical =
+            ((GetKey(KeyCode.W) ? 1 : 0) - (GetKey(KeyCode.S) ? 1 : 0)) +
             (Input.GetAxis("Vertical")/* + Input.GetAxis("Vertical-ArrowKey")*/);
         if (vertical < -1) vertical = -1; else if (vertical > 1) vertical = 1;
         transfer = new Vector2(horizontal, vertical);
+
+        if (Input.GetAxis("Horizontal") < 0) Debug.Log("L : ←"); else if (Input.GetAxis("Horizontal") > 0) Debug.Log("L : →"); else Debug.Log("L : ↔");
+        if (Input.GetAxis("Vertical") < 0) Debug.Log("L : ↓"); else if (Input.GetAxis("Horizontal") > 0) Debug.Log("L : ↑"); else Debug.Log("L : ↕");
     }
 
     Vector2 aim = new Vector2();
     public Vector2 GetAim() { return aim; }
+    const float aimTolerance = 0.05f;
     private void UpdateAim()
     {
-        aim.x = Input.GetAxis("AimX");
-        aim.y = Input.GetAxis("AimY");
+        float tmpX = Input.GetAxis("AimX"), tmpY = Input.GetAxis("AimY");
+        if (tmpX < -aimTolerance || tmpX > aimTolerance) aim.x = tmpX; else aim.x = 0.0f;
+        if (tmpY < -aimTolerance || tmpY > aimTolerance) aim.y = tmpY; else aim.y = 0.0f;
     }
 
-    bool GetKey(KeyCode key) {  return Input.GetKey(key); }
-    bool GetKey(eJoystickButton key) {  return Input. GetKey((KeyCode)key); }
-    bool GetKey(string key) {  return Input.GetKey(key); }
-    bool GetKeyDown(KeyCode key) {  return Input.GetKeyDown(key); }
-    bool GetKeyDown(eJoystickButton key) {  return Input.GetKeyDown((KeyCode)key); }
-    bool GetKeyDown(string key) {  return Input.GetKeyDown(key); }
-    bool GetKeyUp(KeyCode key) {  return Input.GetKeyUp(key); }
-    bool GetKeyUp(eJoystickButton key) {  return Input. GetKeyUp((KeyCode)key); }
-    bool GetKeyUp(string key) {  return Input.GetKeyUp(key); }
+    bool GetKey(KeyCode key) { return Input.GetKey(key); }
+    bool GetKey(eJoystickButton key) { return Input.GetKey((KeyCode)key); }
+    bool GetKey(string key) { return Input.GetKey(key); }
+    bool GetKeyDown(KeyCode key) { return Input.GetKeyDown(key); }
+    bool GetKeyDown(eJoystickButton key) { return Input.GetKeyDown((KeyCode)key); }
+    bool GetKeyDown(string key) { return Input.GetKeyDown(key); }
+    bool GetKeyUp(KeyCode key) { return Input.GetKeyUp(key); }
+    bool GetKeyUp(eJoystickButton key) { return Input.GetKeyUp((KeyCode)key); }
+    bool GetKeyUp(string key) { return Input.GetKeyUp(key); }
 
     Vector2 GetMousePoint() { return Input.mousePosition; }
     public bool GetMouseButton(int num) { return Input.GetMouseButton(num); }
@@ -93,22 +111,28 @@ public class Manager_PlayerController : MonoBehaviour
         technicMouse = new bool[(int)ePushType.max, (int)eTechnicControl.max];
         technicMouse[(int)ePushType.down, (int)eTechnicControl.one] = Input.GetMouseButtonDown(0);
         technicMouse[(int)ePushType.down, (int)eTechnicControl.two] = Input.GetMouseButtonDown(1);
-        technicMouse[(int)ePushType.down, (int)eTechnicControl.one] = Input.GetMouseButton(0);
-        technicMouse[(int)ePushType.down, (int)eTechnicControl.two] = Input.GetMouseButton(1);
-        technicMouse[(int)ePushType.down, (int)eTechnicControl.one] = Input.GetMouseButtonUp(0);
-        technicMouse[(int)ePushType.down, (int)eTechnicControl.two] = Input.GetMouseButtonUp(1);
+        technicMouse[(int)ePushType.stey, (int)eTechnicControl.one] = Input.GetMouseButton(0);
+        technicMouse[(int)ePushType.stey, (int)eTechnicControl.two] = Input.GetMouseButton(1);
+        technicMouse[(int)ePushType.up, (int)eTechnicControl.one] = Input.GetMouseButtonUp(0);
+        technicMouse[(int)ePushType.up, (int)eTechnicControl.two] = Input.GetMouseButtonUp(1);
     }
-    bool[,] technicPad;
-    public bool GetTechnicPad(ePushType pushType, eTechnicControl index) { return technicPad[(int)pushType, (int)index]; }
+    bool[,,] technicPad;
+    public bool GetTechnicPad(ePushType pushType, eTechnicControl index) { for(int i = 0;i < padNumMax; i++)if(technicPad[i, (int)pushType, (int)index]) return true ;return false; }
+    public bool GetTechnicPad(ePushType pushType, eTechnicControl index, int padNum/*0～7*/) { return technicPad[padNum, (int)pushType, (int)index]; }
     private void UpdateTechnicPad()
     {
-        technicPad = new bool[(int)ePushType.max, (int)eTechnicControl.max];
-        technicPad[(int)ePushType.down, (int)eTechnicControl.one] = GetKeyDown(eJoystickButton.R1);
-        technicPad[(int)ePushType.down, (int)eTechnicControl.two] = GetKeyDown(eJoystickButton.R2);
-        technicPad[(int)ePushType.stey, (int)eTechnicControl.one] = GetKey(eJoystickButton.R1);
-        technicPad[(int)ePushType.stey, (int)eTechnicControl.two] = GetKey(eJoystickButton.R2);
-        technicPad[(int)ePushType.up, (int)eTechnicControl.one] = GetKeyUp(eJoystickButton.R1);
-        technicPad[(int)ePushType.up, (int)eTechnicControl.two] = GetKeyUp(eJoystickButton.R2);
+        technicPad = new bool[padNumMax, (int)ePushType.max, (int)eTechnicControl.max];
+        string[] padName = Input.GetJoystickNames();
+        for (int i = 0; i < padName.Length; i++)
+        {
+            if (padName[i] == "") continue;
+            technicPad[i, (int)ePushType.down, (int)eTechnicControl.one] = GetKeyDown(eJoystickButton.R1 + i * 20);
+            technicPad[i, (int)ePushType.down, (int)eTechnicControl.two] = GetKeyDown(eJoystickButton.R2 + i * 20);
+            technicPad[i, (int)ePushType.stey, (int)eTechnicControl.one] = GetKey(eJoystickButton.R1 + i * 20);
+            technicPad[i, (int)ePushType.stey, (int)eTechnicControl.two] = GetKey(eJoystickButton.R2 + i * 20);
+            technicPad[i, (int)ePushType.up, (int)eTechnicControl.one] = GetKeyUp(eJoystickButton.R1 + i * 20);
+            technicPad[i, (int)ePushType.up, (int)eTechnicControl.two] = GetKeyUp(eJoystickButton.R2 + i * 20);
+        }
         //technicPad[(int)ePushType.up, (int)eTechnicControl.two] = GetKeyUp("joystick button " + (5 + (int)eTechnicControl.two * 2).ToString());
     }
     // Start is called before the first frame update
@@ -125,16 +149,30 @@ public class Manager_PlayerController : MonoBehaviour
         UpdateTechnicPad();
         UpdateAim();
 
+        EventSystemButtonPlay();
+
         JoystickButtonTest();
     }
 
-    int[] num = new int [19];
+    int[] num = new int[19];
     void JoystickButtonTest()
     {
         string[] name = Input.GetJoystickNames();
         for (int i = 0; i < name.Length; i++) Debug.Log("JoystickType - " + (i + 1) + " / " + name.Length + " - " + name[i]);
         for (int i = 0; i < name.Length; i++)
         {
+            float axisCheckSize = 0.95f;
+            if (i < 4)
+            {
+                if (Input.GetAxis("Horizontal_Pad" + (i + 1)) < -axisCheckSize || Input.GetAxis("Horizontal_Pad" + (i + 1)) > axisCheckSize) Debug.Log("Joystick" + (i + 1) + " - Horizontal_Pad" + (i + 1) + " - " + Input.GetAxis("Horizontal_Pad" + (i + 1)));
+                if (Input.GetAxis("Vertical_Pad" + (i + 1)) < -axisCheckSize || Input.GetAxis("Vertical_Pad" + (i + 1)) > axisCheckSize) Debug.Log("Joystick" + (i + 1) + " - Vertical_Pad" + (i + 1) + " - " + Input.GetAxis("Vertical_Pad" + (i + 1)));
+                if (Input.GetAxis("AimX") < -axisCheckSize || Input.GetAxis("AimX") > axisCheckSize) Debug.Log("Joystick" + (i + 1) + " - AimX - " + Input.GetAxis("AimX"));
+                if (Input.GetAxis("AimY") < -axisCheckSize || Input.GetAxis("AimY") > axisCheckSize) Debug.Log("Joystick" + (i + 1) + " - AimY - " + Input.GetAxis("AimY"));
+            }
+            if (Input.GetAxis("Horizontal") < -axisCheckSize || Input.GetAxis("Horizontal") > axisCheckSize) Debug.Log("Joystick" + (i + 1) + " - Horizontal - " + Input.GetAxis("Horizontal"));
+            if (Input.GetAxis("Vertical") < -axisCheckSize || Input.GetAxis("Vertical") > axisCheckSize) Debug.Log("Joystick" + (i + 1) + " - Vertical - " + Input.GetAxis("Vertical"));
+            if (Input.GetAxis("AimX") < -axisCheckSize || Input.GetAxis("AimX") > axisCheckSize) Debug.Log("Joystick" + (i + 1) + " - AimX - " + Input.GetAxis("AimX"));
+            if (Input.GetAxis("AimY") < -axisCheckSize || Input.GetAxis("AimY") > axisCheckSize) Debug.Log("Joystick" + (i + 1) + " - AimY - " + Input.GetAxis("AimY"));
             switch (name[i])
             {
                 case "Wireless Controller":
@@ -188,7 +226,16 @@ public class Manager_PlayerController : MonoBehaviour
         //Debug.Log("十字キー : " + Input.GetAxis("7th axis").ToString());
     }
 
-    public bool JoystickButton(eJoystickButton button) { return Input.GetKey((KeyCode)button); }
-    public bool JoystickButtonDown(eJoystickButton button) { return Input.GetKeyDown((KeyCode)button); }
-    public bool JoystickButtonUp(eJoystickButton button) { return Input.GetKeyUp((KeyCode)button); }
+    public bool JoystickButton(eJoystickButton button , int joyConNum = 0) { return Input.GetKey((KeyCode)button + joyConNum * 20); }
+    public bool JoystickButtonDown(eJoystickButton button) {  for(int i = 0;i < padNumMax;i++)if(Input.GetKeyDown((KeyCode)button + i * 20))return true;return false; }
+    public bool JoystickButtonDown(eJoystickButton button, int joyConNum) {return Input.GetKeyDown((KeyCode)button + joyConNum * 20); }
+    public bool JoystickButtonDownAll() { for (int i = 0; i < 20 * 4; i++) if (Input.GetKeyDown((KeyCode)(KeyCode.Joystick1Button0 + i))) return true; return false; }
+    public bool JoystickButtonDownAll(int joyConNum) { for (int i = 0; i < 20 * 4; i++) if (Input.GetKeyDown((KeyCode)(joyConNum * 20 + KeyCode.Joystick1Button0 + i))) return true; return false; }
+    public bool JoystickButtonUp(eJoystickButton button, int joyConNum = 0) { return Input.GetKeyUp((KeyCode)button + joyConNum * 20); }
+
+    void EventSystemButtonPlay()
+    {
+        bool buttonDown = false;for(int i = 0;i < padNumMax;i++ ) if(JoystickButtonDown(eJoystickButton.circle,i) || JoystickButtonDown(eJoystickButton.cross,i))buttonDown = true;
+        if (buttonDown) EventSystem.current.currentSelectedGameObject.GetComponent<Button>().onClick.Invoke();
+    }
 }

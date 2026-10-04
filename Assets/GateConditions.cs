@@ -22,7 +22,7 @@ public class GateConditions : MonoBehaviour
     { 
         gateConditions = new GameObject();
         gateConditions.transform.parent = transform;
-        gateConditions.transform.localPosition = transform.localPosition;
+        gateConditions.transform.localPosition = /*transform.localPosition*/ Vector3.zero;
         gateConditions.transform.localScale = transform.localScale * .5f;
         gateConditions.name = "gateConditions";
 

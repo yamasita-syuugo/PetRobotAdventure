@@ -14,6 +14,7 @@ public class Create_Coins : MonoBehaviour
     {
         for (int i = 0; i < blocks.Length; i++)
         {
+            if (blocks[i] == null) continue;
             if (UnityEngine.Random.Range(0, manager_Collection.GetCoinDenominator()) == 0)
             {
                 GameObject coin = Instantiate<GameObject>(manager_Collection.GetCollectionCoin());

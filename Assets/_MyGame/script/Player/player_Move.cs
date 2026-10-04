@@ -81,7 +81,7 @@ public class Player_Move : MonoBehaviour
     {
         if (GetComponent<ObjectFall>().GetSituation() == ObjectFall.eSituation.fall ||
             GetComponent<ObjectFall>().GetSituation() == ObjectFall.eSituation.chanting) return;
-        Debug.Log("moveBuff : " + moveBuff.ToString());
+
         transform.position += move * playerTypeSpeed * manager_Medal.GetMoveSpeedBuff() * moveBuff * Time.deltaTime;
         if (moveBuffCount <= 0) moveBuff = 1;else moveBuffCount--;
         switch (scaffold)

@@ -13,8 +13,8 @@ public class ScaffoldBreak : MonoBehaviour
         breakOn = manager_StageSelect.GetStageData(manager_StageSelect.GetStage()).GetScaffoldBreakRun();
     }
     [SerializeField] float time = 0;
-    float nextTime = .5f;
-    float timeSpan = .5f;
+    float nextTime = .4f;
+    float timeSpan = .2f;
     // Update is called once per frame
     void Update()
     {

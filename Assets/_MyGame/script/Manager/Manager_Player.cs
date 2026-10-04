@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,11 +13,12 @@ public enum ePlayerType
     PetRobot,
     WizardGhost,
     WereWolf,  //近距離をメインに移動に優れたキャラ
-    //Tower, //中心記固定し移動しないキャラ
-    //レベルアップを題材としたキャラクター
-    //短距離の飛行ができるキャラ
 
     [InspectorName("")] max,
+
+    //Tower → Tree, //中心記固定し移動しないキャラ、樹木、Playerを増やして移動
+    //レベルアップを題材としたキャラクター
+    //短距離の飛行ができるキャラ
 }
 
 public class Manager_Player : MonoBehaviour
@@ -25,13 +27,41 @@ public class Manager_Player : MonoBehaviour
     Manager_Player_Technique manager_Player_Technique;
     Manager_PlayerController manager_PlayerController;
 
-    [SerializeField]
     GameObject[] playerTypeBase;
     public GameObject GetPlayerTypeBase(int index_) {  return playerTypeBase[index_]; }
     public GameObject[] GetPlayerTypeBases() {  return playerTypeBase; }
-    [SerializeField]
+    [SerializeField] GameObject playerTypeBase_PetRpbot;
+    [SerializeField] GameObject playerTypeBase_WizardGhost;
+    [SerializeField] GameObject playerTypeBase_WereWolf;
+    void SetPlayerTypeBase()
+    {
+        playerTypeBase = new GameObject[(int)ePlayerType.max];
+        for(int i = 0; i < (int)ePlayerType.max; i++) switch ((ePlayerType)i)
+            {
+                case ePlayerType.PetRobot:playerTypeBase[i] = playerTypeBase_PetRpbot; break;
+                case ePlayerType.WizardGhost:playerTypeBase[i] = playerTypeBase_WizardGhost; break;
+                case ePlayerType.WereWolf:playerTypeBase[i] = playerTypeBase_WereWolf; break;
+                default: Debug.Log("SetPlayerTypeBase : " + ((ePlayerType)i)); break;
+
+            }
+    }
+
     RuntimeAnimatorController[] playerIconAnimaterBase;
-    void InitializePlayerIconAnimaterBase() { }
+    void InitializePlayerIconAnimaterBase() {
+        playerIconAnimaterBase = new RuntimeAnimatorController[(int)ePlayerType.max];
+
+        for (int i = 0; i < (int)ePlayerType.max; i++) switch ((ePlayerType)i)
+            {
+                case ePlayerType.PetRobot: playerIconAnimaterBase[i] = playerIconAnimaterBase_PetRobot; break;
+                case ePlayerType.WizardGhost: playerIconAnimaterBase[i] = playerIconAnimaterBase_WizardGhost; break;
+                case ePlayerType.WereWolf: playerIconAnimaterBase[i] = playerIconAnimaterBase_WereWolf; break;
+
+                default: Debug.Log("PlayerIconAnimaterBase : " + ((ePlayerType)i)); break;
+            }
+    }
+    [SerializeField] RuntimeAnimatorController playerIconAnimaterBase_PetRobot;
+    [SerializeField] RuntimeAnimatorController playerIconAnimaterBase_WizardGhost;
+    [SerializeField] RuntimeAnimatorController playerIconAnimaterBase_WereWolf;
     public RuntimeAnimatorController GetPlayerIconAnimaterBase(int index)
     {
         if (index >= playerIconAnimaterBase.Length)
@@ -79,9 +109,13 @@ public class Manager_Player : MonoBehaviour
     float[] playerSpeed = new float[(int)ePlayerType.max];
     void SetPlayerSpeed()
     {
-        playerSpeed[(int)ePlayerType.PetRobot] = petRobotTypeSpeed;
-        playerSpeed[(int)ePlayerType.WizardGhost] = wizardGhostTypeSpeed;
-        playerSpeed[(int)ePlayerType.WereWolf] = werewolfTypeSpeed;
+        for(int i = 0;i < (int)ePlayerType.max; i++) switch ((ePlayerType)i)
+            {
+                case ePlayerType.PetRobot: playerSpeed[(int)ePlayerType.PetRobot] = petRobotTypeSpeed; break;
+                case ePlayerType.WizardGhost: playerSpeed[(int)ePlayerType.WizardGhost] = wizardGhostTypeSpeed; break;
+                case ePlayerType.WereWolf: playerSpeed[(int)ePlayerType.WereWolf] = werewolfTypeSpeed; break;
+                default:Debug.Log("<color=red>SetPlayerSpeed : </color>" + ((ePlayerType)i)); break;
+            }
     }
     [SerializeField] float petRobotTypeSpeed = 1.0f;
     [SerializeField] float wizardGhostTypeSpeed = 0.6f;
@@ -96,7 +130,9 @@ public class Manager_Player : MonoBehaviour
         manager_Collection = GetComponent<Manager_Collection>();
         manager_Player_Technique = GetComponent<Manager_Player_Technique>();
         manager_PlayerController = GetComponent<Manager_PlayerController>();
+        SetPlayerTypeBase();
         SetPlayerSpeed();
+        InitializePlayerIconAnimaterBase();
     }
     //void Start()
     //{

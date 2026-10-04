@@ -41,11 +41,11 @@ public class Select_Technique_Image : MonoBehaviour
             case ePlayerType.PetRobot:
                 GetComponent<Image>().sprite = manager_Player_Technique.GetWeaponImage(technique);
                 break;
-            case ePlayerType.WereWolf:
-                GetComponent<Image>().sprite = manager_Player_Technique.GetAttackImage(technique);
-                break;
             case ePlayerType.WizardGhost:
                 GetComponent<Image>().sprite = manager_Player_Technique.GetMagicImage(technique);
+                break;
+            case ePlayerType.WereWolf:
+                GetComponent<Image>().sprite = manager_Player_Technique.GetAttackImage(technique);
                 break;
         }
 

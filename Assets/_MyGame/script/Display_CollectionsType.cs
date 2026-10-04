@@ -28,7 +28,7 @@ public class Display_CollectionsType : MonoBehaviour
         for (int i = 0; i < collection.Length; i++)
         {
             if (collection[i] == null) continue;
-            if (i == (int)collectionsTab || (collectionsTab == eCollectionsTab.other && i >= (int)eCollectionsTab.other)) collection[i].SetActive(true); else collection[i].SetActive(false);
+            if (i == (int)collectionsTab || (collectionsTab == eCollectionsTab.other && i > (int)eCollectionsTab.other)) collection[i].SetActive(true); else collection[i].SetActive(false);
         }
     }
 }

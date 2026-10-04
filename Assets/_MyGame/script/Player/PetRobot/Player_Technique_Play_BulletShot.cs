@@ -25,7 +25,9 @@ public class Player_Technique_Play_BulletShot : Player_Technique_Play_Base
     void Start()
     {
         shotSound = GameObject.FindWithTag("Manager").GetComponent<Manager_Sounds>().GetSound(eSoundType.shot);
-        aimMark = Instantiate<GameObject>(aimMarkBase);
+        aimMark = Instantiate(new GameObject());
+        aimMark.AddComponent<SpriteRenderer>().sprite = aimMarkBase;
+        aimMark.transform.localScale = new Vector2(0.1f, 0.1f);
     }
 
     // Update is called once per frame
@@ -47,8 +49,7 @@ public class Player_Technique_Play_BulletShot : Player_Technique_Play_Base
 
     }
 
-    [SerializeField]
-    GameObject aimMarkBase;
+    [SerializeField] Sprite aimMarkBase; 
     GameObject aimMark;
     bool controllerShot = false;
     public void SetControllerShot(bool shot_ = true) { controllerShot = shot_; }

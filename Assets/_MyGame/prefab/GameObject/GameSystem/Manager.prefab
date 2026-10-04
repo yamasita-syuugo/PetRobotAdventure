@@ -74,6 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectionCoin: {fileID: 8390818184305424821, guid: f1531a9da32921e4e854fe97801f6955, type: 3}
+  collectionsTab: 0
   getSituation_Stage: 000000
   getSituation_StageClear: 00000000000000000000
   getSituation_Player: 00000000
@@ -109,15 +110,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b0bad8cf4496014db41a71ea337d382, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTypeBase:
-  - {fileID: 2637719474650202597, guid: d0a0ddf47f57ef74baba4882b0d50694, type: 3}
-  - {fileID: 5324167455278739525, guid: 9f8d3bc841644ca429c842f522042d13, type: 3}
-  - {fileID: 3585340084940987012, guid: cfbd5a5058f843941aa9424c127d1520, type: 3}
-  playerIconAnimaterBase:
-  - {fileID: 9100000, guid: 506a6060f6a657e46afba3dce3483f5f, type: 2}
-  - {fileID: 9100000, guid: da49c1fbb734baa4783d6ff7b34ecfa9, type: 2}
-  - {fileID: 0}
-  playerTypeIndex: 0
+  playerTypeBase_PetRpbot: {fileID: 2637719474650202597, guid: d0a0ddf47f57ef74baba4882b0d50694, type: 3}
+  playerTypeBase_WizardGhost: {fileID: 5324167455278739525, guid: 9f8d3bc841644ca429c842f522042d13, type: 3}
+  playerTypeBase_WereWolf: {fileID: 3585340084940987012, guid: cfbd5a5058f843941aa9424c127d1520, type: 3}
+  playerIconAnimaterBase_PetRobot: {fileID: 9100000, guid: 506a6060f6a657e46afba3dce3483f5f, type: 2}
+  playerIconAnimaterBase_WizardGhost: {fileID: 9100000, guid: da49c1fbb734baa4783d6ff7b34ecfa9, type: 2}
+  playerIconAnimaterBase_WereWolf: {fileID: 9100000, guid: 1a6c5cfe1c9577f4c8e3cac6a11d1aea, type: 2}
+  playerTypeIndex: 2
   petRobotTypeSpeed: 1
   wizardGhostTypeSpeed: 0.6
   werewolfTypeSpeed: 1.6
@@ -166,6 +165,7 @@ MonoBehaviour:
   attackImage:
   - {fileID: 0}
   - {fileID: 21300000, guid: c9602b25a5f348948ae57e664a2baa30, type: 3}
+  - {fileID: 21300000, guid: a32fc019c003793449312ec9ca409220, type: 3}
 --- !u!114 &5272878437757293859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,7 +180,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boots_Speed_UPMedalImage: {fileID: 21300000, guid: c4dfbd77c3f740c448b5f0eee7a2bde8, type: 3}
   boots_Speed_DOWNMedalImage: {fileID: 21300000, guid: c254762abb579284095ed81ad53e6448, type: 3}
-  boots_SpikeImage: {fileID: 21300000, guid: d711250b26fb7904ba9bd2948cdc9fd2, type: 3}
+  boots_SpikeMedalImage: {fileID: 21300000, guid: d711250b26fb7904ba9bd2948cdc9fd2, type: 3}
+  enemySpawn_UPMedalImage: {fileID: 21300000, guid: aa24e3a917103dd4cb0e44327c4a4a72, type: 3}
+  enemySpawn_DOWNMedalImage: {fileID: 21300000, guid: d9b53647ec1b7454795f0f6b6832c225, type: 3}
   EnemyFoot_Speed_UPMedalImage: {fileID: 21300000, guid: 8f39e076078d510478552d60c2114d8e, type: 3}
   EnemyFoot_Speed_DOWNMedalImage: {fileID: 21300000, guid: edeb618fa20e81749a314cfefd5d1e51, type: 3}
   medalType: 000000000000000000000000
@@ -249,9 +251,10 @@ MonoBehaviour:
   gateIndex: 0
   gateOpen: 0
   gatePos: {x: 0, y: 0}
+  timer_Image: {fileID: 21300000, guid: f0b075f5349feee42bb93ae11630fa34, type: 3}
   destroy_Bom_Image: {fileID: 21300000, guid: 01271042cd8e6be4c9a030171ea91a84, type: 3}
   destroy_Golem_Image: {fileID: -2115553726, guid: 31d3c3b7612648241893f5c0793e3286, type: 3}
-  timer_Image: {fileID: 21300000, guid: f0b075f5349feee42bb93ae11630fa34, type: 3}
+  scaffoldBreak_Image: {fileID: 0}
 --- !u!114 &2980074079378534292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -405,6 +408,7 @@ MonoBehaviour:
   Enemy_LivingArmorImage: {fileID: 0}
   Enemy_EnemyMassImage: {fileID: 0}
   Enemy_BossEnemyImage: {fileID: 0}
+  ScaffoldBreakImage: {fileID: 21300000, guid: fb3e91c8c8710ae43bedb80c7f72450b, type: 3}
 --- !u!114 &7225526075513606991
 MonoBehaviour:
   m_ObjectHideFlags: 0

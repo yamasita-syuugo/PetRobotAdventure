@@ -15,17 +15,10 @@ public class Create_Enemy : MonoBehaviour
     Manager_StageSelect manager_StageSelect;
     Manager_Enemy manager_Enemy;
     Manager_Time manager_Time;
+    Manager_Medal manager_Medal;
 
     eStage stage;
     //public AudioSource setSound;
-
-    enum eDirecttion
-    {
-        north,
-        south,
-        east,
-        west,
-    }
 
     GameObject player = null;
 
@@ -35,6 +28,7 @@ public class Create_Enemy : MonoBehaviour
         manager_StageSelect = manager.GetComponent<Manager_StageSelect>();
         manager_Enemy = manager.GetComponent<Manager_Enemy>();
         manager_Time = manager.GetComponent<Manager_Time>();
+        manager_Medal = manager.GetComponent<Manager_Medal>();
     }
     // Start is called before the first frame update
     void Start()
@@ -112,7 +106,7 @@ public class Create_Enemy : MonoBehaviour
             GameObject tmp = Instantiate<GameObject>(spawnEnemy);
             EnemySpaunPositionSet(tmp);
 
-            enemySpaunTime[(int)enemyType] = manager_Enemy.GetEnemySpaunTimeReset(enemyType);
+            enemySpaunTime[(int)enemyType] = manager_Enemy.GetEnemySpaunTimeReset(enemyType) * manager_Medal.GetEnemySpawnBuff();
         }
     }
     void EnemySpawnCrow()
@@ -191,18 +185,19 @@ public class Create_Enemy : MonoBehaviour
 
     }
     [SerializeField]
-    Vector3 nextPosition = new Vector3(12, 12, 0);
+    Vector3 nextPosition = new Vector3(13, 13, 0);
     void EnemySpaunPositionSet(GameObject spawnEnemy)//âÊñ äOÇ…à⁄ìÆ
     {
         spawnEnemy.transform.parent = transform;
-        spawnEnemy.transform.position = nextPosition;
 
-        int direction = Random.Range(0, 4);
-        if (manager_StageSelect.GetStageData(manager_StageSelect.GetStage()).GetPlayerMoveSkewedDistribution()) direction = player.GetComponent<Player_Move>().GetPlayerDirectionNum(); 
         float x = Camera.main.ViewportToWorldPoint(new Vector3(1.1f, 1.1f, Camera.main.nearClipPlane)).x;
         float y = Camera.main.ViewportToWorldPoint(new Vector3(1.1f, 1.1f, Camera.main.nearClipPlane)).y;
         float width = Random.Range(-x, x);
-        float height = Random.Range(-y, y);Debug.Log("direction" + direction);
+        float height = Random.Range(-y, y);
+
+        int direction = Random.Range(0, 4);
+        if (manager_StageSelect.GetStageData(manager_StageSelect.GetStage()).GetPlayerMoveSkewedDistribution())
+            direction = player.GetComponent<Player_Move>().GetPlayerDirectionNum(); 
         switch (direction)//0=â∫ , 1=è„ , 2=âE , 3=ç∂
         {
             case 0:
@@ -218,6 +213,8 @@ public class Create_Enemy : MonoBehaviour
                 nextPosition = new Vector2(-x, height);
                 break;
         }
+
+        spawnEnemy.transform.position = nextPosition;
     }
 
     public void GolemCountAdd()

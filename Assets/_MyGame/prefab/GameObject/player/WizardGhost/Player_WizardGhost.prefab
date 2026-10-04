@@ -304,3 +304,4 @@ MonoBehaviour:
   swordBase: {fileID: 1369618293143239369, guid: 15be66f49a9f73748a7a9f8402177416, type: 3}
   swordSound: {fileID: 0}
   magicCircleBase: {fileID: 2717951038558090761, guid: 384675e56de995d4fbc4a49cbd73bb4c, type: 3}
+  aimMarkBase: {fileID: 21300000, guid: e54c088b1b556b047ab4fa51b2ea4e36, type: 3}
